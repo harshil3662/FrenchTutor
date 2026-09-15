@@ -944,49 +944,30 @@ export const A1_GRAMMAR_LESSONS = [
     subtitle: 'Conjugate over 85% of French verbs, including spelling changes in -cer, -ger, -yer, and -eler.',
     formula: 'Radical = Infinitif - [er]  |  Terminaisons: je -e, tu -es, il -e, nous -ons, vous -ez, ils -ent',
     goldenRule: 'The endings **-e, -es, and -ent** are completely **SILENT phonetically**; only the stem consonant is heard (je parle, tu parles, ils parlent all sound identical: **/paʁl/**).',
-    detailedDescription: [
-      'The 1st group (-ER verbs) encompasses the overwhelming majority of French verbs and virtually all newly coined verbs (*tweeter, liker, télécharger*).',
-      'While the basic pattern is straightforward, slight orthographic adjustments occur in the *nous* form or the "boot" forms to preserve smooth pronunciation.'
-    ],
     topics: [
       {
         id: 'topic-10-regular-conjugation',
-        title: '1. Regular -ER Conjugation & Silent Endings (-e, -es, -ent)',
-        formula: 'Infinitif - [er] + [-e, -es, -e, -ons, -ez, -ent]',
-        goldenRule: 'Never pronounce the **« -ent »** ending of third-person plural verbs! In "ils parlent", the "-ent" is totally mute.',
+        title: '1. Regular -ER Conjugation',
         detailedDescription: [
-          'To conjugate, strip the "-er" infinitive marker and add the present endings:',
-          'Je **parl-e**, Tu **parl-es**, Il/Elle **parl-e**, Nous **parl-ons**, Vous **parl-ez**, Ils/Elles **parl-ent**.',
-          'Notice that four out of six forms (*je, tu, il, ils*) sound identical in spoken French.'
+          'Before studying the present tense in French, you need to be familiar with the grammatical terms in chapters presenting verbs. To conjugate a verb in the present tense, you’ll need to find the root (or stem) of a verb to which you’ll add the ending corresponding to the desired tense. The root of the verb is found in its infinitive form. In English, the infinitive is preceded by the preposition to: to say, to wear. Infinitives in French are not preceded by an equivalent of the preposition to. They are identified according to groups by their endings: -er, -ir, -re, -oir.',
+          'The endings for the -er regular verbs are: -e, -es, -e, -ons, -ez, -ent. The -e, -es, and -ent endings of the verbs are all silent. The final -s of nous, vous, ils, elles links with verbs beginning with a vowel sound, making a z sound. This is called a liaison.',
         ],
         tables: [
           {
             title: 'Parler Conjugation Paradigm',
             subtitle: 'Written forms vs. phonetic pronunciations',
             description: 'Observe the mute "e" endings in the boot.',
-            headers: ['Pronoun', 'Written Form', 'Phonetic IPA', 'English Meaning'],
+            headers: ['Pronoun', 'Written Form', 'English Meaning'],
             rows: [
-              ['Je', 'parle', '/paʁl/', 'I speak'],
-              ['Tu', 'parles', '/paʁl/', 'you speak'],
-              ['Il / Elle / On', 'parle', '/paʁl/', 'he / she speaks'],
-              ['Nous', 'parlons', '/paʁ.lɔ̃/', 'we speak'],
-              ['Vous', 'parlez', '/paʁ.le/', 'you speak'],
-              ['Ils / Elles', 'parlent', '/paʁl/ (silent -ent!)', 'they speak']
+              ['Je', 'parle', 'I speak'],
+              ['Tu', 'parles', 'you speak'],
+              ['Il / Elle / On', 'parle', 'he / she speaks'],
+              ['Nous', 'parlons', 'we speak'],
+              ['Vous', 'parlez', 'you speak'],
+              ['Ils / Elles', 'parlent', 'they speak']
             ]
           }
         ],
-        contrastExamples: [
-          {
-            french: 'Je parle français et ils parlent espagnol.',
-            english: 'I speak French and they speak Spanish.',
-            aspectNote: 'Both "parle" and "parlent" are pronounced identically (/paʁl/).'
-          },
-          {
-            french: 'Vous regardez le film attentivement.',
-            english: 'You are watching the movie attentively.',
-            aspectNote: 'Second person plural ending "-ez" pronounced /e/.'
-          }
-        ]
       },
       {
         id: 'topic-10-cer-ger-spelling',
@@ -1065,41 +1046,6 @@ export const A1_GRAMMAR_LESSONS = [
           }
         ]
       }
-    ],
-    rules: [
-      'Drop the -er from the infinitive to find the stem, then add: -e, -es, -e, -ons, -ez, -ent.',
-      'Verbs in -ger (manger, voyager) add an "e" before "ons" in the nous form to keep the soft "g" sound: nous mangeons.',
-      'Verbs in -cer (commencer, lancer) take a cedilla "ç" before "ons" in the nous form to keep the soft "s" sound: nous commençons.',
-      'Verbs in -yer (payer, envoyer) change "y" to "i" before a silent e: je paie, ils paient (but nous payons).',
-      'Verbs like appeler and jeter double their consonant (j\'appelle, je jette) or take an accent (je préfère, j\'achète) in silent-e forms ("boot" conjugations).',
-    ],
-    contrastExamples: [
-      {
-        french: 'Nous commençons le cours et nous mangeons ensemble.',
-        english: 'We begin the class and we eat together.',
-        aspectNote: 'Spelling adjustments for nous: commençons (ç) and mangeons (ge).',
-      },
-      {
-        french: 'J\'appelle mon frère, mais nous appelons nos parents.',
-        english: 'I call my brother, but we call our parents.',
-        aspectNote: 'Double "l" in boot forms (j\'appelle) vs single "l" in nous (appelons).',
-      },
-    ],
-    conjugationHighlight: {
-      verb: 'Parler',
-      tense: 'Présent de l\'indicatif',
-      table: {
-        je: 'parle',
-        tu: 'parles',
-        'il/elle/on': 'parle',
-        nous: 'parlons',
-        vous: 'parlez',
-        'ils/elles': 'parlent',
-      },
-    },
-    commonTraps: [
-      'Pronouncing the "-ent" ending of third-person plural verbs (it is totally silent!).',
-      'Forgetting the "e" in "nous mangeons" or the cedilla in "nous commençons".',
     ],
     practiceExercises: [
       {

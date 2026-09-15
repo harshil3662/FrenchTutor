@@ -16,136 +16,63 @@ export const A2_GRAMMAR_LESSONS = [
       {
         id: 'topic-9-coordination',
         title: '1. Coordinating Conjunctions (Mais où est donc Ornicar ?)',
-        formula: '[Proposition 1] + [mais / ou / et / donc / or / ni / car] + [Proposition 2]',
-        goldenRule: 'Coordinating conjunctions join two clauses of equal syntactic rank without altering word order or verbal mood.',
         detailedDescription: [
-          'Every French student learns the classic phonetic rhyme: **« Mais où est donc Ornicar ? »** (**mais, ou, et, donc, or, ni, car**).',
-          'Notice that **« car »** means "for / because" and coordinates two clauses, whereas **« parce que »** is a subordinating conjunction that introduces an explanatory dependent clause.'
-        ],
-        tables: [
-          {
-            title: 'Coordinating Conjunctions Reference',
-            subtitle: 'The 7 classic coordinating conjunctions',
-            description: 'These conjunctions link independent clauses of identical grammatical status.',
-            headers: ['Conjunction', 'Meaning', 'Grammatical Role', 'Example Sentence'],
-            rows: [
-              ['Mais', 'But', 'Opposition / Contrast', 'Je voulais sortir, mais il pleuvait.'],
-              ['Ou', 'Or', 'Alternative', 'Tu préfères du thé ou du café ?'],
-              ['Et', 'And', 'Addition', 'Il a pris son manteau et il est parti.'],
-              ['Donc', 'Therefore / So', 'Consequence', 'Je pense, donc je suis.'],
-              ['Or', 'Now / Yet', 'Transition / New premise', 'Il devait venir, or il a eu un empêchement.'],
-              ['Ni... ni', 'Neither... nor', 'Double negation', 'Je n\'aime ni le sucre ni le sel.'],
-              ['Car', 'For / Because', 'Causal coordination', 'Il reste chez lui car il est malade.']
-            ]
-          }
+          '**sentence = independent clause + dependent clause**',
+          'Examine the following example of a sentence, which comprises both types of clauses: dependent and independent:',
+          'Je mange en attendant ton arrivée. ->  I eat while waiting for your arrival.',
+          '* An independent clause: Je mange',
+          '* A dependent clause: en attendant ton arrivée',
+          'The main clause is in itself an independent clause and supports a dependent clause. This dependent clause, by itself, does not express a complete thought. It depends on the main clause to provide the premise and the background for what is to be expressed.',
         ],
         contrastExamples: [
           {
-            french: 'Je voulais partir en voyage, mais mes vacances ont été annulées.',
-            english: 'I wanted to go on a trip, but my vacation was canceled.',
-            aspectNote: 'Coordination of two independent clauses with "mais".'
+            french: 'Dax rêvait de devenir pilote.',
+            english: 'Dax dreamed of becoming a pilot.',
+            aspectNote: 'Main clause: "Dax rêvait" (Dax dreamed) is independent; dependent clause: "de devenir pilote" (of becoming a pilot) is subordinate.',
           },
           {
-            french: 'Il a bien révisé, donc il a réussi son examen avec brio.',
-            english: 'He revised well, so he passed his exam with flying colors.',
-            aspectNote: 'Consequential link using "donc".'
+            french: 'Les Robert sont à l’hôtel bien que leur famille habite en ville. ',
+            english: 'The Roberts are at the hotel even though their family lives in town.',
+            aspectNote: 'Main clause: "The Roberts are at the hotel" (The Roberts are at the hotel) is independent; dependent clause: "even though their family lives in town" (even though their family lives in town) is subordinate.',
           }
-        ]
+        ],
       },
       {
-        id: 'topic-9-subordination-indicative',
-        title: '2. Subordinate Clauses with Indicative (Parce que, Quand, Pendant que)',
-        formula: '[Proposition Principale] + [parce que / quand / lorsque / pendant que / si] + [Indicatif]',
-        goldenRule: 'Clauses of cause, time, and real condition express **factual reality** and strictly govern the **Indicative mood**.',
+        id: 'topic-9-compound-sentences',
+        title: '2. Compound sentences',
         detailedDescription: [
-          'Subordinating conjunctions connect a dependent clause to a main clause. The dependent clause cannot stand alone as a sentence.',
-          'Common indicative triggers include **parce que** (because), **pendant que** (while), **quand / lorsque** (when), and **puisque** (since/as).'
-        ],
-        tables: [
-          {
-            title: 'Indicative Subordinating Conjunctions',
-            subtitle: 'Factual cause, time, and circumstances',
-            description: 'Notice that verbs following these conjunctions remain in the indicative.',
-            headers: ['Category', 'Conjunction', 'Sample Clause', 'Translation'],
-            rows: [
-              ['Cause', 'Parce que', '...parce qu\'il fait froid.', '...because it is cold.'],
-              ['Time (Simultaneity)', 'Pendant que', 'Pendant qu\'elle dort, j\'étudie.', 'While she sleeps, I study.'],
-              ['Time (Point in time)', 'Quand / Lorsque', 'Quand tu arriveras, appelle-moi.', 'When you arrive, call me.'],
-              ['Condition (Real)', 'Si', 'Si tu viens, nous irons au parc.', 'If you come, we will go to the park.']
-            ]
-          }
+          'A compound sentence includes two independent clauses. These clauses may be combined into asentence by using punctuation (e.g., a semicolon).',
+          '**independent clause + ; + independent clause**',
+          'More frequently, however, independent clauses are joined together with one of the following coordinating conjunctions: et (and), ni (nor), ou (or), car (for), mais (but), and donc (so).',
+          'Commonly used coordinating conjunctions are:',
+          'et - and',
+          'ni - nor',
+          'ou - or',
+          'car - for',
+          'mais - but',
+          'donc - so',
+          'sinon - otherwise',
+          'soit soit - either or',
+          'ni ni - neither nor'
         ],
         contrastExamples: [
           {
-            french: 'Pendant qu\'il préparait le dîner, les enfants faisaient leurs devoirs.',
-            english: 'While he was preparing dinner, the children were doing their homework.',
-            aspectNote: 'Temporal clause with "Pendant que" taking the indicative imparfait.'
+            french: 'Tu pars; tu vas au concert. ',
+            english: 'You are leaving; you are going to the concert.',
+            aspectNote: 'Two independent clauses joined by a semicolon.',
           },
           {
-            french: 'Nous ne sortons pas parce qu\'il neige abondamment.',
-            english: 'We are not going out because it is snowing heavily.',
-            aspectNote: 'Causal clause with "parce que" taking the indicative présent.'
-          }
-        ]
-      },
-      {
-        id: 'topic-9-subordination-subjunctive',
-        title: '3. Concessive & Subjunctive Clauses (Bien que, Pour que)',
-        formula: '[Proposition Principale] + [bien que / pour que / avant que] + [Subjonctif]',
-        goldenRule: 'Conjunctions expressing **concession (bien que)**, **purpose (pour que)**, or **anteriority (avant que)** strictly trigger the **Subjunctive mood**.',
-        detailedDescription: [
-          'Certain subordinating conjunctions do not affirm an established fact, but rather a desired goal, an unexpected obstacle, or an uncertain limit.',
-          'Whenever you see **bien que** (although), **pour que / afin que** (so that), or **avant que** (before), the dependent verb must be in the subjunctive.'
-        ],
-        tables: [
-          {
-            title: 'Key Subjunctive Conjunctions',
-            subtitle: 'Concession, goal, and temporal limits',
-            description: 'Always watch for the subjunctive mood after these connectors.',
-            headers: ['Conjunction', 'Meaning', 'Required Mood', 'Example'],
-            rows: [
-              ['Bien que', 'Although / Even though', 'Subjonctif', 'Bien qu\'il pleuve, nous sortons.'],
-              ['Pour que', 'So that / In order that', 'Subjonctif', 'Je t\'explique pour que tu comprennes.'],
-              ['Avant que', 'Before', 'Subjonctif (+ ne explétif)', 'Pars avant qu\'il ne soit trop tard.'],
-              ['À condition que', 'Provided that', 'Subjonctif', 'Oui, à condition que tu sois sage.']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Bien qu\'il soit fatigué, il termine son travail.',
-            english: 'Although he is tired, he is finishing his work.',
-            aspectNote: 'Bien que triggers the subjunctive form "soit".'
+            french: 'Elle n’est pas encore là mais elle est en route. ',
+            english: 'She is not here yet but she is on her way.',
+            aspectNote: 'Two independent clauses joined by "mais" (but).'
           },
           {
-            french: 'Je te donne ce livre pour que tu le lises ce soir.',
-            english: 'I give you this book so that you read it this evening.',
-            aspectNote: 'Pour que triggers the subjunctive form "lises".'
+            french: 'Donne-moi un peu d’argent sinon je ne pourrai pas l’acheter. ',
+            english: 'Give me some money otherwise I won’t be able to buy it.',
+            aspectNote: 'Two independent clauses joined by "sinon" (otherwise).'
           }
         ]
       }
-    ],
-    rules: [
-      'Independent clauses (propositions indépendantes) can stand alone as complete sentences.',
-      'Coordinating conjunctions: mais (but), ou (or), et (and), donc (therefore), or (yet/now), ni (neither), car (for/because).',
-      'Subordinate clauses (propositions subordonnées) are introduced by subordinating conjunctions: parce que (because), quand (when), si (if), que (that), bien que (although + subj.).',
-      'Conjunctions of cause and time (parce que, pendant que, quand) take the Indicative, whereas concession and necessity (bien que, pour que, avant que) trigger the Subjunctive.',
-    ],
-    contrastExamples: [
-      {
-        french: 'Je voulais sortir, mais il pleuvait des cordes.',
-        english: 'I wanted to go out, but it was raining cats and dogs.',
-        aspectNote: 'Coordination with "mais" linking two independent clauses.',
-      },
-      {
-        french: 'Pendant qu\'il préparait le dîner, les enfants faisaient leurs devoirs.',
-        english: 'While he was preparing dinner, the children were doing their homework.',
-        aspectNote: 'Temporal subordinate clause introduced by "Pendant que" taking the indicative imparfait.',
-      },
-    ],
-    commonTraps: [
-      'Confusing "car" (coordinating conjunction) with "parce que" (subordinating conjunction; "parce que" can start a sentence, "car" cannot).',
-      'Forgetting that "bien que" requires the subjunctive mood.',
     ],
     practiceExercises: [
       {
