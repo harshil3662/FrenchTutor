@@ -1,0 +1,6 @@
+{
+  "name": "French Grammar Lessons & Aspects",
+  "description": "A comprehensive French grammar learning platform featuring structured grammar aspect lessons, interactive rule workbenches, syntactic sentence transformations, AI grammar dissections, and targeted practice drills.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

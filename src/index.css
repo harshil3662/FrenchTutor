@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-size: 118.75%; /* Base ~19px for comfortable high-readability study experience */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: #F5F5F0;
+    color: #34342E;
+    line-height: 1.65;
+    letter-spacing: -0.01em;
+  }
+
+  h1, h2, h3, .font-serif {
+    font-family: 'Libre Baskerville', Georgia, serif;
+  }
+}
+
+/* Custom scrollbar for clean natural UI */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F5F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #DCDCCF;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B8B8A8;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

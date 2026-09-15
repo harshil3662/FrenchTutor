@@ -1,0 +1,58 @@
+export const GRAMMAR_ASPECT_CATEGORIES = [
+  {
+    id: 'Articles, Numbers & Determiners',
+    name: 'Articles, Numbers & Determiners',
+    icon: '📦',
+    badge: 'Units 1 & 4',
+    description: 'Master definite, indefinite, and partitive articles, quantity reductions with "de", and cardinal/ordinal numbers.',
+  },
+  {
+    id: 'Nouns, Gender, Adjectives & Adverbs',
+    name: 'Gender, Nouns, Adjectives & Adverbs',
+    icon: '🏷️',
+    badge: 'Units 2, 3, 28 & 29',
+    description: 'Rules of noun gender suffixes, deceptive genders, regular and irregular adjective agreements, and adverbial derivations.',
+  },
+  {
+    id: 'Sentence Structure & Clauses',
+    name: 'Sentence Structure & Clauses',
+    icon: '🧱',
+    badge: 'Units 6, 7, 8 & 9',
+    description: 'Subject-Verb-Object word order, 3 interrogation systems, exclamative syntax, imperatives, and subordinate conjunctions.',
+  },
+  {
+    id: 'Present Tense & Core Conjugations',
+    name: 'Present Tenses & Irregular Verbs',
+    icon: '⚡',
+    badge: 'Units 10, 11 & 12',
+    description: 'Regular -er, -ir, and -re conjugations, stem-changing verbs, and fundamental irregulars (être, avoir, aller, faire, venir).',
+  },
+  {
+    id: 'Past Tenses, Pronominal & Aspect',
+    name: 'Past Tenses & Pronominal Verbs',
+    icon: '⏳',
+    badge: 'Units 13, 14, 15 & 16',
+    description: 'Passé composé vs Imparfait aspectual divide, plus-que-parfait anteriority, reflexive verbs, and immediate past/future.',
+  },
+  {
+    id: 'Future, Conditionals & Modals',
+    name: 'Future, Conditionals & Modals',
+    icon: '🔮',
+    badge: 'Units 17, 18 & 19',
+    description: 'Futur simple & futur antérieur, conditional present/past, and expressing "could, should, would" with pouvoir, devoir, vouloir.',
+  },
+  {
+    id: 'Subjunctive & Non-Finite Moods',
+    name: 'Subjunctive & Non-Finite Moods',
+    icon: '🎭',
+    badge: 'Units 20, 22, 23 & 24',
+    description: 'Subjunctive triggers (W.E.I.R.D.O.), past subjunctive, infinitive structures, imperative commands, and the gerundive (en + participe présent).',
+  },
+  {
+    id: 'Prepositions, Voice & Pronouns',
+    name: 'Prepositions, Voice & Pronouns',
+    icon: '📍',
+    badge: 'Units 21, 25, 26 & 27',
+    description: 'Prepositional regimes (à vs de), passive voice transformations, simple past (passé simple), direct/indirect pronouns, and relative pronouns.',
+  },
+];
