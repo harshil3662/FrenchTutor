@@ -971,80 +971,53 @@ export const A1_GRAMMAR_LESSONS = [
       },
       {
         id: 'topic-10-cer-ger-spelling',
-        title: '2. Spelling Adjustments in -ger & -cer (Nous Form)',
-        formula: '-ger: nous [-geons] (manger → mangeons)  |  -cer: nous [-çons] (commencer → commençons)',
-        goldenRule: 'Verbs ending in **-ger** insert an **« e »** before "-ons" in the *nous* form (**nous mangeons**) to keep the soft "g". Verbs ending in **-cer** take a cedilla **« ç »** before "-ons" (**nous commençons**) to keep the soft "s".',
+        title: '2. Spelling Adjustments in -ger & -cer',
         detailedDescription: [
-          'In French, "g" followed by "o" produces a hard /g/ sound (as in "gong"). To retain the soft /ʒ/ sound of *manger*, an "e" is inserted: **nous mangeons**, **nous voyageons**, **nous partageons**.',
-          'Similarly, "c" before "o" sounds hard /k/ (as in "cola"). To preserve the soft /s/ sound of *commencer*, a cedilla is added: **nous commençons**, **nous avançons**.'
+          'Some spelling changes occur with some -er regular verbs. With verbs ending in -cer, such as prononcer (to pronounce) the -c- becomes -ç- before the letter o. The cedilla (ç) under the c is needed to keep the soft pronunciation of the c in the infinitive form.',
+          '**nous annonçons** - we announce',
+          '**nous déplaçons** - we move',
+          'With verbs ending in -ger, such as voyager (to travel), the -g- becomes -ge- before the letter o.',
+          '**nous changeons** - we change',
+          '**nous voyageons** - we travel',
+          'Some verbs composed of -e l -er, such as épeler (to spell), sometimes take two ls in all but the first- and second-person plural.',
+          '**appeler - j’appelle **',
+          '**épeler - j’épelle**',
         ],
-        tables: [
-          {
-            title: 'Spelling Adjustments for Nous (Manger & Commencer)',
-            subtitle: 'Preserving soft consonant sounds before "-ons"',
-            description: 'These adjustments occur solely in the nous form.',
-            headers: ['Pronoun', 'Manger (-ger)', 'Commencer (-cer)'],
-            rows: [
-              ['Je', 'mange', 'commence'],
-              ['Tu', 'manges', 'commences'],
-              ['Il / Elle', 'mange', 'commence'],
-              ['Nous', 'mangeons (extra "e"!)', 'commençons (cedilla "ç"!)'],
-              ['Vous', 'mangez', 'commencez'],
-              ['Ils / Elles', 'mangent', 'commencent']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Nous commençons le cours et nous mangeons ensemble.',
-            english: 'We begin the class and we eat together.',
-            aspectNote: 'Spelling adjustments for nous: commençons (ç) and mangeons (ge).'
-          },
-          {
-            french: 'Nous voyageons souvent en France.',
-            english: 'We travel often in France.',
-            aspectNote: 'Voyager takes "-geons" in the nous form: voyageons.'
-          }
-        ]
       },
       {
-        id: 'topic-10-stem-changing-boot',
-        title: '3. Stem-Changing Boot Verbs (-yer, -eler, -eter, accent shifts)',
-        formula: 'Boot forms (je, tu, il, ils): changement de radical  |  Nous / Vous: radical régulier d\'origine',
-        goldenRule: 'In "boot verbs", the stem changes whenever the ending is silent (je, tu, il, ils). For **nous** and **vous**, where the ending is pronounced (-ons, -ez), the original infinitive stem returns.',
+        id: 'topic-10-boot-verbs',
+        title: '3. When is the present tense used in French?',
         detailedDescription: [
-          '**-yer verbs** (payer, envoyer): "y" becomes "i" in the boot: **je paie, tu paies, il paie, ils paient**, but **nous payons, vous payez**.',
-          '**-eler / -eter verbs** (appeler, jeter): double the consonant in the boot: **j\'appelle, tu appelles, ils appellent**, but **nous appelons, vous appelez**.',
-          '**Accent changes** (acheter, préférer): **j\'achète**, but **nous achetons** ; **je préfère**, but **nous préférons**.'
+          'To make a general statement and to describe ongoing actions in the present. It can be translated in three different ways.',
+          'Valérie **parle** à son ami Ludovic. - Valérie is talking to her friend Ludovic.',
+          'To express a close future',
+          'Il **part** demain soir. - He leaves tomorrow night.',
+          'To express a habitual action',
+          'Tous les jours, le soleil se **lève.** - Every day, the sun rises.',
+          'To describe a past action closely connected to the present',
+          'Claude revient d’Asie. Il **apprend** le chinois. - Claude is back from Asia. He is learning Chinese.',
+          'To express an action in the process, être en train de the infinitive form of the verb is used.',
+          'Un instant, s’il vous plaît, je suis en train de parler à Rémi. - One moment, please, I am talking to Rémi.',
         ],
-        tables: [
-          {
-            title: 'Boot Verb Paradigm (Appeler & Acheter)',
-            subtitle: 'Double consonants and grave accents in the boot',
-            description: 'Notice the difference between the boot forms and nous/vous.',
-            headers: ['Pronoun', 'Appeler (Stem: appell- vs appel-)', 'Acheter (Stem: achèt- vs achet-)'],
-            rows: [
-              ['Je', 'j\'appelle (double l)', 'j\'achète (grave accent)'],
-              ['Tu', 'tu appelles (double l)', 'tu achètes (grave accent)'],
-              ['Il / Elle', 'il appelle (double l)', 'il achète (grave accent)'],
-              ['Nous', 'nous appelons (single l)', 'nous achetons (no accent)'],
-              ['Vous', 'vous appelez (single l)', 'vous achetez (no accent)'],
-              ['Ils / Elles', 'ils appellent (double l)', 'ils achètent (grave accent)']
-            ]
-          }
+      },
+      {
+        id: 'topic-10-depuis',
+        title: '4. One more use of the present tense: depuis',
+        detailedDescription: [
+          'The present tense is used to express an action that began in the past and continues in the present. Note that in English, the past tense is used. There are different ways to formulate the questions, using either depuis, il y a... que, cela (ça) fait... que.',
         ],
         contrastExamples: [
           {
-            french: 'J\'appelle mon frère, mais nous appelons nos parents.',
-            english: 'I call my brother, but we call our parents.',
-            aspectNote: 'Double "l" in boot form (j\'appelle) vs single "l" in nous (appelons).'
+            french: 'J’habite à Nice depuis trois ans.',
+            english: 'I have been living in Nice for three years.',
+            aspectNote: 'Using "depuis" to express an action that began in the past and continues in the present.',
           },
           {
-            french: 'J\'achète ce livre pendant que nous achetons les billets.',
-            english: 'I buy this book while we buy the tickets.',
-            aspectNote: 'Grave accent on j\'achète vs no accent on nous achetons.'
+            french: 'Il y a trois ans, je suis arrivé à Paris.',
+            english: 'Three years ago, I arrived in Paris.',
+            aspectNote: 'Using "il y a" to express an action that happened in the past.',
           }
-        ]
+        ],
       }
     ],
     practiceExercises: [
