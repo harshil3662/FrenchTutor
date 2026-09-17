@@ -989,15 +989,37 @@ export const A1_GRAMMAR_LESSONS = [
         title: '3. When is the present tense used in French?',
         detailedDescription: [
           'To make a general statement and to describe ongoing actions in the present. It can be translated in three different ways.',
-          'Valérie **parle** à son ami Ludovic. - Valérie is talking to her friend Ludovic.',
           'To express a close future',
-          'Il **part** demain soir. - He leaves tomorrow night.',
           'To express a habitual action',
-          'Tous les jours, le soleil se **lève.** - Every day, the sun rises.',
           'To describe a past action closely connected to the present',
-          'Claude revient d’Asie. Il **apprend** le chinois. - Claude is back from Asia. He is learning Chinese.',
           'To express an action in the process, être en train de the infinitive form of the verb is used.',
-          'Un instant, s’il vous plaît, je suis en train de parler à Rémi. - One moment, please, I am talking to Rémi.',
+        ],
+        contrastExamples: [
+          {
+            french: 'Valérie parle à son ami Ludovic.',
+            english: 'Valérie is talking to her friend Ludovic.',
+            aspectNote: 'Present tense used to make a general statement.',
+          },
+          {
+            french: 'Il part demain soir.',
+            english: 'He leaves tomorrow night.',
+            aspectNote: 'Present tense used to express a close future.',
+          },
+          {
+            french: 'Tous les jours, le soleil se lève.',
+            english: 'The sun rises every day.',
+            aspectNote: 'Present tense used to express a habitual action.',
+          },
+          {
+            french: 'Claude revient d’Asie. Il apprend le chinois.',
+            english: 'Claude is back from Asia. He is learning Chinese.',
+            aspectNote: 'Present tense used to describe a past action closely connected to the present.',
+          },
+          {
+            french: 'Un instant, s’il vous plaît, je suis en train de parler à Rémi.',
+            english: 'One moment, please, I am talking to Rémi.',
+            aspectNote: 'Present tense used to express an action in the process.',
+          }
         ],
       },
       {
@@ -1055,16 +1077,10 @@ export const A1_GRAMMAR_LESSONS = [
     subtitle: 'Conjugate regular 2nd group verbs with "-iss-" infix and standard 3rd group -re verbs.',
     formula: '-IR (2e groupe): je -is, tu -is, il -it, nous -issons, vous -issez, ils -issent  |  -RE: je -s, tu -s, il [rien/d], nous -ons, vous -ez, ils -ent',
     goldenRule: 'Regular 2nd-group **-IR verbs** (finir, choisir, réfléchir) expand with the **« -iss- »** infix in all plural forms (**nous finissons, vous finissez, ils finissent**). Regular **-RE verbs** take no extra letter after "d" in the *il/elle* form (**il vend, elle attend**).',
-    detailedDescription: [
-      'The 2nd group (-IR verbs) is defined by its characteristic "-iss-" sound in the plural.',
-      'The 3rd group contains both irregular -IR verbs (like *partir, sortir*) and regular -RE verbs (like *vendre, attendre*).'
-    ],
     topics: [
       {
         id: 'topic-11-regular-ir-second-group',
         title: '1. Regular 2nd Group -IR with "-iss-" Infix',
-        formula: 'Singulier: [-is, -is, -it]  |  Pluriel: [-issons, -issez, -issent]',
-        goldenRule: 'To conjugate 2nd group verbs like **finir, choisir, grandir, réussir**, replace "-ir" with **-is, -is, -it** in the singular, and insert the **« -iss- »** sound before plural endings.',
         detailedDescription: [
           'Finir: Je **finis**, Tu **finis**, Il/Elle **finit**, Nous **finissons**, Vous **finissez**, Ils/Elles **finissent**.',
           'Notice that the final consonants "s" and "t" in the singular (*finis, finit*) are silent: both sound like /fini/.'
@@ -1074,14 +1090,14 @@ export const A1_GRAMMAR_LESSONS = [
             title: 'Conjugation of Finir and Choisir',
             subtitle: 'The hallmark "-iss-" infix in the plural',
             description: 'Over 300 verbs follow this exact model.',
-            headers: ['Pronoun', 'Finir (to finish)', 'Choisir (to choose)', 'Phonetic Ending'],
+            headers: ['Pronoun', 'Finir (to finish)', 'Choisir (to choose)'],
             rows: [
-              ['Je', 'finis', 'choisis', '/i/'],
-              ['Tu', 'finis', 'choisis', '/i/'],
-              ['Il / Elle', 'finit', 'choisit', '/i/'],
-              ['Nous', 'finissons', 'choisissons', '/i.sɔ̃/'],
-              ['Vous', 'finissez', 'choisissez', '/i.se/'],
-              ['Ils / Elles', 'finissent', 'choisissent', '/is/']
+              ['Je', 'finis', 'choisis'],
+              ['Tu', 'finis', 'choisis'],
+              ['Il / Elle', 'finit', 'choisit'],
+              ['Nous', 'finissons', 'choisissons'],
+              ['Vous', 'finissez', 'choisissez'],
+              ['Ils / Elles', 'finissent', 'choisissent']
             ]
           }
         ],
@@ -1101,8 +1117,6 @@ export const A1_GRAMMAR_LESSONS = [
       {
         id: 'topic-11-irregular-ir-third-group',
         title: '2. Irregular 3rd Group -IR Verbs (Partir, Sortir, Dormir)',
-        formula: 'Singulier (radical court): [-s, -s, -t]  |  Pluriel (radical complet): [-ons, -ez, -ent]',
-        goldenRule: 'Verbs like **partir, sortir, dormir, servir** do NOT have the "-iss-" sound. In the singular, they **drop the final consonant of the root**: **je pars, tu pars, il part** (root par-). In the plural, the consonant returns: **nous partons**.',
         detailedDescription: [
           'Compare: *finir* has *nous finissons* (2nd group), but *partir* has *nous partons* (3rd group)!',
           'Singular: Je **pars**, Tu **pars**, Il **part**. Plural: Nous **partons**, Vous **partez**, Ils **partent**.'
@@ -1121,26 +1135,31 @@ export const A1_GRAMMAR_LESSONS = [
               ['Vous', 'partez', 'sortez', 'dormez'],
               ['Ils / Elles', 'partent', 'sortent', 'dorment']
             ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Je pars demain à Paris et je dors chez un ami.',
-            english: 'I leave tomorrow for Paris and I am sleeping at a friend\'s house.',
-            aspectNote: 'Dropped consonant in singular: pars (partir), dors (dormir).'
           },
           {
-            french: 'Nous partons en vacances la semaine prochaine.',
-            english: 'We leave on vacation next week.',
-            aspectNote: 'Restored root consonant in plural: partons.'
+            title: 'Some other frequently used irregular -IR verbs and their conjugations',
+            description: 'These verbs also drop a consonant in the singular forms.',
+            headers: ['Verb', 'English', 'Conjugation(Je)', 'Conjugation(Nous)'],
+            rows: [
+              ['bouillir', 'to boil', 'je bous', 'nous bouillons'],
+              ['courir', 'to run', 'je cours', 'nous courons'],
+              ['couvrir', 'to cover', 'je couvre', 'nous couvrons'],
+              ['fuir', 'to flee', 'je fuis', 'nous fuyons'],
+              ['mentir', 'to lie', 'je mens', 'nous mentons'],
+              ['mourir', 'to die', 'je meurs', 'nous mourons'],
+              ['obtenir', 'to obtain', 'j’obtiens', 'nous obtenons'],
+              ['offrir', 'to offer', 'j’offre', 'nous offrons'],
+              ['ouvrir', 'to open', 'j’ouvre', 'nous ouvrons'],
+              ['sentir', 'to feel', 'je sens', 'nous sentons'],
+              ['servir', 'to serve', 'je sers', 'nous servons'],
+              ['souffrir', 'to suffer', 'je souffre', 'nous souffrons'],
+            ]
           }
-        ]
+        ],
       },
       {
         id: 'topic-11-re-verbs-prendre',
         title: '3. Regular -RE Verbs & -prendre Patterns',
-        formula: 'Réguliers en -RE: [-s, -s, -rien (d), -ons, -ez, -ent]  |  Prendre: [prends, prends, prend, prenons, prenez, prennent]',
-        goldenRule: 'Regular -RE verbs (**vendre, attendre, entendre, répondre**) take **no extra ending after "d"** in the third-person singular (**il attend**, never "il attendt"). Verbs in **-prendre** double the "n" in the 3rd person plural (**ils prennent**).',
         detailedDescription: [
           'Vendre: Je **vends**, Tu **vends**, Il **vend**, Nous **vendons**, Vous **vendez**, Ils **vendent**.',
           'Prendre family (*apprendre, comprendre, surprendre*): Je **prends**, Tu **prends**, Il **prend**, Nous **prenons**, Vous **prenez**, Ils **prennent** (pronounced /pʁɛn/).'
@@ -1148,7 +1167,6 @@ export const A1_GRAMMAR_LESSONS = [
         tables: [
           {
             title: 'Vendre and Prendre Conjugations',
-            subtitle: 'Regular -RE vs. Double-n Prendre paradigm',
             description: 'Notice that "il vend" and "il prend" have no ending after d.',
             headers: ['Pronoun', 'Vendre (Regular -RE)', 'Prendre (Irregular -RE)'],
             rows: [
@@ -1159,55 +1177,34 @@ export const A1_GRAMMAR_LESSONS = [
               ['Vous', 'vendez', 'prenez'],
               ['Ils / Elles', 'vendent', 'prennent (double n!)']
             ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Il attend le bus pendant que nous vendons nos livres.',
-            english: 'He waits for the bus while we sell our books.',
-            aspectNote: 'Regular -RE verb: "il attend" (no extra ending after d) vs "nous vendons".'
           },
           {
-            french: 'Les enfants prennent le goûter à quatre heures.',
-            english: 'The children have a snack at four o\'clock.',
-            aspectNote: 'Double "n" in third person plural: prennent (/pʁɛn/).'
+            title: 'Some other -re verbs conjugated in the same way',
+            description: 'These verbs also drop the final consonant in the singular forms.',
+            headers: ['Verb', 'English', 'Conjugation(Je)'],
+            rows: [
+              ['attendre', 'to wait', 'j’attends'],
+              ['défendre', 'to defend', 'je défends'],
+              ['entendre', 'to hear', 'j’entends'],
+              ['descendre', 'to go down', 'je descends'],
+              ['répondre', 'to answer', 'je réponds'],
+              ['perdre', 'to lose', 'je perds'],
+            ]
+          },
+          {
+            title: 'Some other irregular -re verbs',
+            description: 'These verbs also drop the final consonant in the singular forms.',
+            headers: ['Verb', 'English', 'Conjugation(Je)', 'Conjugation(Nous)'],
+            rows: [
+              ['prendre', 'to take', 'j’prends', 'Nous prenons'],
+              ['apprendre', 'to learn', 'j’appris','Nous apprenons'],
+              ['comprendre', 'to understand', 'Je comprends','Nous comprenons'],
+              ['entreprendre', 'to undertake', 'j’entreprends', 'Nous entreprenons'],
+              ['répondre', 'to surprise', 'je surprends', 'Nous surprenons'],
+            ]
           }
-        ]
+        ],
       }
-    ],
-    rules: [
-      'Regular -IR verbs (finir type): je finis, tu finis, il finit, nous finissons, vous finissez, ils finissent.',
-      'Irregular -IR verbs (partir, sortir, dormir type): drop the last letter of the root in the singular: je pars, tu pars, il part, nous partons, vous partez, ils partent.',
-      'Regular -RE verbs (vendre type): je vends, tu vends, il vend (root ending in d), nous vendons, vous vendez, ils vendent.',
-      'Verbs in -prendre (prendre, comprendre, apprendre) double the "n" in the plural: ils prennent, ils comprennent.',
-    ],
-    contrastExamples: [
-      {
-        french: 'Nous finissons nos devoirs et nous choisissons un film.',
-        english: 'We finish our homework and we choose a movie.',
-        aspectNote: '2nd group -IR infix "-iss-" in plural forms: finissons, choisissons.',
-      },
-      {
-        french: 'Il attend le bus pendant que nous vendons nos livres.',
-        english: 'He waits for the bus while we sell our books.',
-        aspectNote: 'Regular -RE verb: "il attend" (no extra ending after d) vs "nous vendons".',
-      },
-    ],
-    conjugationHighlight: {
-      verb: 'Finir',
-      tense: 'Présent de l\'indicatif',
-      table: {
-        je: 'finis',
-        tu: 'finis',
-        'il/elle/on': 'finit',
-        nous: 'finissons',
-        vous: 'finissez',
-        'ils/elles': 'finissent',
-      },
-    },
-    commonTraps: [
-      'Adding a "t" to regular -re verbs in third person singular (say "il vend", never "il vendt").',
-      'Confusing "finir" group (nous finissons) with "partir" group (nous partons, not partissons).',
     ],
     practiceExercises: [
       {
@@ -1244,16 +1241,10 @@ export const A1_GRAMMAR_LESSONS = [
     subtitle: 'Master the top high-frequency auxiliary and modal verbs in the French language.',
     formula: 'Être: suis, es, est, sommes, êtes, sont  |  Avoir: ai, as, a, avons, avez, ont  |  Aller: vais, vas, va, allons, allez, vont  |  Faire: fais, fais, fait, faisons, faites, font',
     goldenRule: 'Watch out for **« vous êtes »** and **« vous faites »** (two of only three present verbs ending in **-tes** for vous: vous êtes, vous faites, vous dites) and third person plurals ending in **-ont** (ils sont, ils ont, ils vont, ils font).',
-    detailedDescription: [
-      'The verbs *être, avoir, aller*, and *faire* are the four undisputed pillars of the French language.',
-      'Beyond their primary meanings, they act as tense auxiliaries, question tags, weather indicators, and near future markers.'
-    ],
     topics: [
       {
         id: 'topic-12-etre-avoir',
         title: '1. Être & Avoir (Dual Roles as Auxiliary & Verb)',
-        formula: 'Être: [suis, es, est, sommes, êtes, sont]  |  Avoir: [ai, as, a, avons, avez, ont]',
-        goldenRule: 'Beware the phonetic difference between **« ils ont »** (voiced /z/ liaison: /il.z‿ɔ̃/) and **« ils sont »** (voiceless /s/: /il.sɔ̃/). Confusing them flips "they have" and "they are"!',
         detailedDescription: [
           'Être expresses identity, profession, origin, and location (**« Je suis canadien »**, **« Elle est à Paris »**).',
           'Avoir expresses possession, age (**« J\'ai 25 ans »**, never "Je suis 25 ans"), and physical sensations (**« avoir faim, avoir soif, avoir chaud »**).'
@@ -1288,8 +1279,43 @@ export const A1_GRAMMAR_LESSONS = [
         ]
       },
       {
+        id: 'topic-12-etre-avoir',
+        title: '2. Avoir Common idiomatic expressions',
+        detailedDescription: [
+          'When referring to the state of one’s body, French uses avoir mal à (having an ache or pain).',
+          '**J’ai mal à la tête. **. I have a headache.',
+          '**Il a mal au bras. ** His arm hurts.',
+          'When avoir mal à is followed by a verb, it means to have trouble doing something.',
+          '**Nous avons du mal à accepter sa décision. ** We have trouble accepting his decision.',
+          'Note that un, une, and des change to de or d’ when the verb is in the negative form.',
+          '** Je n’ai pas d’amis à Paris. ** I do not have friends in Paris.'
+        ],
+        tables: [
+          {
+            title: 'Many common idiomatic expressions',
+            headers: ['French', 'English'],
+            rows: [
+              ['j’ai de la chance','I am lucky'],
+              ['j’ai besoin de… ', 'I need . . .'],
+              ['j’ai chaud ', 'I am hot, warm'],
+              ['j’ai envie de…', 'I feel like . . .'],
+              ['j’ai faim', 'I am hungry'],
+              ['j’ai froid', 'I am cold'],
+              ['j’ai honte', 'I am ashamed'],
+              ['j’ai l’air de… ', 'I seem, I look . . .'],
+              ['j’ai mal ', 'I have a pain, it hurts'],
+              ['j’ai peur', 'I am afraid'],
+              ['j’ai (trente-cinq) ans ', 'I am (thirty-five) years old'],
+              ['j’ai raison', 'I am right'],
+              ['j’ai soif', 'I am thirsty'],
+              ['j’ai tort', 'I am wrong']
+            ]
+          }
+        ],
+      },
+      {
         id: 'topic-12-aller-faire',
-        title: '2. Aller & Faire (Near Future & Daily Idioms)',
+        title: '3. Aller & Faire (Near Future & Daily Idioms)',
         formula: 'Aller: [vais, vas, va, allons, allez, vont]  |  Faire: [fais, fais, fait, faisons, faites, font]',
         goldenRule: '**Aller** forms the Near Future (**aller + infinitif**). **Faire** is used for all weather statements (**il fait beau, il fait froid**) and activities (**faire du sport, faire la cuisine**).',
         detailedDescription: [

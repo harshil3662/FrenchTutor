@@ -72,6 +72,32 @@ export const A2_GRAMMAR_LESSONS = [
             aspectNote: 'Two independent clauses joined by "sinon" (otherwise).'
           }
         ]
+      },
+      {
+        id: 'topic-9-negation-ni-ni',
+        title: 'The negation ni… ni…',
+        detailedDescription: [
+          'The negation ni… ni… precedes each noun that it negates. In addition, the negative particle ne (n’) comes directly before the verb. When the definite article le, la, l’, les is used before the noun, the definite article remains when the verb is negative.',
+          'When the indefinite or partitive article is used before the noun in the affirmative sentence, the article disappears when the verb is made negative.'
+        ],
+        contrastExamples: [
+          {
+            french: 'Il aime le café et le chocolat.',
+            english: 'He likes coffee and chocolate.'
+          },
+          {
+            french: 'Il n’aime ni le café ni le chocolat. ',
+            english: 'He likes neither coffee nor chocolate.'
+          },
+          {
+            french: 'Elle commande de l’eau et du vin. ',
+            english: 'She orders water and wine.'
+          },
+          {
+            french: 'Elle ne commande ni eau ni vin. ',
+            english: 'She orders neither water nor wine.'
+          }
+        ]
       }
     ],
     practiceExercises: [
