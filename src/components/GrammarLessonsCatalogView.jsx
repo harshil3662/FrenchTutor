@@ -28,6 +28,7 @@ export const GrammarLessonsCatalogView = ({
   onAwardXp,
   onLessonComplete,
   onSelectLesson,
+  onOpenAiQuiz,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedLevelFilter, setSelectedLevelFilter] = useState('All');
@@ -366,17 +367,28 @@ export const GrammarLessonsCatalogView = ({
               </div>
 
               {/* Action Button */}
-              <div className="pt-3 border-t border-[#E8E2D9] flex items-center justify-between">
+              <div className="pt-3 border-t border-[#E8E2D9] flex items-center justify-between gap-2">
                 <span className="text-xs text-[#7A7A6A] font-medium">
                   {lesson.practiceExercises?.length || 0} Drills • +20 XP
                 </span>
-                <button
-                  onClick={() => handleOpenLesson(lesson)}
-                  className="px-4 py-2 bg-[#5A5A40] hover:bg-[#4A4A35] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
-                >
-                  <span>Study & Practice</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                <div className="flex items-center gap-2">
+                  {onOpenAiQuiz && (
+                    <button
+                      onClick={() => onOpenAiQuiz(lesson.title, lesson.level)}
+                      className="px-3 py-2 bg-white hover:bg-[#FAF7F2] text-[#5A5A40] border border-[#DCDCCF] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer"
+                    >
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>AI Quiz</span>
+                    </button>
+                  )}
+                  <button
+                    onClick={() => handleOpenLesson(lesson)}
+                    className="px-4 py-2 bg-[#5A5A40] hover:bg-[#4A4A35] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+                  >
+                    <span>Study & Practice</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               </div>
             </div>
           );

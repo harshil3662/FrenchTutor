@@ -1314,51 +1314,33 @@ export const A1_GRAMMAR_LESSONS = [
         ],
       },
       {
-        id: 'topic-12-aller-faire',
-        title: '3. Aller & Faire (Near Future & Daily Idioms)',
-        formula: 'Aller: [vais, vas, va, allons, allez, vont]  |  Faire: [fais, fais, fait, faisons, faites, font]',
-        goldenRule: '**Aller** forms the Near Future (**aller + infinitif**). **Faire** is used for all weather statements (**il fait beau, il fait froid**) and activities (**faire du sport, faire la cuisine**).',
+        id: 'topic-12-savoir-connaître',
+        title: '3. Savoir & Connaître',
         detailedDescription: [
-          'Remember the irregular *vous* form for faire: **vous faites** (saying *"vous faisez"* is a major error!).',
-          'Both verbs end in **-ont** for third person plural: **ils vont**, **ils font**.'
-        ],
-        tables: [
-          {
-            title: 'Aller and Faire Conjugation Matrix',
-            subtitle: 'Forms and high-frequency expressions',
-            description: 'Notice the irregular plural endings.',
-            headers: ['Pronoun', 'Aller (to go)', 'Faire (to do/make)'],
-            rows: [
-              ['Je', 'vais', 'fais'],
-              ['Tu', 'vas', 'fais'],
-              ['Il / Elle / On', 'va', 'fait (il fait beau)'],
-              ['Nous', 'allons', 'faisons'],
-              ['Vous', 'allez', 'faites (ends in -tes!)'],
-              ['Ils / Elles', 'vont (ends in -ont)', 'font (ends in -ont)']
-            ]
-          }
+          'The -oir verbs do not all follow the same conjugation pattern. We’ll start with the very useful verb savoir (to know). Savoir means to know a fact, to know how to do something from memory or study.',
+          'When learning the verb savoir, you also need to become acquainted with the verb connaître, in order to understand when to use one or the other. Connaître means to know, to be acquainted with, to be familiar with. In a figurative way, it means to enjoy, to experience. It is always followed by a direct object; it is never followed by a dependent clause.'
         ],
         contrastExamples: [
           {
-            french: 'Vous faites du sport et vous allez à la salle de gym.',
-            english: 'You do sports and you go to the gym.',
-            aspectNote: 'Irregular "vous faites" + regularized "vous allez".'
+            french: 'Elle sait jouer du piano. ',
+            english: 'She can play the piano.',
           },
           {
-            french: 'Aujourd\'hui, il fait beau et nous allons nous promener.',
-            english: 'Today, the weather is nice (faire) and we are going to take a walk (aller).',
-            aspectNote: 'Weather idiom with faire + near future with aller.'
+            french: 'Il sait ce poème par cœur. ',
+            english: 'He knows this poem by heart.',
+          },
+          {
+            french: 'Elle connaît bien Paris. ',
+            english: 'She knows Paris well.'
           }
         ]
       },
       {
         id: 'topic-12-modals',
-        title: '3. Core Modal Verbs (Pouvoir, Vouloir, Devoir)',
-        formula: 'Pouvoir (can): peux, peux, peut, pouvons, pouvez, peuvent  |  Vouloir (want): veux, veux, veut, voulons, voulez, veulent  |  Devoir (must): dois, dois, doit, devons, devez, doivent',
-        goldenRule: 'Modal verbs are immediately followed by a **bare infinitive** without any preposition: **« Je veux apprendre »**, **« Il peut venir »**, **« Nous devons partir »**.',
+        title: '4. Core Modal Verbs (Pouvoir, Vouloir, Devoir)',
         detailedDescription: [
-          'Notice that in *pouvoir* and *vouloir*, the singular takes an "-x": **je peux, tu peux ; je veux, tu veux**.',
-          'The third person plural forms take stem shifts: **ils peuvent**, **ils veulent**, **ils doivent**.'
+          'Pouvoir (can, may) expresses ability and capability. The verb vouloir (to want) is used to express wishes and desires. It is also used for a polite request in the conditional form.',
+          'The verb devoir (must, to have to) is an irregular verb with various meanings. It can also be used as a debt, an obligation, a warning or a probability.'
         ],
         tables: [
           {
@@ -1378,51 +1360,82 @@ export const A1_GRAMMAR_LESSONS = [
         ],
         contrastExamples: [
           {
-            french: 'Je veux sortir mais je dois finir mes devoirs.',
-            english: 'I want to go out but I must finish my homework.',
-            aspectNote: 'Vouloir + infinitive and Devoir + infinitive.'
+            french: 'Elle ne peut pas venir aujourd’hui. ',
+            english: 'She cannot come today.',
           },
           {
-            french: 'Est-ce que nous pouvons entrer ?',
-            english: 'Can we come in?',
-            aspectNote: 'Pouvoir expressing permission followed by bare infinitive.'
+            french: 'Elle veut une augmentation. ',
+            english: 'She wants a raise.',
+          },
+          {
+            french: 'Combien est-ce qu’on vous doit? ',
+            english: 'How much do we owe you?',
+
+          },
+          {
+            french: 'L’enfant doit obéir à ses parents. ',
+            english: 'The child must obey his parents.',
+          },
+          {
+            french: 'L’avion doit atterrir à dix heures. ',
+            english: 'The plane is supposed to land at ten o’clock.',
+          },
+          {
+            french: 'Tu ne devrais pas lui prêter d’argent.',
+            english: 'You should not lend him any money.',
+          }
+        ]
+      },
+      {
+        id: 'topic-12-expressions',
+        title: 'Il y a & Il s’agit de',
+        detailedDescription: [
+          'Il y a is an impersonal expression that means both there is and there are. Il s’agit de (it is a matter of, it’s about) is a fixed expression that introduces the subject of a work (book, film, etc.) or of a situation.'
+        ],
+        contrastExamples: [
+          {
+            french: 'Il y a un chat sur le canapé. ',
+            english: 'There is a cat on the sofa.'
+          },
+          {
+            french: 'Qu’est-ce qu’il y a? ',
+            english: 'What’s the matter?'
+          },
+          {
+            french: 'Il y a cinquante kilomètres d’ici à Paris.',
+            english: 'It’s fifty kilometers from here to Paris.'
+          },
+          {
+            french: 'De quoi s’agit-il? ',
+            english: 'What is it about?'
+          },
+          {
+            french: 'Il s’agit d’amour. ',
+            english: 'It is a matter of love.'
+          }
+        ]
+      },
+      {
+        id: 'topic-12-eindre-aindre',
+        title: 'Verbs ending in -eindre and -aindre',
+        detailedDescription: [
+          'Among the -re verbs, some verbs ending in -eindre or -aindre can be grouped together. Verbs like peindre (to paint) include teindre (to dye), ceindre (to encircle), feindre (to feign), craindre (to fear), plaindre (to pity), and se plaindre (to complain).'
+        ],
+        tables: [
+          {
+            title: 'Conjugation',
+            headers: ['Pronoun', 'peindre', 'Craindre'],
+            rows: [
+              ['Je', 'peins', 'crains'],
+              ['Tu', 'peins', 'crains'],
+              ['Il / Elle', 'peint', 'craint'],
+              ['Nous', 'peignons', 'craignons'],
+              ['Vous', 'peignez', 'craignez'],
+              ['Ils / Elles', 'peignent', 'craignent']
+            ]
           }
         ]
       }
-    ],
-    rules: [
-      'Être (to be) and Avoir (to have) serve as both standalone verbs and the auxiliaries for all compound tenses.',
-      'Aller (to go) is irregular (je vais, tu vas, il va...) and forms the Near Future (Futur Proche = aller + infinitif).',
-      'Faire (to do/make) is used for activities, weather expressions (il fait beau, il fait froid), and causative structures.',
-      'Key irregular modals: Pouvoir (je peux, nous pouvons, ils peuvent), Vouloir (je veux, nous voulons, ils veulent), Devoir (je dois, nous devons, ils doivent).',
-    ],
-    contrastExamples: [
-      {
-        french: 'Ils ont un chien et ils sont très contents.',
-        english: 'They have a dog and they are very happy.',
-        aspectNote: 'Phonetic distinction: Ils ont (/il.z‿ɔ̃/) with liaison "z" vs Ils sont (/il.sɔ̃/) with "s".',
-      },
-      {
-        french: 'Vous faites du sport et vous êtes en forme.',
-        english: 'You do sports and you are in good shape.',
-        aspectNote: 'Irregular "vous" forms ending in -tes: vous faites, vous êtes.',
-      },
-    ],
-    conjugationHighlight: {
-      verb: 'Être vs Avoir',
-      tense: 'Présent de l\'indicatif',
-      table: {
-        je: 'suis / ai',
-        tu: 'es / as',
-        'il/elle/on': 'est / a',
-        nous: 'sommes / avons',
-        vous: 'êtes / avez',
-        'ils/elles': 'sont / ont',
-      },
-    },
-    commonTraps: [
-      'Saying "vous faisez" or "vous disez" (correct: vous faites, vous dites).',
-      'Confusing pronunciation of "ils ont" (liaison /z/) and "ils sont" (pure /s/).',
     ],
     practiceExercises: [
       {

@@ -1,4 +1,5 @@
 import express from 'express';
+import 'dotenv/config';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
@@ -67,6 +68,41 @@ function getGeminiClient() {
   return aiClient;
 }
 
+function getOpenRouterApiKey() {
+  return process.env.OPEN_ROUTER_KEY || null;
+}
+
+function getOpenRouterModel() {
+  return process.env.OPEN_ROUTER_MODEL || 'openai/gpt-4o';
+}
+
+async function generateOpenRouterJson(prompt) {
+  const apiKey = getOpenRouterApiKey();
+  if (!apiKey) return null;
+
+  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+      'HTTP-Referer': 'http://localhost:3000',
+      'X-Title': 'FrenchTutor',
+    },
+    body: JSON.stringify({
+      model: getOpenRouterModel(),
+      messages: [{ role: 'user', content: prompt }],
+      response_format: { type: 'json_object' },
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`OpenRouter returned status ${response.status}`);
+  }
+
+  const payload = await response.json();
+  return payload.choices?.[0]?.message?.content || null;
+}
+
 // API Routes
 
 // Health check
@@ -74,6 +110,7 @@ app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     hasApiKey: Boolean(process.env.GEMINI_API_KEY),
+    hasOpenRouterKey: Boolean(getOpenRouterApiKey()),
     timestamp: new Date().toISOString(),
   });
 });
@@ -408,12 +445,6 @@ app.post('/api/ai/generate-quiz', async (req, res) => {
   };
 
   try {
-    const ai = getGeminiClient();
-
-    if (!ai) {
-      return res.json(defaultFallback);
-    }
-
     const prompt = `Generate a ${questionCount}-question French interactive grammar quiz strictly focused on grammatical aspects for topic: "${topic}" and level ${level}.
 
 Include varied question types:
@@ -435,6 +466,17 @@ Format as JSON:
     }
   ]
 }`;
+
+    const openRouterResult = await generateOpenRouterJson(prompt);
+    if (openRouterResult) {
+      return res.json(cleanAndParseJson(openRouterResult, defaultFallback));
+    }
+
+    const ai = getGeminiClient();
+
+    if (!ai) {
+      return res.json(defaultFallback);
+    }
 
     const response = await ai.models.generateContent({
       model: 'gemini-3.7-flash',

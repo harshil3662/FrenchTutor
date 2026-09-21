@@ -146,6 +146,7 @@ export default function App() {
             onAwardXp={handleAwardXp}
             onLessonComplete={handleLessonCompleted}
             onSelectLesson={(lesson) => setPreviewUnit(lesson)}
+            onOpenAiQuiz={handleOpenAiQuiz}
           />
         )}
 

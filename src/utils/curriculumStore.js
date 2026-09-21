@@ -2,6 +2,27 @@ import { GRAMMAR_ASPECT_LESSONS } from '../data/grammarAspectsData.js';
 
 const UNITS_STORAGE_KEY = 'french_grammar_units_v1';
 
+const PREDEFINED_DRILLS_BY_LESSON_ID = new Map(
+  GRAMMAR_ASPECT_LESSONS.map((lesson) => [
+    lesson.id,
+    lesson.practiceExercises || lesson.exercises || [],
+  ])
+);
+
+function restorePredefinedDrills(units) {
+  return units.map((unit) => {
+    const predefinedDrills = PREDEFINED_DRILLS_BY_LESSON_ID.get(unit.id);
+    if (!predefinedDrills?.length) {
+      return unit;
+    }
+
+    return {
+      ...unit,
+      practiceExercises: predefinedDrills,
+    };
+  });
+}
+
 /**
  * Loads the current units from localStorage or falls back to the default dataset.
  */
@@ -13,7 +34,7 @@ export function getStoredUnits() {
     }
     const parsed = JSON.parse(raw);
     if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed;
+      return restorePredefinedDrills(parsed);
     }
     return GRAMMAR_ASPECT_LESSONS;
   } catch (e) {

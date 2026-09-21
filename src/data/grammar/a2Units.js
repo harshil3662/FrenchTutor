@@ -135,58 +135,31 @@ export const A2_GRAMMAR_LESSONS = [
     subtitle: 'Express imminent events (aller + inf.), just-completed actions (venir de + inf.), and having things done (faire + inf.).',
     formula: 'Futur Proche: [aller au présent] + [Infinitif]  |  Passé Récent: [venir au présent] + [de / d\'] + [Infinitif]  |  Causatif: [faire conjugué] + [Infinitif]',
     goldenRule: 'To express having someone else perform an action or causing something to happen, use **« Faire + Infinitif »** (e.g. **« Je fais réparer ma voiture »** = I am having my car repaired).',
-    detailedDescription: [
-      'Semi-auxiliary verb constructions are among the most versatile conversational tools in French.',
-      'By combining **aller**, **venir de**, or **faire** with an infinitive, you can situate actions in the immediate timeline or describe delegated services without complex conjugations.'
-    ],
     topics: [
       {
         id: 'topic-13-futur-proche',
-        title: '1. Le Futur Proche (Aller + Infinitif)',
-        formula: '[Sujet] + [aller au présent] + [Infinitif du verbe d\'action]',
-        goldenRule: 'Use the **Futur Proche** for imminent future events or predetermined intentions. In negative sentences, **« ne... pas »** wraps around **aller** (**« Je ne vais pas manger »**).',
+        title: '1. The immediate future tense',
         detailedDescription: [
-          'The **Futur Proche** is extremely frequent in spoken French. It conveys high certainty or immediacy ("going to do").',
-          'Object pronouns sit immediately **before the infinitive**, not before aller: **« Je vais le faire »** (not "Je le vais faire").'
-        ],
-        tables: [
-          {
-            title: 'Futur Proche Conjugation (Partir, Regarder)',
-            subtitle: 'Conjugating Aller + main verb in infinitive',
-            description: 'Only the auxiliary "aller" is conjugated.',
-            headers: ['Pronoun', 'Aller', 'Partir (Infinitive)', 'Negative Form'],
-            rows: [
-              ['Je', 'vais', 'partir', 'Je ne vais pas partir'],
-              ['Tu', 'vas', 'partir', 'Tu ne vas pas partir'],
-              ['Il / Elle', 'va', 'partir', 'Il ne va pas partir'],
-              ['Nous', 'allons', 'partir', 'Nous n\'allons pas partir'],
-              ['Vous', 'allez', 'partir', 'Vous n\'allez pas partir'],
-              ['Ils / Elles', 'vont', 'partir', 'Ils ne vont pas partir']
-            ]
-          }
+          '**Aller** is used to form the immediate future. So, to talk about what you are going to do, use **aller** in the present indicative followed immediately by a verb in the infinitive.',
+          'And in everyday conversation, the immediate future is often used as a substitute for the future tense (le futur simple).'
         ],
         contrastExamples: [
           {
-            french: 'Attention, le train va partir dans une minute !',
-            english: 'Watch out, the train is going to leave in one minute!',
-            aspectNote: 'Imminent event expressed with futur proche.'
+            french: 'Je vais acheter une voiture en mai. ',
+            english: 'I am going to buy a car in May.',
           },
           {
-            french: 'Je vais lui téléphoner ce soir.',
-            english: 'I am going to phone him this evening.',
-            aspectNote: 'Object pronoun "lui" placed directly before the infinitive "téléphoner".'
+            french: 'Vous allez partir la semaine prochaine? ',
+            english: 'You’re going to leave next week?',
           }
         ]
       },
       {
         id: 'topic-13-passe-recent',
-        title: '2. Le Passé Récent (Venir de + Infinitif)',
-        formula: '[Sujet] + [venir au présent] + [de / d\'] + [Infinitif]',
-        goldenRule: 'Express actions that happened moments ago with **« Venir de + Infinitif »**. Never omit the preposition **« de »**!',
+        title: '2. The verb venir (to come)',
         detailedDescription: [
-          'The **Passé Récent** translates the English "have just done".',
-          'Before a verb starting with a vowel, **de** elides into **d\'** (**« Je viens d\'arriver »**).',
-          'In past narration, conjugating venir in the imparfait creates an anterior recent past: **« Il venait de sortir quand le téléphone a sonné »** (He had just stepped out when the phone rang).'
+          'The verb venir (to come) and its derivatives, devenir (to become), prévenir (to warn, to inform), survenir (to occur), are all commonly used verbs.',
+          'The verb venir (to come) in the present tense de, combined with a verb in the infinitive, expresses an action that has just taken place. Although the construction venir de is in the present tense in French, it conveys an idea in the past in English.',
         ],
         tables: [
           {
@@ -206,75 +179,120 @@ export const A2_GRAMMAR_LESSONS = [
         ],
         contrastExamples: [
           {
-            french: 'Je viens de raccrocher avec le directeur.',
-            english: 'I have just hung up with the director.',
-            aspectNote: 'Just completed action with "venir de".'
+            french: 'Vous venez à huit heures ce soir? ',
+            english: 'Are you coming at eight this evening?',
           },
           {
-            french: 'Elle venait d\'acheter ce vase quand son chat l\'a brisé.',
-            english: 'She had just bought this vase when her cat broke it.',
-            aspectNote: 'Imparfait of venir (venait d\') showing recent past relative to a past event.'
+            french: 'Elle vient de vendre sa voiture.',
+            english: 'She just sold her car.',
           }
         ]
       },
       {
-        id: 'topic-13-causatif',
-        title: '3. La Forme Causative (Faire + Infinitif)',
-        formula: '[Sujet] + [faire conjugué] + [Infinitif d\'action] (+ par / à quelqu\'un)',
-        goldenRule: 'When the grammatical subject does not perform the action personally but arranges for someone else to do it, use **« Faire + Infinitif »**.',
+        id: 'topic-13-Tenir',
+        title: '3. Tenir',
         detailedDescription: [
-          'English says "I am having my hair cut" or "The teacher made us read". In French, both are expressed by **faire + infinitive**.',
-          'The agent who performs the work is introduced by **par** (for external services: **« fait réparer par le garagiste »**) or **à** (when commanding a person: **« fait lire aux élèves »**).'
+          'Another verb conjugated like venir is tenir (to hold)',
+          'Tenir has several different meanings.',
+          'When used with the preposition à or de, tenir takes on another meaning.'
         ],
         tables: [
           {
-            title: 'Causative "Faire + Infinitif" Examples',
-            subtitle: 'Everyday service scenarios and delegations',
-            description: 'Notice that the second verb is always an invariable infinitive.',
-            headers: ['Scenario', 'French Causative', 'English Translation', 'Agent Indicator'],
+            title: 'Conjugation',
+            headers: ['Pronoun', 'Tenir'],
             rows: [
-              ['Hairdresser', 'Elle se fait couper les cheveux.', 'She is having her hair cut.', 'Reflexive causative'],
-              ['Mechanic', 'Pierre fait réparer sa voiture par un pro.', 'Pierre is having his car repaired by a pro.', 'Agent with "par"'],
-              ['Dry cleaning', 'Je fais nettoyer ce costume.', 'I am having this suit cleaned.', 'Direct service'],
-              ['School / Order', 'Le professeur fait répéter la phrase.', 'The teacher has the phrase repeated.', 'Causative instruction']
+              ['Je', 'tiens'],
+              ['Tu', 'tiens'],
+              ['Il/Elle', 'tient'],
+              ['Nous', 'tenons'],
+              ['Vous', 'tenez'],
+              ['Ils/Elles', 'tiennent']
+            ]
+          },
+          {
+            title: 'Different meanings',
+            headers: ['French', 'English'],
+            rows: [
+              ['Le directeur ne tient jamais ses promesses.', 'The manager never keeps his promises.'],
+              ['Ils tiennent un restaurant à Nice.', 'They run a restaurant in Nice.'],
+              ['Toutes ces affaires ne vont pas **tenir** dans ta valise.', 'All these things won’t fit in your suitcase.'],
+              ['Ils tiennent le rythme. ', 'They are keeping up the pace.'],
+              ['Tiens, tiens, c’est étrange... ', 'Well, well, this is strange . . .'],
+              ['Tiens, prends ces trois livres. ', 'Here, take these three books.']
+            ]
+          },
+          {
+            title: 'Tenir used with the preposition à or de',
+            headers: ['French', 'English'],
+            rows: [
+              ['Elle tient à ses bijoux. ', 'She is attached to her jewels.'],
+              ['Ils tiennent à leurs habitudes.', 'They are attached to their habits.'],
+              ['Marc tient à vous voir. ', 'Marc insists on seeing you.'],
+              ['Elle tient de sa mère. ', 'She takes after her mother.'],
+            ]
+          }
+        ],
+      },
+      {
+        id: 'topic-13-faire',
+        title: 'The verb faire (to do, to make)',
+        detailedDescription: [
+          'Another verb you’ll come across all the time is faire (to do, to make). Faire is also used in expressions relating to chores, activities, sports, etc. Faire is used, with the impersonal third-person singular il, in most expressions relating to the weather.'
+        ],
+        tables: [
+          {
+            title: 'Conjugation',
+            headers: ['Pronoun', 'Faire'],
+            rows: [
+              ['Je', 'fais'],
+              ['Tu', 'fais'],
+              ['Il/Elle', 'fait'],
+              ['Nous', 'faisons'],
+              ['Vous', 'faites'],
+              ['Ils/Elles', 'font']
             ]
           }
         ],
         contrastExamples: [
           {
-            french: 'Pierre fait réparer sa voiture par le mécanicien.',
-            english: 'Pierre is having his car repaired by the mechanic.',
-            aspectNote: 'Pierre did not fix it; he caused the mechanic to fix it.'
+            french: 'Nous faisons un gâteau. ',
+            english: 'We’re making a cake.'
           },
           {
-            french: 'Elle fait bouillir l\'eau pour préparer le thé.',
-            english: 'She brings the water to a boil to prepare the tea.',
-            aspectNote: 'Causative with inanimate object (causing water to boil).'
+            french: 'Elle fait les courses ici. ',
+            english: 'She shops here.'
+          },
+          {
+            french: 'Tu ne fais jamais la cuisine? ',
+            english: 'You never cook?'
+          },
+          {
+            french: 'Il fait frais. ',
+            english: 'It is cool.'
+          },
+          {
+            french: 'Il pleut.',
+            english: 'It is raining.'
+          }
+        ]
+      },
+      {
+        id: 'topic-13-the-causative-form',
+        title: 'The causative form',
+        detailedDescription: [
+          'The causative form is, in most cases, used to express the idea of having something done by someone or of causing something to happen. It is formed with the verb faire followed by an infinitive.'
+        ],
+        contrastExamples: [
+          {
+            french: 'Elle écrit la lettre elle-même. ',
+            english: 'She writes the letter herself.'
+          },
+          {
+            french: 'Elle fait écrire la lettre par sa secrétaire. ',
+            english: 'She has the letter written by her secretary.'
           }
         ]
       }
-    ],
-    rules: [
-      'Futur Proche (Going to do): Aller in present + main infinitive (e.g. "Je vais partir"). Used heavily in spoken French.',
-      'Passé Récent (Just did): Venir in present + de/d\' + main infinitive (e.g. "Je viens d\'arriver").',
-      'In negative sentences, "ne... pas" surrounds the conjugated auxiliary verb: "Je ne vais pas manger", "Il ne vient pas de partir".',
-      'Causative Form (Faire + Infinitif): Subject causes another agent or service to perform the verb (e.g. "Elle fait couper ses cheveux", "Le professeur fait lire les étudiants").',
-    ],
-    contrastExamples: [
-      {
-        french: 'Je viens de finir mon déjeuner et je vais prendre un café.',
-        english: 'I have just finished my lunch and I am going to have a coffee.',
-        aspectNote: 'Passé récent (venir de finir) juxtaposed with Futur proche (vais prendre).',
-      },
-      {
-        french: 'Pierre fait réparer sa voiture par le mécanicien.',
-        english: 'Pierre is having his car repaired by the mechanic.',
-        aspectNote: 'Causative structure: Pierre is not repairing it himself; he has it done.',
-      },
-    ],
-    commonTraps: [
-      'Forgetting the preposition "de" in passé récent ("Je viens partir" is incorrect; say "Je viens de partir").',
-      'Conjugating the second verb in causative constructions (the second verb must remain in the infinitive).',
     ],
     practiceExercises: [
       {
@@ -311,26 +329,18 @@ export const A2_GRAMMAR_LESSONS = [
     subtitle: 'Conjugate reflexive pronouns (me, te, se, nous, vous, se) across tenses and master participle agreement rules.',
     formula: 'Présent: [Sujet] + [me / te / se / nous / vous / se] + [Verbe]  |  Passé Composé: [Sujet] + [pronom] + [être] + [Participe Passé]',
     goldenRule: 'All pronominal verbs strictly take **« Être »** in compound tenses. The past participle agrees with the reflexive pronoun ONLY if that pronoun functions as a **Direct Object (COD)**, not an **Indirect Object (COI)** or when a body part/direct object follows.',
-    detailedDescription: [
-      'Pronominal verbs carry a reflexive pronoun (**me, te, se, nous, vous, se**) that matches the subject.',
-      'They fall into three functional families: reflexive actions (on oneself), reciprocal interactions (between each other), and purely idiomatic verbs.'
-    ],
     topics: [
       {
-        id: 'topic-14-families',
-        title: '1. Reflexive & Reciprocal Actions (Se laver, S\'aimer)',
-        formula: 'Reflexive: [Sujet] + [pronom réfléchi] + [Verbe] (action sur soi-même)  |  Reciprocal: [Sujet pluriel] + [nous / vous / se] + [Verbe] (action mutuelle)',
-        goldenRule: 'Reflexive actions bounce back onto the actor (**« Je me lave »**). Reciprocal actions require a plural subject and describe mutual actions (**« Ils s\'aiment »**).',
+        id: 'topic-14-reflexive-verbs',
+        title: '1. Reflexive verbs',
         detailedDescription: [
-          'In reflexive verbs, subject and object are the same person: **se lever, se laver, se réveiller, se brosser**.',
-          'Reciprocal verbs exist only in the plural (*nous, vous, ils/elles*): **se regarder, se téléphoner, se disputer, s\'embrasser**.',
-          'Idiomatic pronominal verbs have meanings completely distinct from their non-reflexive counterparts: **se souvenir de** (to remember), **se tromper** (to make a mistake), **se méfier de** (to distrust).'
+          'The action of a reflexive verb is, for the most part, reflected back on the subject, the action being done to oneself. The pronouns me, te, se drop the e before mute h or a vowel.',
+          '',
+          ''
         ],
         tables: [
           {
             title: 'Pronominal Conjugation in Present Tense (Se lever)',
-            subtitle: 'Matching reflexive pronouns with verbal endings',
-            description: 'Notice how the reflexive pronoun adapts to each person.',
             headers: ['Pronoun', 'Reflexive Pronoun', 'Conjugated Form', 'English Translation'],
             rows: [
               ['Je', 'me (m\')', 'je me lève', 'I get up'],
@@ -344,125 +354,57 @@ export const A2_GRAMMAR_LESSONS = [
         ],
         contrastExamples: [
           {
-            french: 'Je me lève à 7 heures tous les matins.',
-            english: 'I get up at 7 o\'clock every morning.',
-            aspectNote: 'Reflexive daily routine with "se lever".'
+            french: 'Elle ne se réveille pas avant huit heures.',
+            english: 'She does not wake up until eight o’clock.',
           },
           {
-            french: 'Roméo et Juliette s\'aiment passionnément.',
-            english: 'Romeo and Juliet love each other passionately.',
-            aspectNote: 'Reciprocal mutual action with plural subject.'
+            french: 'Vous maquillez-vous pour monter sur scène?',
+            english: 'Do you put on makeup to go on stage?',
+          },
+          {
+            french: 'Se rase-t-il tous les matins? ',
+            english: 'Does he shave every morning?'
+          },
+          {
+            french: 'Est-ce que vous vous préparez à partir? ',
+            english: 'Are you getting ready to leave?'
           }
         ]
       },
       {
-        id: 'topic-14-passe-compose',
-        title: '2. Compound Tenses with Être (Le Passé Composé Pronominal)',
-        formula: '[Sujet] + [me / te / s\' / nous / vous / s\'] + [être au présent] + [Participe Passé]',
-        goldenRule: 'All pronominal verbs without exception take the auxiliary **« Être »** in compound tenses. Never use "Avoir" with a reflexive verb!',
+        id: 'topic-14-reciprocal-verbs',
+        title: '2. Reciprocal verbs',
         detailedDescription: [
-          'In compound tenses like the *passé composé*, the reflexive pronoun is wedged between the subject and the auxiliary verb **être**:',
-          '**« Je me suis couché »**, **« Elle s\'est réveillée »**, **« Nous nous sommes promenés »**.',
-          'In negative sentences: **« Elle ne s\'est pas réveillée »** (the *ne... pas* brackets the reflexive pronoun and auxiliary).'
-        ],
-        tables: [
-          {
-            title: 'Passé Composé of Pronominal Verbs (Se coucher)',
-            subtitle: 'With auxiliary Être and feminine/plural agreement marks',
-            description: 'Notice the participle takes -e for feminine and -s for plural.',
-            headers: ['Pronoun', 'Conjugated Auxiliary', 'Participle (Masc / Fem)', 'Meaning'],
-            rows: [
-              ['Je', 'me suis', 'couché / couchée', 'I went to bed'],
-              ['Tu', 't\'es', 'couché / couchée', 'you went to bed'],
-              ['Il / Elle', 's\'est', 'couché / couchée', 'he / she went to bed'],
-              ['Nous', 'nous sommes', 'couchés / couchées', 'we went to bed'],
-              ['Vous', 'vous êtes', 'couché(e)(s)', 'you went to bed'],
-              ['Ils / Elles', 'se sont', 'couchés / couchées', 'they went to bed']
-            ]
-          }
+          'The second type of pronominal verb is called reciprocal. It describes an action two or more people perform with or for each other. Since two or more people are involved, reciprocal verbs can only be used in the plural (with se, nous, vous).',
         ],
         contrastExamples: [
           {
-            french: 'Elle s\'est levée très tôt pour prendre l\'avion.',
-            english: 'She got up very early to catch the flight.',
-            aspectNote: 'Participle takes feminine "-ée" agreeing with subject "Elle".'
+            french: 'Ils s’aiment beaucoup. ',
+            english: 'They love each other a lot.',
           },
           {
-            french: 'Ils se sont disputés hier soir.',
-            english: 'They argued yesterday evening.',
-            aspectNote: 'Reciprocal verb agreeing with masculine plural "Ils" (-és).'
+            french: 'Nous nous parlons tous les jours. ',
+            english: 'We talk to each other every day..',
           }
         ]
       },
       {
-        id: 'topic-14-traps',
-        title: '3. Agreement Traps & Invariable Cases (COD vs. COI)',
-        formula: 'Accord avec le sujet: SI le pronom réfléchi est COD  |  PAS D\'ACCORD: SI un COD suit le verbe OU si le verbe régit "à" (COI)',
-        goldenRule: 'The past participle of pronominal verbs **DOES NOT AGREE** if: (1) A specific body part or direct object follows the verb (**« Elle s\'est lavé les mains »**), or (2) The verb takes an indirect object in normal syntax (**« Ils se sont parlé »** [parler à]).',
+        id: 'topic-14-passive-pronominals',
+        title: '2. Passive pronominals',
         detailedDescription: [
-          'This is one of the most famous grammar traps in the French language!',
-          'Compare: **« Elle s\'est lavée »** (She washed herself; "se" is COD → agrees: +e). But: **« Elle s\'est lavé les mains »** ("les mains" is COD placed *after* the verb → no agreement: lavé).',
-          'Verbs that take **à quelqu\'un** (téléphoner à, parler à, sourire à, succéder à) have NO direct object, so their participle is strictly invariable: **« Elles se sont téléphoné »**, **« Ils se sont souri »**.'
-        ],
-        tables: [
-          {
-            title: 'Pronominal Agreement Decision Matrix',
-            subtitle: 'Direct Object vs. Indirect Object vs. Subsequent COD',
-            description: 'Examine whether the pronoun is COD or COI.',
-            headers: ['Sentence', 'Role of Reflexive Pronoun', 'Participle Agreement', 'Reason'],
-            rows: [
-              ['Elles se sont lavées.', 'COD (themselves)', 'Yes (+es)', '"Se" is direct object preceding verb.'],
-              ['Elles se sont lavé les mains.', 'COI (to themselves)', 'NO (+0)', 'COD "les mains" comes after the verb.'],
-              ['Ils se sont téléphoné.', 'COI (téléphoner à)', 'NO (+0)', '"Téléphoner à" is indirect; no COD.'],
-              ['Ils se sont parlé.', 'COI (parler à)', 'NO (+0)', '"Parler à" is indirect; no COD.']
-            ]
-          }
+          'A third type of pronominal verb is called passive. With the passive pronominal verbs, the subject is not a person or an animal. The subject does not perform the action of the verb but rather is subjected to it. It is in the third-person singular, with se.',
         ],
         contrastExamples: [
           {
-            french: 'Elle s\'est lavée dans la salle de bain.',
-            english: 'She washed in the bathroom.',
-            aspectNote: 'Agrees in feminine singular (+e) because "se" is the direct object.'
+            french: 'Ça ne se dit pas.',
+            english: 'This is not said.',
           },
           {
-            french: 'Elle s\'est lavé le visage à l\'eau fraîche.',
-            english: 'She washed her face with cool water.',
-            aspectNote: 'No agreement (+e) because the direct object "le visage" is placed after the verb.'
-          },
-          {
-            french: 'Nous nous sommes téléphoné pendant des heures.',
-            english: 'We phoned each other for hours.',
-            aspectNote: 'No agreement on téléphoné because "téléphoner à" is an indirect verbal construction.'
+            french: 'Ça ne se fait pas.',
+            english: 'This is not done.',
           }
         ]
-      }
-    ],
-    rules: [
-      'Reflexive (action on oneself): se laver (to wash oneself), se lever (to get up), se réveiller (to wake up).',
-      'Reciprocal (action on each other): s\'aimer (to love each other), se téléphoner (to call each other).',
-      'Idiomatic (inherent reflexive meaning): se souvenir de (to remember), se tromper (to make a mistake), se dépêcher (to hurry).',
-      'Participle Agreement Trap: In "Elle s\'est lavée", "se" is COD (agrees: +e). In "Elle s\'est lavé les mains", "les mains" is COD placed AFTER the verb (no agreement: lavé). In "Ils se sont parlé", "parler à" is COI (no agreement: parlé).',
-    ],
-    contrastExamples: [
-      {
-        french: 'Elles se sont levées tôt ce matin.',
-        english: 'They got up early this morning.',
-        aspectNote: 'Reflexive with direct action on subject: agrees in feminine plural (+es).',
       },
-      {
-        french: 'Elle s\'est lavé les mains.',
-        english: 'She washed her hands.',
-        aspectNote: 'No agreement (+e) on lavé because the direct object "les mains" follows the verb.',
-      },
-      {
-        french: 'Marie et Paul se sont téléphoné hier soir.',
-        english: 'Marie and Paul phoned each other yesterday evening.',
-        aspectNote: 'No agreement on téléphoné because "téléphoner à" takes an indirect object.',
-      },
-    ],
-    commonTraps: [
-      'Using "avoir" with reflexive verbs in passé composé (never say "Je m\'ai lavé"; always "Je me suis lavé").',
-      'Adding agreement to verbs that take indirect objects like "se parler", "se téléphoner", "se succéder".',
     ],
     practiceExercises: [
       {
@@ -499,147 +441,168 @@ export const A2_GRAMMAR_LESSONS = [
     subtitle: 'Express completed, bounded past events and master the DR & MRS VANDERTRAMP movement verbs.',
     formula: 'Passé Composé = [Avoir ou Être au présent] + [Participe Passé]  |  Avec Être: accord en genre et nombre avec le sujet  |  Avec Avoir: accord UNIQUEMENT si le COD précède le verbe',
     goldenRule: 'Verbs using **« Être »** (17 verbs of movement/state change + all reflexives) MUST agree with the subject in gender and number. Verbs using **« Avoir »** agree ONLY if a direct object (COD: que, les, la, l\') is placed **BEFORE** the auxiliary.',
-    detailedDescription: [
-      'The **Passé Composé** is the primary tense used in spoken French to narrate completed, punctual past events.',
-      'To use it accurately, you must master the choice between the auxiliaries **Avoir** and **Être**, memorize irregular participles, and apply the crucial preceding direct object rule.'
-    ],
     topics: [
       {
-        id: 'topic-15-avoir',
-        title: '1. Avoir Auxiliary & Regular/Irregular Participles',
-        formula: '[Sujet] + [ai, as, a, avons, avez, ont] + [Participe Passé]',
-        goldenRule: 'The vast majority of French verbs (over 90%) take **« Avoir »**. With Avoir, the past participle does NOT agree with the subject.',
+        id: 'topic-15- past-participle',
+        title: '1. The past participle of regular verbs',
         detailedDescription: [
-          'Regular participle endings follow three simple patterns: -ER verbs become **-é** (parlé), -IR verbs become **-i** (fini), and -RE verbs become **-u** (vendu).',
-          'Common irregular participles must be memorized: **eu** (avoir), **été** (être), **fait** (faire), **pris** (prendre), **mis** (mettre), **vu** (voir), **bu** (boire), **dit** (dire).'
-        ],
-        tables: [
-          {
-            title: 'Regular and Irregular Past Participles',
-            subtitle: 'Key categories with Avoir auxiliary',
-            description: 'No agreement with the subject when using avoir.',
-            headers: ['Category', 'Infinitive', 'Participle', 'Example (with J\'ai...)'],
-            rows: [
-              ['Regular -ER', 'Parler', 'parlé', 'J\'ai parlé'],
-              ['Regular -IR', 'Choisir', 'choisi', 'J\'ai choisi'],
-              ['Regular -RE', 'Attendre', 'attendu', 'J\'ai attendu'],
-              ['Irregular in -is', 'Prendre / Mettre', 'pris / mis', 'J\'ai pris mon parapluie'],
-              ['Irregular in -it', 'Faire / Écrire', 'fait / écrit', 'J\'ai fait un gâteau'],
-              ['Irregular in -u', 'Voir / Boire / Lire', 'vu / bu / lu', 'J\'ai lu ce livre']
-            ]
-          }
+          'The past participle is formed by adding an ending to the verb stem. Regular past participles take the following endings:',
+          '**-er** verbs take **-é**: parler (to speak) -> **parlé** (spoken)',
+          '**-ir** verbs take **-i**: choisir (to choose) -> **choisi** (chosen)',
+          '**-re** verbs take **-u**: entendre (to hear) -> **entendu** (heard)',
+          'In the negative form, ne (n’) is placed in front of avoir or être, and pas after avoir or être.'
         ],
         contrastExamples: [
           {
-            french: 'Nous avons mangé dans un excellent bistrot parisien.',
-            english: 'We ate in an excellent Parisian bistro.',
-            aspectNote: 'Auxiliary avoir; no agreement with subject "Nous".'
+            french: 'Elle a pris une décision.',
+            english: 'She made a decision.',
           },
           {
-            french: 'Elle a fait ses valises hier soir.',
-            english: 'She packed her bags yesterday evening.',
-            aspectNote: 'Irregular participle of faire (fait); no agreement with "Elle".'
+            french: 'Il n’a pas vendu sa voiture. ',
+            english: 'He did not sell his car.',
           }
         ]
       },
       {
-        id: 'topic-15-etre',
-        title: '2. Être Auxiliary & DR & MRS VANDERTRAMP Verbs',
-        formula: '[Sujet] + [suis, es, est, sommes, êtes, sont] + [Participe Passé] (+e, +s, +es)',
-        goldenRule: 'Verbs conjugated with **« Être »** (the 17 movement/transformation verbs) **ALWAYS agree in gender and number** with the subject.',
+        id: 'topic-15-passé-composé-with-avoir',
+        title: '2. The passé composé with avoir',
         detailedDescription: [
-          'The 17 movement and state-change verbs are remembered with the acronym **DR & MRS VANDERTRAMP**:',
-          'Devenir, Revenir, Monter, Rester, Sortir, Venir, Aller, Naître, Descendre, Entrer, Rentrer, Tomber, Retourner, Arriver, Mourir, Partir.',
-          'Add **-e** for feminine singular, **-s** for masculine plural, and **-es** for feminine plural.'
+          'When avoir is used with the passé composé, with a few exceptions, the past participle does not agree in gender and number with the subject of the verb.',
+          "In the passé composé of verbs conjugated with avoir, the past participle agrees with the direct object of the verb, but only in sentences where the direct object noun or pronoun precedes the verb. But, Don't think too much about direct and indirect objects. That is a saparate topic to learn",
         ],
         tables: [
           {
-            title: 'DR & MRS VANDERTRAMP Agreement Paradigm (Aller & Partir)',
-            subtitle: 'Conjugating with Être and subject agreements',
-            description: 'Subject gender and number strictly dictates the participle ending.',
-            headers: ['Pronoun', 'Être Form', 'Participle Agreement', 'Meaning'],
+            title: 'Some Irregular Verbs',
+            headers: ['Infinitive', 'English', 'Past Participle', 'English'],
             rows: [
-              ['Il', 'est', 'allé / parti', 'He went / left'],
-              ['Elle', 'est', 'allée / partie (+e)', 'She went / left'],
-              ['Ils', 'sont', 'allés / partis (+s)', 'They went / left'],
-              ['Elles', 'sont', 'allées / parties (+es)', 'They (fem.) went / left'],
-              ['Marie et Paul', 'sont', 'arrivés (+s)', 'Marie and Paul arrived'],
-              ['Sophie et Léa', 'sont', 'nées (+es)', 'Sophie and Léa were born']
+              ['acquérir', 'to acquire', 'acquis', 'acquired'],
+              ['apprendre', 'to learn', 'appris', 'learned'],
+              ['avoir', 'to have', 'eu', 'had'],
+              ['boire', 'to drink', 'bu', 'drunk'],
+              ['comprendre', 'to understand', 'compris', 'understood'],
+              ['conduire', 'to drive', 'conduit', 'driven'],
+              ['craindre', 'to fear', 'craint', 'feared'],
+              ['devoir', 'must, to have to', 'dû', 'had to'],
+              ['dire', 'to say', 'dit', 'said'],
+              ['écrire', 'to write', 'écrit', 'written'],
+              ['être', 'to be', 'été', 'been'],
+              ['faire', 'to do, to make', 'fait', 'done, made'],
+              ['falloir', 'to have to', 'fallu', 'had to'],
+              ['lire', 'to read', 'lu', 'read'],
+              ['mettre', 'to put', 'mis', 'put'],
+              ['mourir', 'to die', 'mort', 'dead'],
+              ['naître', 'to be born', 'né', 'born'],
+              ['offrir', 'to offer', 'offert', 'offered'],
+              ['ouvrir', 'to open', 'ouvert', 'opened'],
+              ['peindre', 'to paint', 'peint', 'painted'],
+              ['plaire', 'to please', 'plu', 'pleased'],
+              ['pleuvoir', 'to rain', 'plu', 'rained'],
+              ['pouvoir', 'can, to be able to', 'pu', 'could'],
+              ['prendre', 'to take', 'pris', 'taken'],
+              ['recevoir', 'to receive', 'reçu', 'received'],
+              ['rire', 'to laugh', 'ri', 'laughed'],
+              ['savoir', 'to know', 'su', 'known'],
+              ['suivre', 'to follow', 'suivi', 'followed'],
+              ['vivre', 'to live', 'vécu', 'lived'],
+              ['voir', 'to see', 'vu', 'seen'],
+              ['vouloir', 'to want', 'voulu', 'wanted']
             ]
           }
         ],
         contrastExamples: [
           {
-            french: 'Mes sœurs sont arrivées à Paris ce matin.',
-            english: 'My sisters arrived in Paris this morning.',
-            aspectNote: 'Feminine plural subject (Mes sœurs) requires "-ées" with auxiliary être.'
+            french: 'Il a pris la bonne décision. ',
+            english: 'He made the right decision.',
           },
           {
-            french: 'Victor Hugo est né à Besançon en 1802.',
-            english: 'Victor Hugo was born in Besançon in 1802.',
-            aspectNote: 'Irregular participle of naître (né) with masculine singular subject.'
+            french: 'Il l’a prise. ',
+            english: 'He made it.',
+          },
+          {
+            french: 'Il a appris le français à Strasbourg. ',
+            english: 'He learned French in Strasbourg.'
+          },
+          {
+            french: 'Elle m’a dit bonjour. ',
+            english: 'She said hello to me.'
           }
         ]
       },
       {
-        id: 'topic-15-cod-agreement',
-        title: '3. Preceding Direct Object (COD) Agreement with Avoir',
-        formula: '[COD placé avant] + [avoir conjugué] + [Participe Passé accordé avec le COD]',
-        goldenRule: 'With Avoir, the past participle **AGREES with the Direct Object (COD)** if and only if that direct object is situated **BEFORE the verb** (via que, le, la, les, or quel).',
+        id: 'topic-15-passé-composé-with-être',
+        title: '3. The passé composé with être',
         detailedDescription: [
-          'Normally, avoir never agrees with anything: **« J\'ai acheté les pommes »** ("les pommes" is after the verb → no agreement: acheté).',
-          'However, if the COD is moved in front of the verb via a relative clause (**« Les pommes que j\'ai achetées »**) or an object pronoun (**« Je les ai achetées »**), the participle must agree with that preceding COD!'
+          'Some verbs use être instead of avoir in the passé composé. It is very important to memorize the (finite) list of verbs conjugated with être. Many of these are intransitive verbs of movement (aller, venir, monter…). In addition, all pronominal (reflexive) verbs (see Chapter 14) are conjugated with être in the passé composé.',
+          'The past participle of verbs conjugated with être agrees in gender and number with the subject.'
         ],
         tables: [
           {
-            title: 'Preceding COD vs. Subsequent COD Examples',
-            subtitle: 'Comparing word order and participle agreement with Avoir',
-            description: 'Check the position of the direct object relative to the auxiliary verb.',
-            headers: ['Sentence Structure', 'COD Position', 'Agreement', 'Sample Sentence'],
+            title: 'Verbs',
+            headers: ['Infinitive', 'English'],
             rows: [
-              ['COD after verb', 'Après le verbe', 'NO agreement', 'J\'ai écrit une lettre.'],
-              ['Relative pronoun "que"', 'Avant le verbe', 'Yes (+e)', 'La lettre que j\'ai écrite.'],
-              ['Direct pronoun "la"', 'Avant le verbe', 'Yes (+e)', 'Je l\'ai écrite hier.'],
-              ['Direct pronoun "les"', 'Avant le verbe', 'Yes (+es)', 'Les lettres ? Je les ai écrites.'],
-              ['Interrogative "Quelle"', 'Avant le verbe', 'Yes (+e)', 'Quelle robe as-tu choisie ?']
+              ['aller', 'to go'],
+              ['arriver', 'to arrive'],
+              ['descendre', 'to go down'],
+              ['devenir', 'to become'],
+              ['entrer', 'to enter'],
+              ['monter', 'to go up, to climb'],
+              ['mourir', 'to die'],
+              ['naître', 'to be born'],
+              ['partir', 'to leave'],
+              ['rentrer', 'to return'],
+              ['rester', 'to stay'],
+              ['retourner', 'to return, to go back'],
+              ['revenir', 'to return'],
+              ['sortir', 'to go out'],
+              ['tomber', 'to fall'],
+              ['venir', 'to come, to arrive']
             ]
           }
         ],
         contrastExamples: [
           {
-            french: 'Quelles jolies robes ! Tu les as achetées où ?',
-            english: 'What pretty dresses! Where did you buy them?',
-            aspectNote: 'Achetées agrees with the preceding direct object pronoun "les" (fem. plural robes).'
+            french: 'Il est arrivé en retard. ',
+            english: 'He arrived late.',
           },
           {
-            french: 'Voici la lettre que Paul a envoyée ce matin.',
-            english: 'Here is the letter that Paul sent this morning.',
-            aspectNote: 'Envoyée agrees with "la lettre" via preceding relative pronoun "que".'
+            french: 'Elles sont nées en Belgique.',
+            english: 'They (f.) were born in Belgium.',
+          },
+          {
+            french: 'Ils se sont ennuyés à la réception. ',
+            english: 'They were bored at the reception.'
+          },
+          {
+            french: 'Ils ne se sont pas couchés de bonne heure.',
+            english: 'They did not go to bed.'
+          }
+        ]
+      },
+      {
+        id: 'topic-15-verbs-conjugated-with-avoir-or-être',
+        title: 'Verbs conjugated with avoir or être',
+        detailedDescription: [
+          'Six verbs among those conjugated with être in the passé composé (sortir, rentrer, monter, descendre, passer, retourner) are conjugated with avoir and follow the avoir agreement when a direct object follows the verb. In these cases, the meaning of the verb has changed.'
+        ],
+        tables: [
+          {
+            title: 'Examples',
+            headers: ['French', 'English'],
+            rows: [
+              ['Elle est descendue au rez-de-chaussée.', 'She went down to the ground floor.'],
+              ['Elle a descendu les poubelles.', 'She took down the garbage cans.'],
+              ['Elle est sortie avec des amis.', 'She went out with some friends.'],
+              ['Elle a sorti la voiture du garage.', 'She took the car out of the garage.'],
+              ['Elle est rentrée de vacances hier.', 'She came back from vacation yesterday.'],
+              ['Elle a rentré les géraniums dans le salon.', 'She brought the geraniums into the living room.'],
+              ['Je suis passée devant les Galeries Lafayette.', 'I passed by the Galeries Lafayette.'],
+              ['J’ai passé trois semaines à Tokyo.', 'I spent three weeks in Tokyo.'],
+              ['Je suis retournée à Venise pour la troisième fois.', 'I went back to Venice for the third time.'],
+              ['Elle a retourné l’omelette.', 'She turned over the omelette.']
+            ]
           }
         ]
       }
-    ],
-    rules: [
-      'DR & MRS VANDERTRAMP verbs taking Être: Devenir, Revenir, Monter, Rester, Sortir, Venir, Aller, Naître, Descendre, Entrer, Rentrer, Tomber, Retourner, Arriver, Mourir, Partir.',
-      'Regular participles: -ER verbs → -é (parlé), -IR verbs → -i (fini), -RE verbs → -u (vendu).',
-      'Irregular participles: avoir → eu, être → été, faire → fait, prendre → pris, mettre → mis, voir → vu, écrire → écrit, ouvrir → ouvert.',
-      'The Preceding Direct Object (COD) rule with Avoir: "Les fleurs que j\'ai achetées" (agrees with "les fleurs" because "que" precedes the verb).',
-    ],
-    contrastExamples: [
-      {
-        french: 'Elle est allée à la boulangerie et elle a acheté du pain.',
-        english: 'She went to the bakery and she bought bread.',
-        aspectNote: 'Allée agrees with subject "Elle" (Être), while acheté does not agree (COD "pain" is after).',
-      },
-      {
-        french: 'Quelles jolies robes ! Tu les as achetées où ?',
-        english: 'What pretty dresses! Where did you buy them?',
-        aspectNote: 'Achetées agrees with the preceding direct object pronoun "les" (referring to feminine plural robes).',
-      },
-    ],
-    commonTraps: [
-      'Forgetting agreement on Être verbs (e.g. "Elle est parti" instead of "Elle est partie").',
-      'Making agreement with indirect objects (e.g. "Je leur ai téléphoné" does NOT agree because "leur" is COI).',
     ],
     practiceExercises: [
       {
@@ -676,146 +639,125 @@ export const A2_GRAMMAR_LESSONS = [
     subtitle: 'Paint background descriptions, habits, continuous states, and past anterior actions.',
     formula: 'Imparfait = [Radical de "nous" au présent] + [-ais, -ais, -ait, -ions, -iez, -aient]  |  Plus-que-parfait = [Auxiliaire à l\'imparfait] + [Participe Passé]',
     goldenRule: 'Use the **Imparfait** for ongoing states, weather, habits, and background descriptions. Use the **Plus-que-parfait** to describe an event that had already occurred before another past event.',
-    detailedDescription: [
-      'While the *Passé Composé* reports specific, bounded events that happened on the foreground timeline, the **Imparfait** paints the psychological backdrop, setting, habits, and ongoing states.',
-      'The **Plus-que-parfait** allows you to flashback to actions completed prior to other past events.'
-    ],
     topics: [
       {
         id: 'topic-16-imparfait',
-        title: '1. L\'Imparfait (Formation & Usage for Background/Habits)',
-        formula: '[Radical de "nous" au présent] + [-ais, -ais, -ait, -ions, -iez, -aient]',
-        goldenRule: 'To form the Imparfait: take the **nous** form of the present tense, drop **-ons**, and attach the endings: **-ais, -ais, -ait, -ions, -iez, -aient**. The only irregular stem in the entire language is **Être (ét-)**.',
+        title: '1. The imparfait',
         detailedDescription: [
-          'The Imparfait is the tense of duration without a defined beginning or end: weather (**« Il pleuvait »**), age (**« J\'avais dix ans »**), emotional state (**« Il était triste »**), and repeated routines (**« Tous les samedis, nous allions au marché »**).',
-          'Notice that regular verbs like *finir* keep their infix: *nous finissons* → *je finissais*.'
+          'The uses of the imparfait (imperfect) are some of the most difficult aspects of French grammar to master. While the passé composé is used to talk about an action that took place on a specific occasion in the past, the imparfait plays a different role. It is used to describe a state of mind and being in the past as well as continuous, repeated, or habitual past actions.',
+          'To form the imperfect, take the nous form of the present tense and remove the -ons ending, which gives you the stem. Then add the imparfait endings (-ais, -ais, -ait, -ions, -iez, -aient) to this stem.',
+          '**J\'encourageais** - I encouraged',
+          '**elle exigeait ** - she demanded',
+          '**Elles annonçaient ** - they announced',
+          'Note that the -ais, -ait, -aient endings are pronounced alike. Verbs with spelling changes in the present tense nous form, such as manger and commencer (see Chapter 10), retain the spelling change only for the je, tu, il, elle, ils, and elles subject pronouns.',
+          'The extra e or the ç are not needed in the nous and vous forms of the imparfait.',
+          'Note that the verb être has an irregular stem in the imparfait.',
+          '**j’étais** - I was',
+          '**tu étais** - you were',
+          '**il/elle était** - he/she was',
+          '**nous étions** - we were',
+          '**vous étiez** - you were',
+          '**ils/elles étaient** - they were'
+        ],
+      },
+      {
+        id: 'topic-16- imparfait-versus-the-passé-composé',
+        title: '2. The imparfait versus the passé composé',
+        detailedDescription: [
+          'As they express a mental or physical state of being, some verbs tend to be used more often in the imparfait than in the passé composé. Among these verbs are: être (to be), avoir (to have), penser (to think), croire (to believe), savoir (to know), espérer (to hope), sembler (to seem), paraître (to appear). However, when these verbs are used in the passé composé, they may take on a different meaning.',
+          '**Il semblait déprimé. ** - He looked depressed.',
+          '**Tout à coup il a semblé comprendre la situation.** - Suddenly he seemed to understand the situation.',
+          'Another use of the imparfait is to express habitual, repetitive action. It describes past events that were repeated. Used to and would (meaning habitually) are translated into French by the imparfait.',
+          '**Autrefois, elle faisait partie de la chorale.** - In the past, she used to belong to the choir.',
+          'The imparfait is also used to describe a continuous action that was going on in the past when another action (expressed in the passé composé) interrupted it.',
+          '**Elle regardait la télévision quand soudain elle a entendu un grand bruit.** - She was watching television when suddenly she heard a loud noise.'
         ],
         tables: [
           {
-            title: 'Imparfait Endings Across Verb Groups',
-            subtitle: 'Parler, Finir, and the sole irregular Être',
-            description: 'The endings are identical for every single verb in French.',
-            headers: ['Pronoun', 'Parler (parl-)', 'Finir (finiss-)', 'Être (ét-)'],
+            title: 'Expressions of Frequency may be an indication of the imparfait',
+            headers: ['French', 'English'],
             rows: [
-              ['Je', 'parlais', 'finissais', 'étais'],
-              ['Tu', 'parlais', 'finissais', 'étais'],
-              ['Il / Elle', 'parlait', 'finissait', 'était'],
-              ['Nous', 'parlions', 'finissions', 'étions'],
-              ['Vous', 'parliez', 'finissiez', 'étiez'],
-              ['Ils / Elles', 'parlaient', 'finissaient', 'étaient']
+              ['souvent', 'often'],
+              ['fréquemment', 'frequently'],
+              ['le mardi', 'on Tuesdays'],
+              ['le vendredi', 'on Fridays'],
+              ['chaque jour', 'every day'],
+              ['tous les jours', 'every day'],
+              ['chaque semaine', 'every week'],
+              ['chaque mois', 'every month'],
+              ['chaque année', 'every year'],
+              ['d’ordinaire', 'ordinarily'],
+              ['d’habitude', 'usually'],
+              ['habituellement', 'usually'],
+              ['régulièrement', 'regularly'],
+              ['comme à l’accoutumée', 'as usual'],
+              ['autrefois', 'formerly'],
+              ['jadis', 'in times past']
             ]
           }
         ],
-        contrastExamples: [
-          {
-            french: 'Il faisait beau et les oiseaux chantaient dans les arbres.',
-            english: 'The weather was beautiful and birds were singing in the trees.',
-            aspectNote: 'Imparfait describing the ongoing physical atmosphere.'
-          },
-          {
-            french: 'Quand j\'étais enfant, j\'adorais lire sous ma couette.',
-            english: 'When I was a child, I loved reading under my blanket.',
-            aspectNote: 'Habitual past state and age expressed with the imparfait.'
-          }
-        ]
+      },
+      {
+        id: 'topic-16-imparfait-with-special-constructions',
+        title: '3. The imparfait with special constructions',
+        detailedDescription: [
+          'With a si on construction, the imparfait is used to make a suggestion or to invite someone to do something. The informal on refers to two or more people and is conjugated in the third-person singular.',
+          '**Si on allait en France cet été? ** - What about going to France this summer?',
+          'You will encounter the imparfait in other idiomatic constructions, for instance, preceded by si seulement, to express a wish or a regret.',
+          '**Si seulement on pouvait prendre des vacances!** - If only we could take a vacation!',
+          'In Chapter 13, you studied the immediate past with the verb venir de infinitive. The immediate past can also be used in the imparfait to describe an action that had just happened.',
+          '**Elle vient de téléphoner. ** - She has just called.',
+          '**Elle venait de téléphoner quand il est entré.** - She had just called when he walked in.'
+        ],
       },
       {
         id: 'topic-16-plus-que-parfait',
-        title: '2. Le Plus-que-parfait (Anteriority in the Past)',
-        formula: 'Plus-que-parfait = [Avoir ou Être à l\'imparfait] + [Participe Passé]',
-        goldenRule: 'The **Plus-que-parfait** establishes that an event **had already taken place** prior to another past event.',
+        title: 'The plus-que-parfait',
         detailedDescription: [
-          'Form the plus-que-parfait by conjugating **avoir (avais, avait, avions...)** or **être (étais, était, étions...)** in the imparfait, followed by the past participle.',
-          'It is equivalent to the English past perfect ("had done", "had arrived").'
+          'To form the plus-que-parfait, use the forms of avoir or être in the imparfait the past participle of the main verb.',
+          'In the plus-que-parfait, all pronominal verbs are conjugated with être and agree in gender and number with the subject.',
+          '**Vous vous étiez promenés le long du canal Saint-Martin. ** - You had walked along the Saint-Martin canal.'
         ],
         tables: [
           {
-            title: 'Plus-que-parfait Conjugation Examples',
-            subtitle: 'With Avoir and Être auxiliaries',
-            description: 'Subject agreement applies with être exactly as in the passé composé.',
-            headers: ['Pronoun', 'Avoir + Mangé', 'Être + Parti'],
+            title: 'Être — Imparfait',
+            headers: ['Pronoun', 'French', 'English'],
             rows: [
-              ['J\' / Je', 'j\'avais mangé', 'j\'étais parti(e)'],
-              ['Tu', 'tu avais mangé', 'tu étais parti(e)'],
-              ['Il / Elle', 'il avait mangé', 'elle était partie'],
-              ['Nous', 'nous avions mangé', 'nous étions parti(e)s'],
-              ['Vous', 'vous aviez mangé', 'vous étiez parti(e)(s)'],
-              ['Ils / Elles', 'ils avaient mangé', 'elles étaient parties']
+              ['Je', 'j’étais', 'I was'],
+              ['Tu', 'tu étais', 'you were'],
+              ['Il/Elle', 'il/elle était', 'he/she was'],
+              ['Nous', 'nous étions', 'we were'],
+              ['Vous', 'vous étiez', 'you were'],
+              ['Ils/Elles', 'ils/elles étaient', 'they were']
             ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Quand je suis arrivé à la gare, le train était déjà parti.',
-            english: 'When I arrived at the station, the train had already left.',
-            aspectNote: 'Train departure (était déjà parti) occurred prior to my arrival (suis arrivé).'
           },
           {
-            french: 'J\'ai dévoré le gâteau que ma grand-mère avait préparé.',
-            english: 'I devoured the cake that my grandmother had prepared.',
-            aspectNote: 'Baking occurred before eating.'
+            title: 'Avoir — Imparfait',
+            headers: ['Pronoun', 'French', 'English'],
+            rows: [
+              ['Je', 'j’avais', 'I had'],
+              ['Tu', 'tu avais', 'you had'],
+              ['Il/Elle', 'il/elle avait', 'he/she had'],
+              ['Nous', 'nous avions', 'we had'],
+              ['Vous', 'vous aviez', 'you had'],
+              ['Ils/Elles', 'ils/elles avaient', 'they had']
+            ]
           }
         ]
       },
       {
-        id: 'topic-16-aspect-distinction',
-        title: '3. Imparfait vs. Passé Composé Aspect Distinction',
-        formula: 'Imparfait: [Arrière-plan / Action continue]  VS  Passé Composé: [Événement soudain / Action bornée]',
-        goldenRule: 'Imagine a movie: the **Imparfait** is the scenery, climate, and background music; the **Passé Composé** is the sudden door slamming or gunshot that advances the plot.',
+        id: 'topic-16-use-of-plus-que-parfait',
+        title: 'Use of the plus-que-parfait',
         detailedDescription: [
-          'When two actions collide in the past, the ongoing continuous action uses the **Imparfait**, while the interrupting action uses the **Passé Composé**:',
-          '**« Je dormais (imparfait) quand le réveil a sonné (passé composé) »**.',
-          'Passé composé measures completed time (*pendant deux heures*); Imparfait describes an unmeasured state.'
-        ],
-        tables: [
-          {
-            title: 'Imparfait vs. Passé Composé Comparison',
-            subtitle: 'Grammatical aspect and narrative role',
-            description: 'Use this guide to choose between background and foreground.',
-            headers: ['Feature', 'L\'Imparfait', 'Le Passé Composé'],
-            rows: [
-              ['Narrative Role', 'Background setting, scenery', 'Foreground action, plot event'],
-              ['Duration', 'Indefinite, continuous, habitual', 'Bounded, completed, punctual'],
-              ['English Equivalent', 'was doing / used to do', 'did / has done'],
-              ['Typical Clues', 'tous les jours, souvent, d\'habitude', 'soudain, un jour, tout à coup, hier']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Je lisais tranquillement quand mon téléphone a vibré.',
-            english: 'I was reading peacefully when my phone vibrated.',
-            aspectNote: 'Continuous background reading (lisais) interrupted by vibration (a vibré).'
-          },
-          {
-            french: 'Hier, il a plu toute la journée.',
-            english: 'Yesterday, it rained all day.',
-            aspectNote: 'Bounded historical block of time taking passé composé (a plu).'
-          }
+          'As we mentioned earlier, the plus-que-parfait (pluperfect) indicates a past action that happened before another past action started. This anteriority can be implied or stated. Therefore, the plus-que-parfait is often combined with a dependent clause that states this clearly.',
+          '**Je ne m’étais pas rendu compte que j’étais malade.** - I had not realized I was sick.',
+          'In Chapter 10, you studied depuis with the present tense. In this chapter, you studied depuis with the imparfait (where English uses the plus-que-parfait). Let’s review a few examples.',
+          '**Ils dînent dans ce restaurant thaïlandais depuis des années. ** - They have been dining at this Thai restaurant for years.',
+          '**Elle prend de la vitamine C depuis des mois.** - She has been taking vitamin C for months.',
+          'The plus-que-parfait, when used with si seulement, expresses a wish or regret about past events.',
+          '**Si seulement il n’avait pas attrapé un rhume!** - If only he had not caught a cold!'
         ]
       }
-    ],
-    rules: [
-      'Form the Imparfait by taking the "nous" stem of the present tense and adding: -ais, -ais, -ait, -ions, -iez, -aient. (Only exception is Être: stem "ét-").',
-      'The Plus-que-parfait expresses anteriority in the past: "Quand je suis arrivé, le train était déjà parti" (When I arrived, the train had already left).',
-      'Imparfait is also used with "Si" to express hypothetical present wishes: "Si j\'avais de l\'argent, j\'achèterais une maison".',
-      'Time expressions with Imparfait: tous les jours, d\'habitude, souvent, pendant que, quand j\'étais jeune.',
-    ],
-    contrastExamples: [
-      {
-        french: 'Il faisait beau et les oiseaux chantaient dans les arbres.',
-        english: 'The weather was beautiful and birds were singing in the trees.',
-        aspectNote: 'Imparfait painting the descriptive background atmosphere.',
-      },
-      {
-        french: 'J\'ai mangé le gâteau que ma mère avait préparé.',
-        english: 'I ate the cake that my mother had prepared.',
-        aspectNote: 'Passé composé (j\'ai mangé) preceded by Plus-que-parfait (avait préparé).',
-      },
-    ],
-    commonTraps: [
-      'Using the Passé Composé for routine descriptions or age ("Quand j\'ai eu 10 ans" is incorrect; say "Quand j\'avais 10 ans").',
-      'Conjugating Être incorrectly in Imparfait (it is j\'étais, tu étais, il était, nous étions...).',
     ],
     practiceExercises: [
       {
@@ -852,145 +794,225 @@ export const A2_GRAMMAR_LESSONS = [
     subtitle: 'Master verbs requiring "à", "de", or direct objects, geographical prepositions, and temporal distinctions.',
     formula: 'Géographie: en France (fém.), au Japon (masc.), aux États-Unis (plur.), à Paris (ville)  |  Temps: depuis (présent), pendant (passé fini), en (durée), dans (délai)',
     goldenRule: 'Verbs of thinking/starting/tendency take **« À »** (penser à, commencer à, apprendre à), while verbs of memory/stopping/deciding take **« De »** (se souvenir de, arrêter de, décider de). Geographical prepositions strictly match the grammatical gender of the nation.',
-    detailedDescription: [
-      'Prepositions act as grammatical glue. French preposition rules are strictly structured around gender (for countries), verbal regimes (which preposition a verb demands), and temporal aspect.',
-      'Mastering these three areas prevents literal translations from English.'
-    ],
     topics: [
       {
+        id: 'topic-21-common-prepositions',
+        title: '1. Common prepositions',
+        detailedDescription: [
+          'A preposition is a liaison word. Invariable, it never changes. No mas culine, no feminine. You are already familiar with several French prepositions: à (to, at), avec (with), avant (before), en (in), and pour (for). a preposition is a part of speech that establishes a connection between words or word groups.',
+          'The prepositions à and de, when combined with the definite article, take on different forms.',
+          '**à + le = au**',
+          '**Jean et Vincent sont allés au cinéma. ** - Jean and Vincent went to the movies.',
+          '**à + la = à la**',
+          '**Anne est à la maison.** - Anne is at home.',
+          '**à + les = aux**',
+          '**Elle montre des photos aux enfants. ** - She shows pictures to the children.',
+          '**de + le = du**',
+          '**Je lui ai parlé du film.  ** - I talked to him about the film.',
+          '**de + la = de la**',
+          '**Le cheval s’approche de la rivière. ** - The horse is moving toward the river.',
+          '**de + les = des**',
+          '**Il a peur des souris. ** - He is afraid of mice.',
+          'The preposition de plus a noun can express possession.',
+          '**La voiture des voisins est grise. ** - The neighbors’ car is gray.'
+        ],
+        tables: [
+          {
+            title: 'Prepositions',
+            headers: ['French', 'English'],
+            rows: [
+              ['à', 'at, in'],
+              ['après', 'after'],
+              ['avant', 'before'],
+              ['avec', 'with'],
+              ['chez', 'at, with'],
+              ['contre', 'against'],
+              ['dans', 'in'],
+              ['de', 'of, from'],
+              ['derrière', 'behind'],
+              ['dès', 'from'],
+              ['devant', 'in front of'],
+              ['durant', 'during'],
+              ['en', 'in, out of'],
+              ['entre', 'between'],
+              ['envers', 'toward'],
+              ['hormis', 'apart from'],
+              ['hors', 'except, apart from'],
+              ['malgré', 'in spite of'],
+              ['par', 'by, through'],
+              ['parmi', 'among'],
+              ['pendant', 'during'],
+              ['pour', 'for'],
+              ['sans', 'without'],
+              ['sauf', 'except'],
+              ['selon', 'according to'],
+              ['sous', 'under'],
+              ['suivant', 'according to'],
+              ['sur', 'on'],
+              ['vers', 'toward'],
+              ['vu', 'considering, given']
+            ]
+          }
+        ],
+      },
+      {
+        id: 'topic-21-with-preposition-multiple-meaning',
+        title: '2. "With" preposition with multiple meaning',
+        detailedDescription: [
+          'The preposition **with** presents a number of translation problems. Let’s look at a few examples—the easy ones first.',
+          '**J’irai à Miami avec Etienne. ** - I’ll go to Miami with Etienne.',
+          'To refer to an attribute or feature of a person or thing, **with** is translated by à the definite article.',
+          '**L’ homme aux yeux verts est acteur. ** - The man with green eyes is an actor.',
+          'To describe how to do something, **with** is translated by de.',
+          '**Je l’ai remercié d’un sourire. ** - I thanked him with a smile.',
+          'The preposition **wi**th is left untranslated when describing a way of doing things or carrying oneself.',
+          '**Il avance vers eux, les manches retroussées. ** - He is walking toward them with his sleeves rolled up.',
+          'Some adjectives followed by **with** in English take de in French.',
+          '**Elle est contente de son nouvel emploi. ** - She is happy with her new job.'
+        ],
+      },
+      {
+        id: 'topic-21-sur',
+        title: '3. "Sur" preposition',
+        detailedDescription: [
+          'The preposition sur presents different problems. It is not always translated by on in English.',
+          '**L’ordinateur est sur le bureau. ** - The computer is on the desk.',
+          '**Il a quinze mille euros sur son compte.** - He has 15,000 euros in his account.',
+          '**La cuisine fait deux mètres sur trois. ** - The kitchen measures two by three meters.',
+          'As you can see, sur is not always translated by on in English. And as the following examples show, on is not always translated by sur.',
+          '**Ils se promènent dans la rue. ** - They are walking on the street.',
+          '**Son bureau se trouve au quatrième étage. ** - Her office is on the fourth floor.',
+          '**Le Louvre est à votre gauche.** - The Louvre is on your left.',
+          'When expressing time, en and dans have different uses. Dans is used for an action about to begin.',
+          '**Le train part dans trois minutes. ** - The train is leaving in three minutes.',
+          'En indicates the length of time an action has taken, takes, or will take.',
+          '**Ahmadou a couru le marathon en moins de quatre heures.** - Ahmadou ran the marathon in less than four hours.'
+        ],
+      },
+      {
+        id: 'topic-21-use-of-á-and-en-and-de',
+        title: 'Use of á, en and de',
+        detailedDescription: [
+          'In referring to time, à is used for hours of the day and en is used for months, years, and seasons, except for spring.',
+          '**Les participants sont arrivés à midi.** - The participants arrived at noon.',
+          '**La guerre d’Indochine a pris fin en 1954. ** - The Indochina war ended in 1954.',
+          'To express means of transportation, different prepositions are used. More precisely, when a person has to do by himself/herself to move or travel, we use **á** otherwise **en**',
+          '**aller à bicyclette** - to go by bicycle',
+          '**aller à cheval** - to ride',
+          '**aller à pied ** - to walk',
+          '**aller en autobus ** - to go by bus',
+          '**aller en avion** - to go by plane',
+          'Note the difference between en and dans in distinguishing between general and specific.',
+          '**À Paris, je circule en métro. ** - In Paris, I travel by subway.',
+          '**Hier j’ai vu Arnaud dans le métro. ** - Yesterday I saw Arnaud in the subway.',
+          'The preposition à can denote nature, function, or purpose.',
+          '**une glace à la framboise ** - a strawberry ice cream',
+          '**un moulin à café ** - a coffee mill',
+          'The preposition **de** can denote contents or composition.',
+          '**une boîte de petits pois** - a can of peas',
+          '**un bol de soupe ** - a bowl of soup'
+        ]
+      },
+      {
+        id: 'topic-21-compound-prepositions',
+        title: 'Compound prepositions',
+        detailedDescription: [
+          'Compound prepositions are prepositions made up of two or three words. Here’s a list of the most common of these prepositions. There is no mystery about them—you just have to memorize them one by one.',
+        ],
+        tables: [
+          {
+            title: 'Compound Prepositions',
+            headers: ['French', 'English'],
+            rows: [
+              ['à cause de', 'because of'],
+              ['à côté de', 'beside, next to'],
+              ['à défaut de', 'for lack of'],
+              ['à force de', 'by dint of'],
+              ['à l’égard de', 'toward, with regard to'],
+              ['à l’exception de', 'except for'],
+              ['à l’instar de', 'following the example of'],
+              ['à l’insu de', 'without (somebody)’s knowing'],
+              ['à la faveur de', 'thanks to, owing to'],
+              ['à la merci de', 'at the mercy of'],
+              ['à même', 'straight from, next to'],
+              ['à même de', 'in a position to (do something)'],
+              ['à partir de', 'from'],
+              ['à raison de', 'at the rate of, on the basis of'],
+              ['à travers', 'across, through'],
+              ['au bas de', 'at the bottom of, at the foot of'],
+              ['au bord de', 'by, on the verge of, on the brink of'],
+              ['au coin de', 'at the corner of'],
+              ['au lieu de', 'instead of'],
+              ['au milieu de', 'in the middle of'],
+              ['au moyen de', 'by means of'],
+              ['au nord de', 'north of'],
+              ['au prix de', 'at the cost of'],
+              ['au sud de', 'south of'],
+              ['au-dehors de', 'outside'],
+              ['au-delà de', 'beyond'],
+              ['au-dessous de', 'under, below'],
+              ['au-dessus de', 'above, on top of'],
+              ['auprès de', 'next to, with'],
+              ['autour de', 'around'],
+              ['aux alentours de', 'in the vicinity of'],
+              ['aux dépens de', 'at the expense of'],
+              ['aux environs de', 'in the vicinity of'],
+              ['d’après', 'according to'],
+              ['de façon à', 'so as to'],
+              ['de peur de', 'for fear of'],
+              ['en bas', 'downstairs'],
+              ['en bas de', 'at the bottom of'],
+              ['en comparaison de', 'in comparison with'],
+              ['en dépit de', 'despite'],
+              ['en face de', 'in front of, opposite'],
+              ['en guise de', 'by way of'],
+              ['en haut de', 'at/to the top of'],
+              ['en raison de', 'because of, owing to'],
+              ['en-dehors de', 'outside, apart from'],
+              ['face à', 'against, faced with'],
+              ['faute de', 'for lack of, for want of'],
+              ['grâce à', 'thanks to'],
+              ['le long de', 'along'],
+              ['loin de', 'far from']
+            ]
+          }
+        ]
+      },
+      {
         id: 'topic-21-geography',
-        title: '1. Geographical Prepositions (En, Au, Aux, À)',
-        formula: 'Féminin / voyelle = en  |  Masculin = au  |  Pluriel = aux  |  Villes = à',
-        goldenRule: 'Countries ending in **-e** are almost all feminine and take **« en »** (en France, en Espagne). Masculine countries take **« au »** (au Canada, au Japon). Plural countries take **« aux »** (aux États-Unis). All cities take **« à »** (à Paris, à Rome).',
+        title: 'Prepositions with geographical names',
         detailedDescription: [
-          'To determine the preposition for countries, look at the final letter: if it ends in *-e*, it is feminine (exceptions: *le Mexique, le Cambodge, le Mozambique* take *au*).',
-          'Masculine countries starting with a vowel switch to **en** for phonetic harmony: **en Iran, en Irak, en Israël**.'
-        ],
-        tables: [
-          {
-            title: 'Geographical Preposition Matrix',
-            subtitle: 'Destinations and places where one is located',
-            description: 'Apply the rule based on gender, number, and phonetic starts.',
-            headers: ['Category', 'Rule', 'Sample Entities', 'Preposition + Noun'],
-            rows: [
-              ['Feminine Countries', 'Ends in -e', 'France, Italie, Espagne', 'en France, en Italie'],
-              ['Masculine Countries', 'Consonant end', 'Japon, Canada, Brésil', 'au Japon, au Canada'],
-              ['Vowel start (masc.)', 'Starts with vowel', 'Iran, Irak, Angola', 'en Iran, en Angola'],
-              ['Plural Countries', 'Plural names', 'États-Unis, Pays-Bas', 'aux États-Unis, aux Pays-Bas'],
-              ['Cities', 'Universal for cities', 'Paris, Tokyo, New York', 'à Paris, à Tokyo']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Mon frère habite en France, mais il voyage souvent au Japon.',
-            english: 'My brother lives in France (fem.), but he often travels to Japan (masc.).',
-            aspectNote: 'Feminine country (en France) vs. masculine country (au Japon).'
-          },
-          {
-            french: 'Ils ont passé leurs vacances aux États-Unis, à San Francisco.',
-            english: 'They spent their vacation in the United States, in San Francisco.',
-            aspectNote: 'Plural country (aux États-Unis) + city (à San Francisco).'
-          }
+          'To express in or to with a geographical name, the preposition var ies in French. With cities, the preposition à is used.',
+          'Cities are usually not preceded by an article. Some exceptions are La Nouvelle-Orléans, Le Havre, La Rochelle, Le Mans, and Le Caire.',
+          'With countries, states, and provinces, the preposition changes ac cording to gender, number, and the initial sound of the word that follows.',
+          '**en** - feminine',
+          '**en** - masculine beginning with a vowel',
+          '**au** - masculine beginning with a consonant',
+          '**aux** - plural',
+          'Elle voyagera **en** Allemagne, **aux États-Unis** puis **au** Brésil. - She’ll travel to Germany, the United States then to Brazil.',
+          'With French provinces and departments, the preposition may vary. Before a feminine noun or a masculine noun beginning with a vowel, en is used.',
+          'With names of American states, en is used before a feminine state name or a masculine state name beginning with a vowel. Au is used before a masculine state name beginning with a consonant.',
+          'la Californie - **en Californie**',
+          'l’Alabama - **en Alabama**',
+          'Although usage may vary, the preposition **à (aux in the plural)** is often used for islands.',
+          '**à Cuba**',
+          '**aux Maldives**'
         ]
       },
       {
-        id: 'topic-21-time',
-        title: '2. Temporal Prepositions (Depuis, Pendant, En, Dans, Pour)',
-        formula: 'depuis + Présent (ongoing)  |  pendant + Passé (bounded)  |  en (durée pour accomplir)  |  dans (délai avant début)',
-        goldenRule: 'Use **« Depuis »** with the present tense for actions that started in the past and are **still ongoing**. Use **« Pendant »** for completed time spans. Never use "pour" for ongoing time!',
+        id: 'topic-21-infinitives-with-adjectival-phrases',
+        title: 'Infinitives with adjectival phrases',
         detailedDescription: [
-          'English says "I have been studying for 2 hours". In French, you must say **« J\'étudie depuis deux heures »** (present tense!).',
-          '**Pendant** measures a completed duration (**« J\'ai dormi pendant 8 heures »**).',
-          '**En** indicates the amount of time required to complete a task (**« J\'ai couru 10 km en 50 minutes »**).',
-          '**Dans** specifies the delay before a future action begins (**« Le train part dans 10 minutes »**).'
-        ],
-        tables: [
-          {
-            title: 'Temporal Prepositions Overview',
-            subtitle: 'Comparing Depuis, Pendant, En, Dans',
-            description: 'Choose based on verb tense and temporal status.',
-            headers: ['Preposition', 'Meaning', 'Associated Tense', 'Sample Sentence'],
-            rows: [
-              ['Depuis', 'Since / For (still ongoing)', 'Présent', 'J\'habite ici depuis 5 ans.'],
-              ['Pendant', 'During / For (bounded)', 'Passé Composé', 'J\'ai voyagé pendant 2 mois.'],
-              ['En', 'In (time to complete)', 'Any tense', 'Il a réparé le vélo en 10 minutes.'],
-              ['Dans', 'In (starting after delay)', 'Futur', 'Nous partons dans 3 jours.'],
-              ['Pour', 'For (planned future duration)', 'Futur / Intention', 'Je pars à Nice pour un mois.']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'J\'apprends le français depuis six mois.',
-            english: 'I have been learning French for six months (and still am).',
-            aspectNote: 'Depuis + present tense for ongoing action.'
-          },
-          {
-            french: 'Hier, il a plu pendant trois heures consécutives.',
-            english: 'Yesterday, it rained for three consecutive hours.',
-            aspectNote: 'Pendant used with passé composé for completed duration.'
-          }
-        ]
-      },
-      {
-        id: 'topic-21-verbal-regimes',
-        title: '3. Verbal Regimes (Verbes à préposition À vs. De)',
-        formula: '[Verbe] + [à + Infinitif / Nom]  VS  [Verbe] + [de + Infinitif / Nom]',
-        goldenRule: 'Many French verbs require a specific preposition before an infinitive. Verbs of starting/teaching take **« à »** (commencer à, apprendre à); verbs of deciding/stopping/refusing take **« de »** (décider de, refuser de, essayer de).',
-        detailedDescription: [
-          'Unlike English, which relies heavily on the bare infinitive or gerund, French verbs govern infinitives through **à**, **de**, or **no preposition**.',
-          'Direct verbs with no preposition before infinitive: **vouloir, pouvoir, devoir, aller, aimer, préférer**.'
-        ],
-        tables: [
-          {
-            title: 'Verbs Requiring À vs. De vs. Direct Infinitive',
-            subtitle: 'Essential verbal governing patterns',
-            description: 'Memorize these verbs alongside their prepositional partners.',
-            headers: ['Regime', 'Common Verbs', 'Sample Construction', 'English Translation'],
-            rows: [
-              ['Verbe + À', 'Commencer à, Réussir à, Penser à, Hésiter à', 'J\'ai réussi à réussir l\'examen.', 'I succeeded in passing the exam.'],
-              ['Verbe + De', 'Décider de, Choisir de, Arrêter de, Essayer de', 'Il a décidé de partir tôt.', 'He decided to leave early.'],
-              ['Verbe Direct', 'Aimer, Vouloir, Pouvoir, Devoir, Aller', 'Je veux apprendre le français.', 'I want to learn French.'],
-              ['Penser à vs De', 'Penser à (thinking about) / Penser de (opinion)', 'Que penses-tu de ce film ?', 'What do you think of this film?']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Elle a enfin commencé à comprendre la leçon.',
-            english: 'She finally started to understand the lesson.',
-            aspectNote: 'Commencer + à + infinitive.'
-          },
-          {
-            french: 'Nous avons oublié de fermer la fenêtre.',
-            english: 'We forgot to close the window.',
-            aspectNote: 'Oublier + de + infinitive.'
-          }
+          'The infinitive following an adjective is preceded by de,',
+          'After the following common **être** + adjective expressions',
+          '**être content(e) de ** - to be satisfied to',
+          '**être déçu(e) de ** - to be disappointed to',
+          '**être désolé(e) de** - to be sorry to',
+          'After the impersonal il est adjective',
+          '**il est bon de ** - it is good to',
+          '**il est dangereux de ** - it is dangerous to'
         ]
       }
-    ],
-    rules: [
-      'Countries ending in -e are feminine and take "en" (en France, en Espagne, en Italie). Masculine countries take "au" (au Mexique, au Portugal). Plural countries take "aux" (aux Pays-Bas).',
-      'Cities always take "à" (à Paris, à New York, à Tokyo).',
-      'Temporal Prepositions: "Depuis" = action started in past and still ongoing in present; "Pendant" = completed, bounded duration; "En" = time taken to complete an action; "Dans" = time before a future action begins.',
-      'Verbal prepositions before infinitives: "J\'ai décidé de partir", "J\'ai réussi à terminer".',
-    ],
-    contrastExamples: [
-      {
-        french: 'J\'habite en France depuis trois ans.',
-        english: 'I have been living in France for three years (and still do).',
-        aspectNote: 'Feminine country (en France) + ongoing duration (depuis + présent).',
-      },
-      {
-        french: 'J\'ai voyagé au Canada pendant deux semaines.',
-        english: 'I traveled in Canada for two weeks (completed past).',
-        aspectNote: 'Masculine country (au Canada) + bounded past duration (pendant).',
-      },
-    ],
-    commonTraps: [
-      'Using "pour" for ongoing time (Say "J\'étudie depuis 2 heures", never "J\'étudie pour 2 heures").',
-      'Saying "en Japon" instead of "au Japon" (Japon is masculine).',
     ],
     practiceExercises: [
       {
@@ -1027,145 +1049,202 @@ export const A2_GRAMMAR_LESSONS = [
     subtitle: 'Use infinitives as noun subjects, after prepositions (pour, sans, avant de), and express past anteriority (après avoir/être).',
     formula: 'Après préposition: [sans / pour / avant de] + [Infinitif Présent]  |  Après être/avoir: [Après] + [avoir / être] + [Participe Passé]  |  Négation: [ne pas] + [Infinitif]',
     goldenRule: '**« Avant de »** is followed by the Present Infinitive (**« Avant de partir »**), whereas **« Après »** is STRICTLY followed by the Past Infinitive (**« Après être parti »**, **« Après avoir mangé »**). In negative infinitives, **« ne pas »** stays joined together in front of the verb (**« Prière de ne pas fumer »**).',
-    detailedDescription: [
-      'The **Infinitive** is the unconjugated, pure verbal mood that names an action. It can act as a subject noun, follow a conjugated modal verb, or be governed by prepositions.',
-      'Mastering the distinction between present infinitives and compound past infinitives elevates written and spoken accuracy.'
-    ],
     topics: [
       {
-        id: 'topic-22-prepositions',
-        title: '1. Infinitif Présent after Prepositions (Pour, Sans, Avant de)',
-        formula: '[pour / sans / avant de / afin de / au lieu de] + [Infinitif]',
-        goldenRule: 'In French, all prepositions take the **Infinitive**, EXCEPT the preposition **« en »** (which governs the gerund: en mangeant).',
+        id: 'topic-22-infinitif-présent',
+        title: '1. The infinitif présent',
         detailedDescription: [
-          'While English frequently uses the gerund after prepositions ("without speaking", "before leaving"), French strictly uses the **infinitive**: **sans parler**, **avant de partir**.',
-          'Notice that **avant** requires the preposition **de** before an infinitive (**avant de faire**), whereas **après** does not.'
-        ],
-        tables: [
-          {
-            title: 'Preposition + Infinitive Constructions',
-            subtitle: 'Common prepositions requiring the present infinitive',
-            description: 'Replace English "-ing" forms with the French infinitive.',
-            headers: ['Preposition', 'Meaning', 'Sample French Phrase', 'English Translation'],
-            rows: [
-              ['Pour', 'In order to', 'Il travaille dur pour réussir.', 'He works hard to succeed.'],
-              ['Sans', 'Without', 'Il est parti sans dire un mot.', 'He left without saying a word.'],
-              ['Avant de', 'Before doing', 'Réfléchis avant de parler.', 'Think before speaking.'],
-              ['Au lieu de', 'Instead of', 'Au lieu de râler, aide-moi.', 'Instead of complaining, help me.']
-            ]
-          }
+          'You will come across the infinitif, the infinitive mood, on many occasions. It is used more frequently in French than in English. The infinitif can be used as the subject of a verb.',
+          'The infinitif is also used for general instructions, prescriptions, public notices, and proverbs (where the imperative is often used in English).',
+          'The infinitive is used after verbs of perception (where the present participle is used in English).',
+          'The infinitive is used after expressions of position. The preposition à precedes the infinitive.',
         ],
         contrastExamples: [
           {
-            french: 'Avant de signer le contrat, lisez attentivement chaque clause.',
-            english: 'Before signing the contract, read each clause attentively.',
-            aspectNote: '"Avant de" requires the present infinitive (signer).'
+            french: 'Voyager par le train est rapide.',
+            english: 'Traveling by train is fast.',
           },
           {
-            french: 'Elle est entrée dans la pièce sans faire de bruit.',
-            english: 'She entered the room without making noise.',
-            aspectNote: '"Sans" takes the infinitive (faire).'
+            french: 'Prendre une fois par jour. ',
+            english: 'Take once a day.',
+          },
+          {
+            french: 'J’ai vu les moutons traverser la route. ',
+            english: 'I saw the sheep crossing (cross) the road.',
+          },
+          {
+            french: 'Il est debout à éplucher des carottes. ',
+            english: 'He is standing peeling carrots.',
           }
         ]
       },
       {
         id: 'topic-22-infinitif-passe',
-        title: '2. Infinitif Passé after Après (Après avoir/être fait)',
-        formula: '[Après] + [avoir ou être à l\'infinitif] + [Participe Passé]',
-        goldenRule: 'After the preposition **« Après »**, French strictly requires the **Past Infinitive (Infinitif Passé)** to express an action that is already finished.',
+        title: '2. Infinitif Passé',
         detailedDescription: [
-          'Saying *"Après partir"* or *"Après manger"* is a major grammatical mistake! You must say: **« Après être parti »** and **« Après avoir mangé »**.',
-          'Auxiliary choice (avoir vs. être) and participle agreement rules follow the exact same logic as the *passé composé*.'
-        ],
-        tables: [
-          {
-            title: 'Infinitif Passé Conjugation after Après',
-            subtitle: 'With Avoir and Être auxiliaries',
-            description: 'Auxiliary in infinitive + past participle.',
-            headers: ['Auxiliary', 'Infinitive Structure', 'Sample Sentence', 'Nuance'],
-            rows: [
-              ['Avoir', 'Après avoir + Participe', 'Après avoir bu son café, il est parti.', 'Action with avoir completed.'],
-              ['Être', 'Après être + Participe', 'Après être rentrée, elle s\'est couchée.', 'Agreement with subject (rentrée).'],
-              ['Pronominal (Être)', 'Après s\'être + Participe', 'Après s\'être lavé, il s\'est habillé.', 'Reflexive past infinitive.']
-            ]
-          }
+          'To express an action that happened prior to another, use the past infinitive—formed by pairing the infinitive of *avoir* or *être* with the main verb\'s past participle.',
+          '**Les hôtes ont remercié le chef d’avoir préparé un si bon repas. ** - The guests thanked the chef for having prepared such a good meal.',
+          '**Comment pouvait-il avoir brûlé tout le dîner?** - How could he have burnt the whole dinner?',
+          'One common occurrence of the infinitif passé is after the preposition après (after), while the infinitif présent follows avant de (before).',
+          'Gérard fait mariner la viande **avant d’éplucher** un oignon. - Gérard marinates the meat before peeling an onion.',
+          'Gérard fait mariner la viande **après avoir** épluché un oignon. - Gérard marinates the meat after peeling an onion.'
         ],
         contrastExamples: [
           {
-            french: 'Après avoir signé le contrat, nous avons fêté la nouvelle.',
-            english: 'After having signed the contract, we celebrated the news.',
-            aspectNote: '"Après" governing past infinitive "avoir signé".'
+            french: 'Nous nous sommes excusés d’être partis avant le dessert.',
+            english: 'We apologized for leaving before dessert.',
           },
           {
-            french: 'Après être arrivées à l\'hôtel, les filles se sont reposées.',
-            english: 'After having arrived at the hotel, the girls rested.',
-            aspectNote: '"Après être arrivées" with feminine plural agreement.'
+            french: 'Elle lit le journal avant de se lever. ',
+            english: 'She reads the paper before getting up.',
           }
         ]
       },
       {
-        id: 'topic-22-negation',
-        title: '3. Negative Infinitives & Verbal Chains (Ne pas + Infinitif)',
-        formula: 'Négation de l\'infinitif = [ne pas] + [Infinitif]  (ou [ne plus / ne jamais] + [Infinitif])',
-        goldenRule: 'Unlike conjugated verbs (where "ne" and "pas" sandwich the verb), when negating an **infinitive**, both negative words **sit together immediately before the verb**.',
+        id: 'topic-22-verbs-without-prepositions',
+        title: '3. Verbs not followed by a preposition',
         detailedDescription: [
-          'You see this constantly on formal signs and notices: **« Prière de ne pas fumer »** (Please do not smoke), **« Merci de ne pas jeter de déchets »**.',
-          'In verbal chains (e.g. vouloir + infinitive), distinguish between negating the main verb (**« Je ne veux pas manger »**) and negating the infinitive (**« Je préfère ne pas manger »**).'
+          "The verbs listed in the following table don't require any preposition",
+          'Elle **voudrait devenir** traiteur. - She would like to become a caterer.',
+          'Il **sait faire** la sauce béchamel. - He knows how to make béchamel sauce.',
+          'In the above examples, the subject of the first verb is the same as the one for the second verb; that’s why the infinitive form is used. When the subjects are different, a dependent clause introduced by que is required. Depending on the verb in the main clause, the dependent clause can be in the indicative or the subjunctive.',
+          '**J’espère obtenir ce poste.** - I am hoping to get this position.',
+          'J’espère **qu’elle obtiendra** ce poste. - I am hoping she’ll get this position.'
         ],
         tables: [
           {
-            title: 'Negating Conjugated Verbs vs. Infinitives',
-            subtitle: 'Split negation vs. Joined negation',
-            description: 'Observe where "ne pas" sits relative to the verb.',
-            headers: ['Type', 'Formula', 'French Example', 'English Translation'],
+            title: 'Verbs',
+            headers: ['French', 'English'],
             rows: [
-              ['Conjugated Verb', 'ne + [Verbe] + pas', 'Je ne fume pas.', 'I do not smoke.'],
-              ['Negative Infinitive', 'ne pas + [Infinitif]', 'Prière de ne pas fumer.', 'Please do not smoke.'],
-              ['Negative "Jamais"', 'ne jamais + [Infinitif]', 'Il a promis de ne jamais recommencer.', 'He promised never to do it again.'],
-              ['Negative "Plus"', 'ne plus + [Infinitif]', 'Elle a décidé de ne plus hésiter.', 'She decided not to hesitate anymore.']
+              ['aimer', 'to like, to love'],
+              ['aller', 'to go'],
+              ['avouer', 'to admit'],
+              ['compter', 'to intend, to plan'],
+              ['désirer', 'to desire, to wish'],
+              ['détester', 'to hate (to)'],
+              ['devoir', 'must, to have to'],
+              ['écouter', 'to listen to'],
+              ['espérer', 'to hope to'],
+              ['faire', 'to do'],
+              ['falloir', 'must, to be necessary to'],
+              ['laisser', 'to let, to allow'],
+              ['oser', 'to dare (to)'],
+              ['paraître', 'to appear, to seem'],
+              ['penser', 'to think'],
+              ['pouvoir', 'can, to be able to'],
+              ['préférer', 'to prefer'],
+              ['prétendre', 'to claim'],
+              ['savoir', 'to know (how to)'],
+              ['sembler', 'to seem to'],
+              ['sentir', 'to feel, to think'],
+              ['souhaiter', 'to wish to'],
+              ['venir', 'to come'],
+              ['voir', 'to see'],
+              ['vouloir', 'to want to']
             ]
           }
         ],
-        contrastExamples: [
+      },
+      {
+        id: 'topic-22-verbs-followed-by-á',
+        title: 'Verbs followed by the preposition à',
+        detailedDescription: [
+          'Many verbs are followed by the preposition à when they precede an infinitive. You have already encountered quite a few in previous chapters. These will also need to be memorized.',
+          'Il **commence à travailler** à huit heures. - He starts to work at eight o’clock.'
+        ],
+        tables: [
           {
-            french: 'Prière de ne pas stationner devant la sortie de secours.',
-            english: 'Please do not park in front of the emergency exit.',
-            aspectNote: '"Ne pas" remains joined before the infinitive stationner.'
-          },
+            title: 'Verbs + à',
+            headers: ['French', 'English'],
+            rows: [
+              ['s’accoutumer à', 'to get accustomed to'],
+              ['aider à', 'to help to'],
+              ['s’amuser à', 'to enjoy'],
+              ['apprendre à', 'to learn to, to show how to'],
+              ['arriver à', 'to manage to'],
+              ['aspirer à', 'to aspire to'],
+              ['s’attendre à', 'to expect to'],
+              ['autoriser à', 'to authorize to'],
+              ['chercher à', 'to try to, to attempt to'],
+              ['commencer à', 'to start to'],
+              ['consentir à', 'to agree to, to consent to'],
+              ['continuer à', 'to continue to, to keep on'],
+              ['se décider à', 'to make up one’s mind to'],
+              ['encourager à', 'to encourage to'],
+              ['se faire à', 'to get used to'],
+              ['faire attention à', 'to pay attention to'],
+              ['s’habituer à', 'to get used to'],
+              ['hésiter à', 'to hesitate to'],
+              ['inciter à', 'to encourage to'],
+              ['s’intéresser à', 'to get interested in'],
+              ['inviter à', 'to invite to'],
+              ['se mettre à', 'to start to, to begin to'],
+              ['parvenir à', 'to manage to'],
+              ['préparer à', 'to get ready to'],
+              ['renoncer à', 'to give up'],
+              ['se résigner à', 'to resign oneself to']
+            ]
+          }
+        ]
+      },
+      {
+        id: 'topic-22-verbs-followed-by-de',
+        title: 'Verbs followed by the preposition de',
+        detailedDescription: [
+          'Now that you have memorized some of the à verbs, let’s look at some verbs followed by the preposition de when they precede an infinitive.',
+          'Il **a essayé de faire** un soufflé. - He tried to make a soufflé.'
+        ],
+        tables: [
           {
-            french: 'Il a choisi de ne pas répondre aux provocations.',
-            english: 'He chose not to reply to the provocations.',
-            aspectNote: 'Voluntary negative decision modifying the infinitive.'
+            title: 'Verbs + de',
+            headers: ['French', 'English'],
+            rows: [
+              ['accuser de', 'to accuse (of)'],
+              ['s’arrêter de', 'to stop'],
+              ['avoir besoin de', 'to need to'],
+              ['avoir envie de', 'to feel like, to want'],
+              ['avoir l’intention de', 'to intend to'],
+              ['avoir peur de', 'to be afraid of'],
+              ['cesser de', 'to stop, to cease'],
+              ['choisir de', 'to choose to'],
+              ['conseiller de', 'to advise (to)'],
+              ['se contenter de', 'to content oneself with'],
+              ['convaincre de', 'to convince (to)'],
+              ['craindre de', 'to fear (to)'],
+              ['défendre de', 'to forbid (to)'],
+              ['demander de', 'to ask (to)'],
+              ['se dépêcher de', 'to hurry to'],
+              ['s’efforcer de', 'to try hard to'],
+              ['empêcher de', 'to prevent (from)'],
+              ['s’empêcher de', 'to refrain from'],
+              ['envisager de', 'to contemplate'],
+              ['essayer de', 'to try to'],
+              ['éviter de', 'to avoid'],
+              ['s’excuser de', 'to apologize for'],
+              ['faire semblant de', 'to pretend to'],
+              ['feindre de', 'to feign to, to pretend to'],
+              ['finir de', 'to finish, to end up'],
+              ['interdire de', 'to forbid (to)'],
+              ['menacer de', 'to threaten to'],
+              ['mériter de', 'to deserve to'],
+              ['offrir de', 'to offer to'],
+              ['oublier de', 'to forget to'],
+              ['permettre de', 'to allow (to), to permit (to)'],
+              ['persuader de', 'to persuade (to), to convince (to)'],
+              ['se plaindre de', 'to complain of'],
+              ['projeter de', 'to plan to/on'],
+              ['promettre de', 'to promise to'],
+              ['refuser de', 'to refuse to'],
+              ['regretter de', 'to regret'],
+              ['remercier de', 'to thank (for)'],
+              ['reprocher de', 'to reproach for'],
+              ['soupçonner de', 'to suspect of'],
+              ['se souvenir de', 'to remember to'],
+              ['tâcher de', 'to try to']
+            ]
           }
         ]
       }
-    ],
-    rules: [
-      'All prepositions (pour, sans, à, de, avant de, afin de) take the infinitive in French, EXCEPT "en" (which takes the gerund/participle).',
-      'The Past Infinitive (Infinitif Passé) expresses an action completed before the main verb: "Après avoir terminé mon café, je suis parti".',
-      'When two verbs follow each other with the same subject, the second verb is in the infinitive: "Il veut voyager", "Nous espérons réussir".',
-      'Negative infinitives place "ne pas" together before the verb: "Il a décidé de ne pas venir".',
-    ],
-    contrastExamples: [
-      {
-        french: 'Avant de signer le contrat, lisez attentivement.',
-        english: 'Before signing the contract, read attentively.',
-        aspectNote: '"Avant de" + Present infinitive (signer).',
-      },
-      {
-        french: 'Après avoir signé le contrat, nous avons fêté la nouvelle.',
-        english: 'After having signed the contract, we celebrated the news.',
-        aspectNote: '"Après" + Past infinitive (avoir signé).',
-      },
-      {
-        french: 'Prière de ne pas stationner devant la porte.',
-        english: 'Please do not park in front of the door.',
-        aspectNote: 'Negative infinitive: "ne pas" precedes the infinitive directly.',
-      },
-    ],
-    commonTraps: [
-      'Saying "Après terminer" instead of "Après avoir terminé" (après requires the past infinitive).',
-      'Saying "Pour faire cela" with a conjugated verb instead of the infinitive.',
     ],
     practiceExercises: [
       {
