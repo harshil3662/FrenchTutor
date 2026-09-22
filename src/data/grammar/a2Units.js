@@ -1281,143 +1281,85 @@ export const A2_GRAMMAR_LESSONS = [
     subtitle: 'Give strong commands, advice, and instructions while mastering hyphenated pronoun placement.',
     formula: 'Affirmatif: [Verbe] - [le/la/les] - [moi/toi/lui/nous/vous/leur] - [y/en]  |  Négatif: Ne + [pronoms] + [Verbe] + pas',
     goldenRule: 'In **Affirmative commands**, pronouns follow the verb attached with **hyphens**, and "me/te" become stressed **« moi/toi »** (e.g. **« Donne-le-moi ! »**). In **Negative commands**, pronouns return to their normal position **BEFORE the verb** (e.g. **« Ne me le donne pas ! »**).',
-    detailedDescription: [
-      'The Imperative mood is used to issue orders, give advice, or make urgent requests. It exists only for three persons: **tu**, **nous**, and **vous** (without subject pronouns).',
-      'The syntactic placement of object pronouns flips completely between affirmative and negative commands.'
-    ],
     topics: [
       {
         id: 'topic-23-formation',
         title: '1. Formation of the Imperative (Tu, Nous, Vous)',
-        formula: 'Tu (parle, finis, vends)  |  Nous (parlons, finissons, vendons)  |  Vous (parlez, finissez, vendez)',
-        goldenRule: 'For all regular **-ER verbs**, the final **"-s" of the "tu" form is DROPPED** in the imperative: **« Parle ! »** (not Parles !), **« Regarde ! »**, **« Va ! »** (Aller). It returns only before "y" and "en" for liaison: **« Vas-y ! »**, **« Parles-en ! »**.',
         detailedDescription: [
-          'Forming the imperative is simple: take the present tense forms of *tu, nous, vous* and drop the subject pronoun.',
-          '-IR and -RE verbs keep their final "-s" for *tu* (**« Finis ton assiette ! »**, **« Attends-moi ! »**).'
+          'The imperative mood (l’impératif) is used to give orders, make suggestions, or give advice.',
+          'To make the three forms of the imperative, take the tu, nous, and vous forms of the present tense. For the -er verbs, drop the -s of the present tense tu form.',
+          '**Parle** - speak!',
+          "**Parlons** - Let's speak",
+          '**Parlez** - speak!',
+          '**Prends un café avant de partir! ** - Have a coffee before you leave!',
+          '**Allons leur rendre visite! ** = Let’s go visit them!',
+          'In the negative form, the negation is placed around the verb. Note that object pronouns immediately precede the verb (following ne [n’]) in the negative imperative.',
+          '**N’oubliez pas son anniversaire! ** - Don’t forget her birthday!'
         ],
-        tables: [
-          {
-            title: 'Imperative Formation Table',
-            subtitle: 'Regular -er, -ir, -re verbs across Tu, Nous, Vous',
-            description: 'Notice the dropped "-s" on "tu" for -ER verbs.',
-            headers: ['Verb Group', 'Tu Form', 'Nous Form', 'Vous Form'],
-            rows: [
-              ['Parler (-ER)', 'Parle ! (no -s)', 'Parlons !', 'Parlez !'],
-              ['Aller (Exception)', 'Va ! (no -s)', 'Allons !', 'Allez !'],
-              ['Finir (-IR)', 'Finis ! (keeps -s)', 'Finissons !', 'Finissez !'],
-              ['Attendre (-RE)', 'Attends ! (keeps -s)', 'Attendons !', 'Attendez !']
-            ]
-          }
+      },
+      {
+        id: 'topic-23-irregular-imperative-forms',
+        title: '2. Irregular imperative forms',
+        detailedDescription: [
+          '**être** to be',
+          '**sois** be',
+          "**soyons** Let's be",
+          '**soyez** be',
+          '**avoir** to have',
+          '**aie** have',
+          "**ayons** Let's have",
+          '**ayez** - have',
+          '**savoir** - to know',
+          '**sache** know',
+          "**sachons** Let’s know",
+          '**sachez** know',
+          'The irregular verb vouloir (to want) is used only in the vous imperative form.'
         ],
         contrastExamples: [
           {
-            french: 'Écoute bien ce que je vais te dire !',
-            english: 'Listen well to what I am going to tell you!',
-            aspectNote: 'Dropped "-s" on the -ER verb "écouter" for the "tu" command.'
+            french: 'Veuillez accepter mes excuses! ',
+            english: 'Please accept my excuses!',
           },
           {
-            french: 'Prenez votre temps pour répondre.',
-            english: 'Take your time to answer.',
-            aspectNote: 'Formal or plural command with "vous".'
+            french: 'Aie plus de patience! ',
+            english: 'Have more patience!',
+          },
+          {
+            french: 'Sachez que je suis avec vous! ',
+            english: 'Be aware (Know that) I am with you!'
           }
         ]
       },
       {
-        id: 'topic-23-affirmative-placement',
-        title: '2. Affirmative Imperative & Pronoun Placement (Donne-le-moi !)',
-        formula: '[Verbe] - [COD: le / la / les] - [COI: moi / toi / lui / nous / vous / leur] - [y / en]',
-        goldenRule: 'In affirmative commands, attach pronouns with **hyphens** after the verb. Stressed pronouns **« moi »** and **« toi »** replace "me" and "te".',
+        id: 'topic-23-object-pronouns-with-imperative',
+        title: '3. The position of object pronouns with the imperative',
         detailedDescription: [
-          'Order in affirmative commands: **Verb - Direct Object - Indirect Object - Y/En**.',
-          'Examples: **« Regarde-moi ! »**, **« Donne-le-lui ! »**, **« Parle-nous-en ! »**.',
-          'Before *y* and *en*, *moi* and *toi* contract into **m\'y, m\'en, t\'y, t\'en** (e.g. **« Donne-m\'en un peu ! »**).'
-        ],
-        tables: [
-          {
-            title: 'Affirmative Command Pronoun Hierarchy',
-            subtitle: 'Verb + Hyphen + Direct + Hyphen + Indirect',
-            description: 'Hyphens are mandatory between every element.',
-            headers: ['Order', 'Pronoun Group', 'Examples', 'Sample Command'],
-            rows: [
-              ['1. Verb', 'Imperative verb form', 'Donne, Montre, Dis', 'Donne...'],
-              ['2. Direct (COD)', 'le, la, les', '-le, -la, -les', 'Donne-le...'],
-              ['3. Indirect (COI)', 'moi, toi, lui, nous, vous, leur', '-moi, -lui, -leur', 'Donne-le-moi !'],
-              ['4. Adverbial', 'y, en', '-y, -en', 'Mène-nous-y ! / Donne-m\'en !']
-            ]
-          }
+          'In the affirmative imperative the object pronoun follows the verb and is joined to it by a hyphen (me becomes moi).',
+          'If there are two object pronouns with the imperative form, the direct object pronoun precedes the indirect object pronoun, but y and en always come last. The pronouns are joined to each other and to the verb by a hyphen. Note that before en, moi becomes m’.',
         ],
         contrastExamples: [
           {
-            french: 'Montre-la-moi tout de suite !',
-            english: 'Show it to me right away!',
-            aspectNote: 'Verb (Montre) + COD (la) + COI (moi) connected with hyphens.'
+            french: 'Attendez-moi!',
+            english: 'Wait for me!',
           },
           {
-            french: 'Vas-y, n\'hésite plus !',
-            english: 'Go ahead, don\'t hesitate anymore!',
-            aspectNote: 'S restored on "vas-y" for phonetic liaison.'
-          }
-        ]
-      },
-      {
-        id: 'topic-23-negative-irregulars',
-        title: '3. Negative Imperative & Irregulars (Aie, Sois, Sache)',
-        formula: 'Négatif: Ne + [pronoms normaux avant verbe] + [Verbe] + pas  |  Irréguliers: Être (sois), Avoir (aie), Savoir (sache)',
-        goldenRule: 'In negative commands, **hyphens disappear**, pronouns return to their standard position **before the verb**, and "moi/toi" revert to **« me/te »** (e.g. **« Ne me le donne pas ! »**).',
-        detailedDescription: [
-          'Compare: **« Donne-le-moi ! »** (affirmative) versus **« Ne me le donne pas ! »** (negative).',
-          'Only three verbs have irregular imperative stems (derived from the subjunctive):',
-          '**Avoir**: aie, ayons, ayez ; **Être**: sois, soyons, soyez ; **Savoir**: sache, sachons, sachez.'
-        ],
-        tables: [
-          {
-            title: 'Irregular Imperative Conjugations',
-            subtitle: 'Être, Avoir, Savoir',
-            description: 'Derived from the subjunctive mood.',
-            headers: ['Infinitive', 'Tu', 'Nous', 'Vous'],
-            rows: [
-              ['Être (to be)', 'Sois patient !', 'Soyons calmes !', 'Soyez les bienvenus !'],
-              ['Avoir (to have)', 'Aie du courage !', 'Ayons confiance !', 'Ayez l\'amabilité de...'],
-              ['Savoir (to know)', 'Sache que...', 'Sachons apprécier...', 'Sachez que vous avez réussi !'],
-              ['Vouloir (polite)', 'Veuille', 'Voulons', 'Veuillez agréer...']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Ne me regarde pas comme ça.',
-            english: 'Do not look at me like that.',
-            aspectNote: 'Negative command: pronoun "me" precedes the verb without hyphens.'
+            french: 'Aidez-les!',
+            english: 'Help them!',
           },
           {
-            french: 'Soyez prudents sur la route du retour !',
-            english: 'Be prudent on the road back!',
-            aspectNote: 'Irregular imperative of être for "vous" (soyez).'
+            french: 'Tenez-moi au courant! ',
+            english: 'Keep me posted!',
+          },
+          {
+            french: 'Dis-le-moi!',
+            english: 'Tell me!',
+          },
+          {
+            french: 'Donnez-les-leur!',
+            english: 'Give them to them!',
           }
         ]
       }
-    ],
-    rules: [
-      'Affirmative imperative: Verb + Hyphen + Pronoun (Regarde-moi ! Écoutez-nous ! Vas-y ! Parles-en !).',
-      'Negative imperative: Standard order with "ne" + Pronoun + Verb + "pas" (Ne me regarde pas ! N\'y va pas ! Ne lui parle pas !).',
-      'Double pronoun hierarchy in affirmative commands: Verb + Direct (le/la/les) + Indirect (moi/toi/lui/nous/vous/leur) + Y/En (e.g. "Explique-le-moi !", "Donne-lui-en !").',
-      'Irregular imperatives: Avoir (aie, ayons, ayez), Être (sois, soyons, soyez), Savoir (sache, sachons, sachez).',
-    ],
-    contrastExamples: [
-      {
-        french: 'Montre-la-moi tout de suite !',
-        english: 'Show it to me right away!',
-        aspectNote: 'Affirmative command: Verb + COD (la) + COI (moi) connected with hyphens.',
-      },
-      {
-        french: 'Ne me la montre pas maintenant.',
-        english: 'Do not show it to me now.',
-        aspectNote: 'Negative command: Standard pre-verbal order (me la) with no hyphens.',
-      },
-    ],
-    commonTraps: [
-      'Writing "Donne-me" instead of "Donne-moi".',
-      'Keeping hyphens in negative commands (e.g. "Ne donne-moi pas" is wrong; say "Ne me donne pas").',
     ],
     practiceExercises: [
       {
@@ -1454,195 +1396,222 @@ export const A2_GRAMMAR_LESSONS = [
     subtitle: 'Replace nouns with direct (le/la/les), indirect (lui/leur), adverbial (y/en), and tonic pronouns.',
     formula: 'Ordre avant le verbe: [me/te/se/nous/vous] → [le/la/l\'/les] → [lui/leur] → [y] → [en] + [Verbe]',
     goldenRule: 'Object pronouns always go **immediately BEFORE the conjugated verb** (or auxiliary in compound tenses), ordered strictly according to the French pronoun hierarchy matrix.',
-    detailedDescription: [
-      'Pronouns streamline conversation by avoiding repetitious nouns. French possesses distinct pronoun sets for direct objects (COD), indirect objects of people (COI), places/prepositional concepts (Y), and partitive/quantified nouns (En).',
-      'The multi-tier pronoun order before verbs is one of the definitive benchmarks of fluent French.'
-    ],
     topics: [
       {
-        id: 'topic-26-cod',
-        title: '1. Direct Object Pronouns (COD: Me, Te, Le, La, Les)',
-        formula: '[Sujet] + [me / te / le / la / l\' / nous / vous / les] + [Verbe]',
-        goldenRule: 'Direct object pronouns replace people or objects that receive the action **directly without any preposition** (e.g. regarder quelqu\'un, aimer une chose).',
+        id: 'topic-26-subject-pronouns',
+        title: '1. Subject pronouns',
         detailedDescription: [
-          'Choose the COD pronoun based on gender and number: **le** (masculine singular), **la** (feminine singular), **les** (plural).',
-          'Before a vowel or silent h, *le* and *la* elide to **l\'**: **« Je l\'aime »**, **« Il l\'écoute »**.',
-          'In compound tenses, remember the past participle agrees with a preceding COD (**« Je les ai vus »**).'
+          '**je** I',
+          '**tu** you (singular familiar)',
+          '**il** he, it (masculine)',
+          '**elle** she, it (feminine)',
+          '**On** one, we, they, people',
+          '**nous** we',
+          '**vous** you (singular formal and all plurals)',
+          '**ils** they (masculine, or mixed masculine and feminine)',
+          '**elles** they (feminine)',
+          'Remember that there are two ways of saying you in French. Use tu and its verb forms to talk to friends, family members, children, and animals. Use vous when you are addressing a stranger or someone you don’t know well, or to maintain a certain degree of distance or respect.',
+          'Note, however, that the contemporary trend is toward familiarity, especially among peers. It all depends on the setting and the crowd. However, it’s always a good idea to let the native French speaker initiate your first exchange with tu.',
+          'The pronoun on has several meanings. It may mean one, we, or they depending on how it is used. On can replace an indefinite person.',
+          '**On voudrait tout réussir. ** - One would like to succeed in everything.',
+          'On means people in general. It often refers to habits and customs of a culture.',
+          '**En France, on boit du vin. ** - In France, one drinks wine.',
+          'In informal conversation, on takes on the meaning of nous.',
+          '**On va au cinéma cet après-midi?** - Shall we go to the movies this afternoon?',
+          'Another informal use of on replaces the pronoun tu.',
+          '**Ah, on s’amuse ici! ** - So, we are having fun here!'
+        ],
+      },
+      {
+        id: 'topic-26-direct-object-pronouns',
+        title: '2. Direct object pronouns',
+        detailedDescription: [
+          'Another type of pronoun is the direct object pronoun (le pronom objet direct). In English there are seven direct object pronouns: me, you, him, her, it, us, them. Note that in French there are two forms of the direct object pronoun you: the informal te and the formal or plural vous. English distinguishes between a direct object pronoun that replaces a person (him or her) or a thing (it); in French le, la, les can replace both people and things. Les refers to both masculine and femi- nine. Me, te, le, and la become m’, t’, and l’ before vowels and mute h.',
+          '**L’artiste chante la chanson. ** - The artist sings the song.',
+          '**L’artiste la chante. ** - The artist sings it.',
+          '**Quentin appelle son ami. ** - Quentin calls his friend.',
+          '**Quentin l’appelle. ** - Quentin calls him.',
+          'In a negative sentence, the direct object pronoun also comes immediately before the conjugated verb.',
+          '**Nous n’acceptons pas l’offre. ** - We do not accept the offer.',
+          '**Nous ne l’acceptons pas. ** - We do not accept it.',
+          'In the interrogative form, when using the inversion, the direct object pronoun comes immediately before the verb.',
+          '**Connaissez-vous ce dentiste? ** - Do you know this dentist?',
+          '**Le connaissez-vous? ** - Do you know him?',
         ],
         tables: [
           {
-            title: 'Direct Object Pronouns (COD) Reference',
-            subtitle: 'Forms and replacements',
-            description: 'Used when the verb has no preposition before the object.',
-            headers: ['Person / Gender', 'Pronoun Form', 'Before Vowel', 'Sample Replacement'],
+            title: 'Direct Object Pronouns',
+            headers: ['Singular', 'English', 'Plural', 'English'],
             rows: [
-              ['1st Sing. (Me)', 'me', "m'", 'Il me voit / Il m\'appelle'],
-              ['2nd Sing. (You)', 'te', "t'", 'Je te regarde / Je t\'écoute'],
-              ['3rd Sing. Masc. (Him/It)', 'le', "l'", 'Je connais Paul → Je le connais'],
-              ['3rd Sing. Fem. (Her/It)', 'la', "l'", 'Je lis la lettre → Je la lis'],
-              ['1st Plur. (Us)', 'nous', 'nous', 'Elle nous invite'],
-              ['2nd Plur. (You)', 'vous', 'vous', 'Je vous entends'],
-              ['3rd Plur. (Them)', 'les', 'les (liaison /z/)', 'J\'achète les livres → Je les achète']
+              ['me (m’)', 'me', 'nous', 'us'],
+              ['te (t’)', 'you (familiar)', 'vous', 'you (plural or formal)'],
+              ['le (l’)', 'him or it (masculine)', 'les', 'them (masc. and fem.)'],
+              ['la (l’)', 'her or it (feminine)', '', '']
+            ]
+          }
+        ],
+      },
+      {
+        id: 'topic-26-y-indirect-object-pronouns',
+        title: '3. Indirect object pronouns',
+        detailedDescription: [
+          'In English there are five indirect object pronouns me, you, him, her, us. As always, French distinguishes between an informal you (te) and a formal or plural you (vous). The French indirect object pronoun does not, however, distinguish gender; lui and leur replace both masculine and feminine nouns. In French, the indirect object pronoun replaces only animate indirect objects (people, animals). Inanimate ideas and things are replaced with the indirect object pronouns **y** and **en**, which will be discussed later in this chapter. Let’s look at the indirect object pronouns:',
+          '**Tu parles au journaliste. ** - You are talking to the journalist.',
+          '**Tu lui parles. ** - You are talking to him.',
+          '**Tu réponds à Andrée. ** - You answer Andrée.',
+          '**Tu lui réponds. ** - You answer her.',
+          'In the interrogative or negative, the indirect object pronoun is placed immediately before the verb.',
+          '**Lui as-tu parlé de ce livre? ** - Did you talk to him about this book?'
+        ],
+        tables: [
+          {
+            title: 'Indirect Object Pronouns',
+            headers: ['Singular', 'English', 'Plural', 'English'],
+            rows: [
+              ['me (m’)', 'me', 'nous', 'us'],
+              ['te (t’)', 'you (familiar)', 'vous', 'you (formal or plural)'],
+              ['lui', 'him, her', 'leur', 'them (masc. and fem.)']
+            ]
+          }
+        ],
+      },
+      {
+        id: 'topic-26-pronoun-y-and-en',
+        title: '4. The pronoun y and en',
+        detailedDescription: [
+          'Y is an indirect object pronoun that precedes the verb. It usually replaces an inanimate object (thing or idea). The object replaced by y is considered indirect because it is preceded by a preposition, usually the preposition à, but sometimes sur.',
+          '**Elle répond à l’annonce. ** - She answers the ad.',
+          '**Elle y répond. ** - She answers it.',
+          'En is an indirect object pronoun that precedes the verb. It usually replaces an inanimate object (thing or idea) preceded by de. The pronoun en immediately precedes the verb, except in the affirmative imperative where it follows the verb.',
+          'Nous nous occuperons **de tous les détails.** - We’ll take care of all the details. ',
+          'Nous nous **en** occuperons. - We’ll take care of them.',
+        ],
+      },
+      {
+        id: 'topic-26-order-of-object-pronouns',
+        title: '5. The order of object pronouns',
+        detailedDescription: [
+          'he order of object pronouns When a direct and indirect pronoun appear in the same sentence, the indirect object pronoun comes first, unless the direct and indirect pronouns are in the third person, in which case the direct object pronoun comes first.',
+          'Elle **te** donne **le rôle.** - She gives you the part.',
+          'Elle **te le** donne. - She gives it to you.',
+          'If the direct and indirect pronouns in the third person are combined, the direct object pronoun comes first.',
+          'J’envoie **la lettre au rédacteur.** - I send the letter to the editor.',
+          'Je **la lui** envoie. - I send it to him.'
+        ],
+        tables: [
+          {
+            title: 'Object Pronouns',
+            headers: ['Indirect Object', 'Direct Object'],
+            rows: [
+              ['me (m’)', 'le, la, l’, les'],
+              ['te (t’)', 'le, la, l’, les'],
+              ['nous', 'le, la, l’, les'],
+              ['vous', 'le, la, l’, les']
+            ]
+          },
+          {
+              title: 'Object Pronouns',
+              headers: ['Direct Object', 'Indirect Object'],
+              rows: [
+                ['le (l’)', 'lui, leur'],
+                ['la (l’)', 'lui, leur'],
+                ['les', 'lui, leur']
+              ]
+            }
+        ]
+      },
+      {
+        id: 'topic-26-Possessive-pronouns',
+        title: '6. Possessive pronouns',
+        detailedDescription: [
+          'Possessive pronouns replace nouns used with possessive adjectives. They agree in gender and number with the noun they replace, not with the possessor.',
+          'Remember that the most common way of expressing possession is by using être à the disjunctive pronoun.',
+          'The possessive pronoun is also often used with **aussi** and **non plus** to confirm an affirmative or negative statement.'
+        ],
+        tables: [
+          {
+            title: 'Possessive Pronouns — Masculine',
+            headers: ['Singular', 'English', 'Plural', 'English'],
+            rows: [
+              ['le mien', 'mine', 'les miens', 'mine'],
+              ['le tien', 'yours', 'les tiens', 'yours'],
+              ['le sien', 'his/hers', 'les siens', 'his/hers'],
+              ['le nôtre', 'ours', 'les nôtres', 'ours'],
+              ['le vôtre', 'yours', 'les vôtres', 'yours'],
+              ['le leur', 'theirs', 'les leurs', 'theirs']
+            ]
+          },
+          {
+            title: 'Possessive Pronouns — Feminine',
+            headers: ['Singular', 'English', 'Plural', 'English'],
+            rows: [
+              ['la mienne', 'mine', 'les miennes', 'mine'],
+              ['la tienne', 'yours', 'les tiennes', 'yours'],
+              ['la sienne', 'his/hers', 'les siennes', 'his/hers'],
+              ['la nôtre', 'ours', 'les nôtres', 'ours'],
+              ['la vôtre', 'yours', 'les vôtres', 'yours'],
+              ['la leur', 'theirs', 'les leurs', 'theirs']
             ]
           }
         ],
         contrastExamples: [
           {
-            french: 'Tu regardes ce film ? → Oui, je le regarde.',
-            english: 'Are you watching this movie? → Yes, I am watching it.',
-            aspectNote: 'Masculine singular COD replacement with "le".'
+            french: 'J’apporte mes notes et tu apportes les tiennes.',
+            english: 'I bring my notes and you bring yours.'
           },
           {
-            french: 'Ces fleurs sont magnifiques, je les achète.',
-            english: 'These flowers are gorgeous, I am buying them.',
-            aspectNote: 'Plural COD replacement with "les".'
+            french: 'Il a téléphoné à son avocat et elle a téléphoné au sien.',
+            english: 'He called his lawyer and she called hers.'
+          },
+          {
+            french: 'Cette valise est à moi. ',
+            english: 'This suitcase is mine.'
+          },
+          {
+            french: 'Son appartement coûtait cher. —Le mien aussi. ',
+            english: 'His apartment was expensive. —So was mine.'
           }
         ]
       },
       {
-        id: 'topic-26-coi',
-        title: '2. Indirect Object Pronouns (COI: Lui, Leur)',
-        formula: '[Sujet] + [me / te / lui / nous / vous / leur] + [Verbe régissant "à quelqu\'un"]',
-        goldenRule: 'Indirect object pronouns replace **« à + une personne »** (parler à, téléphoner à, donner à). Use **« lui »** for both singular genders (him and her) and **« leur »** for plural (them).',
+        id: 'topic-26-demonstrative-pronouns',
+        title: 'Demonstrative pronouns',
         detailedDescription: [
-          'Notice that in the third person, French does NOT distinguish gender for indirect objects: **lui** means both "to him" and "to her"!',
-          '**« Je parle à mon père »** → **« Je lui parle »** ; **« Je parle à ma mère »** → **« Je lui parle »**.',
-          'Plural: **« J\'écris à mes parents »** → **« Je leur écris »** (notice: "leur" as a pronoun never takes an -s).'
+          'A demonstrative pronoun replaces a demonstrative adjective a noun. It agrees in gender and number with the noun it replaces. It can refer to people or things. In a sentence, it can be the subject or object of the verb and be followed by que, qui, de, or another prepositional phrase.',
+          'Earlier, you studied the demonstrative adjectives ce, cet, cette, ces (this, that, these, those) used to point out things and people.',
+          'Note that the demonstrative adjective ce adds a -t before a masculine singular noun that starts with a vowel or a mute h (cet appartement, cet arbre).'
         ],
         tables: [
           {
-            title: 'Indirect Object Pronouns (COI)',
-            subtitle: 'Replacing "à + Person"',
-            description: 'Used strictly with verbs of communication and giving governing "à".',
-            headers: ['Person', 'COI Form', 'Replaces', 'Example'],
+            title: 'Demonstrative Pronouns',
+            headers: ['Number', 'Masculine', 'English', 'Feminine', 'English'],
             rows: [
-              ['3rd Sing. Masc.', 'lui', 'à Pierre, à mon frère', 'Je lui téléphone'],
-              ['3rd Sing. Fem.', 'lui', 'à Marie, à ma sœur', 'Je lui donne la clé'],
-              ['3rd Plural', 'leur', 'à mes amis, aux élèves', 'Je leur réponds'],
-              ['1st / 2nd Person', 'me, te, nous, vous', 'à moi, à toi, à nous, à vous', 'Il me parle / Nous vous répondons']
+              ['Singular', 'celui', 'the one (masculine)', 'celle', 'the one (feminine)'],
+              ['Plural', 'ceux', 'the ones (masc.; masc. and fem.)', 'celles', 'the ones (feminine)']
+            ]
+          },
+          {
+            title: 'Demonstrative Pronouns — -ci and -là',
+            headers: ['Number', 'Masculine', 'English', 'Feminine', 'English'],
+            rows: [
+              ['Singular', 'celui-ci', 'this one (masculine)', 'celle-ci', 'this one (feminine)'],
+              ['Singular', 'celui-là', 'that one (masculine)', 'celle-là', 'that one (feminine)'],
+              ['Plural', 'ceux-ci', 'these (ones) (masc.; masc. and fem.)', 'celles-ci', 'these (ones) (fem.)'],
+              ['Plural', 'ceux-là', 'those (ones) (masc.; masc. and fem.)', 'celles-là', 'those (ones) (feminine)']
             ]
           }
         ],
         contrastExamples: [
           {
-            french: 'Je téléphone à Sophie. → Je lui téléphone.',
-            english: 'I phone Sophie. → I phone her.',
-            aspectNote: 'COI replaces "à Sophie" with singular pronoun "lui".'
+            french: 'Cette dame est celle qui habitait autrefois à côté.',
+            english: 'That woman is the one who used to live next door.'
           },
           {
-            french: 'Le professeur a expliqué la règle aux élèves. → Il leur a expliqué la règle.',
-            english: 'The teacher explained the rule to the students. → He explained the rule to them.',
-            aspectNote: 'COI replaces plural "aux élèves" with "leur".'
-          }
-        ]
-      },
-      {
-        id: 'topic-26-y-en',
-        title: '3. Adverbial Pronouns (Y & En)',
-        formula: 'Y = remplace [à / en / dans / sur / sous + Lieu] OU [à + Chose / Concept]  |  En = remplace [de + Chose] OU [du / de la / des / quantité + Nom]',
-        goldenRule: 'Use **« Y »** for places (*there*) and concepts with **à**. Use **« En »** for partitives (*some/any*), quantities, and phrases with **de**.',
-        detailedDescription: [
-          '**Y**: **« Tu vas à Paris ? »** → **« Oui, j\'y vais »** (I am going there). **« Tu penses à ton avenir ? »** → **« J\'y pense »** (I am thinking about it).',
-          '**En**: **« Tu as des enfants ? »** → **« Oui, j\'en ai deux »** (quantity retained at the end). **« Tu manges du pain ? »** → **« J\'en mange »** (I eat some).',
-          'Trap warning: If the verb governs *de + person*, use a tonic pronoun (**« Je parle de Paul »** → **« Je parle de lui »**, not "j\'en parle").'
-        ],
-        tables: [
-          {
-            title: 'Y vs. En Comparison Matrix',
-            subtitle: 'Prepositional triggers and meanings',
-            description: 'Check whether the underlying trigger is "à" or "de/quantity".',
-            headers: ['Pronoun', 'Triggers', 'What It Replaces', 'Sample Translation'],
-            rows: [
-              ['Y (Place)', 'à, dans, en, sur, chez', 'Location / Destination', 'Je vais chez Paul → J\'y vais'],
-              ['Y (Idea)', 'penser à, croire à, réfléchir à', 'Concept / Object with "à"', 'Je réfléchis à ce projet → J\'y réfléchis'],
-              ['En (Partitive)', 'du, de la, de l\', des', 'Unquantified amount', 'Tu bois du thé ? → J\'en bois'],
-              ['En (Quantity)', 'un, deux, beaucoup de, peu de', 'Counted nouns (retain number)', 'J\'ai trois stylos → J\'en ai trois'],
-              ['En (De-phrase)', 'parler de, se souvenir de', 'Thing/Concept with "de"', 'Tu te souviens du voyage ? → Je m\'en souviens']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Tu vas au supermarché ? → Oui, j\'y vais tout de suite.',
-            english: 'Are you going to the supermarket? → Yes, I am going there right away.',
-            aspectNote: 'Pronoun "y" replaces location introduced by "au".'
-          },
-          {
-            french: 'Voulez-vous du café ? → Merci, j\'en ai déjà bu une tasse.',
-            english: 'Do you want some coffee? → Thanks, I already drank a cup of it.',
-            aspectNote: 'Pronoun "en" replaces partitive noun "du café".'
-          }
-        ]
-      },
-      {
-        id: 'topic-26-double-order',
-        title: '4. Double Pronoun Placement Matrix',
-        formula: '[me/te/se/nous/vous] → [le/la/l\'/les] → [lui/leur] → [y] → [en] + [Verbe]',
-        goldenRule: 'When two object pronouns occur together, arrange them strictly according to the **Pronoun Train**: First person / Reflexive (me, te, nous, vous) → Direct (le, la, les) → Indirect (lui, leur) → Y → En.',
-        detailedDescription: [
-          'Mastering the double pronoun train allows you to build sophisticated French sentences with zero hesitation:',
-          'Tier 1: **me, te, se, nous, vous**',
-          'Tier 2: **le, la, l\', les**',
-          'Tier 3: **lui, leur**',
-          'Tier 4: **y**',
-          'Tier 5: **en**',
-          'Examples: **« Il me le donne »** (Tier 1 + 2), **« Je le lui prête »** (Tier 2 + 3), **« Il y en a »** (Tier 4 + 5).'
-        ],
-        tables: [
-          {
-            title: 'The Pre-Verbal Pronoun Order Matrix',
-            subtitle: 'Follow the arrows from left to right',
-            description: 'Only pronouns from different tiers can be combined.',
-            headers: ['Group 1', 'Group 2', 'Group 3', 'Group 4', 'Group 5', 'Followed by:'],
-            rows: [
-              ['me, te, se, nous, vous', 'le, la, l\', les', 'lui, leur', 'y', 'en', 'Conjugated Verb / Auxiliary'],
-              ['Il me...', '...le...', '—', '—', '—', '...donne (Il me le donne)'],
-              ['Je...', '...le...', '...lui...', '—', '—', '...prête (Je le lui prête)'],
-              ['Elle...', '—', '—', '...y...', '...en...', '...a trouvé (Elle y en a trouvé)']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Je donne le livre à Paul. → Je le lui donne.',
-            english: 'I give the book to Paul. → I give it to him.',
-            aspectNote: 'Double pronoun order: COD (le) comes before COI (lui).'
-          },
-          {
-            french: 'Marie prête sa voiture à ses amis. → Marie la leur prête.',
-            english: 'Marie lends her car to her friends. → Marie lends it to them.',
-            aspectNote: 'COD (la) precedes COI (leur).'
+            french: 'Celui-ci est en argent. Celui-là est en or. ',
+            english: 'This one is silver. That one is gold.'
           }
         ]
       }
-    ],
-    rules: [
-      'Direct Object Pronouns (COD): me, te, le, la, l\', nous, vous, les (replaces nouns directly governed by the verb with no preposition).',
-      'Indirect Object Pronouns (COI): me, te, lui, nous, vous, leur (replaces "à + person").',
-      'Adverbial Pronoun "Y": Replaces "à/en/dans/sur + place" or "à + concept/thing" (e.g. "Je vais à Paris" → "J\'y vais").',
-      'Adverbial Pronoun "En": Replaces "de + noun", quantities, or partitive articles (e.g. "Je mange du pain" → "J\'en mange").',
-      'Tonic Pronouns (moi, toi, lui, elle, nous, vous, eux, elles): Used after prepositions (avec lui, pour elle), for emphasis (Moi, je pense...), or comparisons (plus grand que moi).',
-    ],
-    contrastExamples: [
-      {
-        french: 'Je donne le livre à Paul. → Je le lui donne.',
-        english: 'I give the book to Paul. → I give it to him.',
-        aspectNote: 'Double pronoun order: COD (le) comes before COI (lui).',
-      },
-      {
-        french: 'Tu as parlé de ton voyage ? → Oui, j\'en ai parlé.',
-        english: 'Did you talk about your trip? → Yes, I talked about it.',
-        aspectNote: 'Pronoun "en" replaces prepositional phrase introduced by "de" (de ton voyage).',
-      },
-      {
-        french: 'Elle va à la bibliothèque ? → Oui, elle y va.',
-        english: 'Is she going to the library? → Yes, she is going there.',
-        aspectNote: 'Pronoun "y" replaces preposition of location (à la bibliothèque).',
-      },
-    ],
-    commonTraps: [
-      'Using "lui" for things instead of "y" (e.g. "Je pense à ce problème" → "J\'y pense", not "Je lui pense").',
-      'Saying "Je leur" for direct objects instead of "les" ("Je les vois", not "Je leur vois").',
     ],
     practiceExercises: [
       {
@@ -1679,148 +1648,91 @@ export const A2_GRAMMAR_LESSONS = [
     subtitle: 'Form adverbs from feminine adjectives and position them accurately in simple and compound tenses.',
     formula: 'Règle générale = [Adjectif Féminin] + [-ment] (lent → lente → lentement)  |  Terminaison -ant: -amment  |  Terminaison -ent: -emment',
     goldenRule: 'To form an adverb, take the feminine singular form of the adjective and add **« -ment »**. In simple tenses, adverbs sit immediately **after the conjugated verb** (**« Il parle lentement »**); in compound tenses, short/common adverbs sit **between the auxiliary and participle** (**« J\'ai bien dormi »**).',
-    detailedDescription: [
-      'Adverbs modify verbs, adjectives, or entire clauses. Most manner adverbs in French are systematically derived from descriptive adjectives using the suffix **-ment**.',
-      'Understanding the formation exceptions (-amment / -emment) and placement rules ensures rhythmic, natural phrasing.'
-    ],
     topics: [
       {
-        id: 'topic-29-standard-formation',
-        title: '1. Standard Formation of Adverbs (-ment)',
-        formula: 'Adjectif Masculin → Féminin singulier + [-ment]  (e.g. heureux → heureuse → heureusement)',
-        goldenRule: 'Find the **feminine singular** form of the adjective and attach the suffix **« -ment »**. If the masculine adjective already ends in a vowel, add **-ment** directly to the masculine.',
+        id: 'topic-29-interrogative-forms',
+        title: '1. Interrogative forms',
         detailedDescription: [
-          'Regular derivation step: *doux* → feminine *douce* → **doucement** ; *complet* → feminine *complète* → **complètement**.',
-          'Vowel exception: If the masculine adjective ends in a vowel (*vrai, poli, absolu*), do not make it feminine; add *-ment* straight to the masculine: **vraiment**, **poliment**, **absolument**.'
+          'When you want to formulate questions, interrogative words come in handy. Here are some important ones:',
+          '**pourquoi** why',
+          '**où** where',
+          '**quand** when',
+          '**comment** how',
+          '**combien** how much',
+          '**que** what',
+          '**qui** who, whom',
+          '**dans quelle mesure** to what extent',
+          'Below Adverbs are some words that are helpful when talking about location, time or expressions of time'
         ],
         tables: [
           {
-            title: 'Adverb Formation Patterns',
-            subtitle: 'Feminine stem rule vs. Vowel ending rule',
-            description: 'Notice how the feminine consonant is preserved before "-ment".',
-            headers: ['Masculine Adjective', 'Feminine Form', 'Adverb in -ment', 'English Meaning'],
+            title: 'Adverbs of Place',
+            headers: ['French', 'English'],
             rows: [
-              ['Lent', 'lente', 'lentement', 'slowly'],
-              ['Heureux', 'heureuse', 'heureusement', 'happily / fortunately'],
-              ['Franc', 'franche', 'franchement', 'frankly'],
-              ['Vrai (ends in vowel)', 'vraie', 'vraiment (from masc.)', 'truly / really'],
-              ['Poli (ends in vowel)', 'polie', 'poliment (from masc.)', 'politely'],
-              ['Absolu (ends in vowel)', 'absolue', 'absolument (from masc.)', 'absolutely']
+              ['ici', 'here'],
+              ['là', 'there'],
+              ['là-bas', 'over there'],
+              ['ailleurs', 'elsewhere'],
+              ['ça et là', 'here and there'],
+              ['à cet endroit', 'in this place'],
+              ['là-haut', 'up there'],
+              ['partout', 'everywhere'],
+              ['près', 'near, close'],
+              ['loin', 'far'],
+              ['à côté', 'next to, beside'],
+              ['auprès', 'next to, close to'],
+              ['dehors', 'outside'],
+              ['dedans', 'inside'],
+              ['devant', 'in front of'],
+              ['derrière', 'behind'],
+              ['dessus', 'on top'],
+              ['dessous', 'under']
+            ]
+          },
+          {
+            title: 'Adverbs and Expressions of Time',
+            headers: ['French', 'English'],
+            rows: [
+              ['aujourd’hui', 'today'],
+              ['demain', 'tomorrow'],
+              ['hier', 'yesterday'],
+              ['après-demain', 'the day after tomorrow'],
+              ['avant-hier', 'the day before yesterday'],
+              ['dans trois jours', 'in three days (from today)'],
+              ['dans une quinzaine', 'in two weeks'],
+              ['dans un mois', 'in a month'],
+              ['dans un an', 'in a year'],
+              ['la semaine prochaine', 'next week'],
+              ['la semaine dernière', 'last week']
+            ]
+          },
+          {
+            title: 'Adverbs and Expressions of Time',
+            headers: ['French', 'English'],
+            rows: [
+              ['chaque jour', 'every day'],
+              ['tous les jours', 'every day'],
+              ['maintenant', 'now'],
+              ['en ce moment', 'at the moment'],
+              ['actuellement', 'presently'],
+              ['d’habitude', 'usually'],
+              ['d’ordinaire', 'ordinarily'],
+              ['toujours', 'always, still'],
+              ['souvent', 'often'],
+              ['ne... jamais', 'never'],
+              ['longtemps', 'for a long time'],
+              ['autrefois', 'formerly'],
+              ['rarement', 'rarely'],
+              ['tôt', 'early'],
+              ['tard', 'late'],
+              ['parfois', 'sometimes'],
+              ['quelquefois', 'sometimes'],
+              ['de temps en temps', 'from time to time'],
+              ['de temps à autre', 'from time to time']
             ]
           }
         ],
-        contrastExamples: [
-          {
-            french: 'Elle s\'est exprimée très clairement et franchement.',
-            english: 'She expressed herself very clearly and frankly.',
-            aspectNote: 'Clear: claire → clairement ; Franc: franche → franchement.'
-          },
-          {
-            french: 'Je suis absolument ravi de vous rencontrer.',
-            english: 'I am absolutely delighted to meet you.',
-            aspectNote: 'Vowel ending (absolu) taking -ment directly.'
-          }
-        ]
       },
-      {
-        id: 'topic-29-special-endings',
-        title: '2. Special Endings (-amment, -emment) & Irregular Adverbs',
-        formula: '-ant → [-amment] (courant → couramment)  |  -ent → [-emment] (patient → patiemment)  |  bon → bien  |  mauvais → mal',
-        goldenRule: 'Adjectives ending in **-ant** produce adverbs in **« -amment »**. Adjectives ending in **-ent** produce adverbs in **« -emment »**. Both endings are pronounced identically as **/amɑ̃/**!',
-        detailedDescription: [
-          'Do not spell *patientement*! The rule produces **patiemment** and **évidemment**.',
-          'Irregular pillars: **bon** (adjective modifying noun: *un bon gâteau*) becomes **bien** (adverb modifying verb: *il cuisine bien*).',
-          'Similarly, **mauvais** (adjective) becomes **mal** (adverb), and **meilleur** (better adjective) becomes **mieux** (better adverb).'
-        ],
-        tables: [
-          {
-            title: '-amment / -emment and Irregular Equivalents',
-            subtitle: 'Spelling rules and phonetic reality (/amɑ̃/)',
-            description: 'Pay close attention to double "m" spelling.',
-            headers: ['Adjective', 'Ending Rule', 'Adverb Form', 'Phonetic Pronunciation'],
-            rows: [
-              ['Courant', '-ant → -amment', 'couramment', '/ku.ʁa.mɑ̃/ (fluently)'],
-              ['Constant', '-ant → -amment', 'constamment', '/kɔ̃s.ta.mɑ̃/ (constantly)'],
-              ['Patient', '-ent → -emment', 'patiemment', '/pa.sja.mɑ̃/ (patiently)'],
-              ['Évident', '-ent → -emment', 'évidemment', '/e.vi.da.mɑ̃/ (obviously)'],
-              ['Bon (adj.)', 'Irregular', 'bien (adv.)', 'well'],
-              ['Mauvais (adj.)', 'Irregular', 'mal (adv.)', 'badly']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Il conduit prudemment et parle couramment français.',
-            english: 'He drives prudently and speaks French fluently.',
-            aspectNote: 'Prudent → prudemment (-emment) ; Courant → couramment (-amment).'
-          },
-          {
-            french: 'Ce pianiste joue très bien, c\'est un bon musicien.',
-            english: 'This pianist plays very well (adverb bien), he is a good musician (adjective bon).',
-            aspectNote: 'Distinction between adverb "bien" and adjective "bon".'
-          }
-        ]
-      },
-      {
-        id: 'topic-29-placement',
-        title: '3. Placement of Adverbs in Simple & Compound Tenses',
-        formula: 'Temps simples: [Sujet] + [Verbe] + [Adverbe]  |  Temps composés: [Sujet] + [Auxiliaire] + [Adverbe court] + [Participe]',
-        goldenRule: 'Never place an adverb between the subject and the verb in French (never say "Je souvent vais"). In compound tenses (*passé composé*), short common adverbs (**bien, mal, toujours, souvent, déjà, beaucoup**) sit **BETWEEN the auxiliary and the participle**.',
-        detailedDescription: [
-          'In simple tenses (présent, imparfait, futur simple), the adverb sits immediately after the conjugated verb: **« Il parle souvent de toi »**, **« Nous dormons bien »**.',
-          'In compound tenses, short adverbs wedge in the middle: **« J\'ai bien dormi »**, **« Elle a déjà fini »**, **« Nous avons beaucoup ri »**.',
-          'Long adverbs ending in *-ment* or indicating time/place (*hier, demain, là-bas*) sit after the participle or at the beginning/end of the sentence.'
-        ],
-        tables: [
-          {
-            title: 'Adverb Placement Guide across Tenses',
-            subtitle: 'Where to put short vs. long adverbs',
-            description: 'Positioning varies between simple and compound tenses.',
-            headers: ['Tense Type', 'Adverb Category', 'Rule', 'Example Sentence'],
-            rows: [
-              ['Simple Tense', 'Any adverb', 'Immediately after verb', 'Il conduit toujours prudemment.'],
-              ['Compound Tense', 'Short (bien, déjà, trop, peu)', 'Between auxiliary & participle', 'J\'ai déjà vu ce film.'],
-              ['Compound Tense', 'Quantity (beaucoup, assez)', 'Between auxiliary & participle', 'Nous avons beaucoup travaillé.'],
-              ['Compound Tense', 'Long in -ment (lentement)', 'After past participle', 'Il a conduit prudemment.'],
-              ['Temporal Markers', 'Hier, Demain, Aujourd\'hui', 'Beginning or end of sentence', 'Hier, nous sommes sortis.']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Elle a toujours bien compris nos explications.',
-            english: 'She has always understood our explanations well.',
-            aspectNote: 'Short adverbs (toujours, bien) placed between auxiliary "a" and participle "compris".'
-          },
-          {
-            french: 'Il a répondu poliment à toutes les questions.',
-            english: 'He answered all questions politely.',
-            aspectNote: 'Long adverb ending in -ment (poliment) positioned after the past participle (répondu).'
-          }
-        ]
-      }
-    ],
-    rules: [
-      'General rule: Masculine adjective → Feminine form + -ment (facile → facilement, heureux → heureuse → heureusement, doux → douce → doucement).',
-      'If the masculine adjective already ends in a vowel, add -ment directly: vrai → vraiment, absolu → absolument, poli → poliment.',
-      'Adjectives ending in -ant become -amment (constant → constamment; pronounced /amɑ̃/). Adjectives ending in -ent become -emment (évident → évidemment; pronounced /emɑ̃/).',
-      'Irregular common adverbs: bon (adj) → bien (adv), mauvais (adj) → mal (adv), meilleur (adj) → mieux (adv).',
-    ],
-    contrastExamples: [
-      {
-        french: 'Il conduit prudemment et respecte scrupuleusement le code de la route.',
-        english: 'He drives prudently and scrupulously respects the highway code.',
-        aspectNote: 'Adverb formation: prudent → prudemment ; scrupuleux → scrupuleuse → scrupuleusement.',
-      },
-      {
-        french: 'Elle a toujours bien compris nos explications.',
-        english: 'She has always understood our explanations well.',
-        aspectNote: 'Short adverbs (toujours, bien) positioned between auxiliary (a) and participle (compris).',
-      },
-    ],
-    commonTraps: [
-      'Confusing "bon" (adjective modifying a noun: "un bon repas") and "bien" (adverb modifying a verb: "il cuisine bien").',
-      'Writing "patiente-ment" instead of "patiemment" for adjectives ending in -ent.',
     ],
     practiceExercises: [
       {
