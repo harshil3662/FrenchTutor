@@ -80,27 +80,35 @@ async function generateOpenRouterJson(prompt) {
   const apiKey = getOpenRouterApiKey();
   if (!apiKey) return null;
 
-  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
-      'HTTP-Referer': 'http://localhost:3000',
-      'X-Title': 'FrenchTutor',
-    },
-    body: JSON.stringify({
-      model: getOpenRouterModel(),
-      messages: [{ role: 'user', content: prompt }],
-      response_format: { type: 'json_object' },
-    }),
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 20000);
 
-  if (!response.ok) {
-    throw new Error(`OpenRouter returned status ${response.status}`);
+  try {
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      signal: controller.signal,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+        'HTTP-Referer': 'http://localhost:3000',
+        'X-Title': 'FrenchTutor',
+      },
+      body: JSON.stringify({
+        model: getOpenRouterModel(),
+        messages: [{ role: 'user', content: prompt }],
+        response_format: { type: 'json_object' },
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`OpenRouter returned status ${response.status}`);
+    }
+
+    const payload = await response.json();
+    return payload.choices?.[0]?.message?.content || null;
+  } finally {
+    clearTimeout(timeout);
   }
-
-  const payload = await response.json();
-  return payload.choices?.[0]?.message?.content || null;
 }
 
 // API Routes

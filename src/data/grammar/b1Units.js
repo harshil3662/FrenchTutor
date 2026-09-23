@@ -12,33 +12,55 @@ export const B1_GRAMMAR_LESSONS = [
     subtitle: 'Express definitive future projections, plans, promises, and actions completed prior to a future moment.',
     formula: 'Futur Simple = [Infinitif / Radical en -r] + [-ai, -as, -a, -ons, -ez, -ont]  |  Futur Antérieur = [Auxiliaire au futur simple] + [Participe Passé]',
     goldenRule: 'Unlike English (which uses the present after when/as soon as), French **REQUIRES the Future Simple or Futur Antérieur** after temporal conjunctions: **quand**, **lorsque**, **dès que**, **aussitôt que**.',
-    detailedDescription: [
-      'The **Futur Simple** is used for definitive future plans, forecasts, and formal promises. It contrasts with the conversational *futur proche* (aller + infinitive) by sounding more planned and official.',
-      'The **Futur Antérieur** adds temporal depth by establishing that one future action will be completed before another future action begins.'
-    ],
     topics: [
       {
         id: 'topic-17-futur-simple',
-        title: '1. Le Futur Simple (Regular & Irregular Stems)',
-        formula: '[Infinitif en -er/-ir ou base en -r] + [-ai, -as, -a, -ons, -ez, -ont]',
-        goldenRule: 'Regular verbs use their **entire infinitive** as the future stem (parler-ai, finir-ai; drop final -e for -re: vendr-ai). Irregular verbs change the stem but keep the exact same endings.',
+        title: '1. The futur simple',
         detailedDescription: [
-          'The endings for the **Futur Simple** are identical for all French verbs without exception: **-ai, -as, -a, -ons, -ez, -ont**. Notice these match the present tense of **avoir**.',
-          'Key irregular stems must be memorized: **être (ser-)**, **avoir (aur-)**, **aller (ir-)**, **faire (fer-)**, **pouvoir (pourr-)**, **devoir (devr-)**, and **venir (viendr-)**.'
+          'You have become acquainted with the future in Chapter 13 when you studied the futur immédiat. French has two other future constructions: the futur simple and the futur antérieur. To form the futur simple of most verbs, use the infinitive as the stem and add the endings **-ai, -as, -a, -ons, -ez, -ont**. For -re verbs, drop the **e** from the infinitive before adding the endings.',
+          '**décider** to decide',
+          'décider to decide',
+          'je **déciderai**',
+          'tu **décideras**',
+          'il/elle **décidera**',
+          'nous **déciderons**',
+          'vous **déciderez**',
+          'ils/elles **décideront**',
+          'The endings of the futur simple are the same for all verbs. However, some irregular verbs have irregular stems as below. You simply have to memorize them.'
         ],
         tables: [
           {
-            title: 'Futur Simple Conjugation Patterns',
-            subtitle: 'Regular -er, -ir, -re verbs and key irregular stems',
-            description: 'Note that all future forms feature the characteristic "r" sound before the ending.',
-            headers: ['Pronoun', 'Parler (Reg. -er)', 'Finir (Reg. -ir)', 'Être (ser-)', 'Avoir (aur-)'],
+            title: 'Irregular Verbs — Future Simple',
+            headers: ['Infinitive', 'English', 'Future', 'English'],
             rows: [
-              ['Je', 'parlerai', 'finirai', 'serai', 'aurai'],
-              ['Tu', 'parleras', 'finiras', 'seras', 'auras'],
-              ['Il / Elle', 'parlera', 'finira', 'sera', 'aura'],
-              ['Nous', 'parlerons', 'finirons', 'serons', 'aurons'],
-              ['Vous', 'parlerez', 'finirez', 'serez', 'aurez'],
-              ['Ils / Elles', 'parleront', 'finiront', 'seront', 'auront']
+              ['aller', 'to go', 'j’irai', 'I’ll go'],
+              ['apercevoir', 'to notice', 'j’apercevrai', 'I’ll notice'],
+              ['avoir', 'to have', 'j’aurai', 'I’ll have'],
+              ['courir', 'to run', 'je courrai', 'I’ll run'],
+              ['devenir', 'to become', 'je deviendrai', 'I’ll become'],
+              ['devoir', 'must, to have to', 'je devrai', 'I’ll have to'],
+              ['envoyer', 'to send', 'j’enverrai', 'I’ll send'],
+              ['être', 'to be', 'je serai', 'I’ll be'],
+              ['faire', 'to do', 'je ferai', 'I’ll do'],
+              ['falloir', 'to have to', 'il faudra', 'one will have to'],
+              ['mourir', 'to die', 'je mourrai', 'I’ll die'],
+              ['pleuvoir', 'to rain', 'il pleuvra', 'it’ll rain'],
+              ['pouvoir', 'can, to be able to', 'je pourrai', 'I’ll be able to'],
+              ['recevoir', 'to receive', 'je recevrai', 'I’ll receive'],
+              ['revenir', 'to return, to come back', 'je reviendrai', 'I’ll return, I’ll come back'],
+              ['savoir', 'to know', 'je saurai', 'I’ll know'],
+              ['tenir', 'to hold', 'je tiendrai', 'I’ll hold'],
+              ['valoir', 'to be worth', 'il vaudra', 'it will be worth'],
+              ['venir', 'to come', 'je viendrai', 'I’ll come'],
+              ['voir', 'to see', 'je verrai', 'I’ll see'],
+              ['vouloir', 'to want', 'je voudrai', 'I’ll want'],
+              ['acheter', 'to buy', 'j’achèterai', 'I’ll buy'],
+              ['appeler', 'to call', 'j’appellerai', 'I’ll call'],
+              ['employer', 'to hire', 'j’emploierai', 'I’ll use, I’ll hire'],
+              ['essuyer', 'to wipe', 'j’essuierai', 'I’ll wipe'],
+              ['jeter', 'to throw', 'je jetterai', 'I’ll throw'],
+              ['nettoyer', 'to clean', 'je nettoierai', 'I’ll clean'],
+              ['préférer', 'to prefer', 'je préférerai', 'I’ll prefer']
             ]
           }
         ],
