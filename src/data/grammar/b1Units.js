@@ -66,113 +66,59 @@ export const B1_GRAMMAR_LESSONS = [
         ],
         contrastExamples: [
           {
-            french: 'Demain, nous visiterons le Musée d\'Orsay.',
-            english: 'Tomorrow, we will visit the Musée d\'Orsay.',
-            aspectNote: 'Planned future action with regular verb "visiter".'
+            french: '',
+            english: '',
+          },
+        ]
+      },
+      {
+        id: 'topic-17-use-of-futur-tense',
+        title: '2. Use of Future Tense',
+        detailedDescription: [
+          'As in English, the French future tense is used to describe future events.',
+          'In a compound sentence in French, if the main clause is in the futur simple, the dependent clause, introduced by some conjunctions, will also be in the futur simple. Note that in English, such a dependent clause will be in the present tense.',
+          'The future tense of être and avoir is sometimes used to express probability in the present, to indicate something that is likely or allegedly true.',
+        ],
+        contrastExamples: [
+          {
+            french: 'Les étudiants passeront leurs examens en mai.',
+            english: 'Students will take their exams in May.',
           },
           {
-            french: 'Je ferai tout mon possible pour vous aider.',
-            english: 'I will do everything possible to help you.',
-            aspectNote: 'Irregular future stem (faire → ferai).'
+            french: 'lle ira à Paris quand elle aura le temps. ',
+            english: 'She’ll go to Paris when she has time.',
+          },
+          {
+            french: 'L’étudiant n’est pas en classe. Il sera encore endormi.',
+            english: 'The student is not in class. He is probably still asleep.',
           }
         ]
       },
       {
-        id: 'topic-17-futur-anterieur',
-        title: '2. Le Futur Antérieur (Past in the Future)',
-        formula: 'Futur Antérieur = [Avoir ou Être au futur simple] + [Participe Passé]',
-        goldenRule: 'The **Futur Antérieur** expresses a future action that will be completed **prior to another future event** or deadline.',
+        id: 'topic-17-futur-antérieur',
+        title: 'The futur antérieur',
         detailedDescription: [
-          'Just as the *passé composé* couples present auxiliaries with participles, the **futur antérieur** couples future auxiliaries (**aurai / serai**) with past participles.',
-          'It is frequently used with expressions of deadline like **« d\'ici demain »** (by tomorrow) or **« avant ce soir »** (before this evening).'
-        ],
-        tables: [
-          {
-            title: 'Futur Antérieur Conjugation',
-            subtitle: 'With Avoir and Être auxiliaries',
-            description: 'Verbs using être agree in gender and number with the subject.',
-            headers: ['Pronoun', 'Finir (Auxiliaire Avoir)', 'Partir (Auxiliaire Être)'],
-            rows: [
-              ['J\' / Je', "j'aurai fini", 'je serai parti(e)'],
-              ['Tu', 'tu auras fini', 'tu seras parti(e)'],
-              ['Il / Elle', 'il aura fini', 'elle sera partie'],
-              ['Nous', 'nous aurons fini', 'nous serons parti(e)s'],
-              ['Vous', 'vous aurez fini', 'vous serez parti(e)(s)'],
-              ['Ils / Elles', 'ils auront fini', 'elles seront parties']
-            ]
-          }
+          'The futur antérieur (future perfect) describes an action that will take place and be completed before another future action. To form this compound tense, use the future tense of avoir or être the past participle of the main verb. Agreement rules are the same as for the passé composé. Although it is rarely used in English, it must be used in French under certain circumstances.',
+          '**écrire** to write',
+          '**j’aurai écrit** - I’ll have written ', 
+          'tu **auras écrit** - you’ll have written ', 
+          'il/elle **aura écrit** - he/she will have written',
+          'nous **aurons écrit** - we’ll have written',
+          'vous **aurez écrit** - you’ll have written',
+          'ils/elles **auront écrit** - they’ll have written',
+          'The futur antérieur can also express the probability of a past action,'
         ],
         contrastExamples: [
           {
-            french: 'D\'ici vendredi, j\'aurai rédigé tout le rapport.',
-            english: 'By Friday, I will have written the entire report.',
-            aspectNote: 'Completed action prior to a specified future deadline.'
+            french: 'Nous aurons résolu tous les problèmes d’ici la fin de l’année.',
+            english: 'We’ll have solved all the problems by the end of the year.',
           },
           {
-            french: 'Quand tu te réveilleras, le train sera déjà arrivé.',
-            english: 'When you wake up, the train will have already arrived.',
-            aspectNote: 'Anterior action (sera arrivé) before another future action (te réveilleras).'
-          }
-        ]
-      },
-      {
-        id: 'topic-17-temporal-clauses',
-        title: '3. Temporal Conjunctions (Quand, Dès que, Aussitôt que)',
-        formula: '[Quand / Lorsque / Dès que / Aussitôt que] + [Futur Simple / Antérieur] → [Futur Simple]',
-        goldenRule: 'French requires the **future tense** after temporal conjunctions whenever referring to the future, whereas English incorrectly uses the present tense.',
-        detailedDescription: [
-          'A classic mistake for English speakers: in English, we say *"When I arrive, I will call you"* (present "arrive"). In French, this is strictly forbidden! You must say: **« Quand j\'arriverai, je t\'appellerai »**.',
-          'If the temporal action is completed before the main clause, use the **futur antérieur**: **« Dès que j\'aurai fini, nous partirons »**.'
-        ],
-        tables: [
-          {
-            title: 'Temporal Conjunctions in Future Contexts',
-            subtitle: 'Conjunction, French formula, and English translation comparison',
-            description: 'Both clauses must be in a future tense in French.',
-            headers: ['Conjunction', 'French Sentence', 'English Translation', 'Tense Combination'],
-            rows: [
-              ['Quand (When)', 'Quand il arrivera, nous dînerons.', 'When he arrives, we will dine.', 'Futur simple + Futur simple'],
-              ['Dès que (As soon as)', 'Dès que j\'aurai reçu le colis, je te préviendrai.', 'As soon as I receive the package, I will let you know.', 'Futur antérieur + Futur simple'],
-              ['Lorsque (When formal)', 'Lorsque vous serez prêts, prévenez-moi.', 'When you are ready, let me know.', 'Futur simple + Impératif'],
-              ['Aussitôt que (As soon as)', 'Aussitôt qu\'elle aura terminé, elle partira.', 'As soon as she finishes, she will leave.', 'Futur antérieur + Futur simple']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Quand j\'arriverai à Paris, je t\'enverrai un message.',
-            english: 'When I arrive in Paris, I will send you a message.',
-            aspectNote: 'French uses Futur Simple (arriverai) where English uses present (arrive).'
-          },
-          {
-            french: 'Dès que nous aurons fini les valises, nous prendrons la route.',
-            english: 'As soon as we finish packing the bags, we will hit the road.',
-            aspectNote: 'Dès que + Futur Antérieur for the prior completed action.'
+            french: 'Elle aura encore échoué à ses examens! ',
+            english: 'She probably failed her exams again!',
           }
         ]
       }
-    ],
-    rules: [
-      'Regular verbs use the entire infinitive as the stem (parler-ai, finir-ai; drop -e for -re: vendr-ai).',
-      'Key irregular future stems: être (ser-), avoir (aur-), aller (ir-), faire (fer-), voir (verr-), pouvoir (pourr-), devoir (devr-), venir (viendr-), vouloir (voudr-).',
-      'The Futur Antérieur expresses an action that will be completed before another future action: "Dès que j\'aurai fini, je t\'appellerai".',
-      'Temporal clause rule: "Quand tu arriveras, nous mangerons" (When you arrive [will arrive], we will eat).',
-    ],
-    contrastExamples: [
-      {
-        french: 'Quand j\'arriverai à Paris, je t\'enverrai un message.',
-        english: 'When I arrive in Paris, I will send you a message.',
-        aspectNote: 'French uses Futur Simple (arriverai) after "Quand", whereas English uses the present.',
-      },
-      {
-        french: 'Aussitôt qu\'elle aura terminé ses études, elle voyagera.',
-        english: 'As soon as she has finished her studies, she will travel.',
-        aspectNote: 'Futur Antérieur (aura terminé) showing future anteriority before "voyagera".',
-      },
-    ],
-    commonTraps: [
-      'Using the present tense after "quand" or "dès que" when referring to future events (English interference).',
-      'Confusing the future endings (-ai, -as, -a) with conditional endings (-ais, -ais, -ait).',
     ],
     practiceExercises: [
       {
@@ -209,144 +155,74 @@ export const B1_GRAMMAR_LESSONS = [
     subtitle: 'Express politeness, unconfirmed journalistic news, hypothetical outcomes, and past regrets.',
     formula: 'Conditionnel Présent = [Radical du Futur] + [-ais, -ais, -ait, -ions, -iez, -aient]  |  Conditionnel Passé = [Auxiliaire au conditionnel] + [Participe Passé]',
     goldenRule: 'Master the 3 "Si" systems: **Si + Présent → Futur** ; **Si + Imparfait → Conditionnel Présent** ; **Si + Plus-que-parfait → Conditionnel Passé**. Never put a conditional directly inside the "Si" clause!',
-    detailedDescription: [
-      'The **Conditionnel** is used for polite requests, advice, hypothetical scenarios, and expressing unconfirmed journalistic information.',
-      'It combines the **Future stem** with the **Imparfait endings**, creating one of the most melodic and versatile moods in the French language.'
-    ],
     topics: [
       {
-        id: 'topic-18-cond-present',
-        title: '1. Le Conditionnel Présent (Formation & Politeness)',
-        formula: '[Radical du Futur Simple] + [-ais, -ais, -ait, -ions, -iez, -aient]',
-        goldenRule: 'To soften requests and commands into **courteous expressions**, use the conditional: **« Je voudrais »**, **« Pourriez-vous »**, **« Tu devrais »**.',
+        id: 'topic-18-present-conditional',
+        title: '1. The present conditional',
         detailedDescription: [
-          'Forming the **Conditionnel Présent** is straightforward: take the exact same stem you use for the *Futur Simple* and attach the endings of the *Imparfait*.',
-          'Pronunciation nuance: **« je parlerai »** (future) ends in the closed /e/ sound, whereas **« je parlerais »** (conditional) ends in the open /ɛ/ sound.'
-        ],
-        tables: [
-          {
-            title: 'Conditionnel Présent Conjugation (Aimer, Pouvoir, Vouloir)',
-            subtitle: 'Future stems + Imparfait endings',
-            description: 'Notice the consistent -ais, -ais, -ait, -ions, -iez, -aient endings.',
-            headers: ['Pronoun', 'Aimer (aimer-)', 'Pouvoir (pourr-)', 'Vouloir (voudr-)'],
-            rows: [
-              ['Je', 'j\'aimerais', 'je pourrais', 'je voudrais'],
-              ['Tu', 'tu aimerais', 'tu pourrais', 'tu voudrais'],
-              ['Il / Elle', 'il aimerait', 'il pourrait', 'il voudrait'],
-              ['Nous', 'nous aimerions', 'nous pourrions', 'nous voudrions'],
-              ['Vous', 'vous aimeriez', 'vous pourriez', 'vous voudriez'],
-              ['Ils / Elles', 'ils aimeraient', 'ils pourraient', 'ils voudraient']
-            ]
-          }
+          'The présent du conditionnel (present conditional) has many uses we’ll explore in this chapter. It is formed by adding the endings of the imperfect to the future stem of the verb. For -er and -ir verbs, the future stem is the entire infinitive form. For -re verbs, drop the final -e from the infinitive before adding the conditional endings. As you saw in Chapter 17, a number of irregular verbs have an irregular future stem. This same stem is used to form the present conditional.',
+          '**mettre** to put',
+          'je **mettrais** - I would put',
+          'tu **mettrais** - you would put',
+          'il/elle **mettrait** - he/she would put',
+          'vous **mettriez** - you would put',
+          'nous **mettrions** - we would put',
+          'ils/elles **mettraient** - they would put',
+          'It is used to express a wish or a suggestion and o make a statement or a request more polite. The présent du conditionnel is also used to express unconfirmed or alleged information.'
         ],
         contrastExamples: [
           {
-            french: 'Je voudrais réserver une table pour deux personnes.',
-            english: 'I would like to reserve a table for two people.',
-            aspectNote: 'Polite request using the conditional of vouloir.'
+            french: 'Je voudrais finir ce projet aussitôt que possible.',
+            english: 'I would like to finish this project as soon as possible.',
           },
           {
-            french: 'Selon les journaux, le ministre démissionnerait demain.',
-            english: 'According to newspapers, the minister would reportedly resign tomorrow.',
-            aspectNote: 'Journalistic conditional for unverified reports.'
+            french: 'Il aimerait rencontrer la femme de sa vie.',
+            english: 'He would like to meet the woman of his dreams.',
+          },
+          {
+            french: 'Il aimerait avoir une tortue.',
+            english: 'He would like to have a turtle.'
+          },
+          {
+            french: 'Voudriez-vous dîner avec nous ce soir? ',
+            english: 'Would you like to have dinner with us this evening?'
+          },
+          {
+            french: 'La reine d’Angleterre se rendrait en Australie la semaine prochaine.',
+            english: 'The Queen of England is reportedly going to Australia next week.'
           }
         ]
       },
       {
-        id: 'topic-18-cond-passe',
-        title: '2. Le Conditionnel Passé (Past Regrets & Missed Chances)',
-        formula: 'Conditionnel Passé = [Avoir ou Être au conditionnel présent] + [Participe Passé]',
-        goldenRule: 'The **Conditionnel Passé** expresses actions that *would have happened* if circumstances were different, commonly used for **remorse, regret, and reproaches**.',
+        id: 'topic-18-past-conditional',
+        title: '2. The past conditional',
         detailedDescription: [
-          'Form the conditionnel passé with the auxiliary verb (**aurais / serais**) followed by the past participle.',
-          'It is frequently used with verbs like **devoir** (**« Tu aurais dû m\'appeler »** = You should have called me) and **pouvoir** (**« J\'aurais pu t\'aider »** = I could have helped you).'
-        ],
-        tables: [
-          {
-            title: 'Conditionnel Passé Forms',
-            subtitle: 'With Avoir and Être auxiliaries',
-            description: 'Verbs using être agree in gender and number with the subject.',
-            headers: ['Pronoun', 'Venir (Être)', 'Faire (Avoir)'],
-            rows: [
-              ['Je', 'je serais venu(e)', 'j\'aurais fait'],
-              ['Tu', 'tu serais venu(e)', 'tu aurais fait'],
-              ['Il / Elle', 'il serait venu / elle serait venue', 'elle aurait fait'],
-              ['Nous', 'nous serions venu(e)s', 'nous aurions fait'],
-              ['Vous', 'vous seriez venu(e)(s)', 'vous auriez fait'],
-              ['Ils / Elles', 'ils seraient venus / elles seraient venues', 'ils auraient fait']
-            ]
-          }
+          'The passé du conditionnel (past conditional) expresses what would have happened if another event had taken place, or if certain conditions had or had not been present. It is formed with the present conditional of être or avoir and the past participle of the main verb. The rules of agreement common to all compound tenses still apply.',
+          '**donner** to give',
+          '**j’aurais donné** - I would have given', 
+          'tu **aurais donné** - you would have given', 
+          'il/elle **aurait donné** - he/she would have given',
+          'nous **aurions donné** - we would have given',
+          'vous **auriez donné** - you would have given',
+          'ils/elles **auraient donné** - they would have given',
+          'The passé du conditionnel can express regret or reproach. The passé du conditionnel is used like the present du conditionnel as a conditionnel journalistique to express a statement not necessarily confirmed by authorities. In most cases that imply the English allegedly or reportedly',
+          'The présent or passé du conditionnel are also used with the expression au cas où (in case).'
         ],
         contrastExamples: [
           {
-            french: 'J\'aurais aimé visiter le Louvre, mais il était fermé.',
-            english: 'I would have liked to visit the Louvre, but it was closed.',
-            aspectNote: 'Past regret / unfulfilled desire (j\'aurais aimé).'
+            french: 'Nous aurions voulu y assister. ',
+            english: 'We would have liked to attend.',
           },
           {
-            french: 'Sans ton aide, nous serions arrivés trop tard.',
-            english: 'Without your help, we would have arrived too late.',
-            aspectNote: 'Hypothetical past outcome with être (serions arrivés).'
+            french: 'Le tremblement de terre aurait fait des milliers de victimes au Mexique. ',
+            english: 'The earthquake reportedly killed thousands of people in Mexico.',
+          },
+          {
+            french: 'Au cas où le projet ne serait pas fini cet après-midi, appelez-moi.',
+            english: 'In case the project is not finished by this afternoon, call me.',
           }
         ]
       },
-      {
-        id: 'topic-18-si-systems',
-        title: '3. The 3 "Si" Hypothetical Systems',
-        formula: '1. Si + Présent → Futur  |  2. Si + Imparfait → Cond. Présent  |  3. Si + Plus-que-parfait → Cond. Passé',
-        goldenRule: 'Remember the classic French mnemonic: **« Les "si" n\'aiment pas les "-rais" ! »**. You must NEVER place a conditional directly inside a clause introduced by "Si".',
-        detailedDescription: [
-          'French organizes all hypothetical clauses into **three distinct systems** based on probability and timeline.',
-          'System 1 expresses real possibilities; System 2 expresses present hypothetical or contrary-to-fact wishes; System 3 expresses past unalterable counterfactuals.'
-        ],
-        tables: [
-          {
-            title: 'The Three "Si" Systems Matrix',
-            subtitle: 'Clauses, tenses, and degrees of possibility',
-            description: 'Notice that "Si" always governs the indicative tense, while the result clause holds the modal tense.',
-            headers: ['System', 'Si Clause (Condition)', 'Main Clause (Result)', 'Example'],
-            rows: [
-              ['1. Réel (Probable)', 'Si + Présent', 'Futur Simple', 'S\'il fait beau, nous irons à la plage.'],
-              ['2. Potentiel (Présent)', 'Si + Imparfait', 'Conditionnel Présent', 'Si j\'avais un million, j\'achèterais un château.'],
-              ['3. Irréel du Passé', 'Si + Plus-que-parfait', 'Conditionnel Passé', 'Si tu m\'avais écouté, nous n\'aurions pas eu d\'accident.']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Si j\'avais plus de temps, j\'apprendrais le violon.',
-            english: 'If I had more time, I would learn the violin.',
-            aspectNote: 'System 2: Si + Imparfait (avais) → Conditionnel Présent (apprendrais).'
-          },
-          {
-            french: 'Si tu m\'avais prévenu, je serais venu plus tôt.',
-            english: 'If you had warned me, I would have come earlier.',
-            aspectNote: 'System 3: Si + Plus-que-parfait (avais prévenu) → Conditionnel Passé (serais venu).'
-          }
-        ]
-      }
-    ],
-    rules: [
-      'Conditionnel Présent combines the Future stem with Imparfait endings: je parlerais, tu finirais, il voudrait.',
-      'Conditionnel Passé expresses past regrets or unfulfilled past conditions: "J\'aurais aimé venir" (I would have liked to come).',
-      'Politeness register: "Je voudrais un verre d\'eau", "Pourriez-vous m\'aider ?".',
-      'Journalistic hearsay / unconfirmed facts: "L\'avion aurait atterri à Lyon" (The plane reportedly landed in Lyon).',
-    ],
-    contrastExamples: [
-      {
-        french: 'Si j\'avais plus de temps, j\'apprendrais le violon.',
-        english: 'If I had more time, I would learn the violin.',
-        aspectNote: 'Hypothetical present: Si + Imparfait (avais) → Conditionnel Présent (apprendrais).',
-      },
-      {
-        french: 'Si tu m\'avais prévenu, je serais venu plus tôt.',
-        english: 'If you had warned me, I would have come earlier.',
-        aspectNote: 'Past regret / counterfactual: Si + Plus-que-parfait (avais prévenu) → Conditionnel Passé (serais venu).',
-      },
-    ],
-    commonTraps: [
-      'Putting the conditional after "si" (The classic rule: "Les \'si\' n\'aiment pas les \'-rais\'").',
-      'Confusing "je parlerai" (future, /e/) with "je parlerais" (conditional, /ɛ/).',
     ],
     practiceExercises: [
       {
@@ -383,117 +259,134 @@ export const B1_GRAMMAR_LESSONS = [
     subtitle: 'Translate nuanced English modal verbs into precise French conditional, past, and compound structures.',
     formula: 'Could = Pourrait  |  Could have = Aurait pu + Infinitif  |  Should = Devrait  |  Should have = Aurait dû + Infinitif  |  Would = Conditionnel / Imparfait',
     goldenRule: '**« Should have »** is ALWAYS rendered by the conditional past of Devoir: **« Tu aurais dû + Infinitif »**. **« Could have »** is ALWAYS rendered by the conditional past of Pouvoir: **« Tu aurais pu + Infinitif »**.',
-    detailedDescription: [
-      'English modal verbs (could, should, would) are notoriously polysemic. French translates each distinct meaning using specific combinations of **tense, mood, and auxiliary verbs**.',
-      'Understanding these equivalents eliminates the literal translation traps that confuse intermediate learners.'
-    ],
     topics: [
       {
         id: 'topic-19-could',
         title: '1. Could & Could Have (Pouvoir au Conditionnel)',
-        formula: 'Could (ability / polite request) = [Tu pourrais / Vous pourriez] + [Infinitif]  |  Could have (missed ability) = [Aurait pu] + [Infinitif]',
-        goldenRule: 'Use **« pourrais »** for present polite requests and possibilities. Use **« aurais pu »** for actions someone was capable of doing in the past but did not do.',
         detailedDescription: [
-          'In English, "could" can refer to polite ability ("Could you help me?"), past ability ("When I was young, I could run fast"), or past missed opportunity ("You could have told me!").',
-          'French uses: (1) **Conditionnel Présent** for polite ability (**« Pourriez-vous m\'aider ? »**), (2) **Imparfait** for ongoing past ability (**« Je pouvais courir vite »**), and (3) **Conditionnel Passé** for missed opportunity (**« Tu aurais pu me le dire ! »**).'
+          'When could refers to a single, unique action in the past, the passé composé of pouvoir is used.',
+          'When could refers to a description or a habitual action, the imparfait of pouvoir is used.',
+          'When could refers to an idea of the future, a hypothesis, a suggestion, or a request, the présent du conditionnel of pouvoir is used.'
         ],
         tables: [
           {
-            title: 'Translating "Could" into French',
-            subtitle: 'Context, French construction, and sample translations',
-            description: 'Choose the French tense that matches the functional intent of "could".',
-            headers: ['English Context', 'French Form', 'Example', 'Meaning'],
+            title: 'Pouvoir — Passé Composé',
+            headers: ['Pronoun', 'French', 'English'],
             rows: [
-              ['Polite request', 'Pourriez-vous + Inf.', 'Pourriez-vous répéter ?', 'Could you repeat?'],
-              ['Present possibility', 'Tu pourrais + Inf.', 'Tu pourrais essayer ce plat.', 'You could try this dish.'],
-              ['Past missed chance', 'Aurait pu + Inf.', 'Nous aurions pu gagner.', 'We could have won.'],
-              ['Past continuous ability', 'Pouvait (Imparfait)', 'À 6 ans, il pouvait nager.', 'At 6, he could swim.']
+              ['Je', 'j’ai pu', 'I could'],
+              ['Tu', 'tu as pu', 'you could'],
+              ['Il/Elle', 'il/elle a pu', 'he/she could'],
+              ['Nous', 'nous avons pu', 'we could'],
+              ['Vous', 'vous avez pu', 'you could'],
+              ['Ils/Elles', 'ils/elles ont pu', 'they could']
+            ]
+          },
+          {
+            title: 'Pouvoir — Imparfait',
+            headers: ['Pronoun', 'French', 'English'],
+            rows: [
+              ['Je', 'je pouvais', 'I could'],
+              ['Tu', 'tu pouvais', 'you could'],
+              ['Il/Elle', 'il/elle pouvait', 'he/she could'],
+              ['Nous', 'nous pouvions', 'we could'],
+              ['Vous', 'vous pouviez', 'you could'],
+              ['Ils/Elles', 'ils/elles pouvaient', 'they could']
+            ]
+          },
+          {
+            title: 'Pouvoir — Conditionnel Présent',
+            headers: ['Pronoun', 'French', 'English'],
+            rows: [
+              ['Je', 'je pourrais', 'I could'],
+              ['Tu', 'tu pourrais', 'you could'],
+              ['Il/Elle', 'il/elle pourrait', 'he/she could'],
+              ['Nous', 'nous pourrions', 'we could'],
+              ['Vous', 'vous pourriez', 'you could'],
+              ['Ils/Elles', 'ils/elles pourraient', 'they could']
             ]
           }
         ],
         contrastExamples: [
           {
-            french: 'Tu pourrais m\'aider à porter ces valises ?',
-            english: 'Could you help me carry these suitcases?',
-            aspectNote: 'Present polite possibility (pourrais).'
+            french: 'Il n’a pas pu lui parler. ',
+            english: 'He could not talk to him.',
           },
           {
-            french: 'J\'aurais pu t\'accompagner si tu m\'avais prévenu.',
-            english: 'I could have accompanied you if you had warned me.',
-            aspectNote: 'Past missed opportunity (aurais pu).'
+            french: 'En ce temps-là, les femmes ne pouvaient pas voter.',
+            english: 'At that time, women could not vote.',
+          },
+          {
+            french: 'Je pourrais vous prêter ma voiture. ',
+            english: 'I could lend you my car.',
           }
         ]
       },
       {
         id: 'topic-19-should',
         title: '2. Should & Should Have (Devoir au Conditionnel)',
-        formula: 'Should (present advice) = [Devrait] + [Infinitif]  |  Should have (past regret / reproach) = [Aurait dû] + [Infinitif]',
-        goldenRule: 'To give advice or moral obligation in the present, use **« Tu devrais »**. To express regret or blame about a past omission, strictly use **« Tu aurais dû »**.',
         detailedDescription: [
-          'While the present tense **« Tu dois »** conveys a mandatory command ("You must"), the conditional **« Tu devrais »** softens this into polite advice ("You should").',
-          'When reprimanding someone for what they failed to do yesterday, French uses the compound past conditional: **« Tu aurais dû étudier ! »** (You should have studied!).'
+          'When should means ought to, the conditionnel (présent or passé) is used.',
         ],
         tables: [
           {
-            title: 'Devoir Hierarchy of Obligation',
-            subtitle: 'From strict obligation to polite advice and past regret',
-            description: 'Notice the progression from order to advice to reproach.',
-            headers: ['Tense', 'Form', 'English Nuance', 'Sample Sentence'],
+            title: 'Devoir — Conditionnel Présent',
+            headers: ['Pronoun', 'French', 'English'],
             rows: [
-              ['Présent (Order)', 'Tu dois', 'You must / have to', 'Tu dois partir maintenant.'],
-              ['Conditionnel (Advice)', 'Tu devrais', 'You should / ought to', 'Tu devrais te reposer.'],
-              ['Cond. Passé (Reproach)', 'Tu aurais dû', 'You should have', 'Tu aurais dû m\'avertir.'],
-              ['Passé Composé (Deduction)', 'Il a dû', 'He must have (deduction)', 'Il a dû oublier son portefeuille.']
+              ['Je', 'je devrais', 'I should'],
+              ['Tu', 'tu devrais', 'you should'],
+              ['Il/Elle', 'il/elle devrait', 'he/she should'],
+              ['Nous', 'nous devrions', 'we should'],
+              ['Vous', 'vous devriez', 'you should'],
+              ['Ils/Elles', 'ils/elles devraient', 'they should']
+            ]
+          },
+          {
+            title: 'Devoir — Conditionnel Passé',
+            headers: ['Pronoun', 'French', 'English'],
+            rows: [
+              ['Je', 'j’aurais dû', 'I should have'],
+              ['Tu', 'tu aurais dû', 'you should have'],
+              ['Il/Elle', 'il/elle aurait dû', 'he/she should have'],
+              ['Nous', 'nous aurions dû', 'we should have'],
+              ['Vous', 'vous auriez dû', 'you should have'],
+              ['Ils/Elles', 'ils/elles auraient dû', 'they should have']
             ]
           }
         ],
         contrastExamples: [
           {
-            french: 'Tu devrais consulter un médecin pour cette toux.',
-            english: 'You should see a doctor for this cough.',
-            aspectNote: 'Present advice (devrais).'
+            french: 'Elle devrait se détendre un peu.',
+            english: 'She should relax a bit.',
           },
           {
-            french: 'Vous auriez dû réserver vos billets à l\'avance.',
-            english: 'You should have booked your tickets in advance.',
-            aspectNote: 'Past reproach for a missed action (auriez dû réserver).'
+            french: 'Tu aurais dû lui demander des explications.',
+            english: 'You should have asked him for explanations.',
           }
         ]
       },
       {
         id: 'topic-19-would',
         title: '3. Would (Conditional Desire vs. Past Habit)',
-        formula: 'Polite desire / hypothetical = Conditionnel  |  Past habit / repeated action = Imparfait',
-        goldenRule: 'Never translate "would" automatically with the conditional! If "would" describes a **repeated past habit** (e.g. "We would spend summers in Nice"), use the **Imparfait** (**« Nous passions nos étés à Nice »**).',
         detailedDescription: [
-          'In English, "would" plays two entirely separate roles: (1) As the conditional auxiliary for hypothetical desires (**« I would like a coffee »** → **« Je voudrais un café »**), and (2) As a marker of past repeated habits (**« Every Sunday my grandfather would bake bread »**).',
-          'In French, repeated past habits are the exclusive domain of the **Imparfait**, never the conditional.'
-        ],
-        tables: [
-          {
-            title: 'Distinguishing the Two Faces of "Would"',
-            subtitle: 'Hypothetical modal vs. past routine',
-            description: 'Determine whether "would" indicates a hypothetical outcome or a past repetition.',
-            headers: ['English Sentence', 'True Meaning', 'French Tense', 'French Translation'],
-            rows: [
-              ['I would like to visit Paris.', 'Desire / Politeness', 'Conditionnel', 'Je voudrais visiter Paris.'],
-              ['If I were rich, I would buy a boat.', 'Hypothetical result', 'Conditionnel', 'Si j\'étais riche, j\'achèterais un bateau.'],
-              ['When I was young, I would read all night.', 'Past habit', 'Imparfait', 'Quand j\'étais jeune, je lisais toute la nuit.'],
-              ['She said she would come tomorrow.', 'Future in the past', 'Conditionnel', 'Elle a dit qu\'elle viendrait demain.']
-            ]
-          }
+          'When would refers to a repeated action in the past, the imparfait is used. When would refers to a polite request, the présent du conditionnel is used. When would refers to a specific action in the past, the passé composé of vouloir is used. When would refers to an idea of the future, a hypothesis, or a suggestion, the présent du conditionnel of the main verb is used. The imparfait is used in the si clause.',
         ],
         contrastExamples: [
           {
-            french: 'Quand nous étions enfants, nous allions à la mer chaque été.',
-            english: 'When we were children, we would go to the seaside every summer.',
-            aspectNote: 'Past habit: translated with Imparfait (allions), not conditional.'
+            french: 'Quand j’étais étudiant, je lisais les journaux tous les jours. ',
+            english: 'When I was a student, I would read the newspapers every day.',
           },
           {
-            french: 'J\'aimerais tellement faire ce voyage avec toi.',
-            english: 'I would love so much to take this trip with you.',
-            aspectNote: 'Hypothetical present desire: translated with Conditionnel (aimerais).'
-          }
+            french: 'Voudrais-tu me montrer le chemin?',
+            english: 'Would you mind showing me the way?',
+          },
+          {
+            french: 'Je lui ai posé la question plusieurs fois; elle n’a pas voulu répondre. ',
+            english: 'I asked her the question several times; she would not answer.',
+          },
+          {
+            french: 'Je vous le dirais si je le savais. ',
+            english: 'I would tell you if I knew.',
+          },
         ]
       }
     ],
@@ -560,100 +453,129 @@ export const B1_GRAMMAR_LESSONS = [
     subtitle: 'Master the mood of subjectivity, doubt, will, necessity, emotion, and concessive triggers.',
     formula: 'Subjonctif Présent: [Radical de "ils" au présent] + [-e, -es, -e, -ions, -iez, -ent]  |  Subjonctif Passé = [Être/Avoir au subjonctif] + [Participe Passé]',
     goldenRule: 'The Subjunctive is **NOT a tense, but a MOOD**. It requires three conditions: (1) A triggering expression of Will, Emotion, Impersonal necessity, or Doubt, (2) The subordinating conjunction **« que »**, and (3) **TWO DIFFERENT SUBJECTS**.',
-    detailedDescription: [
-      'The **Subjunctive** expresses the subjective perception of reality rather than objective facts. While the Indicative affirms truths, the Subjunctive filters events through feelings, hopes, doubts, and necessities.',
-      'It is one of the most distinctive hallmarks of intermediate-to-advanced French proficiency.'
-    ],
     topics: [
       {
         id: 'topic-20-subj-present',
-        title: '1. Le Subjonctif Présent (Formation & Irregular Stems)',
-        formula: 'Je/Tu/Il/Ils: [Radical de "ils" au présent] + [-e, -es, -e, -ent]  |  Nous/Vous: [Radical de "nous" au présent] + [-ions, -iez]',
-        goldenRule: 'To conjugate the Subjunctive: find the third-person plural (**ils**) present stem for je, tu, il, ils, and the first-person plural (**nous**) present stem for nous, vous.',
+        title: '1. The present subjunctive',
         detailedDescription: [
-          'Regular verbs combine the *ils* stem with distinctive endings: **que je parle, que tu parles, qu\'il parle, que nous parlions, que vous parliez, qu\'ils parlent**.',
-          'Key irregular stems include: **être (sois/soyons)**, **avoir (aie/ayons)**, **faire (fasse)**, **pouvoir (puisse)**, **savoir (sache)**, **aller (aille/allions)**, and **vouloir (veuille/voulions)**.'
+          'The subjunctive is a mood, not a tense. The mood of a verb determines how one views an event. You have already studied verb tenses in the indicative mood (le présent, l’imparfait, and le futur), stating objective facts, and in the conditional mood, relating to possibilities. In Chapter 23 we will study the imperative mood that gives commands. The subjunctive is another mood that refers to someone’s opinion or deals with hypothetical actions.',
+          'or most verbs, the present of the subjunctive is formed by adding the subjunctive endings (-e, -es, -e, -ions, -iez, -ent) to the stem. The stem for je, tu, il/ elle, ils/elles is found by dropping the -ent ending from the third-person plural present indicative form (ils/elles). Note that the sound of the verb will be the same for all these persons.',
+          'Let’s conjugate the verb dire (to say) in the present subjunctive:',
+          'je **dise** - I say', 
+          'tu **dises** - you say',
+          'il/elle **dise** - he/she says',
+          'nous **disions** - we say',
+          'vous **disiez** - you say',
+          'ils/elles **disent** - they say',
+          'Some verbs have irregular forms in the present subjunctive. Être (to be) and avoir (to have) have both irregular stems and endings.',
+
         ],
         tables: [
           {
-            title: 'Subjunctive Conjugation of Irregular Pillars',
-            subtitle: 'Être, Avoir, Faire, Pouvoir',
-            description: 'These essential irregular verbs must be mastered thoroughly.',
-            headers: ['Pronoun', 'Être', 'Avoir', 'Faire', 'Pouvoir'],
+            title: 'Être — Subjonctif Présent',
+            headers: ['Pronoun', 'French', 'English'],
             rows: [
-              ['Que je', 'sois', 'aie', 'fasse', 'puisse'],
-              ['Que tu', 'sois', 'aies', 'fasses', 'puisses'],
-              ['Qu\'il / elle', 'soit', 'ait', 'fasse', 'puisse'],
-              ['Que nous', 'soyons', 'ayons', 'fassions', 'puissions'],
-              ['Que vous', 'soyez', 'ayez', 'fassiez', 'puissiez'],
-              ['Qu\'ils / elles', 'soient', 'aient', 'fassent', 'puissent']
+              ['Je', 'je sois', 'I am'],
+              ['Tu', 'tu sois', 'you are'],
+              ['Il/Elle', 'il/elle soit', 'he/she is'],
+              ['Nous', 'nous soyons', 'we are'],
+              ['Vous', 'vous soyez', 'you are'],
+              ['Ils/Elles', 'ils/elles soient', 'they are']
+            ]
+          },
+          {
+            title: 'Avoir — Subjonctif Présent',
+            headers: ['Pronoun', 'French', 'English'],
+            rows: [
+              ['Je', 'j’aie', 'I have'],
+              ['Tu', 'tu aies', 'you have'],
+              ['Il/Elle', 'il/elle ait', 'he/she has'],
+              ['Nous', 'nous ayons', 'we have'],
+              ['Vous', 'vous ayez', 'you have'],
+              ['Ils/Elles', 'ils/elles aient', 'they have']
+            ]
+          },
+          {
+            title: 'Pouvoir — Subjonctif Présent',
+            headers: ['Pronoun', 'French', 'English'],
+            rows: [
+              ['Je', 'je puisse', 'I can'],
+              ['Tu', 'tu puisses', 'you can'],
+              ['Il/Elle', 'il/elle puisse', 'he/she can'],
+              ['Nous', 'nous puissions', 'we can'],
+              ['Vous', 'vous puissiez', 'you can'],
+              ['Ils/Elles', 'ils/elles puissent', 'they can']
+            ]
+          },
+          {
+            title: 'Savoir — Subjonctif Présent',
+            headers: ['Pronoun', 'French', 'English'],
+            rows: [
+              ['Je', 'je sache', 'I know'],
+              ['Tu', 'tu saches', 'you know'],
+              ['Il/Elle', 'il/elle sache', 'he/she knows'],
+              ['Nous', 'nous sachions', 'we know'],
+              ['Vous', 'vous sachiez', 'you know'],
+              ['Ils/Elles', 'ils/elles sachent', 'they know']
+            ]
+          },
+          {
+            title: 'Faire — Subjonctif Présent',
+            headers: ['Pronoun', 'French', 'English'],
+            rows: [
+              ['Je', 'je fasse', 'I do'],
+              ['Tu', 'tu fasses', 'you do'],
+              ['Il/Elle', 'il/elle fasse', 'he/she does'],
+              ['Nous', 'nous fassions', 'we do'],
+              ['Vous', 'vous fassiez', 'you do'],
+              ['Ils/Elles', 'ils/elles fassent', 'they do']
+            ]
+          },
+          {
+            title: 'Aller — Subjonctif Présent',
+            headers: ['Pronoun', 'French', 'English'],
+            rows: [
+              ['Je', 'j’aille', 'I go'],
+              ['Tu', 'tu ailles', 'you go'],
+              ['Il/Elle', 'il/elle aille', 'he/she goes'],
+              ['Nous', 'nous allions', 'we go'],
+              ['Vous', 'vous alliez', 'you go'],
+              ['Ils/Elles', 'ils/elles aillent', 'they go']
+            ]
+          },
+          {
+            title: 'Vouloir — Subjonctif Présent',
+            headers: ['Pronoun', 'French', 'English'],
+            rows: [
+              ['Je', 'je veuille', 'I want'],
+              ['Tu', 'tu veuilles', 'you want'],
+              ['Il/Elle', 'il/elle veuille', 'he/she wants'],
+              ['Nous', 'nous voulions', 'we want'],
+              ['Vous', 'vous vouliez', 'you want'],
+              ['Ils/Elles', 'ils/elles veuillent', 'they want']
             ]
           }
         ],
         contrastExamples: [
           {
-            french: 'Il faut absolument que tu fasses attention.',
-            english: 'You absolutely must pay attention.',
-            aspectNote: 'Impersonal necessity (il faut que) triggering the subjunctive (fasses).'
+            french: 'Je suis content que tu viennes dimanche.',
+            english: 'I am happy you are coming on Sunday.',
           },
           {
-            french: 'Je suis ravi que nous soyons enfin réunis.',
-            english: 'I am delighted that we are finally gathered together.',
-            aspectNote: 'Emotion (ravi que) triggering subjunctive of être (soyons).'
-          }
-        ]
-      },
-      {
-        id: 'topic-20-triggers',
-        title: '2. W.E.I.R.D.O. Triggers & Conjunctions',
-        formula: '[Expression de Volonté / Émotion / Doute / Conjonction] + [que] + [Sujet 2] + [Subjonctif]',
-        goldenRule: 'Expressions of **hope (espérer que)** and affirmative **certainty (penser que, croire que)** take the **INDICATIVE**. They switch to the **SUBJUNCTIVE** only when negated or questioned.',
-        detailedDescription: [
-          'Remember the **W.E.I.R.D.O.** acronym for triggers: **W**ill (vouloir, exiger), **E**motion (avoir peur, être triste), **I**mpersonal necessity (il faut, il est essentiel), **R**elative doubt (douter, il est peu probable), **D**enial (nier), and **O**pinion negated (**je ne pense pas que**).',
-          'Key subordinating conjunctions also demand the subjunctive: **bien que** (although), **pour que** (so that), **avant que** (before), and **à condition que** (provided that).'
-        ],
-        tables: [
-          {
-            title: 'Trigger vs. Non-Trigger Comparisons',
-            subtitle: 'Subjunctive vs. Indicative contexts',
-            description: 'Observe how the exact same verb changes mood based on affirmative vs. negative stance.',
-            headers: ['Context', 'Expression', 'Required Mood', 'Example'],
-            rows: [
-              ['Certainty / Belief', 'Je pense que / Je crois que', 'Indicatif', 'Je pense qu\'il vient demain.'],
-              ['Doubt / Negation', 'Je ne pense pas que', 'Subjonctif', 'Je ne pense pas qu\'il vienne demain.'],
-              ['Hope (Exception)', 'J\'espère que', 'Indicatif (Futur)', 'J\'espère que tout ira bien.'],
-              ['Concession', 'Bien que / Quoique', 'Subjonctif', 'Bien qu\'il soit tard, je travaille.'],
-              ['Necessity', 'Il est impératif que', 'Subjonctif', 'Il est impératif que nous partions.']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Je pense qu\'il est honnête. / Je doute qu\'il soit honnête.',
-            english: 'I think he is honest (Indicative) / I doubt that he is honest (Subjunctive).',
-            aspectNote: 'Penser indicates belief (est); douter introduces uncertainty (soit).'
-          },
-          {
-            french: 'Bien qu\'elle ait peu de temps, elle m\'aide toujours.',
-            english: 'Although she has little time, she always helps me.',
-            aspectNote: 'Concessive conjunction "Bien que" strictly requires subjunctive (ait).'
+            french: 'Elle souhaite que tu ailles en France. ',
+            english: 'She wishes you would go to France.',
           }
         ]
       },
       {
         id: 'topic-20-subj-passe',
-        title: '3. Le Subjonctif Passé (Past Subjective Anteriority)',
-        formula: 'Subjonctif Passé = [Être ou Avoir au subjonctif présent] + [Participe Passé]',
-        goldenRule: 'Use the **Subjonctif Passé** when the subjective action occurred **prior** to the main clause verb (e.g. "I am happy that you came").',
+        title: '3. The past subjunctive',
         detailedDescription: [
-          'Form the subjonctif passé by conjugating the auxiliary in the present subjunctive (**aie, aies, ait, ayons, ayez, aient** or **sois, sois, soit, soyons, soyez, soient**) followed by the past participle.',
-          'Agreement rules with être and preceding direct objects apply exactly as in the *passé composé*.'
+          'The past subjunctive is used in the same way as the present subjunctive. In such sentences, the action of the dependent clause is anterior to the action of the main clause. To form the past subjunctive, use the present subjunctive of avoir or être the past participle of the verb.',
         ],
         tables: [
           {
             title: 'Subjonctif Passé Conjugation',
-            subtitle: 'With Avoir and Être auxiliaries',
-            description: 'Expresses completed events filtered through an emotional or subjective main clause.',
             headers: ['Pronoun', 'Finir (Auxiliaire Avoir)', 'Venir (Auxiliaire Être)'],
             rows: [
               ['Que je', 'que j\'aie fini', 'que je sois venu(e)'],
@@ -669,37 +591,13 @@ export const B1_GRAMMAR_LESSONS = [
           {
             french: 'Je suis soulagé que vous ayez reçu mon courriel à temps.',
             english: 'I am relieved that you received my email on time.',
-            aspectNote: 'Emotional relief about a completed past action (ayez reçu).'
           },
           {
             french: 'Le professeur regrette que nous soyons partis si tôt.',
             english: 'The professor regrets that we left so early.',
-            aspectNote: 'Past event with auxiliary être (soyons partis).'
           }
         ]
       }
-    ],
-    rules: [
-      'W.E.I.R.D.O. Triggers: Will (vouloir que, exiger que), Emotion (avoir peur que, être triste que), Impersonal (il faut que, il est important que), Relative doubt (douter que, il est peu probable que), Opinions in negative/interrogative (je ne pense pas que).',
-      'Subjunctive triggers with Conjunctions: bien que (although), pour que (so that), avant que (before + ne explétif), à condition que (provided that), jusqu\'à ce que (until).',
-      'Irregular Subjunctives: Être (sois, sois, soit, soyons, soyez, soient), Avoir (aie, aies, ait, ayons, ayez, aient), Faire (fasse), Aller (aille/allions), Pouvoir (puisse), Savoir (sache), Vouloir (veuille/voulions).',
-      'Subjonctif Passé expresses prior completed subjective actions: "Je suis content que tu sois venu", "Il est surpris que nous ayons fini si vite".',
-    ],
-    contrastExamples: [
-      {
-        french: 'Je pense qu\'il vient demain. / Je ne pense pas qu\'il vienne demain.',
-        english: 'I think he is coming tomorrow (Indicative) / I don\'t think he is coming (Subjunctive).',
-        aspectNote: 'Penser in affirmative takes Indicative; in negative it expresses doubt and triggers Subjunctive.',
-      },
-      {
-        french: 'Bien qu\'il soit fatigué, il continue de travailler.',
-        english: 'Although he is tired, he continues to work.',
-        aspectNote: 'Concessive conjunction "Bien que" strictly requires the subjunctive (soit).',
-      },
-    ],
-    commonTraps: [
-      'Using subjunctive after "J\'espère que" (Espérer strictly takes the Indicative/Future, e.g. "J\'espère qu\'il viendra").',
-      'Using subjunctive when both clauses have the same subject (use "Infinitive" instead: "Je veux que je parte" is wrong; say "Je veux partir").',
     ],
     practiceExercises: [
       {
@@ -736,147 +634,32 @@ export const B1_GRAMMAR_LESSONS = [
     subtitle: 'Express simultaneous actions, causality, manner, condition, and adverbial circumstances.',
     formula: 'Participe Présent = [Radical de "nous" au présent] + [-ant] (parlant, finissant)  |  Gérondif = [en] + [Participe Présent] (en parlant, en marchant)',
     goldenRule: 'The Gérondif (**« en + participe présent »**) expresses simultaneity (while doing), means/manner (by doing), or cause (because of doing), and **MUST share the exact same subject** as the main verb.',
-    detailedDescription: [
-      'The **Present Participle** and the **Gerund (Gérondif)** allow speakers to condense subordinate clauses into fluid, elegant prose.',
-      'While English uses "-ing" indiscriminately for gerunds, participles, and continuous tenses, French carefully distinguishes between the verbal participle, the adverbial gerund, and verbal adjectives.'
-    ],
     topics: [
       {
         id: 'topic-24-participe-present',
-        title: '1. Le Participe Présent & Adjectif Verbal',
-        formula: '[Radical de "nous" au présent] + [-ant] (nous chantons → chantant ; nous prenons → prenant)',
-        goldenRule: 'The **Participe Présent** is a VERB form and is **always invariable** (e.g. "des femmes parlant fort"). The **Adjectif Verbal** is an ADJECTIVE and **agrees in gender and number** (e.g. "des histoires passionnantes").',
+        title: '1. the participe présent',
         detailedDescription: [
-          'Form the present participle by taking the first-person plural (*nous*) stem of the present tense and replacing *-ons* with **-ant**.',
-          'Only three verbs have irregular participles: **être → étant**, **avoir → ayant**, and **savoir → sachant**.',
-          'When acting as a verb, it often replaces a relative clause with *qui* (**« Un homme portant un chapeau »** = Un homme qui porte un chapeau).'
+          'You have used the participe passé (past participle) many times with the compound tenses. Another participle is the participe présent (present participle). It is formed by dropping the -ons ending from the present tense nous form and adding -ant.',
+          'Some participes présents can be used as nouns. When used as a noun, the present participle changes according to gender and number. For example:',
+          '**un gagnant** - a winner',
+          '**une gagnante** - a winner',
+          'Many participes présents can be used as adjectives. When used as an adjective, the participe présent agrees with the noun it modifies.',
+          'The participe présent can also be used as a verb. Note that when used as a verb, the present participle is invariable.',
+          'La police l’a aperçu **entrant** dans un laboratoire médical. - The police saw him entering (as he was entering) a medical lab.',
+          'When an action precedes another one, avoir and être in the participe présent can be combined with a participe passé. Note that the past participle agrees with the subject of the sentence if the verb is conjugated with être.',
+          '**Ayant accepté** la défaite, les joueurs sont rentrés chez eux. - Having accepted the defeat, the players went home.'
         ],
-        tables: [
-          {
-            title: 'Participle vs. Verbal Adjective Distinction',
-            subtitle: 'Invariable verbal action vs. variable descriptive adjective',
-            description: 'Observe differences in spelling and grammatical agreement.',
-            headers: ['Type', 'Function', 'Agreement', 'Example'],
-            rows: [
-              ['Participe Présent', 'Verbal action (has complement)', 'Invariable', 'Des enfants obéissant à leurs parents.'],
-              ['Adjectif Verbal', 'Descriptive quality', 'Agrees (+e, +s)', 'Des enfants obéissants.'],
-              ['Spelling variation', 'Différant (participle)', 'Différent(e)(s) (adjective)', 'Une idée différant de la mienne / Des idées différentes.'],
-              ['Irregular: Être / Avoir', 'Étant / Ayant', 'Invariable', 'Étant fatiguée, elle s\'est couchée.']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Les passagers ayant un billet de première classe peuvent monter.',
-            english: 'Passengers having a first-class ticket may board.',
-            aspectNote: 'Invariable present participle of avoir (ayant) replacing "qui ont".'
-          },
-          {
-            french: 'C\'est une aventure palpitante pleine de rebondissements.',
-            english: 'It is a thrilling adventure full of twists and turns.',
-            aspectNote: 'Verbal adjective agreeing with feminine noun une aventure (palpitante).'
-          }
-        ]
       },
       {
         id: 'topic-24-gerondif',
-        title: '2. Le Gérondif (En + Participe Présent)',
-        formula: 'Gérondif = [en] + [Participe Présent] (e.g. en marchant, en mangeant, en étudiant)',
-        goldenRule: 'The Gérondif acts as an **adverbial modifier** indicating simultaneity (*while*), manner/means (*by*), or condition (*if*). It strictly requires that **both actions share the exact same subject**.',
+        title: '2. The Gérondif',
         detailedDescription: [
-          'Preceding the present participle with **« en »** creates the **Gérondif**.',
-          'It answers the questions: *When?* (simultaneity), *How?* (manner), or *Under what condition?* (cause/condition).',
-          'Trap warning: You cannot say *"En arrivant, la pluie a commencé"* because the rain didn\'t arrive; the subject of both actions must match.'
-        ],
-        tables: [
-          {
-            title: 'Core Functions of the Gérondif',
-            subtitle: 'Simultaneity, manner, and causality',
-            description: 'The preposition "en" anchors the participle adverbially to the main verb.',
-            headers: ['Function', 'English Equivalence', 'Sample Sentence', 'Nuance'],
-            rows: [
-              ['Simultanéité (Time)', 'While / As', 'Il écoute la radio en cuisinant.', 'Two actions occurring at the exact same moment.'],
-              ['Moyen / Manière (Means)', 'By doing', 'Elle a réussi en travaillant dur.', 'The method through which the result was achieved.'],
-              ['Cause / Condition', 'If / Because of', 'En prenant le métro, tu gagneras du temps.', 'Equivalent to "si tu prends le métro".']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Il écoute de la musique en faisant la vaisselle.',
-            english: 'He listens to music while doing the dishes.',
-            aspectNote: 'Gérondif (en faisant) showing simultaneous actions with the same subject.'
-          },
-          {
-            french: 'C\'est en forgeant qu\'on devient forgeron.',
-            english: 'Practice makes perfect (literally: By blacksmithing one becomes a blacksmith).',
-            aspectNote: 'Gérondif (en forgeant) indicating means and practice.'
-          }
-        ]
-      },
-      {
-        id: 'topic-24-tout-en',
-        title: '3. Nuances with "Tout en" & Relative Replacement',
-        formula: '[Tout en] + [Participe Présent] (e.g. Tout en reconnaissant ses torts, il a refusé d\'abandonner)',
-        goldenRule: 'Adding **« Tout »** before the gérondif (**« Tout en + participe présent »**) emphasizes **uninterrupted simultaneity** or highlights a **concessive paradox / contradiction** (*even while doing*).',
-        detailedDescription: [
-          'When you wish to emphasize that two actions coexist unexpectedly, use **« tout en »** (e.g. **« Tout en souriant, elle lui annonça la mauvaise nouvelle »** = Even while smiling, she broke the bad news).',
-          'The present participle also serves in formal prose as a concise alternative to relative clauses introduced by *qui* or causal clauses introduced by *parce que / puisque*.'
-        ],
-        tables: [
-          {
-            title: '"Tout en" Nuances & Relative Clause Replacement',
-            subtitle: 'Stylistic elegance in intermediate and advanced prose',
-            description: 'Compare standard gérondif with the emphatic "tout en" construction.',
-            headers: ['Construction', 'Expressive Value', 'French Example', 'English Translation'],
-            rows: [
-              ['Gérondif simple', 'Pure simultaneity', 'Elle marchait en chantonnant.', 'She was walking while humming.'],
-              ['Tout en + gérondif', 'Paradox / Contrast', 'Tout en ayant peur, il a sauté.', 'Even while being afraid, he jumped.'],
-              ['Tout en + gérondif', 'Dual ongoing state', 'Elle étudie tout en travaillant.', 'She studies while also working.'],
-              ['Relative replacement', 'Concise prose', 'Les candidats réussissant l\'épreuve...', 'Candidates who pass the test...']
-            ]
-          }
-        ],
-        contrastExamples: [
-          {
-            french: 'Tout en souriant poliment, il refusa de signer l\'accord.',
-            english: 'Even while smiling politely, he refused to sign the agreement.',
-            aspectNote: 'Concessive paradox with "tout en souriant".'
-          },
-          {
-            french: 'Ayant terminé son travail plus tôt que prévu, elle est allée au cinéma.',
-            english: 'Having finished her work earlier than expected, she went to the movies.',
-            aspectNote: 'Compound participle (ayant terminé) explaining causality.'
-          }
+          'When the present participle is introduced by en, it is referred to as the gérondif (gerund). It is formed with en the present participle. It describes the relationship between two actions. It can express simultaneity, manner, condition, or causality.',
+          'Il s’est foulé la cheville **en jouant** au foot. - He sprained his ankle while playing football.',
+          'When tout precedes the gerund, it underscores a tension, a contradiction between two actions. For example:',
+          '**Tout en étant** un bon joueur, il ne marquait jamais de but. - While being (Even though he was) a good player, he never scored a goal.'
         ]
       }
-    ],
-    rules: [
-      'Form the Present Participle from the "nous" present stem + "-ant": nous chantons → chantant; nous prenons → prenant.',
-      'Irregular participles (3 only): Être → étant, Avoir → ayant, Savoir → sachant.',
-      'Gérondif with "Tout": Adding "Tout en + participe présent" emphasizes simultaneity or paradox (e.g. "Tout en souriant, il refusa" = Even while smiling, he refused).',
-      'The standalone Present Participle acts as an adjective (un film passionnant, une histoire captivante; agrees) or replaces a relative clause "qui..." (un homme parlant cinq langues; invariable).',
-    ],
-    contrastExamples: [
-      {
-        french: 'Il écoute de la musique en faisant la vaisselle.',
-        english: 'He listens to music while doing the dishes.',
-        aspectNote: 'Gérondif (en faisant) showing simultaneous actions with the same subject.',
-      },
-      {
-        french: 'C\'est en forgeant qu\'on devient forgeron.',
-        english: 'Practice makes perfect (literally: It is by blacksmithing that one becomes a blacksmith).',
-        aspectNote: 'Gérondif (en forgeant) showing manner and means.',
-      },
-      {
-        french: 'Ayant terminé son travail, elle est sortie.',
-        english: 'Having finished her work, she went out.',
-        aspectNote: 'Compound present participle (ayant terminé) showing causality/anteriority.',
-      },
-    ],
-    commonTraps: [
-      'Using the gérondif when the subjects of the two actions are different.',
-      'Confusing the verbal participle (invariable: des femmes chantant) with the verbal adjective (agrees: des voix chantantes).',
     ],
     practiceExercises: [
       {
@@ -913,142 +696,109 @@ export const B1_GRAMMAR_LESSONS = [
     subtitle: 'Combine clauses seamlessly using grammatical relative connectors and prepositional relative pronouns.',
     formula: 'Qui + [Verbe] (Sujet)  |  Que + [Sujet] + [Verbe] (COD)  |  Où (Lieu/Temps)  |  Dont (remplace "de + Nom")  |  Composés: lequel, laquelle, lesquels, lesquelles',
     goldenRule: '**« Qui »** is the grammatical subject (followed immediately by a verb). **« Que »** is the direct object (followed by a subject + verb). **« Dont »** replaces any phrase governed by **« de »** (parler de, avoir besoin de, avoir peur de, l\'auteur de).',
-    detailedDescription: [
-      'Relative pronouns join two sentences together, avoiding clumsy repetitions and structuring complex ideas with grammatical precision.',
-      'French distinguishes clearly between subjects (**qui**), direct objects (**que**), place/time (**où**), de-complements (**dont**), and prepositional compounds (**lequel**).'
-    ],
     topics: [
       {
-        id: 'topic-27-qui-que',
-        title: '1. Simple Relative Pronouns (Qui vs. Que / Qu\')',
-        formula: 'Sujet: [Antécédent] + [qui] + [Verbe]  |  Direct Object: [Antécédent] + [que / qu\'] + [Sujet] + [Verbe]',
-        goldenRule: '**« Qui » NEVER elides** before a vowel (**« qui arrive »**, **« qui est »**). In contrast, **« Que » ALWAYS elides** to **« qu\' »** before a vowel sound (**« qu\'il aime »**, **« qu\'elle voit »**).',
+        id: 'topic-27-qui',
+        title: '1. Qui',
         detailedDescription: [
-          'To choose between *qui* and *que*, look at the grammatical role inside the relative clause:',
-          'If the relative pronoun is performing the action (followed directly by the conjugated verb), use **qui** (**« L\'amie qui m\'aide »**).',
-          'If the relative pronoun is receiving the action (followed by a subject pronoun or noun), use **que** (**« L\'amie que j\'aide »**).'
-        ],
-        tables: [
-          {
-            title: 'Qui vs. Que / Qu\' Structural Matrix',
-            subtitle: 'Subject vs. Direct Object relative markers',
-            description: 'Observe the syntactic position immediately following the relative pronoun.',
-            headers: ['Pronoun', 'Syntactic Function', 'Following Element', 'Elision Before Vowel', 'Example'],
-            rows: [
-              ['Qui', 'Subject (Sujet)', 'Conjugated verb', 'NEVER (qui aime)', 'L\'artiste qui peint ce tableau.'],
-              ['Que / Qu\'', 'Direct Object (COD)', 'Subject + verb', 'ALWAYS (qu\'il)', 'Le tableau qu\'il a peint.'],
-              ['Ce qui', 'Indefinite subject', 'Conjugated verb', 'NEVER (ce qui est)', 'Ce qui compte, c\'est l\'effort.'],
-              ['Ce que', 'Indefinite object', 'Subject + verb', 'ALWAYS (ce qu\'il)', 'Ce que je veux, c\'est du repos.']
-            ]
-          }
+          'It is essential to know how to connect several elements in the same sentence. One way to link ideas back to persons and things already mentioned is by using pronoms relatifs (relative pronouns). Relative pronouns link two sentences, making one dependent on the other.', 
+          'The dependent phrase is also called the subordinate clause; it contains a verb, but usually cannot stand alone. Choosing the correct relative pronoun depends on its function in the sentence (subject, direct object, or object of a preposition).',
+          'Let’s start with the relative pronoun qui used as a subject. Qui may refer to people or things and may mean who, whom, which, what, or that. Note that the -i of qui is never dropped in front of a vowel sound. Qui as a subject precedes the verb in the dependent clause.',
+          'When qui is the subject of the dependent clause, the verb following qui agrees with the noun or pronoun that qui replaces.',
+          'J’écoute la personne **qui parle.** - I am listening to the person who is speaking.',
+          ''
         ],
         contrastExamples: [
           {
-            french: 'C\'est l\'étudiante qui a posé la question.',
-            english: 'It is the student who asked the question.',
-            aspectNote: 'Qui acts as subject followed directly by verb (a posé).'
+            french: 'J’écoute la personne qui parle. ',
+            english: 'I am listening to the person who is speaking.',
           },
           {
-            french: 'C\'est la question qu\'elle a posée au professeur.',
-            english: 'It is the question that she asked the professor.',
-            aspectNote: 'Que acts as direct object followed by subject (elle), with participle agreement (posée).'
+            french: 'Nous félicitons l’artiste qui a pris cette photo',
+            english: 'We congratulate the artist who took this picture.',
           }
         ]
       },
       {
-        id: 'topic-27-ou-dont',
-        title: '2. Pronouns Où & Dont (Place, Time & "De")',
-        formula: 'Lieu / Temps: [Lieu / Moment] + [où]  |  Complément de "de": [Nom / Verbe régissant "de"] + [dont]',
-        goldenRule: 'Use **« Où »** for BOTH physical location (*the city where*) and points in time (*the day when*). Never use "quand" as a relative pronoun! Use **« Dont »** whenever the verb or expression requires **« de »**.',
+        id: 'topic-27-Que',
+        title: '2. Que',
         detailedDescription: [
-          '**Où** translates both "where" (**« La ville où j\'habite »**) and "when" (**« Le jour où nous nous sommes rencontrés »**). Saying *"Le jour quand"* is a common anglicism that must be avoided.',
-          '**Dont** is the relative champion for replacing any complement governed by *de*: verbs (**parler de, se souvenir de, avoir besoin de**), adjectives (**fier de, responsable de**), or possession (**le père dont la fille est médecin**).'
-        ],
-        tables: [
-          {
-            title: 'Où vs. Dont Reference Guide',
-            subtitle: 'Place, temporal markers, and expressions with "de"',
-            description: '"Dont" eliminates prepositions like de, d\', du, de la, des.',
-            headers: ['Pronoun', 'Meaning', 'Governing Factor', 'Example Sentence'],
-            rows: [
-              ['Où (Lieu)', 'Where', 'Physical place', 'Le restaurant où nous avons dîné hier.'],
-              ['Où (Temps)', 'When / In which', 'Temporal noun (jour, année, moment)', 'L\'année où j\'ai obtenu mon diplôme.'],
-              ['Dont (Verbe en de)', 'Of which / That', 'Verbal regime (avoir besoin de)', 'Voici le livre dont j\'ai besoin.'],
-              ['Dont (Possession)', 'Whose', 'Noun possessing another', 'Un écrivain dont les livres se vendent bien.']
-            ]
-          }
+          'When the dependent clause introduced by a relative pronoun already has a subject noun or pronoun, the relative pronoun que (whom, which, that) is used. Like qui, the relative pronoun que refers to both people and things.',
+          'In the following example, note that the -e of que is dropped before a vowel (qu’).',
+          'In the compound tenses, if the direct object is placed before the verb, the past participle agrees in gender and number with that direct object. This includes sentences where que (qu’) refers back to a direct object noun.'
         ],
         contrastExamples: [
           {
-            french: 'Paris est la ville où je me sens le mieux.',
-            english: 'Paris is the city where I feel best.',
-            aspectNote: 'Où denoting physical geographical location.'
+            french: 'Voici le lustre que Daniel a acheté.',
+            english: 'Here’s the chandelier Daniel bought.',
           },
           {
-            french: 'C\'est le projet dont nous sommes tous très fiers.',
-            english: 'It is the project of which we are all very proud.',
-            aspectNote: 'Dont replaces "de ce projet" (être fier de).'
+            french: 'Les articles qu’il vend sont chers. ',
+            english: 'The items he sells are expensive.',
+          },
+          {
+            french: 'C’est la table en marbre que nous avons trouvée au marché aux puces. ',
+            english: 'Here’s the marble table we found at the flea market.',
           }
         ]
       },
       {
-        id: 'topic-27-composes',
-        title: '3. Compound Relative Pronouns (Lequel, Auquel, Duquel)',
-        formula: 'Standard: lequel, laquelle, lesquels, lesquelles  |  Avec "à": auquel, à laquelle, auxquels, auxquelles  |  Avec "de": duquel, de laquelle, desquels, desquelles',
-        goldenRule: 'Compound relative pronouns are used after **complex prepositions** (à côté de, grâce à, près de, avec, pour, sur). They agree in **gender and number** with the antecedent noun.',
+        id: 'topic-27-ou',
+        title: '3. Où',
         detailedDescription: [
-          'When a relative clause follows a preposition like *sur, sous, avec, pour, chez, dans*, use **lequel** (**« La table sur laquelle j\'ai posé les clés »**).',
-          'When combined with **à** or **de**, *lequel* contracts into **auquel / auxquels** and **duquel / desquels** (e.g. **« L\'entreprise grâce à laquelle j\'ai trouvé ce travail »**).'
-        ],
-        tables: [
-          {
-            title: 'Compound Relative Pronoun Declensions',
-            subtitle: 'Standard forms and contractions with "à" and "de"',
-            description: 'Match the gender and number of the antecedent noun.',
-            headers: ['Form', 'Masculine Singular', 'Feminine Singular', 'Masculine Plural', 'Feminine Plural'],
-            rows: [
-              ['Standard (sur, avec, pour)', 'lequel', 'laquelle', 'lesquels', 'lesquelles'],
-              ['Contracted with À (grâce à, penser à)', 'auquel', 'à laquelle', 'auxquels', 'auxquelles'],
-              ['Contracted with De (à côté de, près de)', 'duquel', 'de laquelle', 'desquels', 'desquelles']
-            ]
-          }
+          'The relative pronoun où, referring to a place. Où is also used when the antecedent expresses time',
         ],
         contrastExamples: [
           {
-            french: 'Voici le dossier sur lequel nous travaillons cette semaine.',
-            english: 'Here is the file on which we are working this week.',
-            aspectNote: 'Preposition "sur" + masculine singular compound relative (lequel).'
+            french: 'C’est le magasin où je fais mes courses.',
+            english: 'It’s the store where I do my shopping.',
           },
           {
-            french: 'La conférence à laquelle nous avons assisté était passionnante.',
-            english: 'The conference which we attended was fascinating.',
-            aspectNote: 'Assister à + feminine singular noun (laquelle) contracts to "à laquelle".'
+            french: 'Le jour où il a été élu, tout le monde était content.',
+            english: 'The day (when) he was elected, everyone was happy.',
+          }
+        ]
+      },
+      {
+        id: 'topic-27-dont',
+        title: '4. Dont',
+        detailedDescription: [
+          'The relative pronoun dont acts as an object of the main clause and can refer to both people and things. It is used to refer to objects of verbs or verbal expressions that include the preposition de.',
+          '**Il a besoin de ces documents.** - He needs these documents.',
+          '**Voici les documents dont il a besoin.** - Here are the documents he needs.'
+        ],
+        contrastExamples: [
+          {
+            french: 'C’est le magasin où je fais mes courses.',
+            english: 'It’s the store where I do my shopping.',
+          },
+          {
+            french: 'Le jour où il a été élu, tout le monde était content.',
+            english: 'The day (when) he was elected, everyone was happy.',
+          }
+        ]
+      },
+      {
+        id: 'topic-27-Lequel',
+        title: '4. Lequel',
+        detailedDescription: [
+          'When verbs are followed by prepositions, the relative pronouns qui (whom), quoi (what), lequel, laquelle, lesquels, lesquelles (that, which, whom) are used. The preposition precedes these pronouns. Qui refers only to people; quoi is an indefinite thing or object; and lequel, laquelle, lesquels, lesquelles refer to specific things.',
+        ],
+        contrastExamples: [
+          {
+            french: 'Tu sais à quoi il pense? ',
+            english: 'Do you know what he is thinking about?',
+          },
+          {
+            french: 'C’est le client pour lequel je travaille. ',
+            english: 'It’s the client for whom I am working.',
+          },
+          {
+            french: 'Voici le collègue avec qui j’écris le rapport.',
+            english: 'Here is the colleague with whom I am writing the report.',
           }
         ]
       }
-    ],
-    rules: [
-      'Qui = Subject of the relative clause (e.g. "L\'homme qui parle est mon frère"). Does NOT elide before vowels (qui arrive).',
-      'Que / Qu\' = Direct object of the relative clause (e.g. "Le livre que je lis"). Elides before vowels to "qu\'" (le film qu\'il aime).',
-      'Où = Relative pronoun of Place or Time (e.g. "La ville où je suis né", "Le jour où nous sommes arrivés").',
-      'Dont = Relative pronoun replacing "de + antecedent" (e.g. "C\'est le livre dont j\'ai besoin" [avoir besoin de], "La femme dont le fils est médecin").',
-      'Compound Relatives (lequel, auquel, duquel): Used after complex prepositions (à côté duquel, grâce auquel, sur lequel).',
-    ],
-    contrastExamples: [
-      {
-        french: 'C\'est l\'amie qui m\'a aidé et que j\'apprécie beaucoup.',
-        english: 'This is the friend who helped me (qui + verb) and whom I appreciate a lot (que + subject).',
-        aspectNote: 'Distinction between subject relative "qui" and object relative "que".',
-      },
-      {
-        french: 'Le projet dont nous parlons est capital.',
-        english: 'The project of which we are speaking (that we are talking about) is essential.',
-        aspectNote: '"Dont" replaces "de ce projet" (parler de).',
-      },
-    ],
-    commonTraps: [
-      'Saying "Le jour quand..." in French (Use "Le jour où...", never quand as a relative pronoun).',
-      'Saying "C\'est la chose que j\'ai besoin de" (Must be "C\'est la chose dont j\'ai besoin").',
     ],
     practiceExercises: [
       {

@@ -1611,6 +1611,55 @@ export const A2_GRAMMAR_LESSONS = [
             english: 'This one is silver. That one is gold.'
           }
         ]
+      },
+      {
+        id: 'topic-26-possessive-adjectives',
+        title: 'Possessive adjectives',
+        detailedDescription: [
+          'Possessive adjectives modify nouns and are used to express relationship and ownership. They agree in gender and number with the noun they modify.',
+          'Note that the masculine singular form of the possessive adjective (mon, ton, son) is used before singular feminine nouns beginning with a vowel or a mute h.',
+          '**Mon amie** Suzanne travaille à Rennes. - My friend Suzanne works in Rennes.',
+          'Another way of expressing possession is to use à + a noun or a disjunctive pronoun.',
+          'C’est **à Pierre?** - Is it Pierre’s?'
+        ],
+        tables: [
+          {
+            title: 'Possessive Adjectives — Masculine Singular',
+            headers: ['French', 'English'],
+            rows: [
+              ['mon ordinateur', 'my computer'],
+              ['ton ordinateur', 'your computer'],
+              ['son ordinateur', 'his/her computer'],
+              ['notre ordinateur', 'our computer'],
+              ['votre ordinateur', 'your computer'],
+              ['leur ordinateur', 'their computer']
+            ]
+          },
+          {
+            title: 'Possessive Adjectives — Feminine Singular',
+            headers: ['French', 'English'],
+            rows: [
+              ['ma vie', 'my life'],
+              ['ta vie', 'your life'],
+              ['sa vie', 'his/her life'],
+              ['notre vie', 'our life'],
+              ['votre vie', 'your life'],
+              ['leur vie', 'their life']
+            ]
+          },
+          {
+            title: 'Possessive Adjectives — Plural',
+            headers: ['French', 'English'],
+            rows: [
+              ['mes cousin(e)s', 'my cousins'],
+              ['tes cousin(e)s', 'your cousins'],
+              ['ses cousin(e)s', 'his/her cousins'],
+              ['nos cousin(e)s', 'our cousins'],
+              ['vos cousin(e)s', 'your cousins'],
+              ['leurs cousin(e)s', 'their cousins']
+            ]
+          }
+        ]
       }
     ],
     practiceExercises: [
