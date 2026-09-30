@@ -374,7 +374,7 @@ export const GrammarLessonsCatalogView = ({
                 <div className="flex items-center gap-2">
                   {onOpenAiQuiz && (
                     <button
-                      onClick={() => onOpenAiQuiz(lesson.title, lesson.level)}
+                      onClick={() => onOpenAiQuiz(lesson.title, lesson.level, lesson)}
                       className="px-3 py-2 bg-white hover:bg-[#FAF7F2] text-[#5A5A40] border border-[#DCDCCF] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer"
                     >
                       <Sparkles className="w-3.5 h-3.5" />

@@ -1,8 +1,27 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Leaf, Flower2, Sprout, Sparkles, Sun } from 'lucide-react';
+import { Leaf, Flower2, Sprout, Sparkles } from 'lucide-react';
 
-export const AnimatedBackground = () => {
+export const AnimatedBackground = ({ isPaused = false }) => {
+  const containerRef = useRef(null);
+
+  // Directly control browser animation engine to guarantee static state when modal is open
+  useEffect(() => {
+    if (!containerRef.current) return;
+    try {
+      const anims = containerRef.current.getAnimations({ subtree: true });
+      anims.forEach((anim) => {
+        if (isPaused) {
+          anim.pause();
+        } else {
+          anim.play();
+        }
+      });
+    } catch {
+      // Fallback if getAnimations is not supported in environment
+    }
+  }, [isPaused]);
+
   // Garden petals & leaves floating config with vivid organic garden tones
   const gardenElements = useMemo(
     () => [
@@ -48,6 +67,7 @@ export const AnimatedBackground = () => {
 
   return (
     <div
+      ref={containerRef}
       aria-hidden="true"
       id="garden-animated-background"
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
@@ -55,63 +75,95 @@ export const AnimatedBackground = () => {
       {/* Garden Canopy Ambient Gradients */}
       {/* 1. Lush Botanical Green Canopy (Top Left) */}
       <motion.div
-        animate={{
-          x: [0, 40, -30, 20, 0],
-          y: [0, -45, 25, -20, 0],
-          scale: [1, 1.12, 0.96, 1.06, 1],
-          rotate: [0, 20, 45, 20, 0],
-        }}
-        transition={{
-          duration: 26,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
+        animate={
+          isPaused
+            ? { x: 0, y: 0, scale: 1, rotate: 0 }
+            : {
+                x: [0, 40, -30, 20, 0],
+                y: [0, -45, 25, -20, 0],
+                scale: [1, 1.12, 0.96, 1.06, 1],
+                rotate: [0, 20, 45, 20, 0],
+              }
+        }
+        transition={
+          isPaused
+            ? { duration: 0.3 }
+            : {
+                duration: 26,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }
+        }
         className="absolute -top-[15%] -left-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-br from-[#D8E6CC]/70 via-[#E4EFE0]/50 to-transparent blur-3xl"
       />
 
       {/* 2. Soft Warm Sunbeam & Floral Garden Aura (Top Right) */}
       <motion.div
-        animate={{
-          x: [0, -50, 35, -25, 0],
-          y: [0, 40, -40, 30, 0],
-          scale: [1, 0.92, 1.15, 0.98, 1],
-          rotate: [0, -25, -50, -25, 0],
-        }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
+        animate={
+          isPaused
+            ? { x: 0, y: 0, scale: 1, rotate: 0 }
+            : {
+                x: [0, -50, 35, -25, 0],
+                y: [0, 40, -40, 30, 0],
+                scale: [1, 0.92, 1.15, 0.98, 1],
+                rotate: [0, -25, -50, -25, 0],
+              }
+        }
+        transition={
+          isPaused
+            ? { duration: 0.3 }
+            : {
+                duration: 30,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }
+        }
         className="absolute top-[5%] -right-[12%] w-[52vw] h-[52vw] rounded-full bg-gradient-to-bl from-[#FFF6DF]/75 via-[#F7ECE4]/50 to-transparent blur-3xl"
       />
 
       {/* 3. Deep Herbal Moss & Sage Field (Bottom Center-Left) */}
       <motion.div
-        animate={{
-          x: [0, 35, -25, 40, 0],
-          y: [0, 35, 60, -25, 0],
-          scale: [0.95, 1.08, 1, 1.14, 0.95],
-        }}
-        transition={{
-          duration: 28,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
+        animate={
+          isPaused
+            ? { x: 0, y: 0, scale: 1 }
+            : {
+                x: [0, 35, -25, 40, 0],
+                y: [0, 35, 60, -25, 0],
+                scale: [0.95, 1.08, 1, 1.14, 0.95],
+              }
+        }
+        transition={
+          isPaused
+            ? { duration: 0.3 }
+            : {
+                duration: 28,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }
+        }
         className="absolute -bottom-[20%] left-[10%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-tr from-[#CCE0BE]/60 via-[#E6F0DC]/45 to-transparent blur-3xl"
       />
 
       {/* 4. Delicate Rose Garden Blossom Glow (Bottom Right) */}
       <motion.div
-        animate={{
-          x: [0, -30, 20, -15, 0],
-          y: [0, -30, 35, -20, 0],
-          scale: [1, 1.08, 0.94, 1.05, 1],
-        }}
-        transition={{
-          duration: 27,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
+        animate={
+          isPaused
+            ? { x: 0, y: 0, scale: 1 }
+            : {
+                x: [0, -30, 20, -15, 0],
+                y: [0, -30, 35, -20, 0],
+                scale: [1, 1.08, 0.94, 1.05, 1],
+              }
+        }
+        transition={
+          isPaused
+            ? { duration: 0.3 }
+            : {
+                duration: 27,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }
+        }
         className="absolute -bottom-[15%] -right-[10%] w-[48vw] h-[48vw] rounded-full bg-gradient-to-tl from-[#F4E3E3]/55 via-[#EBF2E4]/40 to-transparent blur-3xl"
       />
 
@@ -125,16 +177,24 @@ export const AnimatedBackground = () => {
         ].map((orb, i) => (
           <motion.div
             key={`sun-orb-${i}`}
-            animate={{
-              opacity: [0.35, 0.7, 0.35],
-              scale: [0.9, 1.15, 0.9],
-            }}
-            transition={{
-              duration: 8 + i * 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: orb.delay,
-            }}
+            animate={
+              isPaused
+                ? { opacity: 0.45, scale: 1 }
+                : {
+                    opacity: [0.35, 0.7, 0.35],
+                    scale: [0.9, 1.15, 0.9],
+                  }
+            }
+            transition={
+              isPaused
+                ? { duration: 0.3 }
+                : {
+                    duration: 8 + i * 2,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay: orb.delay,
+                  }
+            }
             className={`absolute rounded-full bg-gradient-to-br from-[#FFFDEB]/60 to-[#E8F2DC]/30 blur-2xl ${orb.size}`}
             style={{ left: orb.left, top: orb.top }}
           />
@@ -154,83 +214,93 @@ export const AnimatedBackground = () => {
         }}
       />
 
-      {/* Floating Garden Leaves, Blossoms, and Sprouts */}
-      <div className="absolute inset-0 overflow-hidden">
-        {gardenElements.map((el) => {
-          return (
-            <motion.div
-              key={`garden-el-${el.id}`}
-              initial={{
-                y: '-8vh',
-                x: `${el.xStart}vw`,
-                opacity: 0,
-                rotate: 0,
-              }}
-              animate={{
-                y: ['-5vh', '108vh'],
-                x: [
-                  `${el.xStart}vw`,
-                  `${el.xStart + (el.id % 2 === 0 ? 5 : -5)}vw`,
-                  `${el.xStart + (el.id % 2 === 0 ? -3 : 4)}vw`,
-                  `${el.xStart + (el.id % 2 === 0 ? 6 : -6)}vw`,
-                ],
-                opacity: [0, 0.85, 0.85, 0],
-                rotate: [0, el.id % 2 === 0 ? 180 : -180, el.id % 2 === 0 ? 360 : -360],
-              }}
-              transition={{
-                duration: el.duration,
-                repeat: Infinity,
-                delay: el.delay,
-                ease: 'linear',
-              }}
-              className={`absolute select-none pointer-events-none ${el.color}`}
-            >
-              {el.type === 'leaf' && (
-                <Leaf
-                  style={{ width: el.size, height: el.size }}
-                  strokeWidth={1.5}
-                />
-              )}
-              {el.type === 'petal' && (
-                <Flower2
-                  style={{ width: el.size, height: el.size }}
-                  strokeWidth={1.5}
-                />
-              )}
-              {el.type === 'sprout' && (
-                <Sprout
-                  style={{ width: el.size, height: el.size }}
-                  strokeWidth={1.5}
-                />
-              )}
-            </motion.div>
-          );
-        })}
+      {/* Floating Garden Leaves, Blossoms, and Sprouts (Hidden/Frozen when modal is open to prevent background movement) */}
+      <div
+        className={`absolute inset-0 overflow-hidden transition-opacity duration-300 ${
+          isPaused ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        }`}
+      >
+        {!isPaused &&
+          gardenElements.map((el) => {
+            return (
+              <motion.div
+                key={`garden-el-${el.id}`}
+                initial={{
+                  y: '-8vh',
+                  x: `${el.xStart}vw`,
+                  opacity: 0,
+                  rotate: 0,
+                }}
+                animate={{
+                  y: ['-5vh', '108vh'],
+                  x: [
+                    `${el.xStart}vw`,
+                    `${el.xStart + (el.id % 2 === 0 ? 5 : -5)}vw`,
+                    `${el.xStart + (el.id % 2 === 0 ? -3 : 4)}vw`,
+                    `${el.xStart + (el.id % 2 === 0 ? 6 : -6)}vw`,
+                  ],
+                  opacity: [0, 0.85, 0.85, 0],
+                  rotate: [0, el.id % 2 === 0 ? 180 : -180, el.id % 2 === 0 ? 360 : -360],
+                }}
+                transition={{
+                  duration: el.duration,
+                  repeat: Infinity,
+                  delay: el.delay,
+                  ease: 'linear',
+                }}
+                className={`absolute select-none pointer-events-none ${el.color}`}
+              >
+                {el.type === 'leaf' && (
+                  <Leaf
+                    style={{ width: el.size, height: el.size }}
+                    strokeWidth={1.5}
+                  />
+                )}
+                {el.type === 'petal' && (
+                  <Flower2
+                    style={{ width: el.size, height: el.size }}
+                    strokeWidth={1.5}
+                  />
+                )}
+                {el.type === 'sprout' && (
+                  <Sprout
+                    style={{ width: el.size, height: el.size }}
+                    strokeWidth={1.5}
+                  />
+                )}
+              </motion.div>
+            );
+          })}
       </div>
 
       {/* Garden Pollen & Golden Light Sparkles */}
-      <div className="absolute inset-0">
-        {pollenMotes.map((mote) => (
-          <motion.div
-            key={`pollen-${mote.id}`}
-            animate={{
-              y: [0, -35, 0],
-              x: [0, 15, -10, 0],
-              opacity: [0.2, 0.75, 0.2],
-              scale: [0.8, 1.3, 0.8],
-            }}
-            transition={{
-              duration: mote.duration,
-              delay: mote.delay,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="absolute flex items-center justify-center text-[#9BBF82]/50"
-            style={{ left: mote.left, top: mote.top }}
-          >
-            <Sparkles className="w-3.5 h-3.5" strokeWidth={1.5} />
-          </motion.div>
-        ))}
+      <div
+        className={`absolute inset-0 transition-opacity duration-300 ${
+          isPaused ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        }`}
+      >
+        {!isPaused &&
+          pollenMotes.map((mote) => (
+            <motion.div
+              key={`pollen-${mote.id}`}
+              animate={{
+                y: [0, -35, 0],
+                x: [0, 15, -10, 0],
+                opacity: [0.2, 0.75, 0.2],
+                scale: [0.8, 1.3, 0.8],
+              }}
+              transition={{
+                duration: mote.duration,
+                delay: mote.delay,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+              className="absolute flex items-center justify-center text-[#9BBF82]/50"
+              style={{ left: mote.left, top: mote.top }}
+            >
+              <Sparkles className="w-3.5 h-3.5" strokeWidth={1.5} />
+            </motion.div>
+          ))}
       </div>
 
       {/* Subtle French Linguistic Accents Weaving Through the Garden */}
@@ -239,18 +309,26 @@ export const AnimatedBackground = () => {
           <motion.div
             key={`ling-accent-${idx}`}
             initial={{ opacity: 0.15 }}
-            animate={{
-              y: [0, -22, 0],
-              x: [0, 14, 0],
-              opacity: [0.15, 0.45, 0.15],
-              rotate: [0, 8, -8, 0],
-            }}
-            transition={{
-              duration: item.duration,
-              delay: item.delay,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
+            animate={
+              isPaused
+                ? { y: 0, x: 0, opacity: 0.18, rotate: 0 }
+                : {
+                    y: [0, -22, 0],
+                    x: [0, 14, 0],
+                    opacity: [0.15, 0.45, 0.15],
+                    rotate: [0, 8, -8, 0],
+                  }
+            }
+            transition={
+              isPaused
+                ? { duration: 0.3 }
+                : {
+                    duration: item.duration,
+                    delay: item.delay,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }
+            }
             className="absolute font-serif text-3xl md:text-5xl font-bold text-[#4B6B42]/35 select-none"
             style={{ top: item.top, left: item.left }}
           >

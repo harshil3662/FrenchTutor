@@ -5,7 +5,7 @@ import confetti from 'canvas-confetti';
 import { playChime } from '../utils/audioUtils.js';
 import { useModalTracker } from '../utils/modalState.js';
 
-export const AiQuizModal = ({ topic, level, onClose, onAwardXp }) => {
+export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
   useModalTracker(true);
   const [isLoading, setIsLoading] = useState(true);
   const [quizTitle, setQuizTitle] = useState('');
@@ -36,6 +36,15 @@ export const AiQuizModal = ({ topic, level, onClose, onAwardXp }) => {
             topic,
             level,
             questionCount: 4,
+            unitContext: {
+              unitNumber: unit?.unitNumber,
+              category: unit?.category,
+              frenchTitle: unit?.frenchTitle,
+              subtitle: unit?.subtitle,
+              formula: unit?.formula,
+              goldenRule: unit?.goldenRule,
+              practiceExercises: unit?.practiceExercises,
+            },
           }),
         });
 

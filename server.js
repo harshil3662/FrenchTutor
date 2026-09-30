@@ -97,6 +97,7 @@ async function generateOpenRouterJson(prompt) {
         model: getOpenRouterModel(),
         messages: [{ role: 'user', content: prompt }],
         response_format: { type: 'json_object' },
+        temperature: 0.9,
       }),
     });
 
@@ -411,9 +412,14 @@ Format as strict JSON:
 
 // Dynamic AI Practice Quiz Generator
 app.post('/api/ai/generate-quiz', async (req, res) => {
-  const { topic = 'Passé Composé vs Imparfait', level = 'B1', questionCount = 4 } = req.body;
+  const {
+    topic = 'Passé Composé vs Imparfait',
+    level = 'B1',
+    questionCount = 4,
+    unitContext = {},
+  } = req.body;
 
-  const defaultFallback = {
+  const genericFallback = {
     title: `Quiz de Révision: ${topic}`,
     level,
     questions: [
@@ -452,8 +458,50 @@ app.post('/api/ai/generate-quiz', async (req, res) => {
     ]
   };
 
+  const unitFallbackQuestions = Array.isArray(unitContext.practiceExercises)
+    ? unitContext.practiceExercises
+        .filter((exercise) =>
+          typeof exercise?.prompt === 'string' &&
+          Array.isArray(exercise.options) &&
+          exercise.options.length >= 2 &&
+          typeof exercise.correctAnswer === 'string'
+        )
+        .slice(0, questionCount)
+        .map((exercise, index) => ({
+          id: exercise.id || `q${index + 1}`,
+          type: exercise.type || 'multiple-choice',
+          prompt: exercise.prompt,
+          options: exercise.options,
+          correctAnswer: exercise.correctAnswer,
+          explanation: exercise.explanation || exercise.hint || 'Review the unit rule and apply it to the sentence.',
+        }))
+    : [];
+  const defaultFallback = {
+    ...genericFallback,
+    title: `Quiz de Révision: ${topic}`,
+    level,
+    questions: unitFallbackQuestions.length ? unitFallbackQuestions : genericFallback.questions,
+  };
+
   try {
-    const prompt = `Generate a ${questionCount}-question French interactive grammar quiz strictly focused on grammatical aspects for topic: "${topic}" and level ${level}.
+    const variationCues = [
+      'a train journey with a missed connection',
+      'a market visit to buy ingredients for dinner',
+      'a weekend trip with an unexpected change of plans',
+      'a conversation between colleagues preparing an event',
+      'a museum visit with a surprising discovery',
+      'a family gathering where people share memories',
+      'a neighborhood problem that needs to be solved',
+      "a traveler's conversation at a small hotel",
+    ];
+    const variationCue = variationCues[Math.floor(Math.random() * variationCues.length)];
+    const variationToken = Math.random().toString(36).slice(2, 10);
+    const prompt = `Generate a fresh ${questionCount}-question French interactive grammar quiz strictly focused on grammatical aspects for topic: "${topic}" and level ${level}.
+
+  Use this unit-specific curriculum context as the source of truth. Test its rules and terminology, not a generic grammar topic:
+  ${JSON.stringify(unitContext)}
+
+  Make this quiz substantially different from a standard or previously generated quiz. Use the scenario cue "${variationCue}" as inspiration, vary names, verbs, sentence structures, and contexts, and avoid stock examples. Use existing drills only to understand the unit content; do not copy their questions or answers verbatim. Give every question in this quiz a distinct sentence and test case. Variation token: ${variationToken}.
 
 Include varied question types:
 - Multiple choice with 4 options
@@ -475,7 +523,13 @@ Format as JSON:
   ]
 }`;
 
-    const openRouterResult = await generateOpenRouterJson(prompt);
+    let openRouterResult = null;
+    try {
+      openRouterResult = await generateOpenRouterJson(prompt);
+    } catch (error) {
+      console.warn('OpenRouter quiz generation failed; trying Gemini:', error);
+    }
+
     if (openRouterResult) {
       return res.json(cleanAndParseJson(openRouterResult, defaultFallback));
     }
@@ -491,6 +545,7 @@ Format as JSON:
       contents: prompt,
       config: {
         responseMimeType: 'application/json',
+        temperature: 0.9,
       },
     });
 

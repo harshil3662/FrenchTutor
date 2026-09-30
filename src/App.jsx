@@ -59,8 +59,8 @@ export default function App() {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const scrollY = window.scrollY;
-          // Threshold of 65px for collapsing horizontal nav and displaying floating vertical right rail
-          setIsScrolled(scrollY > 65);
+          // Threshold of 25px for smooth floating rounded header transition
+          setIsScrolled(scrollY > 25);
           ticking = false;
         });
         ticking = true;
@@ -91,14 +91,14 @@ export default function App() {
     setProgress(updated);
   };
 
-  const handleOpenAiQuiz = (topic, level) => {
-    setQuizModalData({ topic, level });
+  const handleOpenAiQuiz = (topic, level, unit) => {
+    setQuizModalData({ topic, level, unit });
   };
 
   return (
     <div className="relative min-h-screen bg-[#F5F5F0] text-[#34342E] flex flex-col font-sans selection:bg-[#5A5A40] selection:text-white">
       {/* Animated Moving Background Canvas */}
-      <AnimatedBackground />
+      <AnimatedBackground isPaused={isModalOpen} />
 
       {/* Floating Vertical Circular Navigation Rail (Active on Scroll, hidden when modal is open) */}
       <FloatingRightNav
@@ -109,30 +109,38 @@ export default function App() {
 
       {/* Sticky Top Header & Navigation Container (hidden when modal is open) */}
       {!isModalOpen && (
-        <div
-          className={`sticky top-0 z-30 transition-all duration-300 bg-[#F5F5F0]/50 backdrop-blur-md ${
+        <header
+          className={`sticky top-0 z-30 transition-all duration-300 ease-out ${
             isScrolled
-              ? 'border-b border-[#DCDCCF]/70 shadow-xs'
-              : 'border-b border-[#DCDCCF]/40 shadow-none'
+              ? 'pt-2.5 sm:pt-3.5 px-3 sm:px-6 lg:px-8 pb-1 pointer-events-none'
+              : 'pt-0 px-0 pb-0'
           }`}
         >
-          {/* Top App Header */}
-          <Header
-            progress={progress}
-            activeLevel={activeLevel}
-            onLevelChange={setActiveLevel}
-            audioSpeed={audioSpeed}
-            onSpeedChange={setAudioSpeed}
-            isScrolled={isScrolled}
-          />
+          <div
+            className={`mx-auto transition-all duration-300 ease-out ${
+              isScrolled
+                ? 'max-w-7xl rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#E7F2E4]/80 via-[#FAF7EE]/75 to-[#F5ECE6]/80 backdrop-blur-md border border-[#C8DAC3]/80 shadow-lg shadow-[#34342E]/6 ring-1 ring-[#5A7A5A]/15 pointer-events-auto'
+                : 'w-full bg-gradient-to-r from-[#E7F2E4]/70 via-[#FAF7EE]/65 to-[#F5ECE6]/70 backdrop-blur-md border-b border-[#C8DAC3]/60 shadow-none rounded-none'
+            }`}
+          >
+            {/* Top App Header */}
+            <Header
+              progress={progress}
+              activeLevel={activeLevel}
+              onLevelChange={setActiveLevel}
+              audioSpeed={audioSpeed}
+              onSpeedChange={setAudioSpeed}
+              isScrolled={isScrolled}
+            />
 
-          {/* Dynamic Horizontal Tab Navigation (Smoothly collapses when scrolling down) */}
-          <Navigation
-            activeTab={activeTab}
-            onTabChange={setActiveTab}
-            isScrolled={isScrolled}
-          />
-        </div>
+            {/* Dynamic Horizontal Tab Navigation (Smoothly collapses when scrolling down) */}
+            <Navigation
+              activeTab={activeTab}
+              onTabChange={setActiveTab}
+              isScrolled={isScrolled}
+            />
+          </div>
+        </header>
       )}
 
       {/* Main Viewport Content */}
@@ -227,6 +235,7 @@ export default function App() {
         <AiQuizModal
           topic={quizModalData.topic}
           level={quizModalData.level}
+          unit={quizModalData.unit}
           onClose={() => setQuizModalData(null)}
           onAwardXp={handleAwardXp}
         />
