@@ -15,7 +15,8 @@ export const TutorChatView = ({
   const [isRecording, setIsRecording] = useState(false);
   const [recordingRecognizer, setRecordingRecognizer] = useState(null);
   const [showTranslations, setShowTranslations] = useState({});
-  const messagesEndRef = useRef(null);
+  const chatContainerRef = useRef(null);
+  const isInitialMount = useRef(true);
 
   // Initialize messages when scenario changes
   useEffect(() => {
@@ -34,10 +35,23 @@ export const TutorChatView = ({
       },
     ]);
     setShowTranslations({ [starterId]: false });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = 0;
+    }
   }, [selectedScenario]);
 
+  // Only scroll the internal messages container on new messages, never the window
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTo({
+        top: chatContainerRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
   }, [messages, isLoading]);
 
   const handleSendMessage = async (textToSend) => {
@@ -261,7 +275,7 @@ export const TutorChatView = ({
         </div>
 
         {/* Messages Stream */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-[#FAF7F2]/60">
+        <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-[#FAF7F2]/60">
           {messages.map((msg) => {
             const isUser = msg.role === 'user';
             const isTranslated = showTranslations[msg.id];
@@ -366,8 +380,6 @@ export const TutorChatView = ({
               <span className="text-[#34342E] font-medium ml-1">Émile is typing in French...</span>
             </div>
           )}
-
-          <div ref={messagesEndRef} />
         </div>
 
         {/* Suggested Quick Response Chips */}

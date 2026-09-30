@@ -52,6 +52,11 @@ export default function App() {
     setUnits(getStoredUnits());
   }, []);
 
+  // Ensure window view always starts at top when switching tabs
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [activeTab]);
+
   // Track window scroll position to trigger dynamic nav transition
   useEffect(() => {
     let ticking = false;
@@ -91,8 +96,8 @@ export default function App() {
     setProgress(updated);
   };
 
-  const handleOpenAiQuiz = (topic, level, unit) => {
-    setQuizModalData({ topic, level, unit });
+  const handleOpenAiQuiz = (topic, level) => {
+    setQuizModalData({ topic, level });
   };
 
   return (
@@ -235,7 +240,6 @@ export default function App() {
         <AiQuizModal
           topic={quizModalData.topic}
           level={quizModalData.level}
-          unit={quizModalData.unit}
           onClose={() => setQuizModalData(null)}
           onAwardXp={handleAwardXp}
         />

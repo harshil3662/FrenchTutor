@@ -72,11 +72,14 @@ function getOpenRouterApiKey() {
   return process.env.OPEN_ROUTER_KEY || null;
 }
 
-function getOpenRouterModel() {
-  return process.env.OPEN_ROUTER_MODEL || 'openai/gpt-4o';
+function getOpenRouterModel(task) {
+  const taskKey = task
+    ? `OPEN_ROUTER_MODEL_${task.replace(/[^a-z0-9]/gi, '_').toUpperCase()}`
+    : null;
+  return (taskKey && process.env[taskKey]) || process.env.OPEN_ROUTER_MODEL || 'openai/gpt-4o';
 }
 
-async function generateOpenRouterJson(prompt) {
+async function generateOpenRouterJson(prompt, { task, temperature = 0.9 } = {}) {
   const apiKey = getOpenRouterApiKey();
   if (!apiKey) return null;
 
@@ -94,10 +97,10 @@ async function generateOpenRouterJson(prompt) {
         'X-Title': 'FrenchTutor',
       },
       body: JSON.stringify({
-        model: getOpenRouterModel(),
+        model: getOpenRouterModel(task),
         messages: [{ role: 'user', content: prompt }],
         response_format: { type: 'json_object' },
-        temperature: 0.9,
+        temperature,
       }),
     });
 
@@ -110,6 +113,28 @@ async function generateOpenRouterJson(prompt) {
   } finally {
     clearTimeout(timeout);
   }
+}
+
+async function generateAiJson(prompt, fallback, { task, temperature = 0.3 } = {}) {
+  try {
+    const openRouterResult = await generateOpenRouterJson(prompt, { task, temperature });
+    if (openRouterResult) return cleanAndParseJson(openRouterResult, fallback);
+  } catch (error) {
+    console.warn(`OpenRouter ${task || 'AI'} request failed; trying Gemini:`, error);
+  }
+
+  const ai = getGeminiClient();
+  if (!ai) return fallback;
+
+  const response = await ai.models.generateContent({
+    model: 'gemini-3.7-flash',
+    contents: prompt,
+    config: {
+      responseMimeType: 'application/json',
+      temperature,
+    },
+  });
+  return cleanAndParseJson(response.text, fallback);
 }
 
 // API Routes
@@ -139,11 +164,6 @@ app.post('/api/ai/chat', async (req, res) => {
 
   try {
     const { messages, scenario, level = 'A2', userGoal } = req.body;
-    const ai = getGeminiClient();
-
-    if (!ai) {
-      return res.json(defaultFallback);
-    }
 
     const systemPrompt = `You are "Émile", an encouraging, highly articulate, and culturally authentic native French language tutor and conversation partner.
 You are helping a student at CEFR level ${level} who is learning French.
@@ -174,17 +194,12 @@ You MUST format your response as strict JSON matching this structure:
       `${m.role === 'user' ? 'Student' : 'Tutor Émile'}: ${m.content}`
     ).join('\n');
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.7-flash',
-      contents: `${systemPrompt}\n\nCONVERSATION HISTORY:\n${formattedHistory}\n\nGenerate your JSON response now:`,
-      config: {
-        responseMimeType: 'application/json',
-        temperature: 0.7,
-      },
-    });
-
-    const parsed = cleanAndParseJson(response.text, defaultFallback);
-    res.json(parsed);
+    const result = await generateAiJson(
+      `${systemPrompt}\n\nCONVERSATION HISTORY:\n${formattedHistory}\n\nGenerate your JSON response now:`,
+      defaultFallback,
+      { task: 'chat', temperature: 0.7 }
+    );
+    res.json(result);
   } catch (error) {
     console.error('Error in /api/ai/chat:', error);
     res.json(defaultFallback);
@@ -238,12 +253,6 @@ app.post('/api/ai/grammar-check', async (req, res) => {
   };
 
   try {
-    const ai = getGeminiClient();
-
-    if (!ai) {
-      return res.json(defaultFallback);
-    }
-
     const prompt = `You are an expert French Linguist and Teacher at the Sorbonne.
 Analyze the following French text: "${text}".
 
@@ -258,16 +267,7 @@ Provide a comprehensive, pedagogical diagnostic in JSON format with:
 6. "registerAnalysis": "Familier (Informal/Slang)", "Courant (Standard)", or "Soutenu (Formal/Literary)" with explanation
 7. "culturalNuance": string explaining when and how native French speakers would phrase this.`;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.7-flash',
-      contents: prompt,
-      config: {
-        responseMimeType: 'application/json',
-        temperature: 0.3,
-      },
-    });
-
-    const result = cleanAndParseJson(response.text, defaultFallback);
+    const result = await generateAiJson(prompt, defaultFallback, { task: 'grammar-check' });
     res.json(result);
   } catch (error) {
     console.error('Error in /api/ai/grammar-check:', error);
@@ -291,12 +291,6 @@ app.post('/api/ai/pronunciation-feedback', async (req, res) => {
   };
 
   try {
-    const ai = getGeminiClient();
-
-    if (!ai) {
-      return res.json(defaultFallback);
-    }
-
     const prompt = `You are a French Phonetics and Diction coach.
 Target phrase the student was supposed to say: "${targetPhrase}"
 What speech-to-text recognized from the student's voice: "${spokenTranscript}"
@@ -313,15 +307,7 @@ Output JSON strictly with:
   "audioGuideTip": "Mouth shape and tongue placement tip in English"
 }`;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.7-flash',
-      contents: prompt,
-      config: {
-        responseMimeType: 'application/json',
-      },
-    });
-
-    const result = cleanAndParseJson(response.text, defaultFallback);
+    const result = await generateAiJson(prompt, defaultFallback, { task: 'pronunciation-feedback' });
     res.json(result);
   } catch (error) {
     console.error('Error in /api/ai/pronunciation-feedback:', error);
@@ -360,12 +346,6 @@ app.post('/api/ai/generate-story', async (req, res) => {
   };
 
   try {
-    const ai = getGeminiClient();
-
-    if (!ai) {
-      return res.json(defaultFallback);
-    }
-
     const prompt = `Create an engaging, culturally authentic French short reading story for a student at CEFR level ${level}.
 Topic: ${topic}. Theme: ${theme}.
 
@@ -394,15 +374,7 @@ Format as strict JSON:
   ]
 }`;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.7-flash',
-      contents: prompt,
-      config: {
-        responseMimeType: 'application/json',
-      },
-    });
-
-    const result = cleanAndParseJson(response.text, defaultFallback);
+    const result = await generateAiJson(prompt, defaultFallback, { task: 'generate-story' });
     res.json(result);
   } catch (error) {
     console.error('Error in /api/ai/generate-story:', error);
@@ -523,33 +495,7 @@ Format as JSON:
   ]
 }`;
 
-    let openRouterResult = null;
-    try {
-      openRouterResult = await generateOpenRouterJson(prompt);
-    } catch (error) {
-      console.warn('OpenRouter quiz generation failed; trying Gemini:', error);
-    }
-
-    if (openRouterResult) {
-      return res.json(cleanAndParseJson(openRouterResult, defaultFallback));
-    }
-
-    const ai = getGeminiClient();
-
-    if (!ai) {
-      return res.json(defaultFallback);
-    }
-
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.7-flash',
-      contents: prompt,
-      config: {
-        responseMimeType: 'application/json',
-        temperature: 0.9,
-      },
-    });
-
-    const result = cleanAndParseJson(response.text, defaultFallback);
+    const result = await generateAiJson(prompt, defaultFallback, { task: 'generate-quiz', temperature: 0.9 });
     res.json(result);
   } catch (error) {
     console.error('Error in /api/ai/generate-quiz:', error);
@@ -582,12 +528,6 @@ app.post('/api/ai/grammar-transform', async (req, res) => {
   };
 
   try {
-    const ai = getGeminiClient();
-
-    if (!ai) {
-      return res.json(defaultFallback);
-    }
-
     const prompt = `You are a French Syntactician and Grammar Specialist.
 Transform the following French sentence:
 Original Sentence: "${sentence}"
@@ -616,16 +556,7 @@ Format as strict JSON:
   }
 }`;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.7-flash',
-      contents: prompt,
-      config: {
-        responseMimeType: 'application/json',
-        temperature: 0.2,
-      },
-    });
-
-    const result = cleanAndParseJson(response.text, defaultFallback);
+    const result = await generateAiJson(prompt, defaultFallback, { task: 'grammar-transform', temperature: 0.2 });
     res.json(result);
   } catch (error) {
     console.error('Error in /api/ai/grammar-transform:', error);
@@ -673,12 +604,6 @@ app.post('/api/ai/dissect-sentence', async (req, res) => {
   };
 
   try {
-    const ai = getGeminiClient();
-
-    if (!ai) {
-      return res.json(defaultFallback);
-    }
-
     const prompt = `You are a French Computational Linguist and Grammar Professor.
 Conduct a deep grammatical aspect dissection of the French sentence: "${sentence}".
 
@@ -720,16 +645,7 @@ Format as JSON:
   "grammaticalSummary": "A concise, pedagogical linguistic overview of the sentence."
 }`;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.7-flash',
-      contents: prompt,
-      config: {
-        responseMimeType: 'application/json',
-        temperature: 0.2,
-      },
-    });
-
-    const result = cleanAndParseJson(response.text, defaultFallback);
+    const result = await generateAiJson(prompt, defaultFallback, { task: 'dissect-sentence', temperature: 0.2 });
     res.json(result);
   } catch (error) {
     console.error('Error in /api/ai/dissect-sentence:', error);
@@ -785,12 +701,6 @@ app.post('/api/ai/generate-grammar-lesson', async (req, res) => {
   };
 
   try {
-    const ai = getGeminiClient();
-
-    if (!ai) {
-      return res.json(defaultFallback);
-    }
-
     const prompt = `You are a Master Professor of French Grammar and Linguistics.
 Generate an in-depth, pedagogically structured French Grammar Lesson on the topic / aspect: "${aspectTitle}".
 Target CEFR Level: ${level}.
@@ -810,15 +720,7 @@ Requirements:
 
 Format as JSON strictly adhering to this structure.`;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.7-flash',
-      contents: prompt,
-      config: {
-        responseMimeType: 'application/json',
-      },
-    });
-
-    const result = cleanAndParseJson(response.text, defaultFallback);
+    const result = await generateAiJson(prompt, defaultFallback, { task: 'generate-grammar-lesson' });
     res.json(result);
   } catch (error) {
     console.error('Error in /api/ai/generate-grammar-lesson:', error);
