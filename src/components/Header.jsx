@@ -14,61 +14,29 @@ export const Header = ({
   return (
     <div
       id="app-header"
-      className={`text-[#34342E] transition-all duration-300 ${
+      className={`text-[#34342E] transition-colors duration-200 ${
         isScrolled ? 'border-b-0' : 'border-b border-[#DCDCCF]/30'
       }`}
     >
-      <div
-        className={`max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between transition-all duration-300 ${
-          isScrolled
-            ? 'px-3 sm:px-5 py-2 sm:py-2.5 gap-2.5 md:gap-4'
-            : 'px-4 sm:px-6 lg:px-8 py-3.5 gap-4'
-        }`}
-      >
+      <div className="max-w-7xl mx-auto flex flex-row items-center justify-between gap-2.5 sm:gap-4 px-3.5 sm:px-6 py-2.5 sm:py-3">
         {/* Brand identity */}
-        <div className="flex items-center space-x-3 sm:space-x-3.5">
-          <div
-            className={`relative flex items-center justify-center bg-gradient-to-br from-[#5A5A40] to-[#3E3E2C] border border-[#DCDCCF] shadow-sm shadow-[#5A5A40]/15 transition-all duration-300 ${
-              isScrolled ? 'w-9 h-9 rounded-xl' : 'w-11 h-11 rounded-2xl'
-            }`}
-          >
-            <span
-              className={`font-bold tracking-wider text-white font-serif transition-all duration-300 ${
-                isScrolled ? 'text-base' : 'text-xl'
-              }`}
-            >
+        <div className="flex items-center space-x-2.5 sm:space-x-3.5 shrink-0">
+          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#5A5A40] to-[#3E3E2C] border border-[#DCDCCF] shadow-sm shadow-[#5A5A40]/15">
+            <span className="font-bold tracking-wider text-white font-serif text-lg">
               FR
             </span>
             <span className="absolute -bottom-1 -right-1 text-xs">🇫🇷</span>
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <h1
-                className={`font-bold tracking-tight text-[#34342E] flex items-center gap-1.5 font-serif transition-all duration-300 ${
-                  isScrolled ? 'text-lg sm:text-xl' : 'text-xl'
-                }`}
-              >
+              <h1 className="font-bold tracking-tight text-[#34342E] flex items-center gap-1.5 font-serif text-lg sm:text-xl">
                 L'Atelier Grammaire
               </h1>
-              <span
-                className={`bg-[#5A5A40]/10 text-[#5A5A40] border border-[#5A5A40]/20 text-[10px] uppercase font-bold px-2.5 py-0.5 rounded-full tracking-wider transition-all duration-300 ${
-                  isScrolled ? 'hidden sm:inline-block' : 'inline-block'
-                }`}
-              >
-                Grammar Aspects & AI
-              </span>
             </div>
-            <p
-              className={`text-xs text-[#7A7A6A] transition-all duration-300 ${
-                isScrolled ? 'hidden md:block text-[11px]' : 'block'
-              }`}
-            >
-              French Grammar Lessons, Aspects & Syntactic Laboratory
-            </p>
           </div>
         </div>
 
-        {/* Status Counters & Tools */}
+        {/* Status Counters, Tools & Scrolled Menu Toggle */}
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           {/* Level Switcher */}
           <div className="flex items-center bg-white/60 backdrop-blur-sm rounded-xl p-1 border border-[#DCDCCF]/80 shadow-2xs">

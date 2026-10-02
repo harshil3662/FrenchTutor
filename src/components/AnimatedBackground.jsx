@@ -70,7 +70,8 @@ export const AnimatedBackground = ({ isPaused = false }) => {
       ref={containerRef}
       aria-hidden="true"
       id="garden-animated-background"
-      className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden transform-gpu will-change-transform select-none"
+      style={{ isolation: 'isolate', contain: 'strict', transform: 'translateZ(0)' }}
     >
       {/* Garden Canopy Ambient Gradients */}
       {/* 1. Lush Botanical Green Canopy (Top Left) */}
