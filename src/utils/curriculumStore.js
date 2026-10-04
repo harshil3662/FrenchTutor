@@ -1,6 +1,45 @@
 import { GRAMMAR_ASPECT_LESSONS } from '../data/grammarAspectsData.js';
 
 const UNITS_STORAGE_KEY = 'french_grammar_units_v1';
+const AI_PRACTICE_STORAGE_KEY = 'french_ai_practice_exercises_v1';
+
+export function getStoredAiPracticeExercises(lessonId) {
+  if (!lessonId) return null;
+
+  try {
+    const stored = JSON.parse(localStorage.getItem(AI_PRACTICE_STORAGE_KEY) || '{}');
+    const exercises = stored[lessonId];
+    return Array.isArray(exercises) && exercises.length ? exercises : null;
+  } catch (e) {
+    console.warn('Failed to parse saved AI practice exercises:', e);
+    return null;
+  }
+}
+
+export function saveStoredAiPracticeExercises(lessonId, exercises) {
+  if (!lessonId || !Array.isArray(exercises) || !exercises.length) return;
+
+  try {
+    const stored = JSON.parse(localStorage.getItem(AI_PRACTICE_STORAGE_KEY) || '{}');
+    localStorage.setItem(
+      AI_PRACTICE_STORAGE_KEY,
+      JSON.stringify({ ...stored, [lessonId]: exercises })
+    );
+  } catch (e) {
+    console.error('Failed to save AI practice exercises:', e);
+  }
+}
+
+export function clearStoredAiPracticeExercises(lessonId) {
+  if (!lessonId) return;
+  try {
+    const stored = JSON.parse(localStorage.getItem(AI_PRACTICE_STORAGE_KEY) || '{}');
+    delete stored[lessonId];
+    localStorage.setItem(AI_PRACTICE_STORAGE_KEY, JSON.stringify(stored));
+  } catch (e) {
+    console.error('Failed to clear stored AI practice exercises:', e);
+  }
+}
 
 const PREDEFINED_DRILLS_BY_LESSON_ID = new Map(
   GRAMMAR_ASPECT_LESSONS.map((lesson) => [

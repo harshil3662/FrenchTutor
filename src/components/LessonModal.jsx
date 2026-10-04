@@ -1,9 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Volume2, CheckCircle2, XCircle, ArrowRight, Sparkles, BookOpen, Layers, Lightbulb, RotateCcw, Table as TableIcon, FileText } from 'lucide-react';
+import {
+  X,
+  Volume2,
+  CheckCircle2,
+  XCircle,
+  ArrowRight,
+  Sparkles,
+  BookOpen,
+  Layers,
+  Lightbulb,
+  RotateCcw,
+  Table as TableIcon,
+  FileText,
+  BrainCircuit,
+  AlertTriangle,
+  Languages,
+} from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { speakFrench, playChime } from '../utils/audioUtils.js';
 import { useModalTracker } from '../utils/modalState.js';
+import {
+  getStoredAiPracticeExercises,
+  saveStoredAiPracticeExercises,
+  clearStoredAiPracticeExercises,
+} from '../utils/curriculumStore.js';
 import { formatBoldText } from '../utils/textFormatter.jsx';
 
 export const LessonModal = ({
@@ -18,11 +39,20 @@ export const LessonModal = ({
   const [activeTopicIndex, setActiveTopicIndex] = useState(0);
   const [currentExIndex, setCurrentExIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [sentenceWords, setSentenceWords] = useState([]);
-  const [availableWords, setAvailableWords] = useState([]);
   const [hasChecked, setHasChecked] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [score, setScore] = useState(0);
+  const [showHint, setShowHint] = useState(false);
+  const [isQuestionTranslated, setIsQuestionTranslated] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
+  const [translationMap, setTranslationMap] = useState({});
+
+  // AI Quiz generation state
+  const [aiExercises, setAiExercises] = useState(null);
+  const [aiExercisesLessonId, setAiExercisesLessonId] = useState(null);
+  const [isGeneratingQuiz, setIsGeneratingQuiz] = useState(false);
+  const [quizError, setQuizError] = useState('');
+  const quizRequestRef = useRef(null);
 
   // Lock background scroll when lesson modal is open
   useEffect(() => {
@@ -35,6 +65,8 @@ export const LessonModal = ({
 
   // Reset state when lesson changes
   useEffect(() => {
+    quizRequestRef.current?.abort();
+    const saved = getStoredAiPracticeExercises(lesson?.id);
     setActiveTopicIndex(0);
     setPhase('grammar');
     setCurrentExIndex(0);
@@ -42,7 +74,15 @@ export const LessonModal = ({
     setHasChecked(false);
     setIsCorrect(false);
     setScore(0);
+    setShowHint(false);
+    setIsQuestionTranslated(false);
+    setAiExercises(saved);
+    setAiExercisesLessonId(saved ? lesson?.id : null);
+    setIsGeneratingQuiz(false);
+    setQuizError('');
   }, [lesson?.id]);
+
+  useEffect(() => () => quizRequestRef.current?.abort(), []);
 
   // Scroll to top whenever topic or phase changes
   useEffect(() => {
@@ -57,19 +97,12 @@ export const LessonModal = ({
     }
   };
 
+  if (!lesson) return null;
+
   // Support multi-topic units
   const topicsList = Array.isArray(lesson?.topics) && lesson.topics.length > 0 ? lesson.topics : null;
   const hasMultipleTopics = Boolean(topicsList && topicsList.length > 1);
   const activeTopic = hasMultipleTopics ? (topicsList[activeTopicIndex] || topicsList[0]) : lesson;
-
-  // Resolve exercises: support root exercises or aggregated topic exercises
-  const topicExercises = Array.isArray(lesson?.topics)
-    ? lesson.topics.flatMap((t) => t.exercises || t.practiceExercises || [])
-    : [];
-  const exercisesList = (lesson?.exercises?.length || lesson?.practiceExercises?.length)
-    ? (lesson?.exercises || lesson?.practiceExercises)
-    : topicExercises;
-  const currentExercise = exercisesList?.[currentExIndex];
 
   // Resolve vocabulary
   const vocabList = Array.isArray(lesson?.vocabulary) && lesson.vocabulary.length > 0
@@ -77,6 +110,12 @@ export const LessonModal = ({
     : Array.isArray(lesson?.topics)
     ? lesson.topics.flatMap((t) => t.vocabulary || [])
     : [];
+
+  // Exercises are ALWAYS dynamic AI Quiz questions
+  const exercises = (aiExercisesLessonId === lesson?.id && aiExercises?.length)
+    ? aiExercises
+    : [];
+  const currentExercise = exercises[currentExIndex];
 
   // Normalize formula for active topic
   const formulaText = activeTopic?.formula || activeTopic?.syntaxFormula || activeTopic?.grammarTip?.formula || (!hasMultipleTopics ? (lesson?.formula || lesson?.syntaxFormula || lesson?.grammarTip?.formula) : null);
@@ -100,142 +139,248 @@ export const LessonModal = ({
     ? [rawTables]
     : [];
 
-  // Normalize examples from active topic (displayed at last)
+  // Normalize examples from active topic
   const rawExamples = activeTopic?.contrastExamples || activeTopic?.examples || activeTopic?.grammarTip?.examples || (!hasMultipleTopics ? (lesson?.contrastExamples || lesson?.examples || lesson?.grammarTip?.examples) : null);
   const lessonExamples = Array.isArray(rawExamples) && rawExamples.length > 0
     ? rawExamples
     : [];
 
-  // Initialize sentence builder words when exercise changes
-  React.useEffect(() => {
-    if (currentExercise?.type === 'sentence-builder' && currentExercise.words) {
-      // Shuffle words for challenge
-      const shuffled = [...currentExercise.words].sort(() => Math.random() - 0.5);
-      setAvailableWords(shuffled);
-      setSentenceWords([]);
+  const handleAudioPlay = (text) => {
+    speakFrench(text, audioSpeed || 0.95);
+  };
+
+  const handleGenerateAiQuiz = async (forceFresh = false) => {
+    if (isGeneratingQuiz) return;
+
+    if (!forceFresh) {
+      const saved = getStoredAiPracticeExercises(lesson.id);
+      if (saved && saved.length) {
+        setAiExercises(saved);
+        setAiExercisesLessonId(lesson.id);
+        setCurrentExIndex(0);
+        setSelectedAnswer(null);
+        setHasChecked(false);
+        setIsCorrect(false);
+        setScore(0);
+        setQuizError('');
+        return;
+      }
+    } else {
+      clearStoredAiPracticeExercises(lesson.id);
     }
+
+    const controller = new AbortController();
+    quizRequestRef.current = controller;
+    setIsGeneratingQuiz(true);
+    setQuizError('');
+    setCurrentExIndex(0);
     setSelectedAnswer(null);
     setHasChecked(false);
     setIsCorrect(false);
-  }, [currentExIndex, currentExercise]);
+    setScore(0);
 
-  const handleWordTileClick = (word, fromAvailable) => {
-    playChime('click');
-    if (fromAvailable) {
-      setAvailableWords((prev) => {
-        const idx = prev.indexOf(word);
-        if (idx > -1) {
-          const next = [...prev];
-          next.splice(idx, 1);
-          return next;
-        }
-        return prev;
+    try {
+      const res = await fetch('/api/ai/generate-quiz', {
+        method: 'POST',
+        signal: controller.signal,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topic: lesson.title,
+          level: lesson.level || 'A1',
+          questionCount: 4,
+          unitContext: {
+            unitNumber: lesson.unit,
+            category: lesson.category,
+            subtitle: lesson.subtitle,
+            formula: formulaText,
+            goldenRule: goldenRuleText,
+            vocabulary: vocabList.slice(0, 10),
+            topics: lesson.topics,
+          },
+        }),
       });
-      setSentenceWords((prev) => [...prev, word]);
-    } else {
-      setSentenceWords((prev) => {
-        const idx = prev.indexOf(word);
-        if (idx > -1) {
-          const next = [...prev];
-          next.splice(idx, 1);
-          return next;
-        }
-        return prev;
+      const data = await res.json();
+      const validQuestions = Array.isArray(data.questions)
+        ? data.questions.filter((q) =>
+            typeof q?.prompt === 'string' &&
+            q.prompt.trim() &&
+            Array.isArray(q.options) &&
+            q.options.length >= 2 &&
+            typeof q.correctAnswer === 'string' &&
+            q.options.includes(q.correctAnswer)
+          )
+        : [];
+
+      if (!res.ok || !validQuestions.length) {
+        throw new Error(data.error || 'Could not generate AI quiz questions.');
+      }
+
+      const formatted = validQuestions.map((q, idx) => ({
+        id: q.id || `lesson-q-${idx + 1}`,
+        type: 'multiple-choice',
+        prompt: q.prompt,
+        promptEnglish: q.promptEnglish || '',
+        options: q.options,
+        correctAnswer: q.correctAnswer,
+        hint: q.hint || q.explanation || '',
+        explanation: q.explanation || 'Review the unit rule and apply it to the sentence.',
+      }));
+
+      saveStoredAiPracticeExercises(lesson.id, formatted);
+      setAiExercises(formatted);
+      setAiExercisesLessonId(lesson.id);
+      setCurrentExIndex(0);
+      setQuizError('');
+    } catch (e) {
+      if (controller.signal.aborted) return;
+      setQuizError(e.message || 'Could not generate AI quiz.');
+    } finally {
+      if (!controller.signal.aborted) setIsGeneratingQuiz(false);
+    }
+  };
+
+  const handleToggleTranslation = async () => {
+    if (!currentExercise) return;
+    if (isQuestionTranslated) {
+      setIsQuestionTranslated(false);
+      return;
+    }
+
+    if (currentExercise.promptEnglish) {
+      setIsQuestionTranslated(true);
+      return;
+    }
+
+    const cached = translationMap[currentExercise.prompt];
+    if (cached) {
+      setIsQuestionTranslated(true);
+      return;
+    }
+
+    setIsTranslating(true);
+    try {
+      const res = await fetch('/api/ai/translate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: currentExercise.prompt,
+          targetLang: 'en',
+        }),
       });
-      setAvailableWords((prev) => [...prev, word]);
+      const data = await res.json();
+      if (data?.translatedText) {
+        setTranslationMap((prev) => ({
+          ...prev,
+          [currentExercise.prompt]: data.translatedText,
+        }));
+        setIsQuestionTranslated(true);
+      }
+    } catch (e) {
+      console.warn('Failed to translate question:', e);
+    } finally {
+      setIsTranslating(false);
+    }
+  };
+
+  const handleOpenQuizPhase = () => {
+    setPhase('quiz');
+    scrollToTop();
+    setIsQuestionTranslated(false);
+    if (aiExercisesLessonId !== lesson.id || !aiExercises?.length) {
+      handleGenerateAiQuiz();
     }
   };
 
   const handleCheckAnswer = () => {
-    if (!currentExercise) return;
+    if (!currentExercise || !selectedAnswer) return;
 
-    let correct = false;
-    if (currentExercise.type === 'sentence-builder') {
-      const assembled = sentenceWords.join(' ');
-      correct = assembled.trim() === currentExercise.correctAnswer.trim();
-    } else {
-      correct = selectedAnswer?.trim() === currentExercise.correctAnswer.trim();
-    }
+    const cleanUser = selectedAnswer.trim().toLowerCase().replace(/[.,!?;:]/g, '');
+    const cleanCorrect = currentExercise.correctAnswer.trim().toLowerCase().replace(/[.,!?;:]/g, '');
 
+    const correct = cleanUser === cleanCorrect;
     setIsCorrect(correct);
     setHasChecked(true);
 
     if (correct) {
+      setScore((prev) => prev + 1);
       playChime('correct');
-      setScore((s) => s + 1);
     } else {
       playChime('incorrect');
     }
   };
 
   const handleNextExercise = () => {
-    if (currentExIndex < exercisesList.length - 1) {
-      setCurrentExIndex((i) => i + 1);
+    if (currentExIndex < exercises.length - 1) {
+      setCurrentExIndex((prev) => prev + 1);
+      setSelectedAnswer(null);
+      setHasChecked(false);
+      setIsCorrect(false);
+      setShowHint(false);
+      setIsQuestionTranslated(false);
     } else {
-      // Completed all exercises
+      // Completed!
+      const totalEarnedXp = Math.max(15, (score + (isCorrect ? 1 : 0)) * 10);
       setPhase('completed');
-      playChime('celebrate');
       try {
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 }
-        });
-      } catch (e) {}
-      onComplete(lesson.id, lesson.xpReward || (exercisesList.length * 10));
+        confetti({ particleCount: 70, spread: 70, origin: { y: 0.6 } });
+      } catch {}
+      onComplete?.(lesson.id, totalEarnedXp);
     }
   };
 
-  const handleAudioPlay = (text) => {
-    speakFrench(text, audioSpeed);
-  };
-
-  if (!lesson) return null;
-
   const modalContent = (
-    <div id="lesson-modal-overlay" className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-[#34342E]/70 backdrop-blur-sm animate-in fade-in duration-200 overscroll-contain">
-      <div 
-        id="lesson-modal-container" 
-        className="bg-white border border-[#E8E2D9] rounded-3xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden text-[#34342E]"
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200 overscroll-contain">
+      <div
+        id="lesson-modal-container"
+        className="bg-white rounded-3xl w-full max-w-4xl max-h-[92vh] flex flex-col shadow-2xl border border-[#DCDCCF] overflow-hidden"
       >
         {/* Modal Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8E2D9] bg-[#FAF7F2] shrink-0">
-          <div className="flex items-center space-x-3">
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#F0ECE1] text-[#5A5A40] border border-[#5A5A40]/20">
-              {lesson.level} • Unit {lesson.unit}
-            </span>
-            <h2 className="text-lg font-bold text-[#34342E] tracking-tight font-serif">{lesson.title}</h2>
+        <div className="p-4 sm:p-6 bg-[#FAF7F2] border-b border-[#E8E2D9] flex items-start justify-between shrink-0">
+          <div className="space-y-1">
+            <div className="flex items-center space-x-2">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#5A5A40] text-white">
+                Unit {lesson.unit || 1} • {lesson.level}
+              </span>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#F0ECE1] text-[#5A5A40] border border-[#5A5A40]/20">
+                {lesson.category}
+              </span>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#FAF3EE] text-[#9C4B2E] border border-[#D98E73]/20 flex items-center gap-1">
+                <BrainCircuit className="w-3 h-3" />
+                <span>AI Quiz</span>
+              </span>
+            </div>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#34342E] font-serif">
+              {lesson.title}
+            </h2>
+            <p className="text-xs sm:text-sm text-[#7A7A6A] font-serif italic">
+              {lesson.subtitle}
+            </p>
           </div>
+
           <button
-            id="close-lesson-btn"
             onClick={onClose}
             aria-label="Close lesson modal"
-            className="p-1.5 text-[#7A7A6A] hover:text-[#34342E] hover:bg-[#F0ECE1] rounded-xl transition-colors cursor-pointer shrink-0"
+            className="p-2 rounded-full hover:bg-[#EAE6DF] text-[#7A7A6A] hover:text-[#34342E] transition-all cursor-pointer shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Phase Stepper Tab Bar */}
-        <div className="flex border-b border-[#E8E2D9] bg-[#FAF7F2] px-6 py-2 gap-4 text-xs font-semibold text-[#7A7A6A] overflow-x-auto">
+        {/* Phase Navigation Tabs */}
+        <div className="flex items-center space-x-6 px-6 border-b border-[#E8E2D9] text-xs font-semibold text-[#7A7A6A] bg-[#FAF7F2] overflow-x-auto scrollbar-none">
           <button
             onClick={() => setPhase('grammar')}
-            className={`flex items-center gap-1.5 py-1 transition-colors cursor-pointer shrink-0 ${
+            className={`flex items-center gap-1.5 py-3 transition-colors cursor-pointer shrink-0 ${
               phase === 'grammar' ? 'text-[#5A5A40] font-bold border-b-2 border-[#5A5A40]' : 'hover:text-[#34342E]'
             }`}
           >
             <BookOpen className="w-3.5 h-3.5" />
-            <span>1. Grammar Rules & Blueprint</span>
-            {hasMultipleTopics && (
-              <span className="ml-1 px-1.5 py-0.5 rounded-full bg-[#5A5A40]/10 text-[#5A5A40] text-[10px] font-bold">
-                {topicsList.length} topics
-              </span>
-            )}
+            <span>1. Lesson Guide & Rules</span>
           </button>
           {vocabList.length > 0 && (
             <button
               onClick={() => setPhase('vocab')}
-              className={`flex items-center gap-1.5 py-1 transition-colors cursor-pointer shrink-0 ${
+              className={`flex items-center gap-1.5 py-3 transition-colors cursor-pointer shrink-0 ${
                 phase === 'vocab' ? 'text-[#5A5A40] font-bold border-b-2 border-[#5A5A40]' : 'hover:text-[#34342E]'
               }`}
             >
@@ -243,21 +388,20 @@ export const LessonModal = ({
               <span>2. Key Vocabulary ({vocabList.length})</span>
             </button>
           )}
-          {exercisesList.length > 0 && (
-            <button
-              onClick={() => setPhase('exercises')}
-              className={`flex items-center gap-1.5 py-1 transition-colors cursor-pointer shrink-0 ${
-                phase === 'exercises' || phase === 'completed' ? 'text-[#5A5A40] font-bold border-b-2 border-[#5A5A40]' : 'hover:text-[#34342E]'
-              }`}
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{vocabList.length > 0 ? '3' : '2'}. Practice Exercises ({exercisesList.length})</span>
-            </button>
-          )}
+          <button
+            id="tab-lesson-ai-quiz"
+            onClick={handleOpenQuizPhase}
+            className={`flex items-center gap-1.5 py-3 transition-colors cursor-pointer shrink-0 ${
+              phase === 'quiz' || phase === 'completed' ? 'text-[#5A5A40] font-bold border-b-2 border-[#5A5A40]' : 'hover:text-[#34342E]'
+            }`}
+          >
+            <BrainCircuit className="w-3.5 h-3.5 text-[#5A5A40]" />
+            <span>{vocabList.length > 0 ? '3' : '2'}. Unit AI Quiz {exercises.length ? `(${exercises.length})` : ''}</span>
+          </button>
         </div>
 
         {/* Modal Body */}
-        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto overscroll-contain p-6 space-y-6">
+        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto overscroll-contain p-6 sm:p-8 space-y-6">
           {/* PHASE 1: GRAMMAR RULES & BLUEPRINT */}
           {phase === 'grammar' && (
             <div className="space-y-6 animate-in fade-in">
@@ -299,162 +443,202 @@ export const LessonModal = ({
                 </div>
               )}
 
-              {/* Formula Blueprint */}
+              {/* Topic Header & Jump to AI Quiz CTA */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-[#E8E2D9]">
+                <div>
+                  <h3 className="text-lg font-bold text-[#34342E] font-serif">
+                    {activeTopic?.title || lesson.title}
+                  </h3>
+                  {activeTopic?.subtitle && (
+                    <p className="text-xs text-[#7A7A6A] mt-0.5">
+                      {activeTopic.subtitle}
+                    </p>
+                  )}
+                </div>
+                <button
+                  onClick={handleOpenQuizPhase}
+                  className="px-3.5 py-1.5 rounded-xl bg-white hover:bg-[#FAF7F2] text-[#5A5A40] border border-[#5A5A40]/25 text-xs font-bold transition-all shadow-2xs hover:shadow-xs flex items-center gap-1.5 cursor-pointer shrink-0 self-start sm:self-auto"
+                >
+                  <BrainCircuit className="w-3.5 h-3.5 text-[#5A5A40]" />
+                  <span>Skip to AI Quiz →</span>
+                </button>
+              </div>
+
+              {/* 1. Structural Formula Blueprint */}
               {formulaText && (
-                <div className="p-5 bg-[#FAF7F2] border border-[#5A5A40]/30 rounded-2xl space-y-2 shadow-xs">
-                  <span className="text-xs uppercase font-bold tracking-wider text-[#5A5A40] flex items-center gap-1.5">
-                    <Layers className="w-4 h-4" />
-                    Syntactic Formula Blueprint
-                  </span>
-                  <div className="text-base sm:text-lg font-bold text-[#34342E] font-mono tracking-tight bg-white p-3.5 rounded-xl border border-[#E8E2D9]">
+                <div className="p-5 bg-[#FAF7F2] rounded-2xl border border-[#E8E2D9] space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#5A5A40] flex items-center gap-1.5">
+                      <Layers className="w-3.5 h-3.5" />
+                      Syntax Formula Blueprint
+                    </span>
+                    <button
+                      onClick={() => handleAudioPlay(formulaText)}
+                      className="p-1 text-[#7A7A6A] hover:text-[#34342E] rounded-md transition-colors cursor-pointer"
+                      title="Listen"
+                    >
+                      <Volume2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <div className="text-sm sm:text-base font-mono font-semibold text-[#34342E] bg-white p-3 rounded-xl border border-[#DCDCCF]/80">
                     {formulaText}
                   </div>
                 </div>
               )}
 
-              {/* The Golden Rule */}
-              {goldenRuleText ? (
-                <div className="p-5 bg-[#EEF4EE] border border-[#5A7A5A]/30 rounded-2xl flex items-start space-x-3.5 shadow-xs">
+              {/* 2. Golden Rule */}
+              {goldenRuleText && (
+                <div className="p-5 bg-[#EEF4EE] rounded-2xl border border-[#5A7A5A]/30 flex items-start gap-3">
                   <Lightbulb className="w-5 h-5 text-[#3A5A3A] shrink-0 mt-0.5" />
                   <div className="space-y-1">
-                    <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#3A5A3A]">
-                      The Golden Rule
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#3A5A3A]">
+                      Golden Grammar Rule
                     </h4>
-                    <p className="text-sm sm:text-base text-[#34342E] leading-relaxed font-medium">
+                    <p className="text-sm text-[#34342E] font-medium leading-relaxed">
                       {formatBoldText(goldenRuleText)}
                     </p>
                   </div>
                 </div>
-              ) : lesson?.grammarTip?.rules?.length > 0 ? (
-                <div className="p-5 bg-[#EEF4EE] border border-[#5A7A5A]/30 rounded-2xl flex items-start space-x-3.5 shadow-xs">
-                  <Lightbulb className="w-5 h-5 text-[#3A5A3A] shrink-0 mt-0.5" />
-                  <div className="space-y-1.5 w-full">
-                    <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#3A5A3A]">
-                      {lesson.grammarTip.title || 'The Golden Rule & Key Takeaways'}
-                    </h4>
-                    <ul className="space-y-1.5 text-sm sm:text-base text-[#34342E] list-disc list-inside font-medium leading-relaxed">
-                      {lesson.grammarTip.rules.map((rule, idx) => (
-                        <li key={idx}>{formatBoldText(rule)}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ) : null}
+              )}
 
-              {/* 1. Description */}
+              {/* 3. Detailed Explanations */}
               {detailedParagraphs.length > 0 && (
-                <div id="grammar-modal-description" className="space-y-3">
-                  <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#7A7A6A] flex items-center gap-1.5">
-                    <FileText className="w-4 h-4 text-[#5A5A40]" />
-                    Description
+                <div className="space-y-3 bg-[#FAF9F5] p-5 rounded-2xl border border-[#E8E2D9]">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#7A7A6A] flex items-center gap-1.5">
+                    <FileText className="w-3.5 h-3.5 text-[#5A5A40]" />
+                    Pedagogical Breakdown
                   </h4>
-                  <div className="bg-white border border-[#E8E2D9] rounded-2xl p-5 sm:p-6 space-y-3.5 text-sm sm:text-base text-[#404038] leading-relaxed shadow-xs">
-                    {detailedParagraphs.map((paragraph, idx) => (
-                      <p key={idx} className="leading-relaxed">{formatBoldText(paragraph)}</p>
+                  <div className="space-y-3 text-sm text-[#404038] leading-relaxed">
+                    {detailedParagraphs.map((para, pIdx) => (
+                      <p key={pIdx} className="leading-relaxed">
+                        {formatBoldText(para)}
+                      </p>
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* 2. Tabular Information (if available) */}
-              {tableList.length > 0 && (
-                <div id="grammar-modal-tabular" className="space-y-4">
-                  <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#7A7A6A] flex items-center gap-1.5">
-                    <TableIcon className="w-4 h-4 text-[#5A5A40]" />
-                    Tabular Information
+              {/* 4. Structured Rules List */}
+              {activeTopic?.rules && activeTopic.rules.length > 0 && (
+                <div className="space-y-3">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#7A7A6A]">
+                    Key Morphosyntactic Principles
                   </h4>
-                  {tableList.map((tbl, tIdx) => (
-                    <div key={tIdx} className="space-y-2.5">
-                      <div className="flex items-center justify-between">
-                        <h5 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#5A5A40] flex items-center gap-1.5">
-                          {tbl.title || `Reference Table ${tIdx + 1}`}
-                        </h5>
-                        {tbl.subtitle && (
-                          <span className="text-[11px] text-[#7A7A6A] italic">{tbl.subtitle}</span>
-                        )}
+                  <div className="grid gap-2.5">
+                    {activeTopic.rules.map((rule, idx) => (
+                      <div
+                        key={idx}
+                        className="p-4 rounded-xl bg-white border border-[#E8E2D9] flex items-start gap-3 shadow-2xs"
+                      >
+                        <span className="w-6 h-6 rounded-full bg-[#F0ECE1] text-[#5A5A40] flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+                          {idx + 1}
+                        </span>
+                        <p className="text-xs sm:text-sm text-[#34342E] leading-relaxed">
+                          {formatBoldText(rule)}
+                        </p>
                       </div>
-                      {tbl.description && (
-                        <p className="text-xs sm:text-sm text-[#7A7A6A]">{tbl.description}</p>
-                      )}
-                      <div className="overflow-x-auto rounded-2xl border border-[#E8E2D9] bg-white shadow-xs">
-                        <table className="w-full text-left text-sm sm:text-base border-collapse">
-                          {tbl.headers && (
-                            <thead className="bg-[#FAF7F2] border-b border-[#E8E2D9] text-[#5A5A40]">
-                              <tr>
-                                {tbl.headers.map((header, hIdx) => (
-                                  <th key={hIdx} className="px-4.5 py-3.5 font-bold uppercase text-xs tracking-wider whitespace-nowrap">
-                                    {header}
-                                  </th>
-                                ))}
-                              </tr>
-                            </thead>
-                          )}
-                          <tbody className="divide-y divide-[#E8E2D9]">
-                            {tbl.rows?.map((row, rIdx) => (
-                              <tr key={rIdx} className="hover:bg-[#FAF8F5]/80 transition-colors">
-                                {Array.isArray(row) ? (
-                                  row.map((cell, cIdx) => (
-                                    <td key={cIdx} className={`px-4.5 py-3.5 ${cIdx === 0 ? 'font-bold text-[#34342E]' : 'text-[#404038]'}`}>
-                                      {typeof cell === 'object' && cell !== null ? cell.text : String(cell ?? '')}
-                                    </td>
-                                  ))
-                                ) : (
-                                  <td className="px-4.5 py-3.5 text-[#404038]">{String(row)}</td>
-                                )}
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               )}
 
-              {/* 3. Examples (at last) */}
-              {lessonExamples.length > 0 && (
-                <div id="grammar-modal-examples" className="space-y-3">
-                  <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#7A7A6A] flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4 text-[#5A5A40]" />
-                    Examples
+              {/* 5. Conjugation / Aspect Tables */}
+              {tableList.length > 0 && (
+                <div className="space-y-4">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#7A7A6A] flex items-center gap-1.5">
+                    <TableIcon className="w-3.5 h-3.5 text-[#5A5A40]" />
+                    Conjugation & Syntactic Breakdown Tables
                   </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                  <div className="grid gap-4">
+                    {tableList.map((tbl, tIdx) => (
+                      <div
+                        key={tIdx}
+                        className="bg-white rounded-2xl border border-[#E8E2D9] overflow-hidden shadow-2xs"
+                      >
+                        {tbl.title && (
+                          <div className="px-4 py-2.5 bg-[#F0ECE1] border-b border-[#E8E2D9] font-bold text-xs text-[#5A5A40]">
+                            {tbl.title}
+                          </div>
+                        )}
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-left text-xs sm:text-sm">
+                            {tbl.headers && (
+                              <thead className="bg-[#FAF7F2] border-b border-[#E8E2D9] text-[#7A7A6A]">
+                                <tr>
+                                  {tbl.headers.map((h, hIdx) => (
+                                    <th key={hIdx} className="px-4 py-2 font-semibold">
+                                      {h}
+                                    </th>
+                                  ))}
+                                </tr>
+                              </thead>
+                            )}
+                            <tbody className="divide-y divide-[#E8E2D9]">
+                              {tbl.rows?.map((row, rIdx) => (
+                                <tr key={rIdx} className="hover:bg-[#FAF9F5] transition-colors">
+                                  {row.map((cell, cIdx) => (
+                                    <td key={cIdx} className="px-4 py-2.5 text-[#34342E] font-medium">
+                                      {cell}
+                                    </td>
+                                  ))}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* 6. Examples in Context */}
+              {lessonExamples.length > 0 && (
+                <div className="space-y-3">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#7A7A6A]">
+                    Exemplars & Sentence Usage
+                  </h4>
+                  <div className="grid gap-3">
                     {lessonExamples.map((ex, idx) => (
                       <div
                         key={idx}
-                        className="flex items-center justify-between p-4 rounded-xl bg-white border border-[#E8E2D9] hover:border-[#DCDCCF] transition-all shadow-xs"
+                        className="p-4 rounded-xl bg-white border border-[#E8E2D9] space-y-1.5 shadow-2xs"
                       >
-                        <div className="space-y-1">
-                          <p className="text-base sm:text-lg font-semibold text-[#34342E] font-serif">{ex.french}</p>
-                          <p className="text-xs sm:text-sm text-[#7A7A6A] italic">« {ex.english} »</p>
-                          {ex.aspectNote && (
-                            <div className="text-xs text-[#5A5A40] bg-[#F0ECE1] px-2 py-0.5 rounded-md inline-block font-medium mt-1">
-                              {ex.aspectNote}
-                            </div>
-                          )}
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm sm:text-base font-bold text-[#34342E] font-serif">
+                            {ex.french}
+                          </span>
+                          <button
+                            onClick={() => handleAudioPlay(ex.french)}
+                            className="p-1 text-[#7A7A6A] hover:text-[#34342E] rounded transition-colors cursor-pointer"
+                            title="Listen"
+                          >
+                            <Volume2 className="w-4 h-4" />
+                          </button>
                         </div>
-                        <button
-                          onClick={() => handleAudioPlay(ex.french)}
-                          className="p-2.5 rounded-xl bg-[#F0ECE1] text-[#5A5A40] hover:bg-[#5A5A40] hover:text-white transition-all shadow-xs border border-[#5A5A40]/20 cursor-pointer shrink-0 ml-3"
-                          title="Listen to pronunciation"
-                          aria-label={`Listen to "${ex.french}"`}
-                        >
-                          <Volume2 className="w-4 h-4" />
-                        </button>
+                        <p className="text-xs text-[#7A7A6A] italic">
+                          "{ex.english}"
+                        </p>
+                        {ex.aspectNote && (
+                          <div className="pt-1.5 border-t border-[#E8E2D9]/60 text-xs text-[#5A5A40] font-medium">
+                            💡 {ex.aspectNote}
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
                 </div>
               )}
 
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t border-[#E8E2D9]">
+              {/* Bottom Actions: Next Topic or Start AI Quiz */}
+              <div className="pt-4 border-t border-[#E8E2D9] flex justify-between items-center">
                 {hasMultipleTopics && activeTopicIndex > 0 ? (
                   <button
                     onClick={() => {
-                      setActiveTopicIndex((prev) => Math.max(0, prev - 1));
+                      setActiveTopicIndex((prev) => prev - 1);
                       scrollToTop();
                     }}
-                    className="px-4 py-2.5 rounded-xl border border-[#E8E2D9] text-[#7A7A6A] hover:text-[#34342E] hover:bg-[#FAF7F2] font-semibold text-xs transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                    className="px-4 py-2 text-xs font-semibold text-[#7A7A6A] hover:text-[#34342E] cursor-pointer"
                   >
                     ← Previous Topic
                   </button>
@@ -462,18 +646,15 @@ export const LessonModal = ({
                   <div />
                 )}
 
-                <div className="flex items-center gap-2.5 self-end sm:self-auto">
-                  {exercisesList.length > 0 && hasMultipleTopics && activeTopicIndex < topicsList.length - 1 && (
+                <div className="flex items-center gap-3">
+                  {vocabList.length > 0 ? (
                     <button
-                      onClick={() => {
-                        setPhase('exercises');
-                        scrollToTop();
-                      }}
-                      className="px-4 py-2 text-xs font-semibold text-[#7A7A6A] hover:text-[#34342E] cursor-pointer"
+                      onClick={() => setPhase('vocab')}
+                      className="px-5 py-2.5 bg-white border border-[#DCDCCF] hover:bg-[#FAF7F2] text-[#34342E] rounded-xl font-bold text-xs shadow-2xs flex items-center gap-2 cursor-pointer"
                     >
-                      Skip to Practice Drills →
+                      <span>Key Vocabulary ({vocabList.length}) →</span>
                     </button>
-                  )}
+                  ) : null}
 
                   {hasMultipleTopics && activeTopicIndex < topicsList.length - 1 ? (
                     <button
@@ -481,34 +662,20 @@ export const LessonModal = ({
                         setActiveTopicIndex((prev) => prev + 1);
                         scrollToTop();
                       }}
-                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#5A5A40] hover:bg-[#4A4A35] text-white font-semibold text-xs transition-all shadow-xs cursor-pointer"
+                      className="px-5 py-2.5 bg-[#5A5A40] hover:bg-[#4A4A35] text-white rounded-xl font-bold text-xs shadow-xs flex items-center gap-2 transition-all cursor-pointer"
                     >
                       <span>Next Topic: {topicsList[activeTopicIndex + 1]?.title}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
-                  ) : vocabList.length > 0 ? (
-                    <button
-                      id="to-vocab-btn"
-                      onClick={() => {
-                        setPhase('vocab');
-                        scrollToTop();
-                      }}
-                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#5A5A40] hover:bg-[#4A4A35] text-white font-semibold text-sm transition-all shadow-sm cursor-pointer"
-                    >
-                      <span>Continue to Vocabulary</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
                   ) : (
                     <button
-                      id="to-exercises-btn"
-                      onClick={() => {
-                        setPhase('exercises');
-                        scrollToTop();
-                      }}
-                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#5A5A40] hover:bg-[#4A4A35] text-white font-semibold text-sm transition-all shadow-sm cursor-pointer"
+                      id="start-lesson-ai-quiz-btn"
+                      onClick={handleOpenQuizPhase}
+                      className="px-6 py-2.5 bg-[#5A5A40] hover:bg-[#4A4A35] text-white rounded-xl font-bold text-xs shadow-xs flex items-center gap-2 transition-all cursor-pointer"
                     >
-                      <span>Start Practice Exercises ({exercisesList.length})</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <BrainCircuit className="w-4 h-4 text-white" />
+                      <span>Start Unit AI Quiz</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   )}
                 </div>
@@ -564,231 +731,315 @@ export const LessonModal = ({
                   ← Back to Guide
                 </button>
                 <button
-                  id="to-exercises-btn"
-                  onClick={() => setPhase('exercises')}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#5A5A40] hover:bg-[#4A4A35] text-white font-semibold text-sm transition-all shadow-sm cursor-pointer"
+                  id="vocab-to-quiz-btn"
+                  onClick={handleOpenQuizPhase}
+                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#5A5A40] hover:bg-[#4A4A35] text-white font-bold text-xs transition-all shadow-xs cursor-pointer"
                 >
-                  <span>Start Practice Exercises ({exercisesList.length})</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <BrainCircuit className="w-4 h-4 text-white" />
+                  <span>Start Unit AI Quiz</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
           )}
 
-          {/* PHASE 3: EXERCISES */}
-          {phase === 'exercises' && currentExercise && (
+          {/* PHASE 3: UNIT AI QUIZ */}
+          {phase === 'quiz' && (
             <div className="space-y-6 animate-in fade-in">
-              {/* Progress bar within exercises */}
-              <div className="flex items-center justify-between text-xs text-[#7A7A6A]">
-                <span>Exercise {currentExIndex + 1} of {exercisesList.length}</span>
-                <span className="font-semibold text-[#5A5A40]">Current Score: {score} / {currentExIndex}</span>
-              </div>
-              <div className="w-full bg-[#E8E2D9] h-2 rounded-full overflow-hidden">
-                <div
-                  className="bg-[#5A5A40] h-full transition-all duration-300 rounded-full"
-                  style={{ width: `${((currentExIndex + 1) / exercisesList.length) * 100}%` }}
-                />
-              </div>
-
-              {/* Prompt Card */}
-              <div className="bg-[#FAF7F2] border border-[#E8E2D9] rounded-2xl p-5 sm:p-6 space-y-3.5 shadow-xs">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs uppercase font-bold tracking-wider text-[#7A7A6A]">
-                    {currentExercise.type === 'sentence-builder' ? '🧩 Sentence Builder' : '❓ Question'}
-                  </span>
-                  {currentExercise.audioText && (
-                    <button
-                      onClick={() => handleAudioPlay(currentExercise.audioText)}
-                      className="flex items-center gap-1.5 text-xs sm:text-sm text-[#5A5A40] hover:text-[#34342E] font-bold cursor-pointer"
-                    >
-                      <Volume2 className="w-4 h-4" />
-                      Listen
-                    </button>
-                  )}
+              {/* Header inside AI Quiz */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#E8E2D9]">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2 bg-[#F0ECE1] text-[#5A5A40] rounded-xl border border-[#5A5A40]/15">
+                    <BrainCircuit className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-base font-bold text-[#34342E] font-serif">
+                      Unit AI Quiz: {lesson.title}
+                    </h4>
+                    <p className="text-xs text-[#7A7A6A]">
+                      Dynamic interactive quiz generated by Gemini testing this lesson's concepts
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-lg md:text-xl font-bold text-[#34342E] leading-snug font-serif">
-                  {currentExercise.prompt}
-                </h3>
-                {currentExercise.hint && (
-                  <p className="text-xs sm:text-sm text-[#D98E73] italic">💡 Hint: {currentExercise.hint}</p>
-                )}
+
+                <button
+                  id="lesson-regenerate-ai-quiz-btn"
+                  onClick={() => handleGenerateAiQuiz(true)}
+                  disabled={isGeneratingQuiz}
+                  className="px-3.5 py-1.5 bg-white hover:bg-[#FAF7F2] text-[#5A5A40] border border-[#DCDCCF] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs disabled:opacity-50 self-start sm:self-auto"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-[#D98E73]" />
+                  <span>Generate New AI Questions</span>
+                </button>
               </div>
 
-              {/* INTERACTIVE INPUT: Multiple Choice / Fill blank / Translation */}
-              {currentExercise.type !== 'sentence-builder' && currentExercise.options && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                  {currentExercise.options.map((option, idx) => {
-                    const isSelected = selectedAnswer === option;
-                    let btnStyle = 'bg-white border-[#DCDCCF] text-[#34342E] hover:border-[#5A5A40]/40 hover:bg-[#FAF7F2]';
-
-                    if (hasChecked) {
-                      if (option === currentExercise.correctAnswer) {
-                        btnStyle = 'bg-[#EEF4EE] border-[#5A7A5A] text-[#3A5A3A] font-bold';
-                      } else if (isSelected && !isCorrect) {
-                        btnStyle = 'bg-[#FAF3EE] border-[#C05C54] text-[#C05C54] font-bold';
-                      }
-                    } else if (isSelected) {
-                      btnStyle = 'bg-[#F0ECE1] border-[#5A5A40] text-[#34342E] font-semibold shadow-xs';
-                    }
-
-                    return (
-                      <button
-                        key={idx}
-                        disabled={hasChecked}
-                        onClick={() => {
-                          playChime('click');
-                          setSelectedAnswer(option);
-                        }}
-                        className={`p-4.5 rounded-2xl border text-left font-medium text-sm sm:text-base transition-all flex items-center justify-between cursor-pointer ${btnStyle}`}
-                      >
-                        <span>{option}</span>
-                        {hasChecked && option === currentExercise.correctAnswer && (
-                          <CheckCircle2 className="w-5 h-5 text-[#5A7A5A] flex-shrink-0 ml-2" />
-                        )}
-                        {hasChecked && isSelected && !isCorrect && (
-                          <XCircle className="w-5 h-5 text-[#C05C54] flex-shrink-0 ml-2" />
-                        )}
-                      </button>
-                    );
-                  })}
+              {isGeneratingQuiz ? (
+                <div className="text-center py-16 space-y-4">
+                  <div className="w-12 h-12 border-4 border-[#5A5A40] border-t-transparent rounded-full animate-spin mx-auto" />
+                  <div className="space-y-1">
+                    <p className="text-base font-bold text-[#34342E] font-serif">
+                      Gemini is generating your custom AI Quiz...
+                    </p>
+                    <p className="text-xs text-[#7A7A6A] max-w-sm mx-auto">
+                      Formulating questions tailored to {lesson.title} ({lesson.level})
+                    </p>
+                  </div>
                 </div>
-              )}
+              ) : quizError ? (
+                <div className="text-center py-12 space-y-4 bg-[#FAF3EE] rounded-3xl p-8 border border-[#D98E73]/30">
+                  <AlertTriangle className="w-10 h-10 text-[#C05C54] mx-auto" />
+                  <div className="space-y-1">
+                    <h4 className="text-base font-bold text-[#34342E] font-serif">
+                      Could not generate AI quiz
+                    </h4>
+                    <p className="text-xs text-[#7A4A3A]">{quizError}</p>
+                  </div>
+                  <button
+                    onClick={() => handleGenerateAiQuiz(true)}
+                    className="px-5 py-2.5 bg-[#5A5A40] hover:bg-[#4A4A35] text-white rounded-xl text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-xs"
+                  >
+                    <RotateCcw className="w-4 h-4" />
+                    <span>Try Generating Again</span>
+                  </button>
+                </div>
+              ) : currentExercise ? (
+                <div className="space-y-6">
+                  {/* Progress Indicator */}
+                  <div className="flex items-center justify-between text-xs text-[#7A7A6A]">
+                    <span className="font-semibold text-[#5A5A40] flex items-center gap-1.5">
+                      <BrainCircuit className="w-3.5 h-3.5" />
+                      Question {currentExIndex + 1} of {exercises.length}
+                    </span>
+                    <span>Score: {score}</span>
+                  </div>
+                  <div className="w-full bg-[#EAE6DF] h-2 rounded-full overflow-hidden">
+                    <div
+                      className="bg-[#5A5A40] h-full transition-all duration-300"
+                      style={{ width: `${((currentExIndex + 1) / exercises.length) * 100}%` }}
+                    />
+                  </div>
 
-              {/* INTERACTIVE INPUT: Sentence Builder */}
-              {currentExercise.type === 'sentence-builder' && (
-                <div className="space-y-4">
-                  {/* Assembled Sentence Drop Area */}
-                  <div className="min-h-[64px] p-3.5 rounded-2xl bg-[#FAF7F2] border-2 border-dashed border-[#DCDCCF] flex flex-wrap gap-2.5 items-center">
-                    {sentenceWords.length === 0 ? (
-                      <span className="text-sm text-[#7A7A6A] italic pl-2">
-                        Tap words below to arrange the sentence in correct order...
-                      </span>
-                    ) : (
-                      sentenceWords.map((w, idx) => (
+                  {/* Prompt Card */}
+                  <div className="bg-[#FAF7F2] border border-[#E8E2D9] rounded-2xl p-5 sm:p-6 space-y-3.5 shadow-2xs">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] uppercase font-bold tracking-wider text-[#5A5A40] bg-[#F0ECE1] px-2.5 py-0.5 rounded-md border border-[#5A5A40]/15">
+                          French Grammar Challenge
+                        </span>
+                        {isQuestionTranslated && (
+                          <span className="text-[10px] uppercase font-semibold text-[#8C6D23] bg-[#FEF9ED] px-2 py-0.5 rounded border border-[#E0D0A5]">
+                            English Translation
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          id="toggle-lesson-quiz-translation-btn"
+                          onClick={handleToggleTranslation}
+                          disabled={isTranslating}
+                          className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer border ${
+                            isQuestionTranslated
+                              ? 'bg-[#5A5A40] text-white border-[#5A5A40] shadow-2xs'
+                              : 'bg-white hover:bg-[#FAF7F2] text-[#5A5A40] border-[#DCDCCF]'
+                          }`}
+                          title={isQuestionTranslated ? 'Translate back to French' : 'Translate question into English'}
+                          aria-label={isQuestionTranslated ? 'Translate back to French' : 'Translate question into English'}
+                        >
+                          <Languages className="w-3.5 h-3.5" />
+                          <span className="text-[11px]">
+                            {isTranslating ? '...' : isQuestionTranslated ? 'French' : 'Translate'}
+                          </span>
+                        </button>
+
+                        <button
+                          onClick={() => handleAudioPlay(currentExercise.prompt)}
+                          className="p-1.5 text-[#7A7A6A] hover:text-[#34342E] rounded-lg transition-colors cursor-pointer"
+                          title="Listen to French prompt"
+                        >
+                          <Volume2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-bold text-[#34342E] font-serif leading-snug">
+                      {isQuestionTranslated
+                        ? (currentExercise.promptEnglish || translationMap[currentExercise.prompt] || currentExercise.prompt)
+                        : currentExercise.prompt}
+                    </h3>
+                  </div>
+
+                  {/* Multiple Choice Options */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {currentExercise.options?.map((option, idx) => {
+                      const isSelected = selectedAnswer === option;
+                      const letter = String.fromCharCode(65 + idx);
+                      return (
                         <button
                           key={idx}
                           disabled={hasChecked}
-                          onClick={() => handleWordTileClick(w, false)}
-                          className="px-4 py-2 rounded-xl bg-[#5A5A40] text-white text-sm sm:text-base font-semibold shadow-xs hover:bg-[#4A4A35] transition-transform active:scale-95 cursor-pointer"
+                          onClick={() => {
+                            playChime('click');
+                            setSelectedAnswer(option);
+                          }}
+                          className={`p-4 rounded-2xl border text-left text-sm sm:text-base font-semibold transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                            isSelected
+                              ? 'bg-[#5A5A40] text-white border-[#5A5A40] shadow-xs'
+                              : 'bg-white text-[#34342E] border-[#E8E2D9] hover:bg-[#FAF7F2]'
+                          }`}
                         >
-                          {w}
+                          <div className="flex items-center gap-3">
+                            <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
+                              isSelected ? 'bg-white/20 text-white' : 'bg-[#F0ECE1] text-[#5A5A40]'
+                            }`}>
+                              {letter}
+                            </span>
+                            <span>{option}</span>
+                          </div>
+                          {isSelected && <CheckCircle2 className="w-5 h-5 shrink-0 text-white" />}
                         </button>
-                      ))
-                    )}
+                      );
+                    })}
                   </div>
 
-                  {/* Available word tiles */}
-                  <div className="flex flex-wrap gap-2.5 pt-2">
-                    {availableWords.map((w, idx) => (
+                  {/* Hint Toggle */}
+                  {currentExercise.hint && (
+                    <div>
                       <button
-                        key={idx}
-                        disabled={hasChecked}
-                        onClick={() => handleWordTileClick(w, true)}
-                        className="px-4 py-2.5 rounded-xl bg-white border border-[#DCDCCF] text-[#34342E] text-sm sm:text-base font-medium hover:border-[#5A5A40] hover:bg-[#FAF7F2] transition-all cursor-pointer shadow-xs"
+                        onClick={() => setShowHint(!showHint)}
+                        className="text-xs sm:text-sm font-bold text-[#D98E73] flex items-center gap-1.5 hover:underline cursor-pointer"
                       >
-                        {w}
+                        <Lightbulb className="w-4 h-4" />
+                        {showHint ? 'Hide Grammar Hint' : 'Need a Grammar Hint?'}
                       </button>
-                    ))}
-                  </div>
-                </div>
-              )}
+                      {showHint && (
+                        <div className="p-3.5 mt-2 bg-[#FAF3EE] border border-[#D98E73]/30 rounded-xl text-xs sm:text-sm text-[#525248]">
+                          💡 {currentExercise.hint}
+                        </div>
+                      )}
+                    </div>
+                  )}
 
-              {/* Explanation Box when checked */}
-              {hasChecked && (
-                <div className={`p-5 rounded-2xl border animate-in fade-in ${
-                  isCorrect
-                    ? 'bg-[#EEF4EE] border-[#5A7A5A]/30 text-[#3A5A3A]'
-                    : 'bg-[#FAF3EE] border-[#C05C54]/30 text-[#C05C54]'
-                }`}>
-                  <div className="flex items-center space-x-2 font-bold mb-1.5 text-sm sm:text-base">
-                    {isCorrect ? (
-                      <>
-                        <CheckCircle2 className="w-5 h-5 text-[#5A7A5A]" />
-                        <span className="font-serif">Excellent! Correct answer.</span>
-                      </>
+                  {/* Feedback Explanation */}
+                  {hasChecked && (
+                    <div
+                      className={`p-5 rounded-2xl border text-sm sm:text-base space-y-2 animate-in fade-in ${
+                        isCorrect
+                          ? 'bg-[#EEF4EE] border-[#5A7A5A]/40 text-[#3A5A3A]'
+                          : 'bg-[#FAF3EE] border-[#D98E73]/40 text-[#525248]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 font-bold text-base">
+                        {isCorrect ? (
+                          <>
+                            <CheckCircle2 className="w-5 h-5 text-[#5A7A5A]" />
+                            <span>Correct! Excellent grammatical precision.</span>
+                          </>
+                        ) : (
+                          <>
+                            <AlertTriangle className="w-5 h-5 text-[#C05C54]" />
+                            <span>Incorrect. Correct Answer: {currentExercise.correctAnswer}</span>
+                          </>
+                        )}
+                      </div>
+                      <p className="text-xs sm:text-sm leading-relaxed">{currentExercise.explanation}</p>
+                    </div>
+                  )}
+
+                  {/* Actions Footer */}
+                  <div className="flex justify-end gap-3 pt-2">
+                    {!hasChecked ? (
+                      <button
+                        id="lesson-quiz-check-btn"
+                        disabled={!selectedAnswer}
+                        onClick={handleCheckAnswer}
+                        className="px-6 py-3 bg-[#5A5A40] text-white rounded-2xl font-bold text-xs shadow-sm hover:bg-[#4A4A35] transition-all cursor-pointer disabled:opacity-50"
+                      >
+                        Check Answer
+                      </button>
                     ) : (
-                      <>
-                        <XCircle className="w-5 h-5 text-[#C05C54]" />
-                        <span className="font-serif">Not quite. Answer: {currentExercise.correctAnswer}</span>
-                      </>
+                      <button
+                        id="lesson-quiz-next-btn"
+                        onClick={handleNextExercise}
+                        className="px-6 py-3 bg-[#5A5A40] text-white rounded-2xl font-bold text-xs shadow-sm hover:bg-[#4A4A35] transition-all cursor-pointer flex items-center gap-2"
+                      >
+                        <span>{currentExIndex < exercises.length - 1 ? 'Next Question' : 'Complete Quiz & View Score'}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
                     )}
                   </div>
-                  <p className="text-xs sm:text-sm text-[#525248] mt-1 leading-relaxed">{currentExercise.explanation}</p>
+                </div>
+              ) : (
+                <div className="text-center py-12 space-y-4 bg-white rounded-3xl border border-[#E8E2D9] p-8">
+                  <BrainCircuit className="w-10 h-10 text-[#5A5A40] mx-auto" />
+                  <div className="space-y-1">
+                    <h4 className="text-base font-bold text-[#34342E] font-serif">
+                      Ready for the Unit AI Quiz?
+                    </h4>
+                    <p className="text-xs text-[#7A7A6A] max-w-sm mx-auto">
+                      Test your understanding of {lesson.title} with an AI-generated quiz customized to this unit.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleGenerateAiQuiz(false)}
+                    className="px-6 py-2.5 bg-[#5A5A40] hover:bg-[#4A4A35] text-white rounded-xl text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-xs"
+                  >
+                    <Sparkles className="w-4 h-4 text-[#D98E73]" />
+                    <span>Launch Unit AI Quiz</span>
+                  </button>
                 </div>
               )}
-
-              {/* Actions Footer */}
-              <div className="flex justify-between items-center pt-3 border-t border-[#E8E2D9]">
-                {!hasChecked ? (
-                  <button
-                    id="check-exercise-btn"
-                    disabled={
-                      currentExercise.type === 'sentence-builder'
-                        ? sentenceWords.length === 0
-                        : !selectedAnswer
-                    }
-                    onClick={handleCheckAnswer}
-                    className="w-full py-3 rounded-xl bg-[#5A5A40] hover:bg-[#4A4A35] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-sm transition-all shadow-xs cursor-pointer"
-                  >
-                    Check Answer
-                  </button>
-                ) : (
-                  <button
-                    id="next-exercise-btn"
-                    onClick={handleNextExercise}
-                    className="w-full py-3 rounded-xl bg-[#5A5A40] hover:bg-[#4A4A35] text-white font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer"
-                  >
-                    <span>Continue</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                )}
-              </div>
             </div>
           )}
 
           {/* PHASE 4: COMPLETED CELEBRATION */}
           {phase === 'completed' && (
             <div className="text-center py-8 space-y-6 animate-in zoom-in-95">
-              <div className="w-20 h-20 rounded-full bg-[#F0ECE1] border border-[#5A5A40]/20 flex items-center justify-center mx-auto text-4xl shadow-sm animate-bounce">
-                🎉
+              <div className="w-20 h-20 bg-[#EEF4EE] text-[#3A5A3A] rounded-full flex items-center justify-center mx-auto border-2 border-[#5A7A5A] shadow-xs">
+                <Trophy className="w-10 h-10" />
               </div>
 
-              <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-[#34342E] font-serif">Congratulations!</h3>
-                <p className="text-sm text-[#525248]">
-                  You have completed the lesson: <strong className="text-[#5A5A40] font-serif">{lesson.title}</strong>
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-1.5 bg-[#F0ECE1] text-[#5A5A40] px-3 py-1 rounded-full text-xs font-bold">
+                  <Sparkles className="w-3.5 h-3.5 text-[#D98E73]" />
+                  <span>Unit AI Quiz Mastered</span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#34342E] font-serif">
+                  Félicitations ! Lesson Completed
+                </h3>
+                <p className="text-sm text-[#7A7A6A] max-w-md mx-auto">
+                  You scored <strong>{score} / {exercises.length}</strong> on this unit's AI quiz and earned{' '}
+                  <strong className="text-[#5A5A40]">+{lesson.xpReward || 25} XP</strong>.
                 </p>
               </div>
 
-              <div className="max-w-xs mx-auto grid grid-cols-2 gap-3">
-                <div className="p-3 bg-[#FAF7F2] rounded-2xl border border-[#E8E2D9]">
-                  <span className="text-xs text-[#7A7A6A] block">Score</span>
-                  <span className="text-lg font-bold text-[#5A7A5A] font-serif">{score} / {exercisesList.length}</span>
-                </div>
-                <div className="p-3 bg-[#FAF7F2] rounded-2xl border border-[#E8E2D9]">
-                  <span className="text-xs text-[#7A7A6A] block">XP Earned</span>
-                  <span className="text-lg font-bold text-[#5A5A40] font-serif">+{lesson.xpReward || (exercisesList.length * 10)} XP</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
+              <div className="flex flex-wrap justify-center gap-3 pt-3">
+                <button
+                  onClick={() => handleGenerateAiQuiz(true)}
+                  className="px-5 py-2.5 bg-white border border-[#DCDCCF] hover:bg-[#FAF7F2] text-[#5A5A40] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+                >
+                  <Sparkles className="w-4 h-4 text-[#D98E73]" />
+                  <span>Generate New AI Quiz</span>
+                </button>
                 <button
                   onClick={() => {
                     setCurrentExIndex(0);
+                    setSelectedAnswer(null);
+                    setHasChecked(false);
+                    setIsCorrect(false);
                     setScore(0);
-                    setPhase('exercises');
+                    setPhase('quiz');
                   }}
-                  className="px-5 py-2.5 rounded-xl bg-white hover:bg-[#FAF7F2] border border-[#DCDCCF] text-[#34342E] font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                  className="px-5 py-2.5 bg-white border border-[#DCDCCF] text-[#34342E] rounded-xl text-xs font-bold flex items-center gap-1.5 hover:bg-[#FAF7F2] transition-all cursor-pointer shadow-xs"
                 >
                   <RotateCcw className="w-4 h-4" />
-                  Retry Lesson
+                  <span>Retake Current Quiz</span>
                 </button>
                 <button
                   id="finish-lesson-modal-btn"
                   onClick={onClose}
-                  className="px-6 py-2.5 rounded-xl bg-[#5A5A40] hover:bg-[#4A4A35] text-white font-bold text-sm shadow-sm transition-all cursor-pointer"
+                  className="px-6 py-2.5 bg-[#5A5A40] text-white rounded-xl text-xs font-bold hover:bg-[#4A4A35] transition-all cursor-pointer shadow-xs"
                 >
-                  Finish & Continue
+                  <span>Finish & Continue</span>
                 </button>
               </div>
             </div>

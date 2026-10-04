@@ -1,8 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Sparkles, CheckCircle2, XCircle, ArrowRight, RotateCcw, BrainCircuit } from 'lucide-react';
+import {
+  X,
+  Sparkles,
+  CheckCircle2,
+  XCircle,
+  ArrowRight,
+  RotateCcw,
+  BrainCircuit,
+  Languages,
+  Volume2,
+} from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { playChime } from '../utils/audioUtils.js';
+import { playChime, speakFrench } from '../utils/audioUtils.js';
 import { useModalTracker } from '../utils/modalState.js';
 
 export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
@@ -15,6 +25,10 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
   const [hasChecked, setHasChecked] = useState(false);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+  const [reloadToken, setReloadToken] = useState(0);
+  const [isQuestionTranslated, setIsQuestionTranslated] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
+  const [translationMap, setTranslationMap] = useState({});
 
   // Lock background scroll when AI Quiz modal is open
   useEffect(() => {
@@ -30,6 +44,13 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
 
     async function fetchQuiz() {
       setIsLoading(true);
+      setQuizTitle('');
+      setQuestions([]);
+      setCurrentIndex(0);
+      setSelectedOption(null);
+      setHasChecked(false);
+      setScore(0);
+      setIsFinished(false);
       try {
         const res = await fetch('/api/ai/generate-quiz', {
           method: 'POST',
@@ -40,28 +61,41 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
             level,
             questionCount: 4,
             unitContext: {
-              unitNumber: unit?.unitNumber,
+              unitNumber: unit?.unitNumber || unit?.unit,
               category: unit?.category,
               frenchTitle: unit?.frenchTitle,
               subtitle: unit?.subtitle,
               formula: unit?.formula,
               goldenRule: unit?.goldenRule,
-              practiceExercises: unit?.practiceExercises,
+              rules: unit?.rules,
+              commonTraps: unit?.commonTraps,
+              vocabulary: unit?.vocabulary,
+              topics: unit?.topics,
             },
           }),
         });
 
         const data = await res.json();
         const validQuestions = Array.isArray(data.questions)
-          ? data.questions.filter((question) =>
-              typeof question?.prompt === 'string' &&
-              question.prompt.trim() &&
-              Array.isArray(question.options) &&
-              question.options.length >= 2 &&
-              question.options.every((option) => typeof option === 'string') &&
-              typeof question.correctAnswer === 'string' &&
-              question.options.includes(question.correctAnswer)
-            )
+          ? data.questions
+              .filter((question) =>
+                typeof question?.prompt === 'string' &&
+                question.prompt.trim() &&
+                Array.isArray(question.options) &&
+                question.options.length >= 2 &&
+                question.options.every((option) => typeof option === 'string') &&
+                typeof question.correctAnswer === 'string' &&
+                question.options.includes(question.correctAnswer)
+              )
+              .map((question, idx) => ({
+                id: question.id || `quiz-q-${idx + 1}`,
+                type: 'multiple-choice',
+                prompt: question.prompt,
+                promptEnglish: question.promptEnglish || '',
+                options: question.options,
+                correctAnswer: question.correctAnswer,
+                explanation: question.explanation || '',
+              }))
           : [];
         if (!validQuestions.length) {
           throw new Error('Quiz response did not contain valid multiple-choice questions.');
@@ -77,7 +111,8 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
           {
             id: 'q1',
             type: 'multiple-choice',
-            prompt: "How do you say 'I would like a croissant please' in French?",
+            prompt: "Comment dit-on « Je voudrais un croissant s'il vous plaît » en français ?",
+            promptEnglish: "How do you say 'I would like a croissant please' in French?",
             options: [
               "Je voudrais un croissant s'il vous plaît",
               "Je veux un croissant merci",
@@ -90,7 +125,8 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
           {
             id: 'q2',
             type: 'multiple-choice',
-            prompt: "Which is the correct form: 'Hier soir, nous ___ au restaurant.'",
+            prompt: "Quelle est la forme correcte : « Hier soir, nous ___ au restaurant. » ?",
+            promptEnglish: "Which is the correct form: 'Yesterday evening, we ___ at the restaurant.'?",
             options: ["avons mangé", "mangions", "mangeons", "mangerons"],
             correctAnswer: "avons mangé",
             explanation: "Passé composé with auxiliary 'avoir' for a completed past action.",
@@ -103,9 +139,52 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
 
     fetchQuiz();
     return () => controller.abort();
-  }, [topic, level]);
+  }, [topic, level, reloadToken]);
 
   const currentQ = questions[currentIndex];
+
+  const handleToggleTranslation = async () => {
+    if (!currentQ) return;
+    if (isQuestionTranslated) {
+      setIsQuestionTranslated(false);
+      return;
+    }
+
+    if (currentQ.promptEnglish) {
+      setIsQuestionTranslated(true);
+      return;
+    }
+
+    const cached = translationMap[currentQ.prompt];
+    if (cached) {
+      setIsQuestionTranslated(true);
+      return;
+    }
+
+    setIsTranslating(true);
+    try {
+      const res = await fetch('/api/ai/translate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: currentQ.prompt,
+          targetLang: 'en',
+        }),
+      });
+      const data = await res.json();
+      if (data?.translatedText) {
+        setTranslationMap((prev) => ({
+          ...prev,
+          [currentQ.prompt]: data.translatedText,
+        }));
+        setIsQuestionTranslated(true);
+      }
+    } catch (e) {
+      console.warn('Failed to translate question:', e);
+    } finally {
+      setIsTranslating(false);
+    }
+  };
 
   const handleCheck = () => {
     if (!selectedOption || !currentQ) return;
@@ -121,10 +200,12 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
   };
 
   const handleNext = () => {
+    if (!currentQ) return;
     if (currentIndex < questions.length - 1) {
       setCurrentIndex((i) => i + 1);
       setSelectedOption(null);
       setHasChecked(false);
+      setIsQuestionTranslated(false);
     } else {
       setIsFinished(true);
       playChime('celebrate');
@@ -185,7 +266,18 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                 Close & Continue
               </button>
             </div>
-          ) : currentQ ? (
+          ) : !currentQ ? (
+            <div className="text-center py-10 space-y-4">
+              <p className="text-sm text-[#7A4A3A]">This quiz question could not be displayed.</p>
+              <button
+                onClick={() => setReloadToken((value) => value + 1)}
+                className="px-5 py-2.5 bg-[#5A5A40] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 mx-auto cursor-pointer"
+              >
+                <RotateCcw className="w-4 h-4" />
+                <span>Reload Quiz</span>
+              </button>
+            </div>
+          ) : (
             <div className="space-y-6">
               {/* Progress */}
               <div className="flex items-center justify-between text-xs text-[#7A7A6A]">
@@ -193,9 +285,52 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                 <span className="text-[#5A5A40] font-bold">Score: {score}</span>
               </div>
 
-              <div className="p-5 bg-[#FAF7F2] rounded-2xl border border-[#E8E2D9] space-y-2">
-                <h4 className="text-base font-bold text-[#34342E] leading-snug font-serif">
-                  {currentQ.prompt}
+              <div className="p-5 bg-[#FAF7F2] rounded-2xl border border-[#E8E2D9] space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] uppercase font-bold tracking-wider text-[#5A5A40] bg-[#F0ECE1] px-2.5 py-0.5 rounded-md border border-[#5A5A40]/15">
+                      Question {currentIndex + 1}
+                    </span>
+                    {isQuestionTranslated && (
+                      <span className="text-[10px] uppercase font-semibold text-[#8C6D23] bg-[#FEF9ED] px-2 py-0.5 rounded border border-[#E0D0A5]">
+                        English Translation
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      id="toggle-ai-quiz-modal-translation-btn"
+                      onClick={handleToggleTranslation}
+                      disabled={isTranslating}
+                      className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer border ${
+                        isQuestionTranslated
+                          ? 'bg-[#5A5A40] text-white border-[#5A5A40] shadow-2xs'
+                          : 'bg-white hover:bg-[#FAF7F2] text-[#5A5A40] border-[#DCDCCF]'
+                      }`}
+                      title={isQuestionTranslated ? 'Translate back to French' : 'Translate question into English'}
+                      aria-label={isQuestionTranslated ? 'Translate back to French' : 'Translate question into English'}
+                    >
+                      <Languages className="w-3.5 h-3.5" />
+                      <span className="text-[11px]">
+                        {isTranslating ? '...' : isQuestionTranslated ? 'French' : 'Translate'}
+                      </span>
+                    </button>
+
+                    <button
+                      onClick={() => speakFrench(currentQ.prompt)}
+                      className="p-1.5 text-[#7A7A6A] hover:text-[#34342E] rounded-lg transition-colors cursor-pointer"
+                      title="Listen to French prompt"
+                    >
+                      <Volume2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+
+                <h4 className="text-base sm:text-lg font-bold text-[#34342E] leading-snug font-serif">
+                  {isQuestionTranslated
+                    ? (currentQ.promptEnglish || translationMap[currentQ.prompt] || currentQ.prompt)
+                    : currentQ.prompt}
                 </h4>
               </div>
 
@@ -257,7 +392,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                 )}
               </div>
             </div>
-          ) : null}
+          )}
         </div>
       </div>
     </div>

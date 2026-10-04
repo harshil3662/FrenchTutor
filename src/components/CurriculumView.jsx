@@ -169,35 +169,47 @@ export const CurriculumView = ({
                     <BookOpen className="w-3.5 h-3.5 text-[#7A7A6A]" />
                     {lesson.vocabulary.length} key words
                   </span>
-                  <span className="flex items-center gap-1">
-                    <Sparkles className="w-3.5 h-3.5 text-[#7A7A6A]" />
-                    {lesson.exercises.length} exercises
+                  <span className="flex items-center gap-1 font-semibold text-[#5A5A40]">
+                    <BrainCircuit className="w-3.5 h-3.5 text-[#5A5A40]" />
+                    AI Quiz Included
                   </span>
                 </div>
               </div>
 
-              {/* Start Action */}
-              <button
-                id={`start-lesson-btn-${lesson.id}`}
-                onClick={() => onStartLesson(lesson)}
-                className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                  isCompleted
-                    ? 'bg-[#EAE6DF] hover:bg-[#DCDCCF] text-[#34342E] border border-[#DCDCCF]'
-                    : 'bg-[#5A5A40] hover:bg-[#4A4A35] text-white shadow-sm'
-                }`}
-              >
-                {isCompleted ? (
-                  <>
-                    <Play className="w-3.5 h-3.5" />
-                    <span>Review Lesson</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Start Lesson</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                  </>
+              {/* Start Action Buttons */}
+              <div className="flex items-center gap-2">
+                {onGenerateAiQuiz && (
+                  <button
+                    onClick={() => onGenerateAiQuiz(lesson.title, activeLevel, lesson)}
+                    className="px-3.5 py-2.5 bg-white hover:bg-[#FAF7F2] text-[#5A5A40] border border-[#DCDCCF] rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-2xs"
+                    title="Launch instant AI Quiz for this unit"
+                  >
+                    <BrainCircuit className="w-3.5 h-3.5" />
+                    <span>AI Quiz</span>
+                  </button>
                 )}
-              </button>
+                <button
+                  id={`start-lesson-btn-${lesson.id}`}
+                  onClick={() => onStartLesson(lesson)}
+                  className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                    isCompleted
+                      ? 'bg-[#EAE6DF] hover:bg-[#DCDCCF] text-[#34342E] border border-[#DCDCCF]'
+                      : 'bg-[#5A5A40] hover:bg-[#4A4A35] text-white shadow-sm'
+                  }`}
+                >
+                  {isCompleted ? (
+                    <>
+                      <Play className="w-3.5 h-3.5" />
+                      <span>Review Lesson</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Start Lesson</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           );
         })}

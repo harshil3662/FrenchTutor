@@ -109,8 +109,8 @@ export default function App() {
     setProgress(updated);
   };
 
-  const handleOpenAiQuiz = (topic, level) => {
-    setQuizModalData({ topic, level });
+  const handleOpenAiQuiz = (topic, level, unit = null) => {
+    setQuizModalData({ topic, level, unit });
   };
 
   return (
@@ -340,6 +340,7 @@ export default function App() {
         <AiQuizModal
           topic={quizModalData.topic}
           level={quizModalData.level}
+          unit={quizModalData.unit}
           onClose={() => setQuizModalData(null)}
           onAwardXp={handleAwardXp}
         />

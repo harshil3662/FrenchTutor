@@ -86,7 +86,7 @@ async function generateOpenRouterJson(prompt, { task, temperature = 0.9 } = {}) 
   if (!apiKey) return null;
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 20000);
+  const timeout = setTimeout(() => controller.abort(), 4000);
 
   try {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -118,25 +118,35 @@ async function generateOpenRouterJson(prompt, { task, temperature = 0.9 } = {}) 
 }
 
 async function generateAiJson(prompt, fallback, { task, temperature = 0.3 } = {}) {
+  const ai = getGeminiClient();
+  if (ai) {
+    const candidateModels = ['gemini-3.8-flash', 'gemini-flash-latest', 'gemini-3.1-flash-lite'];
+    for (const model of candidateModels) {
+      try {
+        const response = await ai.models.generateContent({
+          model,
+          contents: prompt,
+          config: {
+            responseMimeType: 'application/json',
+            temperature,
+          },
+        });
+        const parsed = cleanAndParseJson(response.text, null);
+        if (parsed) return parsed;
+      } catch (geminiError) {
+        console.warn(`Gemini model ${model} for ${task || 'AI'} failed:`, geminiError.message || geminiError);
+      }
+    }
+  }
+
   try {
     const openRouterResult = await generateOpenRouterJson(prompt, { task, temperature });
     if (openRouterResult) return cleanAndParseJson(openRouterResult, fallback);
   } catch (error) {
-    console.warn(`OpenRouter ${task || 'AI'} request failed; trying Gemini:`, error);
+    console.warn(`OpenRouter ${task || 'AI'} request failed:`, error);
   }
 
-  const ai = getGeminiClient();
-  if (!ai) return fallback;
-
-  const response = await ai.models.generateContent({
-    model: 'gemini-3.7-flash',
-    contents: prompt,
-    config: {
-      responseMimeType: 'application/json',
-      temperature,
-    },
-  });
-  return cleanAndParseJson(response.text, fallback);
+  return fallback;
 }
 
 // API Routes
@@ -401,6 +411,7 @@ app.post('/api/ai/generate-quiz', async (req, res) => {
         id: 'q1',
         type: 'multiple-choice',
         prompt: "Hier soir, nous ___ (manger) dans un formidable restaurant parisien.",
+        promptEnglish: "Last night, we ___ (ate) at a wonderful Parisian restaurant.",
         options: ["avons mangé", "mangions", "mangeons", "avions mangé"],
         correctAnswer: "avons mangé",
         explanation: "Passé Composé is used for a completed punctual action in the past with a specific time indicator ('Hier soir')."
@@ -409,6 +420,7 @@ app.post('/api/ai/generate-quiz', async (req, res) => {
         id: 'q2',
         type: 'multiple-choice',
         prompt: "Quand j'étais enfant, je ___ (jouer) toujours dans le jardin l'été.",
+        promptEnglish: "When I was a child, I always ___ (played) in the garden in the summer.",
         options: ["jouais", "ai joué", "joue", "jouerai"],
         correctAnswer: "jouais",
         explanation: "Imparfait expresses habitual past actions or repeated descriptions ('Quand j'étais enfant, toujours')."
@@ -417,6 +429,7 @@ app.post('/api/ai/generate-quiz', async (req, res) => {
         id: 'q3',
         type: 'multiple-choice',
         prompt: "Il faut absolument que vous ___ (venir) à l'heure.",
+        promptEnglish: "It is absolutely necessary that you ___ (come) on time.",
         options: ["veniez", "venez", "viendrez", "êtes venus"],
         correctAnswer: "veniez",
         explanation: "'Il faut que' demands the subjunctive mood (vous + venir -> veniez)."
@@ -425,6 +438,7 @@ app.post('/api/ai/generate-quiz', async (req, res) => {
         id: 'q4',
         type: 'multiple-choice',
         prompt: "Les fleurs que Marie a ___ (acheter) sont magnifiques.",
+        promptEnglish: "The flowers that Marie ___ (bought) are magnificent.",
         options: ["achetées", "acheté", "achetés", "achete"],
         correctAnswer: "achetées",
         explanation: "Agreement with preceding direct object (COD) 'les fleurs' (feminine plural) placed before auxiliary avoir."
@@ -432,7 +446,7 @@ app.post('/api/ai/generate-quiz', async (req, res) => {
     ]
   };
 
-  const unitFallbackQuestions = Array.isArray(unitContext.practiceExercises)
+  const unitFallbackQuestions = Array.isArray(unitContext.practiceExercises) && unitContext.practiceExercises.length
     ? unitContext.practiceExercises
         .filter((exercise) =>
           typeof exercise?.prompt === 'string' &&
@@ -445,14 +459,31 @@ app.post('/api/ai/generate-quiz', async (req, res) => {
           id: exercise.id || `q${index + 1}`,
           type: exercise.type || 'multiple-choice',
           prompt: exercise.prompt,
+          promptEnglish: exercise.promptEnglish || exercise.english || exercise.translation || `In the context of ${topic}, choose the correct form.`,
           options: exercise.options,
           correctAnswer: exercise.correctAnswer,
-          explanation: exercise.explanation || exercise.hint || 'Review the unit rule and apply it to the sentence.',
+          explanation: exercise.explanation || exercise.hint || `Apply the grammatical rule for ${topic}.`,
         }))
-    : [];
+    : [
+        {
+          id: 'q1',
+          type: 'multiple-choice',
+          prompt: `Dans le contexte de « ${unitContext.frenchTitle || topic} », quelle proposition est grammaticalement correcte ?`,
+          promptEnglish: `In the context of "${unitContext.frenchTitle || topic}", which statement is grammatically correct?`,
+          options: [
+            unitContext.goldenRule ? unitContext.goldenRule.slice(0, 60) + '...' : `Application exacte de la règle de ${topic}`,
+            `Forme incorrecte avec accord erroné`,
+            `Structure syntaxique inadaptée`,
+            `Emploi d'un temps ou mode inapproprié`
+          ],
+          correctAnswer: unitContext.goldenRule ? unitContext.goldenRule.slice(0, 60) + '...' : `Application exacte de la règle de ${topic}`,
+          explanation: `According to the unit rule: ${unitContext.goldenRule || 'Review the core formula and apply agreement constraints accurately.'}`
+        },
+        ...genericFallback.questions.slice(1, questionCount)
+      ];
+
   const defaultFallback = {
-    ...genericFallback,
-    title: `Quiz de Révision: ${topic}`,
+    title: `Quiz IA : ${unitContext.frenchTitle || topic}`,
     level,
     questions: unitFallbackQuestions.length ? unitFallbackQuestions : genericFallback.questions,
   };
@@ -490,6 +521,7 @@ Format as JSON:
       "id": "q1",
       "type": "multiple-choice",
       "prompt": "The question prompt in French with blank or verb to conjugate",
+      "promptEnglish": "Accurate, fluent English translation of the prompt so the user can toggle between French and English",
       "options": ["option 1", "option 2", "option 3", "option 4"],
       "correctAnswer": "The exact correct string",
       "explanation": "Clear grammatical explanation in English of why this is correct"
@@ -501,6 +533,37 @@ Format as JSON:
     res.json(result);
   } catch (error) {
     console.error('Error in /api/ai/generate-quiz:', error);
+    res.json(defaultFallback);
+  }
+});
+
+// Quick AI Question Prompt Translation Endpoint
+app.post('/api/ai/translate', async (req, res) => {
+  const { text = '', targetLang = 'en' } = req.body;
+  if (!text || !text.trim()) {
+    return res.json({ translatedText: '' });
+  }
+
+  const defaultFallback = {
+    translatedText: text
+  };
+
+  try {
+    const prompt = `You are a professional French-English pedagogical translator.
+Translate the following sentence accurately into ${targetLang === 'en' ? 'English' : 'French'}.
+Preserve any blanks like "___" or brackets like "(aller)".
+
+Source text: "${text}"
+
+Format as JSON:
+{
+  "translatedText": "the translation"
+}`;
+
+    const result = await generateAiJson(prompt, defaultFallback, { task: 'translate', temperature: 0.1 });
+    res.json(result);
+  } catch (error) {
+    console.error('Error in /api/ai/translate:', error);
     res.json(defaultFallback);
   }
 });
