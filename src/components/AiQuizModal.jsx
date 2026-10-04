@@ -26,12 +26,15 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
   }, []);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function fetchQuiz() {
       setIsLoading(true);
       try {
         const res = await fetch('/api/ai/generate-quiz', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          signal: controller.signal,
           body: JSON.stringify({
             topic,
             level,
@@ -49,9 +52,24 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
         });
 
         const data = await res.json();
+        const validQuestions = Array.isArray(data.questions)
+          ? data.questions.filter((question) =>
+              typeof question?.prompt === 'string' &&
+              question.prompt.trim() &&
+              Array.isArray(question.options) &&
+              question.options.length >= 2 &&
+              question.options.every((option) => typeof option === 'string') &&
+              typeof question.correctAnswer === 'string' &&
+              question.options.includes(question.correctAnswer)
+            )
+          : [];
+        if (!validQuestions.length) {
+          throw new Error('Quiz response did not contain valid multiple-choice questions.');
+        }
         setQuizTitle(data.title || `AI Quiz: ${topic}`);
-        setQuestions(data.questions || []);
+        setQuestions(validQuestions);
       } catch (e) {
+        if (controller.signal.aborted) return;
         console.error('Failed to generate quiz:', e);
         // fallback
         setQuizTitle(`Review Quiz (${level})`);
@@ -79,11 +97,12 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
           },
         ]);
       } finally {
-        setIsLoading(false);
+        if (!controller.signal.aborted) setIsLoading(false);
       }
     }
 
     fetchQuiz();
+    return () => controller.abort();
   }, [topic, level]);
 
   const currentQ = questions[currentIndex];

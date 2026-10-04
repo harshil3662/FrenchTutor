@@ -479,9 +479,7 @@ app.post('/api/ai/generate-quiz', async (req, res) => {
 
 Important: every explanation must be written in English, even though the question text is in French. Keep the explanation clear, concise, and focused on the grammar rule being tested.
 
-Include varied question types:
-- Multiple choice with 4 options
-- Fill-in-the-blank / conjugation
+Use multiple-choice questions only, with exactly 4 string options per question. Every correctAnswer must exactly match one of its options.
 
 Format as JSON:
 {
