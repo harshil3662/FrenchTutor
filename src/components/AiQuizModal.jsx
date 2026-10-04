@@ -242,7 +242,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
             <div className="text-center py-12 space-y-4">
               <div className="w-12 h-12 border-4 border-[#5A5A40] border-t-transparent rounded-full animate-spin mx-auto" />
               <p className="text-sm text-[#525248] font-medium">
-                Gemini is generating tailored questions for your {level} level...
+                Generating tailored questions for your {level} level...
               </p>
             </div>
           ) : isFinished ? (

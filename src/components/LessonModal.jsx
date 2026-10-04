@@ -778,7 +778,7 @@ export const LessonModal = ({
                   <div className="w-12 h-12 border-4 border-[#5A5A40] border-t-transparent rounded-full animate-spin mx-auto" />
                   <div className="space-y-1">
                     <p className="text-base font-bold text-[#34342E] font-serif">
-                      Gemini is generating your custom AI Quiz...
+                      Generating your Quiz questions...
                     </p>
                     <p className="text-xs text-[#7A7A6A] max-w-sm mx-auto">
                       Formulating questions tailored to {lesson.title} ({lesson.level})

@@ -4,12 +4,12 @@ import { BookOpen, Cpu, Stethoscope, Layers, BookCheck, MessageSquare, Trophy } 
 
 export const NAV_TABS = [
   { id: 'grammar-lessons', label: 'Grammar Lessons', icon: BookOpen, tag: '8 Aspects' },
-  { id: 'workbench', label: 'Aspect Workbench', icon: Cpu, tag: 'Transformer' },
+  { id: 'workbench', label: 'Workbench', icon: Cpu, tag: 'Transformer' },
   { id: 'grammar-doctor', label: 'Grammar Doctor', icon: Stethoscope, tag: 'Diagnostics' },
-  { id: 'flashcards', label: 'Grammar Rules SRS', icon: Layers, tag: 'Decks' },
-  { id: 'stories', label: 'Grammar in Context', icon: BookCheck, tag: 'Bilingual' },
+  { id: 'flashcards', label: 'Vocabulary', icon: Layers, tag: 'Decks' },
+  { id: 'stories', label: 'Reading', icon: BookCheck, tag: 'Contextual' },
   { id: 'tutor', label: 'Grammar Tutor', icon: MessageSquare, tag: 'Live AI' },
-  { id: 'progress', label: 'Mastery & Stats', icon: Trophy, tag: 'XP & Badges' },
+  { id: 'progress', label: 'Stats', icon: Trophy, tag: 'Badges' },
 ];
 
 export const Navigation = ({
