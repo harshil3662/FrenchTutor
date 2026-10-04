@@ -8,7 +8,7 @@ export const NAV_TABS = [
   { id: 'grammar-doctor', label: 'Grammar Doctor', icon: Stethoscope, tag: 'Diagnostics' },
   { id: 'flashcards', label: 'Vocabulary', icon: Layers, tag: 'Decks' },
   { id: 'stories', label: 'Reading', icon: BookCheck, tag: 'Contextual' },
-  { id: 'tutor', label: 'Grammar Tutor', icon: MessageSquare, tag: 'Live AI' },
+  { id: 'tutor', label: 'Grammar Tutor', icon: MessageSquare, tag: 'Live' },
   { id: 'progress', label: 'Stats', icon: Trophy, tag: 'Badges' },
 ];
 

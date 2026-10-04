@@ -103,7 +103,7 @@ export const StoriesView = ({ activeLevel, audioSpeed, onAwardXp }) => {
           className="px-5 py-3 bg-[#5A5A40] hover:bg-[#4A4A35] disabled:opacity-50 text-white rounded-2xl font-bold text-xs shadow-sm flex items-center gap-2 transition-all cursor-pointer"
         >
           <Sparkles className="w-4 h-4" />
-          <span>{isLoading ? 'Generating story...' : 'Generate New Story with AI'}</span>
+          <span>{isLoading ? 'Changing topic...' : 'Change Story Topic'}</span>
         </button>
       </div>
 

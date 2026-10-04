@@ -30,7 +30,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
   const [isTranslating, setIsTranslating] = useState(false);
   const [translationMap, setTranslationMap] = useState({});
 
-  // Lock background scroll when AI Quiz modal is open
+  // Lock background scroll when the practice quiz modal is open
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -100,7 +100,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
         if (!validQuestions.length) {
           throw new Error('Quiz response did not contain valid multiple-choice questions.');
         }
-        setQuizTitle(data.title || `AI Quiz: ${topic}`);
+        setQuizTitle(data.title || `Practice Quiz: ${topic}`);
         setQuestions(validQuestions);
       } catch (e) {
         if (controller.signal.aborted) return;

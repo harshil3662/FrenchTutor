@@ -61,7 +61,7 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
             <Stethoscope className="w-3.5 h-3.5" />
             <span>Grammar & Linguistics Clinic</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#34342E] font-serif">AI Diagnostics & Conjugator</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#34342E] font-serif">Diagnostics & Conjugator</h2>
           <p className="text-sm text-[#525248] max-w-2xl leading-relaxed">
             Enter any French sentence to get a full grammatical checkup, agreement corrections, conjugation tables, and register analysis.
           </p>

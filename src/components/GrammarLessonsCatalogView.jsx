@@ -381,25 +381,25 @@ export const GrammarLessonsCatalogView = ({
             No grammar lessons match your filter
           </h3>
           <p className="text-xs text-[#7A7A6A] max-w-sm mx-auto">
-            Try adjusting your search query or click "Generate Custom Grammar Lesson" to have Gemini create one on this exact rule.
+            Try adjusting your search query or click "Generate Custom Grammar Lesson" to create one for this exact rule.
           </p>
         </div>
       )}
 
-      {/* AI Custom Lesson Generator Modal */}
+      {/* Custom Lesson Generator Modal */}
       {isGeneratorOpen && typeof document !== 'undefined' && createPortal(
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in">
           <div className="bg-white rounded-3xl w-full max-w-xl p-6 sm:p-8 space-y-6 shadow-2xl border border-[#DCDCCF]">
             <div className="space-y-2">
               <div className="inline-flex items-center space-x-1.5 bg-[#F0ECE1] text-[#5A5A40] px-3 py-1 rounded-full text-xs font-bold uppercase">
                 <Sparkles className="w-3.5 h-3.5 text-[#D98E73]" />
-                <span>AI Grammar Lesson Atelier</span>
+                <span>Lesson Atelier</span>
               </div>
               <h3 className="text-xl font-bold text-[#34342E] font-serif">
                 Generate Custom Grammar Aspect Module
               </h3>
               <p className="text-xs text-[#525248]">
-                Enter any French grammar rule, tense comparison, or syntactic question. Gemini will generate a full lesson with formula blueprints, traps, and exercises.
+                Enter any French grammar rule, tense comparison, or syntactic question. The generator will create a full lesson with formula blueprints, traps, and exercises.
               </p>
             </div>
 

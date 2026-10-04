@@ -335,7 +335,7 @@ export default function App() {
         />
       )}
 
-      {/* AI Quiz Generator Modal */}
+      {/* Practice Quiz Generator Modal */}
       {quizModalData && (
         <AiQuizModal
           topic={quizModalData.topic}
