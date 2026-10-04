@@ -177,14 +177,6 @@ export const GrammarLessonsCatalogView = ({
             Master the architecture of French grammar by aspect: tense boundaries, subjunctive triggers, preceding COD agreements, pronoun syntax, and hypothetical clauses.
           </p>
         </div>
-
-        <button
-          onClick={() => setIsGeneratorOpen(true)}
-          className="px-5 py-3 bg-[#5A5A40] text-white hover:bg-[#4A4A35] rounded-2xl text-xs font-bold flex items-center gap-2 transition-all shadow-sm cursor-pointer self-start lg:self-auto"
-        >
-          <Sparkles className="w-4 h-4 text-[#D98E73]" />
-          <span>Generate Custom Grammar Lesson</span>
-        </button>
       </div>
 
       {/* 8 Grammatical Aspects Cards Overview */}

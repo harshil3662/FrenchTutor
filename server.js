@@ -477,6 +477,8 @@ app.post('/api/ai/generate-quiz', async (req, res) => {
 
   Make this quiz substantially different from a standard or previously generated quiz. Use the scenario cue "${variationCue}" as inspiration, vary names, verbs, sentence structures, and contexts, and avoid stock examples. Use existing drills only to understand the unit content; do not copy their questions or answers verbatim. Give every question in this quiz a distinct sentence and test case. Variation token: ${variationToken}.
 
+Important: every explanation must be written in English, even though the question text is in French. Keep the explanation clear, concise, and focused on the grammar rule being tested.
+
 Include varied question types:
 - Multiple choice with 4 options
 - Fill-in-the-blank / conjugation
@@ -492,7 +494,7 @@ Format as JSON:
       "prompt": "The question prompt in French with blank or verb to conjugate",
       "options": ["option 1", "option 2", "option 3", "option 4"],
       "correctAnswer": "The exact correct string",
-      "explanation": "Clear grammatical explanation of why this is correct"
+      "explanation": "Clear grammatical explanation in English of why this is correct"
     }
   ]
 }`;
