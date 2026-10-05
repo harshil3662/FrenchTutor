@@ -88,11 +88,11 @@ export const StoriesView = ({ activeLevel, audioSpeed, onAwardXp }) => {
         <div className="space-y-2">
           <div className="inline-flex items-center space-x-2 bg-[#F0ECE1] border border-[#5A5A40]/20 text-[#5A5A40] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
             <BookCheck className="w-3.5 h-3.5" />
-            <span>Reading Comprehension & Bilingual Stories</span>
+            <span>French Reading & Comprehension</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#34342E] font-serif">French Stories & Cultural Tales</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#34342E] font-serif">French Reading Room</h2>
           <p className="text-sm text-[#525248] max-w-2xl leading-relaxed">
-            Build your intuition and vocabulary with engaging short stories tailored to your CEFR {activeLevel} level.
+            Build your reading fluency with longer passages tailored to your CEFR {activeLevel} level.
           </p>
         </div>
 
@@ -103,7 +103,7 @@ export const StoriesView = ({ activeLevel, audioSpeed, onAwardXp }) => {
           className="px-5 py-3 bg-[#5A5A40] hover:bg-[#4A4A35] disabled:opacity-50 text-white rounded-2xl font-bold text-xs shadow-sm flex items-center gap-2 transition-all cursor-pointer"
         >
           <Sparkles className="w-4 h-4" />
-          <span>{isLoading ? 'Changing topic...' : 'Change Story Topic'}</span>
+          <span>{isLoading ? 'Creating story...' : 'Change story topic'}</span>
         </button>
       </div>
 

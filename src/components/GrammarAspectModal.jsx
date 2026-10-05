@@ -26,6 +26,7 @@ import {
   clearStoredAiPracticeExercises,
 } from '../utils/curriculumStore.js';
 import { formatBoldText } from '../utils/textFormatter.jsx';
+import { speakFrench } from '../utils/audioUtils.js';
 
 export const GrammarAspectModal = ({
   lesson,
@@ -103,7 +104,9 @@ export const GrammarAspectModal = ({
   // Support multi-topic units
   const topicsList = Array.isArray(lesson?.topics) && lesson.topics.length > 0 ? lesson.topics : null;
   const hasMultipleTopics = Boolean(topicsList && topicsList.length > 1);
-  const activeTopic = hasMultipleTopics ? (topicsList[activeTopicIndex] || topicsList[0]) : lesson;
+  const activeTopic = hasMultipleTopics
+    ? (topicsList[activeTopicIndex] || topicsList[0])
+    : (topicsList?.[0] || lesson);
 
   // Exercises are always dynamic practice quiz questions
   const exercises = (aiExercisesLessonId === lesson.id && aiExercises?.length)
@@ -140,12 +143,7 @@ export const GrammarAspectModal = ({
     : [];
 
   const handleAudioPlay = (text) => {
-    if (!('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'fr-FR';
-    utterance.rate = audioSpeed || 0.95;
-    window.speechSynthesis.speak(utterance);
+    speakFrench(text, audioSpeed || 0.95);
   };
 
   const handleGenerateAiExercises = async (forceFresh = false) => {

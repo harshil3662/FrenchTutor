@@ -10,6 +10,7 @@ export const Header = ({
   isScrolled = false,
 }) => {
   const levels = ['A1', 'A2', 'B1', 'B2'];
+  const selectedAudioSpeed = String(audioSpeed);
 
   return (
     <div
@@ -94,13 +95,13 @@ export const Header = ({
             <select
               id="audio-speed-select"
               aria-label="Audio pronunciation playback speed"
-              value={audioSpeed}
+              value={selectedAudioSpeed}
               onChange={(e) => onSpeedChange(parseFloat(e.target.value))}
               className="bg-transparent text-[#34342E] text-xs font-medium focus:outline-none cursor-pointer"
             >
               <option value="0.75" className="bg-[#F5F5F0] text-[#34342E]">0.75x (Slow)</option>
               <option value="0.9" className="bg-[#F5F5F0] text-[#34342E]">0.9x (Ideal)</option>
-              <option value="1.0" className="bg-[#F5F5F0] text-[#34342E]">1.0x (Normal)</option>
+              <option value="1" className="bg-[#F5F5F0] text-[#34342E]">1x (Normal)</option>
               <option value="1.15" className="bg-[#F5F5F0] text-[#34342E]">1.15x (Native)</option>
             </select>
           </div>

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Volume2, RotateCcw, Check, Sparkles, Plus, Search, Star, Layers, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Volume2, RotateCcw, Check, Sparkles, Plus, Search, Star, Layers, ArrowLeft, ArrowRight, Shuffle } from 'lucide-react';
 import { VOCABULARY_FLASHCARDS } from '../data/vocabData.js';
 import { speakFrench, playChime } from '../utils/audioUtils.js';
 import { useModalTracker } from '../utils/modalState.js';
+
+const VOCABULARY_CATEGORIES = [...new Set(VOCABULARY_FLASHCARDS.map((card) => card.category))];
 
 export const FlashcardsView = ({
   progress,
@@ -12,9 +14,10 @@ export const FlashcardsView = ({
   onAwardXp,
 }) => {
   const [cards, setCards] = useState(VOCABULARY_FLASHCARDS);
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [selectedCategories, setSelectedCategories] = useState(VOCABULARY_CATEGORIES);
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState('srs');
+  const [suggestionOffset, setSuggestionOffset] = useState(0);
   
   // SRS Review mode state
   const [srsIndex, setSrsIndex] = useState(0);
@@ -28,15 +31,20 @@ export const FlashcardsView = ({
 
   useModalTracker(isAddingCard);
 
-  const categories = ['All', 'Basics', 'Food & Wine', 'Travel & Metro', 'Daily Life', 'Slang & Argot', 'Business'];
-
-  const filteredCards = cards.filter((c) => {
-    const matchesCat = activeCategory === 'All' || c.category === activeCategory;
+  const categoryCards = cards.filter((card) => selectedCategories.includes(card.category));
+  const filteredCards = categoryCards.filter((c) => {
     const matchesSearch =
       c.french.toLowerCase().includes(searchQuery.toLowerCase()) ||
       c.english.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCat && matchesSearch;
+    return matchesSearch;
   });
+
+  const suggestionPool = categoryCards.filter((card) => !progress.masteredCards.includes(card.id));
+  const availableSuggestions = suggestionPool.length > 0 ? suggestionPool : categoryCards;
+  const suggestedCards = availableSuggestions.length > 0
+    ? Array.from({ length: Math.min(8, availableSuggestions.length) }, (_, index) =>
+      availableSuggestions[(suggestionOffset + index) % availableSuggestions.length])
+    : [];
 
   const currentSrsCard = filteredCards[srsIndex % (filteredCards.length || 1)];
 
@@ -147,26 +155,93 @@ export const FlashcardsView = ({
         </div>
       </div>
 
-      {/* Categories Bar */}
-      <div className="flex flex-wrap gap-2">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => {
-              setActiveCategory(cat);
-              setSrsIndex(0);
-              setIsFlipped(false);
-            }}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-              activeCategory === cat
-                ? 'bg-[#5A5A40] text-white shadow-xs'
-                : 'bg-white border border-[#DCDCCF] text-[#7A7A6A] hover:text-[#34342E] hover:bg-[#F5F5F0]'
-            }`}
-          >
-            {cat === 'All' ? 'All categories' : cat}
-          </button>
-        ))}
-      </div>
+      {/* Category preferences */}
+      <fieldset className="space-y-3">
+        <legend className="text-sm font-bold text-[#34342E]">Choose vocabulary categories</legend>
+        <div className="flex flex-wrap gap-2">
+          <label className="inline-flex items-center gap-2 rounded-xl border border-[#5A5A40]/30 bg-[#F0ECE1] px-3 py-2 text-xs font-semibold text-[#34342E]">
+            <input
+              type="checkbox"
+              checked={selectedCategories.length === VOCABULARY_CATEGORIES.length}
+              onChange={(event) => {
+                setSelectedCategories(event.target.checked ? VOCABULARY_CATEGORIES : []);
+                setSuggestionOffset(0);
+                setSrsIndex(0);
+                setIsFlipped(false);
+              }}
+              className="accent-[#5A5A40]"
+            />
+            All categories
+          </label>
+          {VOCABULARY_CATEGORIES.map((category) => (
+            <label key={category} className="inline-flex items-center gap-2 rounded-xl border border-[#DCDCCF] bg-white px-3 py-2 text-xs font-medium text-[#525248] hover:border-[#5A5A40]/50">
+              <input
+                type="checkbox"
+                checked={selectedCategories.includes(category)}
+                onChange={(event) => {
+                  setSelectedCategories((previous) => event.target.checked
+                    ? [...previous, category]
+                    : previous.filter((item) => item !== category));
+                  setSuggestionOffset(0);
+                  setSrsIndex(0);
+                  setIsFlipped(false);
+                }}
+                className="accent-[#5A5A40]"
+              />
+              {category}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      {/* Suggested words from selected categories */}
+      <section aria-labelledby="suggested-words-heading" className="space-y-3">
+        <div className="flex items-center justify-between gap-3 border-b border-[#DCDCCF] pb-2">
+          <div>
+            <h3 id="suggested-words-heading" className="text-sm font-bold text-[#34342E]">Suggested words</h3>
+            <p className="text-xs text-[#7A7A6A]">Based on your selected categories</p>
+          </div>
+          {availableSuggestions.length > 4 && (
+            <button
+              type="button"
+              onClick={() => setSuggestionOffset((current) => (current + 8) % availableSuggestions.length)}
+              className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-[#5A5A40] hover:bg-white"
+            >
+              <Shuffle className="h-3.5 w-3.5" />
+              More words
+            </button>
+          )}
+        </div>
+        {suggestedCards.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {suggestedCards.map((card) => (
+              <div key={card.id} className="flex items-center justify-between gap-3 border-l-2 border-[#5A7A5A] bg-white px-3.5 py-3">
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-bold text-[#34342E] font-serif">{card.french}</p>
+                  <p className="truncate text-xs text-[#5A5A40]">{card.english}</p>
+                  <p className="mt-1 text-[10px] text-[#7A7A6A]">{card.category} · {card.level}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => speakFrench(card.french, audioSpeed)}
+                  aria-label={`Listen to ${card.french}`}
+                  className="shrink-0 rounded-lg p-2 text-[#7A7A6A] hover:bg-[#F0ECE1] hover:text-[#34342E]"
+                >
+                  <Volume2 className="h-4 w-4" />
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-xs text-[#7A7A6A]">Select at least one category to get word suggestions.</p>
+        )}
+      </section>
+
+      {filteredCards.length === 0 && (
+        <p role="status" className="border-l-2 border-[#D98E73] bg-[#FAF3EE] px-4 py-3 text-xs text-[#5C382A]">
+          No words match your selected categories or search.
+        </p>
+      )}
 
       {/* SRS FLASHCARD INTERACTIVE 3D CAROUSEL */}
       {viewMode === 'srs' && filteredCards.length > 0 && currentSrsCard && (

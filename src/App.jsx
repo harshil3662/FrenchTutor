@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Pause, Play, X } from 'lucide-react';
 import { Header } from './components/Header.jsx';
 import { Navigation } from './components/Navigation.jsx';
 import { AnimatedBackground } from './components/AnimatedBackground.jsx';
@@ -16,6 +17,7 @@ import { AiQuizModal } from './components/AiQuizModal.jsx';
 import { Footer } from './components/Footer.jsx';
 import { loadUserProgress, markLessonCompleted, toggleCardMastery, addXp } from './utils/storageUtils.js';
 import { getStoredUnits } from './utils/curriculumStore.js';
+import { resumeFrench } from './utils/audioUtils.js';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('grammar-lessons');
@@ -25,6 +27,8 @@ export default function App() {
   const [units, setUnits] = useState(getStoredUnits());
   const [isScrolled, setIsScrolled] = useState(false);
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
+  const [isNarrationPaused, setIsNarrationPaused] = useState(false);
+  const [isNarrationPanelDismissed, setIsNarrationPanelDismissed] = useState(false);
 
   // Modals state
   const [activeLesson, setActiveLesson] = useState(null);
@@ -39,6 +43,16 @@ export default function App() {
     };
     window.addEventListener('app-modal-change', handleModalChange);
     return () => window.removeEventListener('app-modal-change', handleModalChange);
+  }, []);
+
+  useEffect(() => {
+    const handleSpeechState = (event) => {
+      const isPaused = event.detail?.status === 'paused';
+      setIsNarrationPaused(isPaused);
+      if (isPaused) setIsNarrationPanelDismissed(false);
+    };
+    window.addEventListener('french-speech-state', handleSpeechState);
+    return () => window.removeEventListener('french-speech-state', handleSpeechState);
   }, []);
 
   const isModalOpen = Boolean(
@@ -348,6 +362,40 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
+
+      <AnimatePresence>
+        {isNarrationPaused && !isNarrationPanelDismissed && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            transition={{ duration: 0.18 }}
+            role="status"
+            aria-live="polite"
+            className="fixed bottom-4 right-4 z-[110] flex items-center gap-3 rounded-xl border border-[#DCDCCF] bg-[#34342E] px-4 py-3 text-white shadow-lg"
+          >
+            <Pause className="h-4 w-4 text-[#E3C66B]" aria-hidden="true" />
+            <span className="text-sm font-medium">Narration paused</span>
+            <button
+              type="button"
+              onClick={resumeFrench}
+              className="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-1.5 text-sm font-semibold hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              <Play className="h-3.5 w-3.5" aria-hidden="true" />
+              Resume
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsNarrationPanelDismissed(true)}
+              aria-label="Close narration panel"
+              title="Close narration panel"
+              className="rounded-md p-1 text-white/70 hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              <X className="h-4 w-4" aria-hidden="true" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

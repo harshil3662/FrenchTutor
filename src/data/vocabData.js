@@ -178,6 +178,18 @@ export const VOCABULARY_FLASHCARDS = [
     category: 'Travel & Metro',
     level: 'B1'
   },
+  {
+    id: 'v24',
+    french: 'La sortie',
+    english: 'The exit',
+    gender: 'f',
+    partOfSpeech: 'noun',
+    ipa: '/la sɔʁ.ti/',
+    exampleFrench: 'La sortie de la station se trouve à gauche.',
+    exampleEnglish: 'The station exit is on the left.',
+    category: 'Travel & Metro',
+    level: 'A2'
+  },
 
   // DAILY LIFE
   {
@@ -212,6 +224,28 @@ export const VOCABULARY_FLASHCARDS = [
     exampleEnglish: 'After a long day, I listen to music to relax.',
     category: 'Daily Life',
     level: 'B1'
+  },
+  {
+    id: 'v33',
+    french: 'Se réveiller',
+    english: 'To wake up',
+    partOfSpeech: 'verb',
+    ipa: '/sə ʁe.ve.je/',
+    exampleFrench: 'Je me réveille à sept heures en semaine.',
+    exampleEnglish: 'I wake up at seven on weekdays.',
+    category: 'Daily Life',
+    level: 'A1'
+  },
+  {
+    id: 'v34',
+    french: 'Faire les courses',
+    english: 'To do the grocery shopping',
+    partOfSpeech: 'expression',
+    ipa: '/fɛʁ le kuʁs/',
+    exampleFrench: 'Nous faisons les courses au marché le samedi.',
+    exampleEnglish: 'We do the grocery shopping at the market on Saturday.',
+    category: 'Daily Life',
+    level: 'A2'
   },
 
   // SLANG & ARGOT (ARGOT & VERLAN)
@@ -260,6 +294,17 @@ export const VOCABULARY_FLASHCARDS = [
     category: 'Slang & Argot',
     level: 'A2'
   },
+  {
+    id: 'v44',
+    french: 'Ça marche',
+    english: 'Okay / That works',
+    partOfSpeech: 'expression',
+    ipa: '/sa maʁʃ/',
+    exampleFrench: 'On se retrouve à huit heures ? Ça marche !',
+    exampleEnglish: 'Shall we meet at eight? Sounds good!',
+    category: 'Slang & Argot',
+    level: 'A2'
+  },
 
   // BUSINESS & FORMAL
   {
@@ -294,6 +339,30 @@ export const VOCABULARY_FLASHCARDS = [
     ipa: '/œ̃ kɔ̃t.ʁɑ̃.dy/',
     exampleFrench: 'Je vous enverrai le compte-rendu de la réunion d\'ici ce soir.',
     exampleEnglish: 'I will send you the meeting summary by tonight.',
+    category: 'Business',
+    level: 'B2'
+  },
+  {
+    id: 'v53',
+    french: 'Un entretien d\'embauche',
+    english: 'A job interview',
+    gender: 'm',
+    partOfSpeech: 'noun',
+    ipa: '/œ̃.n‿ɑ̃.tʁə.tjɛ̃ dɑ̃.boʃ/',
+    exampleFrench: 'Elle prépare son entretien d\'embauche de demain.',
+    exampleEnglish: 'She is preparing for her job interview tomorrow.',
+    category: 'Business',
+    level: 'B1'
+  },
+  {
+    id: 'v54',
+    french: 'Une échéance',
+    english: 'A deadline / due date',
+    gender: 'f',
+    partOfSpeech: 'noun',
+    ipa: '/yn e.ʃe.ɑ̃s/',
+    exampleFrench: 'La date limite de ce projet est une échéance importante.',
+    exampleEnglish: 'The deadline for this project is an important due date.',
     category: 'Business',
     level: 'B2'
   }

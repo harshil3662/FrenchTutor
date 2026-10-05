@@ -1,6 +1,14 @@
 // French Audio & Speech Synthesis / Speech Recognition Utilities
 
 let audioCtx = null;
+let activeUtterance = null;
+let activeSpeechText = null;
+
+function dispatchSpeechState(status) {
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('french-speech-state', { detail: { status } }));
+  }
+}
 
 function getAudioContext() {
   if (!audioCtx) {
@@ -22,14 +30,29 @@ export function speakFrench(text, rate = 0.9, pitch = 1.0) {
       return;
     }
 
-    // Cancel any ongoing speech
-    window.speechSynthesis.cancel();
-
     const cleanText = text.replace(/<[^>]*>?/gm, '').trim();
     if (!cleanText) {
       resolve();
       return;
     }
+
+    const synthesis = window.speechSynthesis;
+    if (activeSpeechText === cleanText && synthesis.speaking) {
+      if (synthesis.paused) {
+        synthesis.resume();
+        dispatchSpeechState('playing');
+      } else {
+        synthesis.pause();
+        dispatchSpeechState('paused');
+      }
+      resolve();
+      return;
+    }
+
+    if (activeUtterance) dispatchSpeechState('stopped');
+    synthesis.cancel();
+    activeUtterance = null;
+    activeSpeechText = null;
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = 'fr-FR';
@@ -46,14 +69,37 @@ export function speakFrench(text, rate = 0.9, pitch = 1.0) {
       utterance.voice = frenchVoice;
     }
 
-    utterance.onend = () => resolve();
+    activeUtterance = utterance;
+    activeSpeechText = cleanText;
+    utterance.onend = () => {
+      if (activeUtterance === utterance) {
+        activeUtterance = null;
+        activeSpeechText = null;
+        dispatchSpeechState('stopped');
+      }
+      resolve();
+    };
     utterance.onerror = (e) => {
       console.warn('Speech synthesis error:', e);
+      if (activeUtterance === utterance) {
+        activeUtterance = null;
+        activeSpeechText = null;
+        dispatchSpeechState('stopped');
+      }
       resolve();
     };
 
-    window.speechSynthesis.speak(utterance);
+    synthesis.speak(utterance);
+    dispatchSpeechState('playing');
   });
+}
+
+export function resumeFrench() {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+  if (activeUtterance && window.speechSynthesis.paused) {
+    window.speechSynthesis.resume();
+    dispatchSpeechState('playing');
+  }
 }
 
 // Play harmonious web audio chimes for feedback

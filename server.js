@@ -81,12 +81,12 @@ function getOpenRouterModel(task) {
   return (taskKey && process.env[taskKey]) || process.env.OPEN_ROUTER_MODEL || 'openai/gpt-4o';
 }
 
-async function generateOpenRouterJson(prompt, { task, temperature = 0.9 } = {}) {
+async function generateOpenRouterJson(prompt, { task, temperature = 0.9, timeoutMs = 4000, maxTokens } = {}) {
   const apiKey = getOpenRouterApiKey();
   if (!apiKey) return null;
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 4000);
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -103,6 +103,7 @@ async function generateOpenRouterJson(prompt, { task, temperature = 0.9 } = {}) 
         messages: [{ role: 'user', content: prompt }],
         response_format: { type: 'json_object' },
         temperature,
+        ...(maxTokens ? { max_tokens: maxTokens } : {}),
       }),
     });
 
@@ -117,7 +118,28 @@ async function generateOpenRouterJson(prompt, { task, temperature = 0.9 } = {}) 
   }
 }
 
-async function generateAiJson(prompt, fallback, { task, temperature = 0.3 } = {}) {
+async function generateAiJson(prompt, fallback, {
+  task,
+  temperature = 0.3,
+  preferOpenRouter = false,
+  openRouterTimeoutMs,
+  maxTokens,
+} = {}) {
+  if (preferOpenRouter) {
+    try {
+      const openRouterResult = await generateOpenRouterJson(prompt, {
+        task,
+        temperature,
+        timeoutMs: openRouterTimeoutMs,
+        maxTokens,
+      });
+      const parsed = cleanAndParseJson(openRouterResult, null);
+      if (parsed) return parsed;
+    } catch (error) {
+      console.warn(`OpenRouter ${task || 'AI'} request failed:`, error);
+    }
+  }
+
   const ai = getGeminiClient();
   if (ai) {
     const candidateModels = ['gemini-3.8-flash', 'gemini-flash-latest', 'gemini-3.1-flash-lite'];
@@ -139,11 +161,13 @@ async function generateAiJson(prompt, fallback, { task, temperature = 0.3 } = {}
     }
   }
 
-  try {
-    const openRouterResult = await generateOpenRouterJson(prompt, { task, temperature });
-    if (openRouterResult) return cleanAndParseJson(openRouterResult, fallback);
-  } catch (error) {
-    console.warn(`OpenRouter ${task || 'AI'} request failed:`, error);
+  if (!preferOpenRouter) {
+    try {
+      const openRouterResult = await generateOpenRouterJson(prompt, { task, temperature });
+      if (openRouterResult) return cleanAndParseJson(openRouterResult, fallback);
+    } catch (error) {
+      console.warn(`OpenRouter ${task || 'AI'} request failed:`, error);
+    }
   }
 
   return fallback;
@@ -358,14 +382,15 @@ app.post('/api/ai/generate-story', async (req, res) => {
   };
 
   try {
-    const prompt = `Create an engaging, culturally authentic French short reading story for a student at CEFR level ${level}.
+    const prompt = `Create an engaging, culturally authentic French reading passage for a student at CEFR level ${level}.
 Topic: ${topic}. Theme: ${theme}.
 
 Requirements:
-- The French text should be about 120-180 words, perfectly tailored for ${level} level.
+  - Write a substantial passage of 250-320 French words, perfectly tailored to CEFR ${level}. Keep vocabulary, sentence structure, verb tenses, and grammar appropriate for this level.
+  - Keep the story coherent and engaging, with a clear beginning, development, and conclusion.
 - Include a side-by-side English translation.
 - Extract a glossary of 4-6 key vocabulary terms or idioms.
-- Include 3 multiple-choice comprehension questions in French with 4 options each, correct index, and short French explanation.
+  - Include 4 multiple-choice comprehension questions in French with 4 options each, correct index, and short French explanation.
 
 Format as strict JSON:
 {
@@ -386,8 +411,14 @@ Format as strict JSON:
   ]
 }`;
 
-    const result = await generateAiJson(prompt, defaultFallback, { task: 'generate-story' });
-    res.json(result);
+    const result = await generateAiJson(prompt, defaultFallback, {
+      task: 'generate-story',
+      temperature: 0.7,
+      preferOpenRouter: true,
+      openRouterTimeoutMs: 25000,
+      maxTokens: 3000,
+    });
+    res.json({ ...result, level });
   } catch (error) {
     console.error('Error in /api/ai/generate-story:', error);
     res.json(defaultFallback);

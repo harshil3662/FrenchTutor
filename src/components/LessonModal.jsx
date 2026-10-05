@@ -102,7 +102,9 @@ export const LessonModal = ({
   // Support multi-topic units
   const topicsList = Array.isArray(lesson?.topics) && lesson.topics.length > 0 ? lesson.topics : null;
   const hasMultipleTopics = Boolean(topicsList && topicsList.length > 1);
-  const activeTopic = hasMultipleTopics ? (topicsList[activeTopicIndex] || topicsList[0]) : lesson;
+  const activeTopic = hasMultipleTopics
+    ? (topicsList[activeTopicIndex] || topicsList[0])
+    : (topicsList?.[0] || lesson);
 
   // Resolve vocabulary
   const vocabList = Array.isArray(lesson?.vocabulary) && lesson.vocabulary.length > 0
