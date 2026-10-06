@@ -18,10 +18,11 @@ import { Footer } from './components/Footer.jsx';
 import { loadUserProgress, markLessonCompleted, toggleCardMastery, addXp } from './utils/storageUtils.js';
 import { getStoredUnits } from './utils/curriculumStore.js';
 import { resumeFrench } from './utils/audioUtils.js';
+import { getUnlockedLevels } from './utils/progressionUtils.js';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('grammar-lessons');
-  const [activeLevel, setActiveLevel] = useState('A2');
+  const [activeLevel, setActiveLevel] = useState('A1');
   const [audioSpeed, setAudioSpeed] = useState(0.9);
   const [progress, setProgress] = useState(loadUserProgress());
   const [units, setUnits] = useState(getStoredUnits());
@@ -29,6 +30,16 @@ export default function App() {
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
   const [isNarrationPaused, setIsNarrationPaused] = useState(false);
   const [isNarrationPanelDismissed, setIsNarrationPanelDismissed] = useState(false);
+
+  // Unlocked levels based on bottom-to-top unit progression
+  const unlockedLevels = getUnlockedLevels(progress.completedLessons);
+
+  // Ensure activeLevel is always an unlocked level
+  useEffect(() => {
+    if (!unlockedLevels.includes(activeLevel)) {
+      setActiveLevel('A1');
+    }
+  }, [unlockedLevels, activeLevel]);
 
   // Modals state
   const [activeLesson, setActiveLesson] = useState(null);
@@ -108,8 +119,8 @@ export default function App() {
     };
   }, []);
 
-  const handleLessonCompleted = (lessonId, xpEarned) => {
-    const updated = markLessonCompleted(lessonId, xpEarned);
+  const handleLessonCompleted = (lessonId, xpEarned, isMastered = false) => {
+    const updated = markLessonCompleted(lessonId, xpEarned, isMastered);
     setProgress(updated);
   };
 
@@ -156,7 +167,12 @@ export default function App() {
                   <Header
                     progress={progress}
                     activeLevel={activeLevel}
-                    onLevelChange={setActiveLevel}
+                    unlockedLevels={unlockedLevels}
+                    onLevelChange={(lvl) => {
+                      if (unlockedLevels.includes(lvl)) {
+                        setActiveLevel(lvl);
+                      }
+                    }}
                     audioSpeed={audioSpeed}
                     onSpeedChange={setAudioSpeed}
                     isScrolled={isScrolled}
@@ -267,7 +283,9 @@ export default function App() {
         {activeTab === 'grammar-lessons' && (
           <GrammarLessonsCatalogView
             activeLevel={activeLevel}
+            unlockedLevels={unlockedLevels}
             completedLessons={progress.completedLessons}
+            masteredLessons={progress.masteredLessons || []}
             audioSpeed={audioSpeed}
             units={units}
             onAwardXp={handleAwardXp}
@@ -342,9 +360,8 @@ export default function App() {
           isOpen={!!previewUnit}
           audioSpeed={audioSpeed}
           onClose={() => setPreviewUnit(null)}
-          onComplete={(lessonId, xp) => {
-            handleLessonCompleted(lessonId, xp);
-            setPreviewUnit(null);
+          onComplete={(lessonId, xp, isMastered) => {
+            handleLessonCompleted(lessonId, xp, isMastered);
           }}
         />
       )}

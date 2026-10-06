@@ -351,77 +351,515 @@ Output JSON strictly with:
   }
 });
 
-// Dynamic AI Story & Reading Comprehension Generator
+// Dynamic AI Story, Newspaper Article & Multi-modal Reading Generator
 app.post('/api/ai/generate-story', async (req, res) => {
-  const { level = 'A2', topic = 'A sunny afternoon in Montmartre', theme = 'daily life' } = req.body;
+  const {
+    level = 'A1',
+    topic = 'Le café parisien et l\'art de vivre au quotidien',
+    theme = 'culture & society',
+    sourceType = 'newspaper', // 'newspaper' | 'magazine' | 'editorial' | 'story'
+  } = req.body;
 
-  const defaultFallback = {
-    title: "Une journée à Paris",
-    level,
-    frenchText: "Julien se réveille tôt le matin. Il va à la boulangerie pour acheter un croissant chaud et une baguette tradition. Le boulanger lui sourit et lui dit : « Passez une excellente journée ! » Julien s'assoit au parc avec son café.",
-    englishTranslation: "Julien wakes up early in the morning. He goes to the bakery to buy a warm croissant and a traditional baguette. The baker smiles at him and says: 'Have an excellent day!' Julien sits in the park with his coffee.",
-    glossary: [
-      { french: "se réveille", english: "wakes up", type: "verb" },
-      { french: "boulangerie", english: "bakery", type: "noun (f)" },
-      { french: "s'assoit", english: "sits down", type: "verb" }
-    ],
-    comprehensionQuestions: [
-      {
-        question: "Où va Julien le matin ?",
-        options: ["À la gare", "À la boulangerie", "Au musée", "À l'école"],
-        correctIndex: 1,
-        explanation: "Julien va à la boulangerie pour acheter un croissant."
+  const levelFallbacks = {
+    A1: {
+      title: "Le quotidien du matin : Un café à la terrasse parisienne",
+      subtitle: "Chaque matin dans les quartiers de Paris, les habitants retrouvent leur boulangerie et leur café habituel.",
+      sourceType: "Newspaper Article (Le Parisien Quotidien)",
+      publicationDate: "Morning Edition",
+      author: "By Claire Delacroix, Society Desk",
+      level: "A1",
+      frenchText: "Chaque matin, Thomas se réveille à sept heures. Il habite dans un petit appartement près du jardin du Luxembourg. À huit heures, il marche jusqu'à la boulangerie de son quartier. La boulangère est toujours souriante. Thomas achète un croissant au beurre et une baguette bien dorée. Ensuite, il va au Café des Arts. Le serveur s'appelle Lucas. Lucas lui apporte un café noir avec un peu de sucre. Beaucoup de personnes lisent le journal ou parlent de la météo. Aujourd'hui, il fait beau et le ciel est bleu. Thomas aime observer les passants dans la rue. Pour lui, ce moment calme est le meilleur moment de la journée avant de commencer le travail.",
+      englishTranslation: "Every morning, Thomas wakes up at seven o'clock. He lives in a small apartment near the Luxembourg Garden. At eight o'clock, he walks to the bakery in his neighborhood. The baker is always smiling. Thomas buys a butter croissant and a golden baguette. Then, he goes to the Café des Arts. The waiter's name is Lucas. Lucas brings him a black coffee with a little sugar. Many people read the newspaper or talk about the weather. Today, the weather is nice and the sky is blue. Thomas likes watching passersby in the street. For him, this calm moment is the best moment of the day before starting work.",
+      glossary: [
+        { french: "se réveille", english: "wakes up", type: "pronominal verb", contextSentence: "Thomas se réveille à sept heures." },
+        { french: "boulangerie", english: "bakery", type: "feminine noun", contextSentence: "Il marche jusqu'à la boulangerie." },
+        { french: "croissant au beurre", english: "butter croissant", type: "masculine noun", contextSentence: "Thomas achète un croissant au beurre." },
+        { french: "serveur", english: "waiter", type: "masculine noun", contextSentence: "Le serveur s'appelle Lucas." },
+        { french: "passants", english: "passersby / pedestrians", type: "plural noun", contextSentence: "Thomas aime observer les passants." },
+      ],
+      rightOrWrongQuestions: [
+        {
+          claim: "According to the article: Thomas buys his croissant at 10:00 AM.",
+          isRight: false,
+          explanation: "False: The text states that Thomas walks to the bakery at 8:00 AM, not at 10:00 AM.",
+          quote: "À huit heures, il marche jusqu'à la boulangerie de son quartier."
+        },
+        {
+          claim: "According to the article: Lucas the waiter serves Thomas a black coffee.",
+          isRight: true,
+          explanation: "True: The article explicitly states that Lucas brings him a black coffee with a little sugar.",
+          quote: "Lucas lui apporte un café noir avec un peu de sucre."
+        },
+        {
+          claim: "According to the article: The weather is cold and rainy that morning.",
+          isRight: false,
+          explanation: "False: The article says the weather is beautiful and the sky is blue.",
+          quote: "Aujourd'hui, il fait beau et le ciel est bleu."
+        }
+      ],
+      comprehensionQuestions: [
+        {
+          question: "Where does Thomas live in Paris?",
+          options: ["Near the Eiffel Tower", "Near the Luxembourg Garden", "Near Gare de Lyon", "In the northern suburbs"],
+          correctIndex: 1,
+          explanation: "Thomas lives in a small apartment near the Luxembourg Garden (près du jardin du Luxembourg)."
+        },
+        {
+          question: "What are people doing while sitting at the café?",
+          options: ["Jogging around the park", "Sleeping at their tables", "Reading the newspaper or discussing the weather", "Watching a live football match"],
+          correctIndex: 2,
+          explanation: "The text says: 'Beaucoup de personnes lisent le journal ou parlent de la météo.'"
+        },
+        {
+          question: "Which part of the day does Thomas prefer most?",
+          options: ["The quiet morning moment before work starts", "The noisy lunch rush", "The evening subway commute", "Late night hours"],
+          correctIndex: 0,
+          explanation: "Thomas loves this calm morning moment best before beginning work."
+        }
+      ],
+      summaryExercise: {
+        prompt: "Which statement best summarizes the main idea of this article?",
+        options: [
+          { text: "Thomas enjoys a peaceful morning routine buying a croissant and drinking coffee at his neighborhood café before work.", isBest: true, feedback: "Excellent! This perfectly captures the essence and tone of the passage." },
+          { text: "Lucas the waiter arrives late to open the café because of heavy rain.", isBest: false, feedback: "Incorrect: Lucas is already working and serving coffee on a sunny day." },
+          { text: "The local bakery is closed for renovations in the morning.", isBest: false, feedback: "Incorrect: the bakery is open and welcoming customers." }
+        ],
+        sampleSummary: "In the morning, Thomas savors a quiet pause at his local bakery and café before his work day begins."
       },
-      {
-        question: "Qu'est-ce qu'il achète ?",
-        options: ["Du fromage", "Un croissant et une baguette", "Un journal", "Des fleurs"],
-        correctIndex: 1,
-        explanation: "Il achète un croissant chaud et une baguette tradition."
+      opinionPrompt: {
+        question: "How do you prefer to start your ideal day? Share your morning routine or point of view in French.",
+        context: "Write 1 to 3 simple sentences in French (e.g., your breakfast, coffee, walking, or reading habits). Use the starter phrases below to help you write!",
+        starterPhrases: [
+          "Le matin, je préfère boire... (In the morning, I prefer drinking...)",
+          "Mon rituel du matin est très simple : d'abord... (My morning routine is very simple: first...)",
+          "À mon avis, le meilleur moment de la journée est... (In my opinion, the best moment of the day is...)",
+          "J'aime commencer ma journée par... (I like starting my day with...)"
+        ]
       }
-    ]
+    },
+    A2: {
+      title: "Chronique Magazine : Le renouveau des marchés de producteurs locaux",
+      subtitle: "De Lyon à Bordeaux, les Français se tournent vers les circuits courts pour cuisiner de saison.",
+      sourceType: "Magazine Feature (Terroirs & Saveurs)",
+      publicationDate: "Weekly Feature",
+      author: "By Antoine Mercier, Food & Culture Journalist",
+      level: "A2",
+      frenchText: "Chaque samedi matin, la place du marché s'anime dès huit heures. De nombreux habitants viennent faire leurs courses avec de grands paniers en osier. Madame Dupont, maraîchère depuis vingt ans, vend des carottes fraîches, des poireaux et des pommes de terre biologiques. « Les clients posent beaucoup plus de questions qu'avant sur l'origine des légumes », explique-t-elle avec enthousiasme. Plus loin, un jeune fromager propose du comté affiné et du chèvre frais. Les prix sont parfois un peu plus élevés qu'au supermarché, mais la fraîcheur et le goût sont incomparables. Pour beaucoup de citadins, venir au marché n'est pas seulement une nécessité alimentaire, c'est aussi un rendez-vous convivial où l'on prend le temps de discuter et de partager des recettes.",
+      englishTranslation: "Every Saturday morning, the market square comes alive starting at eight o'clock. Many locals come to do their shopping with large wicker baskets. Mrs. Dupont, a market gardener for twenty years, sells fresh carrots, leeks, and organic potatoes. 'Customers ask many more questions than before about the origin of vegetables,' she explains enthusiastically. Further along, a young cheesemaker offers aged Comté and fresh goat cheese. Prices are sometimes slightly higher than at the supermarket, but freshness and taste are incomparable. For many city dwellers, coming to the market is not only a food necessity, it is also a friendly gathering where people take time to chat and share recipes.",
+      glossary: [
+        { french: "s'anime", english: "comes alive / buzzes", type: "pronominal verb", contextSentence: "La place du marché s'anime dès huit heures." },
+        { french: "maraîchère", english: "market gardener / vegetable grower", type: "feminine noun", contextSentence: "Madame Dupont est maraîchère depuis vingt ans." },
+        { french: "paniers en osier", english: "wicker baskets", type: "masculine plural noun", contextSentence: "Les clients viennent avec de grands paniers en osier." },
+        { french: "affiné", english: "aged / matured (cheese)", type: "adjective", contextSentence: "Le fromager propose du comté affiné." },
+        { french: "convivial", english: "friendly / welcoming / warm", type: "adjective", contextSentence: "C'est un rendez-vous convivial." }
+      ],
+      rightOrWrongQuestions: [
+        {
+          claim: "According to the article: Customers care less about vegetable origins than they did in the past.",
+          isRight: false,
+          explanation: "False: Mrs. Dupont explains that customers ask far more questions now about where produce comes from.",
+          quote: "Les clients posent beaucoup plus de questions qu'avant sur l'origine des légumes."
+        },
+        {
+          claim: "According to the article: Prices at the local farmers' market can be slightly higher than at the supermarket.",
+          isRight: true,
+          explanation: "True: The article acknowledges that market prices are sometimes slightly higher than supermarkets.",
+          quote: "Les prix sont parfois un peu plus élevés qu'au supermarché."
+        },
+        {
+          claim: "According to the article: City dwellers visit the market solely for quick grocery shopping without talking.",
+          isRight: false,
+          explanation: "False: The article highlights that it is also a warm social gathering to chat and share recipes.",
+          quote: "Ce n'est pas seulement une nécessité alimentaire, c'est aussi un rendez-vous convivial."
+        }
+      ],
+      comprehensionQuestions: [
+        {
+          question: "How long has Mrs. Dupont worked as a vegetable grower?",
+          options: ["Two years", "Ten years", "Twenty years", "Fifty years"],
+          correctIndex: 2,
+          explanation: "The text explicitly states: 'Madame Dupont, maraîchère depuis vingt ans' (twenty years)."
+        },
+        {
+          question: "What main advantage justifies the higher market prices according to the author?",
+          options: ["Automated self-checkout speed", "Incomparable freshness and flavor of the produce", "Free unlimited parking", "Daily clearance discounts"],
+          correctIndex: 1,
+          explanation: "The text specifies that 'la fraîcheur et le goût sont incomparables' (freshness and taste are incomparable)."
+        },
+        {
+          question: "What do visitors do at the market in addition to buying food?",
+          options: ["Work silently on laptops", "Chat with growers and exchange recipes", "Protest in the streets", "Attend choir rehearsals"],
+          correctIndex: 1,
+          explanation: "The market is a warm gathering place where people take time to chat and share recipes."
+        }
+      ],
+      summaryExercise: {
+        prompt: "Which statement best summarizes the journalist's perspective?",
+        options: [
+          { text: "Local farmers' markets are flourishing because city dwellers value fresh seasonal food and warm community connections.", isBest: true, feedback: "Spot on! This captures both the culinary quality and the social bond highlighted in the article." },
+          { text: "Supermarkets have completely driven traditional French open-air markets out of business.", isBest: false, feedback: "Incorrect: the article illustrates the strong resurgence of local markets." },
+          { text: "Organic vegetables are too expensive for the vast majority of consumers.", isBest: false, feedback: "Incomplete and misleading: the focus is on the appreciation of freshness and taste." }
+        ],
+        sampleSummary: "Despite somewhat higher prices, local farmers' markets thrive thanks to superior taste and friendly community atmosphere."
+      },
+      opinionPrompt: {
+        question: "In your opinion, is it important to support local farmers and open-air markets? Share your view in French.",
+        context: "Express your point of view in 1 to 3 sentences in French. You can mention price, health, taste, or community feeling.",
+        starterPhrases: [
+          "À mon avis, faire ses courses au marché... (In my opinion, shopping at the market...)",
+          "Personnellement, je trouve que les produits locaux... (Personally, I find that local products...)",
+          "D'un côté c'est un peu plus cher, mais de l'autre... (On one hand it is slightly pricier, but on the other...)",
+          "Je préfère acheter des légumes frais parce que... (I prefer buying fresh vegetables because...)"
+        ]
+      }
+    },
+    B1: {
+      title: "Enquête : Comment le vélo a conquis le cœur des métropoles françaises",
+      subtitle: "Autrefois marginal, le vélo s'impose comme le symbole d'une transition urbaine accélérée.",
+      sourceType: "Special Investigation (Le Monde Mobility & Cities)",
+      publicationDate: "Weekly Report",
+      author: "By Maxime Vasseur, Senior Reporter",
+      level: "B1",
+      frenchText: "Il y a dix ans, traverser Paris ou Strasbourg à vélo relevait presque du défi pour les cyclistes téméraires. Aujourd'hui, la donne a radicalement changé. Grâce à l'aménagement de pistes cyclables protégées et à la création de zones à trafic limité, des centaines de milliers de citoyens ont troqué la voiture ou le métro contre le vélo. Pour Sarah, trentenaire lyonnaise, ce changement a transformé son rapport à la ville : « Non seulement j'économise du temps et de l'argent, mais je me sens aussi beaucoup plus connectée à mon environnement. Je ne subis plus le stress des embouteillages. » Cependant, cette transformation suscite encore des débats houleux. Certains commerçants s'inquiètent de la suppression des places de stationnement, tandis que la cohabitation entre piétons, trottinettes et cyclistes exige une vigilance constante. Il n'en reste pas moins que la bicyclette semble désormais incontournable dans le paysage urbain.",
+      englishTranslation: "Ten years ago, crossing Paris or Strasbourg by bicycle was almost a dare for bold cyclists. Today, the situation has radically changed. Thanks to the development of protected bike lanes and the creation of limited-traffic zones, hundreds of thousands of citizens have traded car or metro for bicycles. For Sarah, a thirty-something from Lyon, this change has transformed her relationship with the city: 'Not only do I save time and money, but I also feel much more connected to my environment. I no longer endure traffic stress.' However, this transformation still sparks heated debates. Some shopkeepers worry about the removal of parking spots, while coexistence between pedestrians, scooters, and cyclists demands constant vigilance. Nevertheless, the bicycle now seems indispensable in the urban landscape.",
+      glossary: [
+        { french: "relevait du défi", english: "was quite a challenge / feat", type: "verbal idiom", contextSentence: "Traverser la ville relevait presque du défi." },
+        { french: "la donne a changé", english: "the situation changed completely", type: "idiom", contextSentence: "Aujourd'hui, la donne a radicalement changé." },
+        { french: "troqué", english: "traded / swapped", type: "past participle", contextSentence: "Ils ont troqué la voiture contre le vélo." },
+        { french: "débats houleux", english: "heated debates", type: "masculine plural noun", contextSentence: "Cette transformation suscite des débats houleux." },
+        { french: "incontournable", english: "indispensable / essential", type: "adjective", contextSentence: "La bicyclette semble désormais incontournable." }
+      ],
+      rightOrWrongQuestions: [
+        {
+          claim: "According to the article: Sarah claims that commuting by bike wasted her time compared to traffic jams.",
+          isRight: false,
+          explanation: "False: Sarah emphasizes that she saves both time and money while avoiding the stress of traffic.",
+          quote: "Non seulement j'économise du temps et de l'argent, mais je ne subis plus le stress des embouteillages."
+        },
+        {
+          claim: "According to the article: The cycling transition still raises concerns among certain local shop owners.",
+          isRight: true,
+          explanation: "True: Shopkeepers worry specifically about the removal of customer parking spaces.",
+          quote: "Certains commerçants s'inquiètent de la suppression des places de stationnement."
+        },
+        {
+          claim: "According to the article: Ten years ago, bike paths in Paris and Strasbourg were as widespread as they are now.",
+          isRight: false,
+          explanation: "False: The article recalls that a decade ago, cycling across the city was an intimidating feat for bold riders.",
+          quote: "Il y a dix ans, traverser Paris ou Strasbourg à vélo relevait presque du défi."
+        }
+      ],
+      comprehensionQuestions: [
+        {
+          question: "What primarily fostered the dramatic boom in urban cycling across French cities?",
+          options: ["The permanent shutdown of metro networks", "Protected bike lanes and low-traffic calm zones", "A total ban on walking", "Drastic price cuts on luxury bicycles"],
+          correctIndex: 1,
+          explanation: "The author credits protected cycling infrastructure and limited-traffic pedestrian-friendly zones."
+        },
+        {
+          question: "What ongoing public space challenge is cited in the report?",
+          options: ["Sharing streets safely among pedestrians, e-scooters, and cyclists", "Total lack of street trees", "Severe cold weather in July", "The complete absence of traffic signs"],
+          correctIndex: 0,
+          explanation: "Coexistence among pedestrians, scooters, and cyclists requires constant vigilance."
+        },
+        {
+          question: "How has cycling transformed Sarah's daily experience in Lyon?",
+          options: ["She feels lost and disoriented", "She is completely indifferent", "She feels freer, less stressed, and more connected to her surroundings", "She wants to buy a bigger car"],
+          correctIndex: 2,
+          explanation: "Sarah feels much more connected to her environment and free from traffic stress."
+        }
+      ],
+      summaryExercise: {
+        prompt: "Which statement provides the most balanced summary of this investigation?",
+        options: [
+          { text: "The rapid expansion of cycling is revitalizing urban mobility, though it brings real challenges in sharing street space.", isBest: true, feedback: "Brilliant! This reflects both the environmental enthusiasm and the practical urban coexistence issues." },
+          { text: "Bicycles are a temporary fad that will disappear with the first winter frost.", isBest: false, feedback: "Incorrect: the author concludes that the bicycle has become an indispensable urban fixture." },
+          { text: "French shopkeepers successfully forced city councils to dismantle all protected bike lanes.", isBest: false, feedback: "False: the article demonstrates ongoing expansion despite debates." }
+        ],
+        sampleSummary: "Backed by protected infrastructure, cycling has become a permanent pillar of French city life while sparking lively discussions about urban space sharing."
+      },
+      opinionPrompt: {
+        question: "Do you believe modern cities should reduce car space to prioritize cycling and pedestrians? What is your point of view?",
+        context: "State your opinion in 2 to 3 sentences in French. Try using contrast words like 'cependant' (however) or 'à mon avis' (in my view).",
+        starterPhrases: [
+          "À mon avis, la transition vers les mobilités douces est... (In my opinion, the transition to active travel is...)",
+          "Bien que certains automobilistes soient réticents, je pense que... (Although some drivers are reluctant, I think that...)",
+          "D'un point de vue environnemental, il me semble évident que... (From an environmental standpoint, it seems clear that...)",
+          "Il faut néanmoins veiller à ce que... (One must nevertheless ensure that...)"
+        ]
+      }
+    },
+    B2: {
+      title: "Éditorial & Analyse : L'intelligence artificielle et l'héritage intellectuel français",
+      subtitle: "Entre effervescence technologique et exigence critique, la France tente d'imprimer sa marque singulière.",
+      sourceType: "Editorial & Analysis (Le Figaro Perspectives)",
+      publicationDate: "Ideas & Society Section",
+      author: "By Hélène de Montalembert, Essayist",
+      level: "B2",
+      frenchText: "Dans le concert international des révolutions algorithmiques, la France cultive une posture singulière faite d'audace entrepreneuriale et de circonspection cartésienne. D'un côté, le dynamisme des start-up hexagonales et l'excellence des centres de recherche témoignent d'une réelle volonté de souveraineté numérique. De l'autre, persiste une tradition critique profondément enracinée dans l'humanisme des Lumières, qui refuse de subordonner la liberté de l'esprit aux seuls impératifs mercantiles. Les détracteurs d'une régulation stricte arguent qu'un excès de prudence risquerait d'étouffer l'innovation dans l'œuf face aux géants américains et asiatiques. À l'inverse, les partisans d'un encadrement éthique vigoureux rappellent qu'aucun progrès technique ne saurait être émancipateur s'il bafoue le discernement critique et la créativité humaine. Ce dilemme n'est pas qu'économique ; il interroge notre conception même de la culture et de la transmission du savoir.",
+      englishTranslation: "In the international chorus of algorithmic revolutions, France cultivates a singular posture made of entrepreneurial boldness and Cartesian circumspection. On the one hand, the vitality of French start-ups and the excellence of research centers reflect a genuine determination for digital sovereignty. On the other hand, there persists a critical tradition deeply rooted in Enlightenment humanism, refusing to subordinate freedom of thought solely to commercial imperatives. Critics of strict regulation argue that excessive caution risks nipping innovation in the bud when facing American and Asian giants. Conversely, proponents of vigorous ethical oversight argue that no technological progress can be liberating if it tramples critical discernment and human creativity. This dilemma is not merely economic; it questions our very conception of culture and the transmission of knowledge.",
+      glossary: [
+        { french: "circonspection", english: "wariness / prudent reserve", type: "feminine noun", contextSentence: "Une circonspection cartésienne face au changement." },
+        { french: "étouffer dans l'œuf", english: "to nip in the bud", type: "idiom", contextSentence: "Risquer d'étouffer l'innovation dans l'œuf." },
+        { french: "bafoue", english: "flouts / disregards / tramples", type: "verb", contextSentence: "S'il bafoue le discernement critique." },
+        { french: "souveraineté numérique", english: "digital sovereignty", type: "noun phrase", contextSentence: "Une volonté affirmée de souveraineté numérique." },
+        { french: "humanisme des Lumières", english: "Enlightenment humanism", type: "philosophical concept", contextSentence: "Enracinée dans l'humanisme des Lumières." }
+      ],
+      rightOrWrongQuestions: [
+        {
+          claim: "According to the author: France wholly rejects technological innovation out of sheer conservatism.",
+          isRight: false,
+          explanation: "False: The author emphasizes entrepreneurial boldness and the excellence of French research labs.",
+          quote: "Le dynamisme des start-up hexagonales témoigne d'une réelle volonté de souveraineté numérique."
+        },
+        {
+          claim: "According to the author: Opponents of strict regulation fear European companies will fall behind global rivals.",
+          isRight: true,
+          explanation: "True: They argue that excessive caution risks nipping European innovation in the bud.",
+          quote: "Les détracteurs d'une régulation stricte arguent qu'un excès de prudence risquerait d'étouffer l'innovation."
+        },
+        {
+          claim: "According to the author: The debate surrounding AI is exclusively a financial and balance-sheet concern.",
+          isRight: false,
+          explanation: "False: The author insists this dilemma questions our very conception of culture and learning.",
+          quote: "Ce dilemme n'est pas qu'économique ; il interroge notre conception même de la culture."
+        }
+      ],
+      comprehensionQuestions: [
+        {
+          question: "What dual posture characterizes the French approach according to the editorial?",
+          options: ["Total denial and resignation", "Entrepreneurial boldness paired with Cartesian critical vigilance", "Blind imitation of foreign models", "Nostalgic isolationism"],
+          correctIndex: 1,
+          explanation: "The author describes a posture combining entrepreneurial boldness and Cartesian circumspection."
+        },
+        {
+          question: "To which philosophical heritage does the author tie the demand for ethical oversight?",
+          options: ["19th-century romanticism", "Enlightenment humanism (les Lumières)", "Industrial positivism", "Ancient stoicism"],
+          correctIndex: 1,
+          explanation: "The author refers to a critical tradition deeply rooted in Enlightenment humanism."
+        },
+        {
+          question: "What condition is deemed essential for technical progress to be truly liberating?",
+          options: ["It must safeguard critical discernment and human creativity", "It must maximize quarterly profits", "It must replace all human teachers", "It must ban printed books"],
+          correctIndex: 0,
+          explanation: "Progress is only liberating if it upholds critical discernment and human creativity."
+        }
+      ],
+      summaryExercise: {
+        prompt: "Which analysis most faithfully captures the essayist's thesis?",
+        options: [
+          { text: "France seeks a humanistic equilibrium between tech ambition and ethics, ensuring progress serves critical human discernment.", isBest: true, feedback: "Remarkable! This accurately captures the dialectical nuance of the essay." },
+          { text: "Artificial intelligence has no future in Europe because regulations have already crushed it.", isBest: false, feedback: "Inaccurate: the author celebrates the dynamism of French startups and research." },
+          { text: "Foreign tech giants have eliminated all resistance without any domestic debate.", isBest: false, feedback: "False: France is actively seeking its own distinct path and sovereignty." }
+        ],
+        sampleSummary: "Balancing innovation and humanism, France seeks to reconcile digital sovereignty with the protection of critical thought."
+      },
+      opinionPrompt: {
+        question: "Does artificial intelligence represent an opportunity for human liberation or a threat to critical thinking? Take a stance.",
+        context: "Draft a reasoned paragraph in French taking a clear position with supporting arguments.",
+        starterPhrases: [
+          "Il convient de distinguer d'une part..., et d'autre part... (It is worth distinguishing on one hand..., and on the other...)",
+          "Loin de constituer une menace absolue, l'IA pourrait... (Far from constituting an absolute threat, AI could...)",
+          "À mon sens, le véritable écueil réside dans... (In my view, the real pitfall lies in...)",
+          "La pensée critique demeure irremplaçable parce que... (Critical thinking remains irreplaceable because...)"
+        ]
+      }
+    }
   };
 
+  const defaultFallback = levelFallbacks[level] || levelFallbacks.A1;
+
   try {
-    const prompt = `Create an engaging, culturally authentic French reading passage for a student at CEFR level ${level}.
-Topic: ${topic}. Theme: ${theme}.
+    const genreDescription = {
+      newspaper: "an authentic French newspaper article (article de presse / dépêche d'actualité)",
+      magazine: "a cultural magazine feature (chronique de magazine culturel / grand format de société)",
+      editorial: "a thought-provoking journalistic editorial / opinion column (éditorial d'opinion et débat)",
+      story: "an authentic literary narrative or personal story (récit ou nouvelle contemporaine)"
+    }[sourceType] || "an authentic French magazine article";
 
-Requirements:
-  - Write a substantial passage of 250-320 French words, perfectly tailored to CEFR ${level}. Keep vocabulary, sentence structure, verb tenses, and grammar appropriate for this level.
-  - Keep the story coherent and engaging, with a clear beginning, development, and conclusion.
-- Include a side-by-side English translation.
-- Extract a glossary of 4-6 key vocabulary terms or idioms.
-  - Include 4 multiple-choice comprehension questions in French with 4 options each, correct index, and short French explanation.
+    const prompt = `You are a distinguished French journalist and CEFR pedagogical expert.
+Generate an engaging, culturally authentic French reading piece in the style of ${genreDescription} tailored specifically to CEFR level ${level}.
 
-Format as strict JSON:
+Target Topic / Interest: "${topic}"
+Theme: "${theme}"
+Target CEFR Level: "${level}"
+Publication Format: "${sourceType}"
+
+CEFR Level Specifications:
+- If A1: Simple short sentences, present tense, high-frequency everyday vocabulary, clear cognates, approachable tone.
+- If A2: Everyday and lifestyle French, passé composé and imparfait, basic relative clauses, friendly informative journalistic tone.
+- If B1: Subjunctive and conditional uses, opinions, cause/consequence connectors (cependant, par conséquent, bien que), analytical French press style.
+- If B2: Nuanced journalistic prose, formal discourse markers, rich vocabulary, debate and critical perspectives (Le Monde / Le Figaro style).
+
+Required output content:
+1. Title: Catchy French headline.
+2. Subtitle: Journalistic subhead / chapeau in French (1-2 sentences).
+3. SourceType: Realistic French media publication name (e.g., "Le Quotidien", "Revue Culture & Société", "L'Écho de Paris", etc.).
+4. Author: Journalist byline with specialty.
+5. FrenchText: 220-320 words of cohesive, immersive French text.
+6. EnglishTranslation: Accurate side-by-side English translation.
+7. Glossary: 4-6 key journalistic terms/idioms with French, English, grammatical type, and context sentence.
+8. RightOrWrongQuestions: Exactly 3 statements testing who, what, or which claim is right or wrong, with:
+   - claim: statement written in clear English stating what is claimed about the text (e.g. "According to the article: ...")
+   - isRight: boolean (true if claim is true / accurate according to text, false if wrong)
+   - explanation: clear explanation in English citing the passage
+   - quote: direct short quote in French from the text
+9. ComprehensionQuestions: Exactly 3 multiple-choice questions written in English testing reading comprehension, with 4 English options each, correctIndex (0-3), and clear English explanation.
+10. SummaryExercise:
+   - prompt: "Which statement best summarizes this article?"
+   - options: 3 summary statements in English (exactly 1 with isBest: true and encouraging English feedback, 2 with isBest: false and pedagogical English feedback explaining why it's incomplete or misleading)
+   - sampleSummary: a model 1-2 sentence French summary with English translation.
+11. OpinionPrompt:
+   - question: an engaging question in English asking for the reader's opinion or point of view on the topic
+   - context: brief guidance in English on how to respond in French
+   - starterPhrases: 4 helpful French sentence starters with English translations in parentheses (e.g., "À mon avis... (In my opinion...)", "Je pense que... (I think that...)")
+
+IMPORTANT: Keep all comprehension questions, statements/claims, answer options, summary options, explanations, and prompts in ENGLISH so the student understands exactly what is being asked of them.
+
+Format strictly as JSON with this exact structure:
 {
-  "title": "Story Title in French",
+  "title": "Titre en français",
+  "subtitle": "Chapeau journalistique...",
+  "sourceType": "Nom du média et format",
+  "publicationDate": "Date ou édition",
+  "author": "Par Prénom Nom, fonction",
   "level": "${level}",
-  "frenchText": "Full text in French...",
-  "englishTranslation": "Full text in English...",
+  "frenchText": "Texte complet en français...",
+  "englishTranslation": "Full English translation...",
   "glossary": [
-    { "french": "word/phrase", "english": "meaning", "type": "noun/verb/adj" }
+    { "french": "mot", "english": "meaning", "type": "noun/verb/adj", "contextSentence": "Exemple..." }
+  ],
+  "rightOrWrongQuestions": [
+    { "claim": "Statement in English...", "isRight": true, "explanation": "Explanation in English...", "quote": "Citation en français..." }
   ],
   "comprehensionQuestions": [
-    {
-      "question": "Question in French?",
-      "options": ["Option A", "Option B", "Option C", "Option D"],
-      "correctIndex": 0,
-      "explanation": "Why this answer is correct in French/English"
-    }
-  ]
+    { "question": "Question in English?", "options": ["Option A", "Option B", "Option C", "Option D"], "correctIndex": 0, "explanation": "Explanation in English..." }
+  ],
+  "summaryExercise": {
+    "prompt": "Which statement best summarizes this article?",
+    "options": [
+      { "text": "Summary option in English...", "isBest": true, "feedback": "Feedback in English..." }
+    ],
+    "sampleSummary": "Model summary..."
+  },
+  "opinionPrompt": {
+    "question": "Question in English asking for opinion...",
+    "context": "Guidance in English...",
+    "starterPhrases": ["À mon avis... (In my opinion...)", "Je pense que... (I think that...)"]
+  }
 }`;
 
     const result = await generateAiJson(prompt, defaultFallback, {
       task: 'generate-story',
-      temperature: 0.7,
+      temperature: 0.6,
       preferOpenRouter: true,
       openRouterTimeoutMs: 25000,
-      maxTokens: 3000,
+      maxTokens: 3500,
     });
-    res.json({ ...result, level });
+
+    // Ensure all critical fields exist
+    const finalData = {
+      ...defaultFallback,
+      ...result,
+      level,
+      rightOrWrongQuestions: Array.isArray(result?.rightOrWrongQuestions) && result.rightOrWrongQuestions.length > 0
+        ? result.rightOrWrongQuestions
+        : defaultFallback.rightOrWrongQuestions,
+      comprehensionQuestions: Array.isArray(result?.comprehensionQuestions) && result.comprehensionQuestions.length > 0
+        ? result.comprehensionQuestions
+        : defaultFallback.comprehensionQuestions,
+      summaryExercise: result?.summaryExercise || defaultFallback.summaryExercise,
+      opinionPrompt: result?.opinionPrompt || defaultFallback.opinionPrompt,
+    };
+
+    res.json(finalData);
   } catch (error) {
     console.error('Error in /api/ai/generate-story:', error);
     res.json(defaultFallback);
+  }
+});
+
+// AI Evaluation of User Opinion / Point of View on Reading Passages
+app.post('/api/ai/evaluate-reading-opinion', async (req, res) => {
+  const {
+    userOpinion = '',
+    articleTitle = '',
+    level = 'A2',
+    promptQuestion = '',
+  } = req.body;
+
+  const defaultEvaluation = {
+    score: 85,
+    cefrAssessment: `Bonne expression pour le niveau ${level}`,
+    feedbackFr: "Bravo pour votre contribution ! Votre point de vue est bien exprimé et pertinent par rapport au sujet de l'article.",
+    feedbackEn: "Well done! Your perspective is clearly articulated and relevant to the article's theme.",
+    grammarTips: [
+      "Veillez à bien accorder les adjectifs avec les noms qu'ils qualifient.",
+      "L'emploi de connecteurs logiques enrichit la fluidité de votre pensée."
+    ],
+    suggestedNativeVersion: userOpinion ? `« ${userOpinion.trim()} » est compréhensible et naturel.` : "Exprimez-vous librement en français !",
+    encouragement: "Continuez à partager votre opinion en français, c'est le meilleur moyen de progresser !",
+    xpBonus: 25,
+  };
+
+  if (!userOpinion || userOpinion.trim().length < 5) {
+    return res.json({
+      score: 50,
+      cefrAssessment: "Réponse trop courte",
+      feedbackFr: "N'hésitez pas à écrire une phrase complète pour développer votre point de vue.",
+      feedbackEn: "Try writing at least one full sentence to express your perspective.",
+      grammarTips: ["Utilisez les amorces suggérées comme « À mon avis... » pour démarrer."],
+      suggestedNativeVersion: "À mon avis, c'est un sujet très intéressant.",
+      encouragement: "Essayez à nouveau avec une ou deux phrases !",
+      xpBonus: 10,
+    });
+  }
+
+  try {
+    const prompt = `You are a French professor evaluating a student's opinion / point of view written in response to a French article.
+Article Title: "${articleTitle}"
+Question asked: "${promptQuestion}"
+Target CEFR Level: "${level}"
+Student's response in French:
+"""
+${userOpinion}
+"""
+
+Evaluate the student's response kindly, constructively, and pedagogically according to CEFR level ${level}.
+Provide:
+1. score: integer between 60 and 100 based on effort, clarity, vocabulary, and grammar relative to CEFR ${level}.
+2. cefrAssessment: short assessment title (e.g., "Niveau A2 validé avec brio" or "Bonne tentative, vocabulaire encourageant").
+3. feedbackFr: 2-3 sentences in French praising what they did well and explaining how to improve.
+4. feedbackEn: 1-2 sentence English summary of feedback.
+5. grammarTips: array of 1-3 specific grammar or vocabulary improvements or observations.
+6. suggestedNativeVersion: how a native French speaker would write this exact thought cleanly and naturally.
+7. encouragement: brief warm encouraging closing message in French.
+8. xpBonus: integer 20-30.
+
+Format strictly as JSON:
+{
+  "score": 90,
+  "cefrAssessment": "Niveau A2 bien maîtrisé",
+  "feedbackFr": "Votre phrase est claire...",
+  "feedbackEn": "Your thought is well expressed...",
+  "grammarTips": ["Pensez à...", "Attention à..."],
+  "suggestedNativeVersion": "Version naturelle...",
+  "encouragement": "Bravo !",
+  "xpBonus": 25
+}`;
+
+    const result = await generateAiJson(prompt, defaultEvaluation, {
+      task: 'evaluate-opinion',
+      temperature: 0.4,
+      preferOpenRouter: true,
+      openRouterTimeoutMs: 15000,
+      maxTokens: 1500,
+    });
+
+    res.json({ ...defaultEvaluation, ...result });
+  } catch (error) {
+    console.error('Error in /api/ai/evaluate-reading-opinion:', error);
+    res.json(defaultEvaluation);
   }
 });
 

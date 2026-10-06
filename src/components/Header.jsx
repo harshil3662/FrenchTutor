@@ -1,9 +1,10 @@
 import React from 'react';
-import { Sparkles, Flame, Award, Volume2, Globe } from 'lucide-react';
+import { Sparkles, Flame, Award, Volume2, Globe, Lock } from 'lucide-react';
 
 export const Header = ({
   progress,
   activeLevel,
+  unlockedLevels = ['A1'],
   onLevelChange,
   audioSpeed,
   onSpeedChange,
@@ -43,20 +44,30 @@ export const Header = ({
           <div className="flex items-center bg-white/60 backdrop-blur-sm rounded-xl p-1 border border-[#DCDCCF]/80 shadow-2xs">
             <Globe className="w-3.5 h-3.5 text-[#7A7A6A] ml-1.5 mr-1" />
             <div className="flex space-x-1">
-              {levels.map((lvl) => (
-                <button
-                  key={lvl}
-                  id={`header-level-btn-${lvl}`}
-                  onClick={() => onLevelChange(lvl)}
-                  className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-                    activeLevel === lvl
-                      ? 'bg-[#5A5A40] text-white shadow-xs'
-                      : 'text-[#7A7A6A] hover:text-[#34342E] hover:bg-[#F5F5F0]/70'
-                  }`}
-                >
-                  {lvl}
-                </button>
-              ))}
+              {levels.map((lvl) => {
+                const isUnlocked = unlockedLevels.includes(lvl);
+                return (
+                  <button
+                    key={lvl}
+                    id={`header-level-btn-${lvl}`}
+                    disabled={!isUnlocked}
+                    onClick={() => {
+                      if (isUnlocked) onLevelChange(lvl);
+                    }}
+                    title={isUnlocked ? `Switch to Level ${lvl}` : `Level ${lvl} is locked. Complete earlier units first.`}
+                    className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all flex items-center gap-1 ${
+                      activeLevel === lvl
+                        ? 'bg-[#5A5A40] text-white shadow-xs'
+                        : isUnlocked
+                        ? 'text-[#7A7A6A] hover:text-[#34342E] hover:bg-[#F5F5F0]/70 cursor-pointer'
+                        : 'text-[#B0ABA0] opacity-50 cursor-not-allowed'
+                    }`}
+                  >
+                    <span>{lvl}</span>
+                    {!isUnlocked && <Lock className="w-2.5 h-2.5 text-[#A09C90]" />}
+                  </button>
+                );
+              })}
             </div>
           </div>
 

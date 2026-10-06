@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import {
   BookOpen,
@@ -14,16 +14,23 @@ import {
   Flame,
   Info,
   BrainCircuit,
+  AlertTriangle,
+  HelpCircle,
+  Lock,
+  X,
 } from 'lucide-react';
 import { GRAMMAR_ASPECT_CATEGORIES, GRAMMAR_ASPECT_LESSONS } from '../data/grammarAspectsData.js';
 import { GrammarAspectModal } from './GrammarAspectModal.jsx';
 import { playChime } from '../utils/audioUtils.js';
 import { useModalTracker } from '../utils/modalState.js';
 import { formatBoldText } from '../utils/textFormatter.jsx';
+import { getLessonLockStatus, getUnlockedLevels } from '../utils/progressionUtils.js';
 
 export const GrammarLessonsCatalogView = ({
   activeLevel,
-  completedLessons,
+  unlockedLevels = ['A1'],
+  completedLessons = [],
+  masteredLessons = [],
   audioSpeed,
   units,
   onAwardXp,
@@ -32,10 +39,17 @@ export const GrammarLessonsCatalogView = ({
   onOpenAiQuiz,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [selectedLevelFilter, setSelectedLevelFilter] = useState('All');
+  const [selectedLevelFilter, setSelectedLevelFilter] = useState(activeLevel || 'A1');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [customLessons, setCustomLessons] = useState([]);
+  const [lockedNotice, setLockedNotice] = useState(null);
+
+  useEffect(() => {
+    if (activeLevel) {
+      setSelectedLevelFilter(activeLevel);
+    }
+  }, [activeLevel]);
 
   // AI Generator state
   const [isGeneratorOpen, setIsGeneratorOpen] = useState(false);
@@ -232,37 +246,73 @@ export const GrammarLessonsCatalogView = ({
         <div className="flex items-center gap-2 w-full lg:w-auto overflow-x-auto no-scrollbar">
           {/* Level Filter */}
           <div className="flex items-center bg-[#FAF7F2] p-1 rounded-xl border border-[#E8E2D9] space-x-1">
-            {['All', 'A1', 'A2', 'B1', 'B2'].map((lvl) => (
-              <button
-                key={lvl}
-                onClick={() => setSelectedLevelFilter(lvl)}
-                className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${
-                  selectedLevelFilter === lvl
-                    ? 'bg-[#5A5A40] text-white shadow-xs'
-                    : 'text-[#7A7A6A] hover:text-[#34342E]'
-                }`}
-              >
-                {lvl === 'All' ? 'All Levels' : lvl}
-              </button>
-            ))}
+            {['A1', 'A2', 'B1', 'B2', 'All'].map((lvl) => {
+              const isUnlocked = lvl === 'All' || unlockedLevels.includes(lvl);
+              return (
+                <button
+                  key={lvl}
+                  onClick={() => {
+                    if (isUnlocked) {
+                      setSelectedLevelFilter(lvl);
+                    } else {
+                      setLockedNotice(`Level ${lvl} is locked. Complete all previous units to unlock Level ${lvl}!`);
+                    }
+                  }}
+                  className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all flex items-center gap-1 ${
+                    selectedLevelFilter === lvl
+                      ? 'bg-[#5A5A40] text-white shadow-xs'
+                      : isUnlocked
+                      ? 'text-[#7A7A6A] hover:text-[#34342E] cursor-pointer'
+                      : 'text-[#B0ABA0] opacity-50 cursor-not-allowed'
+                  }`}
+                  title={isUnlocked ? `Filter by ${lvl}` : `Level ${lvl} is locked`}
+                >
+                  <span>{lvl === 'All' ? 'All Lessons' : lvl}</span>
+                  {!isUnlocked && <Lock className="w-2.5 h-2.5 text-[#A09C90]" />}
+                </button>
+              );
+            })}
           </div>
 
           <button
             onClick={() => {
               setSelectedCategory('All');
-              setSelectedLevelFilter('All');
+              setSelectedLevelFilter(activeLevel || 'A1');
               setSearchQuery('');
             }}
             className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-              selectedCategory === 'All' && selectedLevelFilter === 'All' && !searchQuery
+              selectedCategory === 'All' && selectedLevelFilter === (activeLevel || 'A1') && !searchQuery
                 ? 'bg-[#5A5A40] text-white'
                 : 'bg-[#F0ECE1] text-[#7A7A6A] hover:text-[#34342E]'
             }`}
           >
-            Reset Filters ({allLessons.length})
+            Reset Filters
           </button>
         </div>
       </div>
+
+      {/* Locked Progression Alert Banner */}
+      {lockedNotice && (
+        <div className="bg-[#FAF3EE] border-2 border-[#D98E73]/50 text-[#9C4B2E] rounded-2xl p-4 flex items-center justify-between gap-3 shadow-md animate-in fade-in slide-in-from-top-2">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-white border border-[#D98E73]/40 flex items-center justify-center shrink-0">
+              <Lock className="w-4 h-4 text-[#C05C54]" />
+            </div>
+            <div>
+              <p className="text-xs font-bold font-serif">{lockedNotice}</p>
+              <p className="text-[11px] text-[#7A5A48] mt-0.5">
+                Progression is bottom-to-top. Complete and master earlier units to unlock subsequent units and levels.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => setLockedNotice(null)}
+            className="p-1.5 hover:bg-[#F0ECE1] rounded-xl text-[#9C4B2E] cursor-pointer shrink-0 transition-colors"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
 
       {/* Quick Unit Jump Strip */}
       <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
@@ -270,7 +320,24 @@ export const GrammarLessonsCatalogView = ({
         {allLessons
           .filter((l) => l.unitNumber !== undefined)
           .map((l) => {
+            const isMastered = masteredLessons.includes(l.id);
             const isCompleted = completedLessons.includes(l.id);
+            const { isUnlocked: isUnitUnlocked, lockReason: unitLockReason } = getLessonLockStatus(l, completedLessons, unlockedLevels);
+
+            if (!isUnitUnlocked) {
+              return (
+                <button
+                  key={l.id}
+                  onClick={() => setLockedNotice(`Unit ${l.unitNumber || ''} is locked: ${unitLockReason}`)}
+                  className="px-2.5 py-1 rounded-lg text-[11px] font-bold shrink-0 border border-[#E8E2D9] bg-[#F7F4EE] text-[#B0ABA0] cursor-not-allowed flex items-center gap-1 opacity-60"
+                  title={`Unit ${l.unitNumber} is locked: ${unitLockReason}`}
+                >
+                  <span>U{l.unitNumber}</span>
+                  <Lock className="w-2.5 h-2.5 text-[#A09C90]" />
+                </button>
+              );
+            }
+
             return (
               <button
                 key={l.id}
@@ -280,13 +347,15 @@ export const GrammarLessonsCatalogView = ({
                 className={`px-2.5 py-1 rounded-lg text-[11px] font-bold shrink-0 border transition-all cursor-pointer ${
                   searchQuery.toLowerCase().includes(`unit ${l.unitNumber}`) || searchQuery === `${l.unitNumber}`
                     ? 'bg-[#5A5A40] text-white border-[#5A5A40]'
-                    : isCompleted
+                    : isMastered
                     ? 'bg-[#EEF4EE] text-[#3A5A3A] border-[#5A7A5A]/30'
+                    : isCompleted
+                    ? 'bg-[#FEF9E7] text-[#8C6D23] border-[#D4AC0D]/30'
                     : 'bg-white text-[#525248] border-[#E8E2D9] hover:bg-[#FAF7F2]'
                 }`}
                 title={l.title}
               >
-                U{l.unitNumber} {isCompleted && '✓'}
+                U{l.unitNumber} {isMastered ? '★' : isCompleted ? '✓' : ''}
               </button>
             );
           })}
@@ -295,16 +364,21 @@ export const GrammarLessonsCatalogView = ({
       {/* Grammar Lesson Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {filteredLessons.map((lesson) => {
+          const isMastered = masteredLessons.includes(lesson.id);
           const isCompleted = completedLessons.includes(lesson.id);
+          const { isUnlocked, lockReason } = getLessonLockStatus(lesson, completedLessons, unlockedLevels);
+
           return (
             <div
               key={lesson.id}
-              className="bg-white border border-[#E8E2D9] rounded-3xl p-6 flex flex-col justify-between space-y-4 hover:border-[#5A5A40]/40 transition-all shadow-xs"
+              className={`bg-white border rounded-3xl p-6 flex flex-col justify-between space-y-4 transition-all shadow-xs ${
+                !isUnlocked ? 'border-[#E2DDD3] bg-[#FAF8F5]/90' : 'border-[#E8E2D9] hover:border-[#5A5A40]/40'
+              }`}
             >
               <div className="space-y-3">
                 {/* Badges row */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
+                <div className="flex items-center justify-between gap-2 flex-wrap sm:flex-nowrap">
+                  <div className="flex items-center space-x-2 shrink-0">
                     {lesson.unitNumber && (
                       <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-[#D98E73] text-white tracking-wider">
                         Unit {lesson.unitNumber}
@@ -313,16 +387,48 @@ export const GrammarLessonsCatalogView = ({
                     <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#5A5A40] text-white">
                       {lesson.level}
                     </span>
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#F0ECE1] text-[#5A5A40] border border-[#5A5A40]/20 max-w-[160px] truncate">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#F0ECE1] text-[#5A5A40] border border-[#5A5A40]/20 max-w-[130px] truncate hidden sm:inline-block">
                       {lesson.category}
                     </span>
                   </div>
-                  {isCompleted && (
-                    <span className="flex items-center gap-1 text-xs font-bold text-[#3A5A3A] bg-[#EEF4EE] px-2.5 py-0.5 rounded-full border border-[#5A7A5A]/30">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                      Mastered
-                    </span>
-                  )}
+                  <div className="flex items-center flex-wrap gap-1.5 justify-end">
+                    {!isUnlocked ? (
+                      <span
+                        className="flex items-center gap-1 text-xs font-semibold text-[#8C7A65] bg-[#FAF5EE] px-2.5 py-0.5 rounded-full border border-[#E8DAC8] shadow-2xs"
+                        title={lockReason}
+                      >
+                        <Lock className="w-3.5 h-3.5 text-[#C05C54]" />
+                        <span>{lockReason}</span>
+                      </span>
+                    ) : isMastered ? (
+                      <span className="flex items-center gap-1 text-xs font-bold text-[#3A5A3A] bg-[#EEF4EE] px-2.5 py-0.5 rounded-full border border-[#5A7A5A]/30 shadow-2xs">
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                        Mastered
+                      </span>
+                    ) : isCompleted ? (
+                      <>
+                        <span className="flex items-center gap-1 text-xs font-bold text-[#8C6D23] bg-[#FEF9E7] px-2.5 py-0.5 rounded-full border border-[#D4AC0D]/30 shadow-2xs">
+                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          Completed
+                        </span>
+                        <span
+                          className="flex items-center gap-1 text-[11px] font-bold text-[#9C4B2E] bg-[#FAF3EE] px-2.5 py-0.5 rounded-full border border-[#D98E73]/30 shadow-2xs"
+                          title="You must get all questions correct to finish and master the whole unit"
+                        >
+                          <AlertTriangle className="w-3 h-3 text-[#C05C54]" />
+                          Needs 100% to Finish
+                        </span>
+                      </>
+                    ) : (
+                      <span
+                        className="flex items-center gap-1 text-xs font-medium text-[#7A7A6A] bg-[#F5F2EB] px-2.5 py-0.5 rounded-full border border-[#E0DACE] shadow-2xs"
+                        title="Quiz not completed yet. All questions must be answered correctly to finish the whole unit."
+                      >
+                        <HelpCircle className="w-3.5 h-3.5 text-[#9C9485]" />
+                        Quiz Not Done
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 {/* Title and Subtitle */}
@@ -360,14 +466,36 @@ export const GrammarLessonsCatalogView = ({
               </div>
 
               {/* Action Button */}
-              <div className="pt-3 border-t border-[#E8E2D9] flex items-center justify-end gap-2">
-                <button
-                  onClick={() => handleOpenLesson(lesson)}
-                  className="px-4 py-2 bg-[#5A5A40] hover:bg-[#4A4A35] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
-                >
-                  <span>Study & Practice</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+              <div className="pt-3 border-t border-[#E8E2D9] flex items-center justify-between gap-2">
+                {isUnlocked ? (
+                  <span className="text-[11px] text-[#7A7A6A] font-medium truncate">
+                    {isMastered ? 'Mastered • Ready to review' : isCompleted ? 'Completed • Retake for 100%' : 'Next up in sequence'}
+                  </span>
+                ) : (
+                  <span className="text-[11px] text-[#9C4B2E] font-medium flex items-center gap-1 truncate">
+                    <Lock className="w-3 h-3 text-[#C05C54] shrink-0" />
+                    <span>{lockReason}</span>
+                  </span>
+                )}
+
+                {isUnlocked ? (
+                  <button
+                    onClick={() => handleOpenLesson(lesson)}
+                    className="px-4 py-2 bg-[#5A5A40] hover:bg-[#4A4A35] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs shrink-0"
+                  >
+                    <span>{isCompleted ? 'Review & Practice' : 'Study & Practice'}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setLockedNotice(lockReason)}
+                    className="px-3.5 py-2 bg-[#EDE8E0] text-[#7A7A6A] border border-[#D5D0C5] rounded-xl text-xs font-bold flex items-center gap-1.5 cursor-not-allowed shadow-2xs shrink-0"
+                    title={lockReason}
+                  >
+                    <Lock className="w-3.5 h-3.5 text-[#A09C90]" />
+                    <span>Locked</span>
+                  </button>
+                )}
               </div>
             </div>
           );

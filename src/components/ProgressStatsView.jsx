@@ -8,7 +8,14 @@ export const ProgressStatsView = ({ progress, activeLevel }) => {
       name: 'First Step',
       icon: '🌱',
       description: 'Complete your very first French lesson',
-      unlocked: progress.completedLessons.length >= 1,
+      unlocked: (progress.completedLessons || []).length >= 1,
+    },
+    {
+      id: 'unit_master',
+      name: 'Grammaire Parfaite',
+      icon: '🏆',
+      description: 'Master a French grammar unit with a 100% quiz score',
+      unlocked: (progress.masteredLessons || []).length >= 1,
     },
     {
       id: 'bonjour_paris',
@@ -97,7 +104,7 @@ export const ProgressStatsView = ({ progress, activeLevel }) => {
             </div>
             <div className="bg-[#FAF7F2] border border-[#E8E2D9] p-3 rounded-2xl text-center shadow-xs">
               <BookOpen className="w-4 h-4 text-[#5A7A5A] mx-auto" />
-              <span className="text-lg font-bold text-[#34342E] block mt-0.5 font-serif">{progress.completedLessons.length}</span>
+              <span className="text-lg font-bold text-[#34342E] block mt-0.5 font-serif">{(progress.completedLessons || []).length}</span>
               <span className="text-[10px] text-[#7A7A6A] font-medium">Lessons</span>
             </div>
           </div>

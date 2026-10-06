@@ -16,6 +16,7 @@ import {
   BrainCircuit,
   AlertTriangle,
   Languages,
+  Trophy,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { speakFrench, playChime } from '../utils/audioUtils.js';
@@ -321,12 +322,26 @@ export const LessonModal = ({
       setIsQuestionTranslated(false);
     } else {
       // Completed!
-      const totalEarnedXp = Math.max(15, (score + (isCorrect ? 1 : 0)) * 10);
+      const isMastered = exercises.length > 0 && score === exercises.length;
+      const totalEarnedXp = Math.max(10, score * 10);
       setPhase('completed');
-      try {
-        confetti({ particleCount: 70, spread: 70, origin: { y: 0.6 } });
-      } catch {}
-      onComplete?.(lesson.id, totalEarnedXp);
+      if (isMastered) {
+        try {
+          confetti({ particleCount: 75, spread: 70, origin: { y: 0.6 } });
+        } catch {}
+        try {
+          playChime('celebrate');
+        } catch {}
+      } else if (score > 0) {
+        try {
+          playChime('correct');
+        } catch {}
+      } else {
+        try {
+          playChime('incorrect');
+        } catch {}
+      }
+      onComplete?.(lesson.id, totalEarnedXp, isMastered);
     }
   };
 
@@ -807,12 +822,18 @@ export const LessonModal = ({
               ) : currentExercise ? (
                 <div className="space-y-6">
                   {/* Progress Indicator */}
-                  <div className="flex items-center justify-between text-xs text-[#7A7A6A]">
+                  <div className="flex items-center justify-between text-xs text-[#7A7A6A] flex-wrap gap-2">
                     <span className="font-semibold text-[#5A5A40] flex items-center gap-1.5">
                       <BrainCircuit className="w-3.5 h-3.5" />
                       Question {currentExIndex + 1} of {exercises.length}
                     </span>
-                    <span>Score: {score}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-bold text-[#9C4B2E] bg-[#FAF3EE] px-2 py-0.5 rounded-full border border-[#D98E73]/30 flex items-center gap-1">
+                        <AlertTriangle className="w-3 h-3 text-[#C05C54]" />
+                        <span>100% correct required to finish unit</span>
+                      </span>
+                      <span className="font-bold text-[#34342E]">Score: {score}</span>
+                    </div>
                   </div>
                   <div className="w-full bg-[#EAE6DF] h-2 rounded-full overflow-hidden">
                     <div
@@ -996,54 +1017,164 @@ export const LessonModal = ({
           {/* PHASE 4: COMPLETED CELEBRATION */}
           {phase === 'completed' && (
             <div className="text-center py-8 space-y-6 animate-in zoom-in-95">
-              <div className="w-20 h-20 bg-[#EEF4EE] text-[#3A5A3A] rounded-full flex items-center justify-center mx-auto border-2 border-[#5A7A5A] shadow-xs">
-                <Trophy className="w-10 h-10" />
-              </div>
+              {exercises.length > 0 && score === exercises.length ? (
+                /* 100% Correct: Mastered */
+                <>
+                  <div className="w-20 h-20 bg-[#EEF4EE] text-[#3A5A3A] rounded-full flex items-center justify-center mx-auto border-2 border-[#5A7A5A] shadow-xs">
+                    <Trophy className="w-10 h-10" />
+                  </div>
 
-              <div className="space-y-1">
-                <div className="inline-flex items-center gap-1.5 bg-[#F0ECE1] text-[#5A5A40] px-3 py-1 rounded-full text-xs font-bold">
-                  <Sparkles className="w-3.5 h-3.5 text-[#D98E73]" />
-                  <span>Unit Quiz Mastered</span>
-                </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-[#34342E] font-serif">
-                  Félicitations ! Lesson Completed
-                </h3>
-                <p className="text-sm text-[#7A7A6A] max-w-md mx-auto">
-                  You scored <strong>{score} / {exercises.length}</strong> on this unit's quiz and earned{' '}
-                  <strong className="text-[#5A5A40]">+{lesson.xpReward || 25} XP</strong>.
-                </p>
-              </div>
+                  <div className="space-y-1">
+                    <div className="inline-flex items-center gap-1.5 bg-[#EEF4EE] text-[#3A5A3A] border border-[#5A7A5A]/30 px-3.5 py-1 rounded-full text-xs font-bold">
+                      <Sparkles className="w-3.5 h-3.5 text-[#5A7A5A]" />
+                      <span>100% Score • Unit Mastered</span>
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-[#34342E] font-serif">
+                      Félicitations ! Unit Mastered
+                    </h3>
+                    <p className="text-sm text-[#7A7A6A] max-w-md mx-auto">
+                      Flawless! You scored <strong>{score} / {exercises.length}</strong> (100%) and earned{' '}
+                      <strong className="text-[#5A5A40]">+{lesson.xpReward || 25} XP</strong>. This unit is now officially marked as <strong>Mastered</strong>!
+                    </p>
+                  </div>
 
-              <div className="flex flex-wrap justify-center gap-3 pt-3">
-                <button
-                  onClick={() => handleGenerateAiQuiz(true)}
-                  className="px-5 py-2.5 bg-white border border-[#DCDCCF] hover:bg-[#FAF7F2] text-[#5A5A40] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
-                >
-                  <Sparkles className="w-4 h-4 text-[#D98E73]" />
-                  <span>Generate New Quiz</span>
-                </button>
-                <button
-                  onClick={() => {
-                    setCurrentExIndex(0);
-                    setSelectedAnswer(null);
-                    setHasChecked(false);
-                    setIsCorrect(false);
-                    setScore(0);
-                    setPhase('quiz');
-                  }}
-                  className="px-5 py-2.5 bg-white border border-[#DCDCCF] text-[#34342E] rounded-xl text-xs font-bold flex items-center gap-1.5 hover:bg-[#FAF7F2] transition-all cursor-pointer shadow-xs"
-                >
-                  <RotateCcw className="w-4 h-4" />
-                  <span>Retake Current Quiz</span>
-                </button>
-                <button
-                  id="finish-lesson-modal-btn"
-                  onClick={onClose}
-                  className="px-6 py-2.5 bg-[#5A5A40] text-white rounded-xl text-xs font-bold hover:bg-[#4A4A35] transition-all cursor-pointer shadow-xs"
-                >
-                  <span>Finish & Continue</span>
-                </button>
-              </div>
+                  <div className="flex flex-wrap justify-center gap-3 pt-3">
+                    <button
+                      onClick={() => handleGenerateAiQuiz(true)}
+                      className="px-5 py-2.5 bg-white border border-[#DCDCCF] hover:bg-[#FAF7F2] text-[#5A5A40] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+                    >
+                      <Sparkles className="w-4 h-4 text-[#D98E73]" />
+                      <span>Generate New Quiz</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        setCurrentExIndex(0);
+                        setSelectedAnswer(null);
+                        setHasChecked(false);
+                        setIsCorrect(false);
+                        setScore(0);
+                        setPhase('quiz');
+                      }}
+                      className="px-5 py-2.5 bg-white border border-[#DCDCCF] text-[#34342E] rounded-xl text-xs font-bold flex items-center gap-1.5 hover:bg-[#FAF7F2] transition-all cursor-pointer shadow-xs"
+                    >
+                      <RotateCcw className="w-4 h-4" />
+                      <span>Retake Current Quiz</span>
+                    </button>
+                    <button
+                      id="finish-lesson-modal-btn"
+                      onClick={onClose}
+                      className="px-6 py-2.5 bg-[#5A5A40] text-white rounded-xl text-xs font-bold hover:bg-[#4A4A35] transition-all cursor-pointer shadow-xs"
+                    >
+                      <span>Finish & Continue</span>
+                    </button>
+                  </div>
+                </>
+              ) : score === 0 ? (
+                /* 0% Correct: Needs Practice / Not Mastered */
+                <>
+                  <div className="w-20 h-20 bg-[#FAF3EE] text-[#C05C54] rounded-full flex items-center justify-center mx-auto border-2 border-[#D98E73]/40 shadow-xs">
+                    <AlertTriangle className="w-10 h-10" />
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="inline-flex items-center gap-1.5 bg-[#FAF3EE] text-[#9C4B2E] border border-[#D98E73]/30 px-3.5 py-1 rounded-full text-xs font-bold">
+                      <XCircle className="w-3.5 h-3.5 text-[#C05C54]" />
+                      <span>Not Mastered (0 / {exercises.length} Correct)</span>
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-[#34342E] font-serif">
+                      Practice Makes Perfect!
+                    </h3>
+                    <p className="text-sm text-[#7A7A6A] max-w-md mx-auto">
+                      You scored <strong>0 / {exercises.length}</strong>. A unit is only considered <strong>Mastered</strong> when all questions are answered correctly. Review the lesson explanations and try again!
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap justify-center gap-3 pt-3">
+                    <button
+                      onClick={() => {
+                        setCurrentExIndex(0);
+                        setSelectedAnswer(null);
+                        setHasChecked(false);
+                        setIsCorrect(false);
+                        setScore(0);
+                        setPhase('quiz');
+                      }}
+                      className="px-6 py-2.5 bg-[#5A5A40] text-white rounded-xl text-xs font-bold hover:bg-[#4A4A35] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                    >
+                      <RotateCcw className="w-4 h-4" />
+                      <span>Retake Quiz to Master (0/{exercises.length})</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        setPhase('learn');
+                      }}
+                      className="px-5 py-2.5 bg-white border border-[#DCDCCF] hover:bg-[#FAF7F2] text-[#5A5A40] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+                    >
+                      <BookOpen className="w-4 h-4" />
+                      <span>Review Lesson Notes</span>
+                    </button>
+                    <button
+                      id="finish-lesson-modal-btn"
+                      onClick={onClose}
+                      className="px-5 py-2.5 bg-white border border-[#DCDCCF] text-[#7A7A6A] hover:text-[#34342E] hover:bg-[#FAF7F2] rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs"
+                    >
+                      <span>Finish & Continue</span>
+                    </button>
+                  </div>
+                </>
+              ) : (
+                /* Partial Score: Completed but Not Mastered */
+                <>
+                  <div className="w-20 h-20 bg-[#FAF7EE] text-[#8C6D23] rounded-full flex items-center justify-center mx-auto border-2 border-[#D4AC0D]/40 shadow-xs">
+                    <CheckCircle2 className="w-10 h-10" />
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="inline-flex items-center gap-1.5 bg-[#FEF9E7] text-[#8C6D23] border border-[#D4AC0D]/30 px-3.5 py-1 rounded-full text-xs font-bold">
+                      <Sparkles className="w-3.5 h-3.5 text-[#D4AC0D]" />
+                      <span>Almost There ({score} / {exercises.length} Correct)</span>
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-[#34342E] font-serif">
+                      Bon effort ! Lesson Completed
+                    </h3>
+                    <p className="text-sm text-[#7A7A6A] max-w-md mx-auto">
+                      You scored <strong>{score} / {exercises.length}</strong> and earned{' '}
+                      <strong className="text-[#5A5A40]">+{Math.max(10, score * 10)} XP</strong>. To earn the <strong>Mastered</strong> badge for this unit, all questions must be answered correctly.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap justify-center gap-3 pt-3">
+                    <button
+                      onClick={() => {
+                        setCurrentExIndex(0);
+                        setSelectedAnswer(null);
+                        setHasChecked(false);
+                        setIsCorrect(false);
+                        setScore(0);
+                        setPhase('quiz');
+                      }}
+                      className="px-6 py-2.5 bg-[#5A5A40] text-white rounded-xl text-xs font-bold hover:bg-[#4A4A35] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                    >
+                      <RotateCcw className="w-4 h-4" />
+                      <span>Retake to Master ({score}/{exercises.length})</span>
+                    </button>
+                    <button
+                      onClick={() => handleGenerateAiQuiz(true)}
+                      className="px-5 py-2.5 bg-white border border-[#DCDCCF] hover:bg-[#FAF7F2] text-[#5A5A40] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+                    >
+                      <Sparkles className="w-4 h-4 text-[#D98E73]" />
+                      <span>Generate New Quiz</span>
+                    </button>
+                    <button
+                      id="finish-lesson-modal-btn"
+                      onClick={onClose}
+                      className="px-5 py-2.5 bg-white border border-[#DCDCCF] text-[#7A7A6A] hover:text-[#34342E] hover:bg-[#FAF7F2] rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs"
+                    >
+                      <span>Finish & Continue</span>
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>

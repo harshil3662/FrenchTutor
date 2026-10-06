@@ -1,14 +1,17 @@
+import { getCurrentUserLevel } from './progressionUtils.js';
+
 const STORAGE_KEY = 'french_learning_progress_v1';
 
 const INITIAL_PROGRESS = {
-  xp: 140,
-  streakDays: 3,
+  xp: 0,
+  streakDays: 1,
   lastActiveDate: new Date().toISOString().split('T')[0],
-  completedLessons: ['a1-unit1-l1'],
-  masteredCards: ['v1', 'v2', 'v4'],
+  completedLessons: [],
+  masteredLessons: [],
+  masteredCards: [],
   level: 'A1',
   dailyGoalXp: 50,
-  todayXp: 20,
+  todayXp: 0,
   badges: [
     {
       id: 'first_step',
@@ -59,6 +62,15 @@ export function loadUserProgress() {
       parsed.lastActiveDate = today;
     }
 
+    if (!Array.isArray(parsed.masteredLessons)) {
+      parsed.masteredLessons = [];
+    }
+    if (!Array.isArray(parsed.completedLessons)) {
+      parsed.completedLessons = [];
+    }
+
+    parsed.level = getCurrentUserLevel(parsed.completedLessons);
+
     return { ...INITIAL_PROGRESS, ...parsed };
   } catch (e) {
     return INITIAL_PROGRESS;
@@ -77,19 +89,12 @@ export function addXp(amount) {
   const current = loadUserProgress();
   const newXp = current.xp + amount;
   const newTodayXp = current.todayXp + amount;
-  
-  // Calculate level based on XP
-  let calculatedLevel = 'A1';
-  if (newXp >= 1500) calculatedLevel = 'B2';
-  else if (newXp >= 800) calculatedLevel = 'B1';
-  else if (newXp >= 300) calculatedLevel = 'A2';
-  else calculatedLevel = 'A1';
 
   const updated = {
     ...current,
     xp: newXp,
     todayXp: newTodayXp,
-    level: calculatedLevel,
+    level: getCurrentUserLevel(current.completedLessons),
     lastActiveDate: new Date().toISOString().split('T')[0],
   };
 
@@ -97,15 +102,24 @@ export function addXp(amount) {
   return updated;
 }
 
-export function markLessonCompleted(lessonId, xpEarned) {
+export function markLessonCompleted(lessonId, xpEarned, isMastered = false) {
   const current = loadUserProgress();
-  const completed = new Set(current.completedLessons);
+  const completed = new Set(current.completedLessons || []);
+  const mastered = new Set(current.masteredLessons || []);
+  
   const isFirstTime = !completed.has(lessonId);
   completed.add(lessonId);
 
+  if (isMastered) {
+    mastered.add(lessonId);
+  }
+
+  const updatedCompleted = Array.from(completed);
   const updated = {
     ...current,
-    completedLessons: Array.from(completed),
+    completedLessons: updatedCompleted,
+    masteredLessons: Array.from(mastered),
+    level: getCurrentUserLevel(updatedCompleted),
     xp: current.xp + (isFirstTime ? xpEarned : Math.floor(xpEarned / 2)),
     todayXp: current.todayXp + (isFirstTime ? xpEarned : Math.floor(xpEarned / 2)),
     lastActiveDate: new Date().toISOString().split('T')[0]
