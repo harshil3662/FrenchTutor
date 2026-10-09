@@ -320,8 +320,8 @@ export const GrammarLessonsCatalogView = ({
         {allLessons
           .filter((l) => l.unitNumber !== undefined)
           .map((l) => {
-            const isMastered = masteredLessons.includes(l.id);
-            const isCompleted = completedLessons.includes(l.id);
+            const isMastered = masteredLessons.includes(l.id) || (l.legacyId && masteredLessons.includes(l.legacyId));
+            const isCompleted = completedLessons.includes(l.id) || (l.legacyId && completedLessons.includes(l.legacyId));
             const { isUnlocked: isUnitUnlocked, lockReason: unitLockReason } = getLessonLockStatus(l, completedLessons, unlockedLevels);
 
             if (!isUnitUnlocked) {
@@ -364,8 +364,8 @@ export const GrammarLessonsCatalogView = ({
       {/* Grammar Lesson Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {filteredLessons.map((lesson) => {
-          const isMastered = masteredLessons.includes(lesson.id);
-          const isCompleted = completedLessons.includes(lesson.id);
+          const isMastered = masteredLessons.includes(lesson.id) || (lesson.legacyId && masteredLessons.includes(lesson.legacyId));
+          const isCompleted = completedLessons.includes(lesson.id) || (lesson.legacyId && completedLessons.includes(lesson.legacyId));
           const { isUnlocked, lockReason } = getLessonLockStatus(lesson, completedLessons, unlockedLevels);
 
           return (

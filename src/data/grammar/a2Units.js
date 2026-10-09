@@ -1,14 +1,15 @@
 export const A2_GRAMMAR_LESSONS = [
   // ==========================================
-  // Unit 9: Independent & Subordinate Clauses
+  // Unit 8: Independent & Subordinate Clauses
   // ==========================================
   {
-    id: 'unit-9-independent-subordinate-clauses',
-    unitNumber: 9,
+    id: 'unit-8-independent-subordinate-clauses',
+    legacyId: 'unit-9-independent-subordinate-clauses',
+    unitNumber: 8,
     category: 'Sentence Structure & Clauses',
     level: 'A2',
-    title: 'Unit 9: Independent and Subordinate Clauses (Propositions)',
-    frenchTitle: 'Unité 9 : Propositions indépendantes, coordonnées et subordonnées',
+    title: 'Unit 8: Independent and Subordinate Clauses (Propositions)',
+    frenchTitle: 'Unité 8 : Propositions indépendantes, coordonnées et subordonnées',
     subtitle: 'Link ideas with coordinating conjunctions (mais, ou, et, donc, or, ni, car) and subordinate clauses.',
     formula: 'Coordination: [Prop. 1] + [mais / ou / et / donc / or / ni / car] + [Prop. 2]  |  Subordination: [Prop. Principale] + [que / quand / parce que / bien que] + [Prop. Subordonnée]',
     goldenRule: 'Coordinating conjunctions connect two grammatically equal clauses, remembered with the mnemonic **« Mais où est donc Ornicar ? »**. Subordinate clauses depend on a main clause and determine whether the following mood is **Indicative** or **Subjunctive**.',
@@ -123,15 +124,16 @@ export const A2_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 13: Immediate Future, Past & Causative
+  // Unit 12: Immediate Future, Past & Causative
   // ==========================================
   {
-    id: 'unit-13-immediate-future-past-causative',
-    unitNumber: 13,
+    id: 'unit-12-immediate-future-past-causative',
+    legacyId: 'unit-13-immediate-future-past-causative',
+    unitNumber: 12,
     category: 'Past Tenses, Pronominal & Aspect',
     level: 'A2',
-    title: 'Unit 13: The Immediate Future, Immediate Past & Causative Form',
-    frenchTitle: 'Unité 13 : Le futur proche, le passé récent et la forme causative (Faire + Infinitif)',
+    title: 'Unit 12: The Immediate Future, Immediate Past & Causative Form',
+    frenchTitle: 'Unité 12 : Le futur proche, le passé récent et la forme causative (Faire + Infinitif)',
     subtitle: 'Express imminent events (aller + inf.), just-completed actions (venir de + inf.), and having things done (faire + inf.).',
     formula: 'Futur Proche: [aller au présent] + [Infinitif]  |  Passé Récent: [venir au présent] + [de / d\'] + [Infinitif]  |  Causatif: [faire conjugué] + [Infinitif]',
     goldenRule: 'To express having someone else perform an action or causing something to happen, use **« Faire + Infinitif »** (e.g. **« Je fais réparer ma voiture »** = I am having my car repaired).',
@@ -317,15 +319,16 @@ export const A2_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 14: Pronominal Verbs
+  // Unit 13: Pronominal Verbs
   // ==========================================
   {
-    id: 'unit-14-pronominal-verbs',
-    unitNumber: 14,
+    id: 'unit-13-pronominal-verbs',
+    legacyId: 'unit-14-pronominal-verbs',
+    unitNumber: 13,
     category: 'Past Tenses, Pronominal & Aspect',
     level: 'A2',
-    title: 'Unit 14: Pronominal Verbs (Reflexive, Reciprocal & Idiomatic)',
-    frenchTitle: 'Unité 14 : Les verbes pronominaux (Réfléchis, réciproques et idiomatiques)',
+    title: 'Unit 13: Pronominal Verbs (Reflexive, Reciprocal & Idiomatic)',
+    frenchTitle: 'Unité 13 : Les verbes pronominaux (Réfléchis, réciproques et idiomatiques)',
     subtitle: 'Conjugate reflexive pronouns (me, te, se, nous, vous, se) across tenses and master participle agreement rules.',
     formula: 'Présent: [Sujet] + [me / te / se / nous / vous / se] + [Verbe]  |  Passé Composé: [Sujet] + [pronom] + [être] + [Participe Passé]',
     goldenRule: 'All pronominal verbs strictly take **« Être »** in compound tenses. The past participle agrees with the reflexive pronoun ONLY if that pronoun functions as a **Direct Object (COD)**, not an **Indirect Object (COI)** or when a body part/direct object follows.',
@@ -429,15 +432,16 @@ export const A2_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 15: The Passé Composé
+  // Unit 14: The Passé Composé
   // ==========================================
   {
-    id: 'unit-15-passe-compose',
-    unitNumber: 15,
+    id: 'unit-14-passe-compose',
+    legacyId: 'unit-15-passe-compose',
+    unitNumber: 14,
     category: 'Past Tenses, Pronominal & Aspect',
     level: 'A2',
-    title: 'Unit 15: The Passé Composé (Auxiliaries & Participle Agreements)',
-    frenchTitle: 'Unité 15 : Le passé composé (Avoir, Être et l\'accord du participe passé)',
+    title: 'Unit 14: The Passé Composé (Auxiliaries & Participle Agreements)',
+    frenchTitle: 'Unité 14 : Le passé composé (Avoir, Être et l\'accord du participe passé)',
     subtitle: 'Express completed, bounded past events and master the DR & MRS VANDERTRAMP movement verbs.',
     formula: 'Passé Composé = [Avoir ou Être au présent] + [Participe Passé]  |  Avec Être: accord en genre et nombre avec le sujet  |  Avec Avoir: accord UNIQUEMENT si le COD précède le verbe',
     goldenRule: 'Verbs using **« Être »** (17 verbs of movement/state change + all reflexives) MUST agree with the subject in gender and number. Verbs using **« Avoir »** agree ONLY if a direct object (COD: que, les, la, l\') is placed **BEFORE** the auxiliary.',
@@ -627,15 +631,16 @@ export const A2_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 16: Imparfait and Plus-que-parfait
+  // Unit 15: Imparfait and Plus-que-parfait
   // ==========================================
   {
-    id: 'unit-16-imparfait-plus-que-parfait',
-    unitNumber: 16,
+    id: 'unit-15-imparfait-plus-que-parfait',
+    legacyId: 'unit-16-imparfait-plus-que-parfait',
+    unitNumber: 15,
     category: 'Past Tenses, Pronominal & Aspect',
     level: 'A2',
-    title: 'Unit 16: The Imparfait and the Plus-que-parfait',
-    frenchTitle: 'Unité 16 : L\'imparfait et le plus-que-parfait (Description et antériorité)',
+    title: 'Unit 15: The Imparfait and the Plus-que-parfait',
+    frenchTitle: 'Unité 15 : L\'imparfait et le plus-que-parfait (Description et antériorité)',
     subtitle: 'Paint background descriptions, habits, continuous states, and past anterior actions.',
     formula: 'Imparfait = [Radical de "nous" au présent] + [-ais, -ais, -ait, -ions, -iez, -aient]  |  Plus-que-parfait = [Auxiliaire à l\'imparfait] + [Participe Passé]',
     goldenRule: 'Use the **Imparfait** for ongoing states, weather, habits, and background descriptions. Use the **Plus-que-parfait** to describe an event that had already occurred before another past event.',
@@ -782,15 +787,16 @@ export const A2_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 21: Prepositions
+  // Unit 20: Prepositions
   // ==========================================
   {
-    id: 'unit-21-prepositions',
-    unitNumber: 21,
+    id: 'unit-20-prepositions',
+    legacyId: 'unit-21-prepositions',
+    unitNumber: 20,
     category: 'Prepositions, Voice & Pronouns',
     level: 'A2',
-    title: 'Unit 21: Prepositions (Verbal Regimes, Geography & Time)',
-    frenchTitle: 'Unité 21 : Les prépositions (Régimes verbaux, géographie et temps)',
+    title: 'Unit 20: Prepositions (Verbal Regimes, Geography & Time)',
+    frenchTitle: 'Unité 20 : Les prépositions (Régimes verbaux, géographie et temps)',
     subtitle: 'Master verbs requiring "à", "de", or direct objects, geographical prepositions, and temporal distinctions.',
     formula: 'Géographie: en France (fém.), au Japon (masc.), aux États-Unis (plur.), à Paris (ville)  |  Temps: depuis (présent), pendant (passé fini), en (durée), dans (délai)',
     goldenRule: 'Verbs of thinking/starting/tendency take **« À »** (penser à, commencer à, apprendre à), while verbs of memory/stopping/deciding take **« De »** (se souvenir de, arrêter de, décider de). Geographical prepositions strictly match the grammatical gender of the nation.',
@@ -1037,15 +1043,16 @@ export const A2_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 22: The Infinitive Mood
+  // Unit 21: The Infinitive Mood
   // ==========================================
   {
-    id: 'unit-22-infinitive-mood',
-    unitNumber: 22,
+    id: 'unit-21-infinitive-mood',
+    legacyId: 'unit-22-infinitive-mood',
+    unitNumber: 21,
     category: 'Subjunctive & Non-Finite Moods',
     level: 'A2',
-    title: 'Unit 22: The Infinitive Mood (L\'infinitif présent et passé)',
-    frenchTitle: 'Unité 22 : Le mode infinitif (Présent, passé et constructions prépositionnelles)',
+    title: 'Unit 21: The Infinitive Mood (L\'infinitif présent et passé)',
+    frenchTitle: 'Unité 21 : Le mode infinitif (Présent, passé et constructions prépositionnelles)',
     subtitle: 'Use infinitives as noun subjects, after prepositions (pour, sans, avant de), and express past anteriority (après avoir/être).',
     formula: 'Après préposition: [sans / pour / avant de] + [Infinitif Présent]  |  Après être/avoir: [Après] + [avoir / être] + [Participe Passé]  |  Négation: [ne pas] + [Infinitif]',
     goldenRule: '**« Avant de »** is followed by the Present Infinitive (**« Avant de partir »**), whereas **« Après »** is STRICTLY followed by the Past Infinitive (**« Après être parti »**, **« Après avoir mangé »**). In negative infinitives, **« ne pas »** stays joined together in front of the verb (**« Prière de ne pas fumer »**).',
@@ -1269,15 +1276,16 @@ export const A2_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 23: The Imperative Mood
+  // Unit 22: The Imperative Mood
   // ==========================================
   {
-    id: 'unit-23-imperative-mood',
-    unitNumber: 23,
+    id: 'unit-22-imperative-mood',
+    legacyId: 'unit-23-imperative-mood',
+    unitNumber: 22,
     category: 'Subjunctive & Non-Finite Moods',
     level: 'A2',
-    title: 'Unit 23: The Imperative Mood (Pronoun Positioning & Commands)',
-    frenchTitle: 'Unité 23 : L\'impératif et la place des pronoms (Affirmatif vs Négatif)',
+    title: 'Unit 22: The Imperative Mood (Pronoun Positioning & Commands)',
+    frenchTitle: 'Unité 22 : L\'impératif et la place des pronoms (Affirmatif vs Négatif)',
     subtitle: 'Give strong commands, advice, and instructions while mastering hyphenated pronoun placement.',
     formula: 'Affirmatif: [Verbe] - [le/la/les] - [moi/toi/lui/nous/vous/leur] - [y/en]  |  Négatif: Ne + [pronoms] + [Verbe] + pas',
     goldenRule: 'In **Affirmative commands**, pronouns follow the verb attached with **hyphens**, and "me/te" become stressed **« moi/toi »** (e.g. **« Donne-le-moi ! »**). In **Negative commands**, pronouns return to their normal position **BEFORE the verb** (e.g. **« Ne me le donne pas ! »**).',
@@ -1384,15 +1392,16 @@ export const A2_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 26: Pronouns
+  // Unit 25: Pronouns
   // ==========================================
   {
-    id: 'unit-26-pronouns',
-    unitNumber: 26,
+    id: 'unit-25-pronouns',
+    legacyId: 'unit-26-pronouns',
+    unitNumber: 25,
     category: 'Prepositions, Voice & Pronouns',
     level: 'A2',
-    title: 'Unit 26: Pronouns (COD, COI, Y, En & Double Object Syntax)',
-    frenchTitle: 'Unité 26 : Les pronoms personnels (COD, COI, Y, En et l\'ordre des pronoms)',
+    title: 'Unit 25: Pronouns (COD, COI, Y, En & Double Object Syntax)',
+    frenchTitle: 'Unité 25 : Les pronoms personnels (COD, COI, Y, En et l\'ordre des pronoms)',
     subtitle: 'Replace nouns with direct (le/la/les), indirect (lui/leur), adverbial (y/en), and tonic pronouns.',
     formula: 'Ordre avant le verbe: [me/te/se/nous/vous] → [le/la/l\'/les] → [lui/leur] → [y] → [en] + [Verbe]',
     goldenRule: 'Object pronouns always go **immediately BEFORE the conjugated verb** (or auxiliary in compound tenses), ordered strictly according to the French pronoun hierarchy matrix.',
@@ -1685,15 +1694,16 @@ export const A2_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 29: Adverbs
+  // Unit 28: Adverbs
   // ==========================================
   {
-    id: 'unit-29-adverbs',
-    unitNumber: 29,
+    id: 'unit-28-adverbs',
+    legacyId: 'unit-29-adverbs',
+    unitNumber: 28,
     category: 'Nouns, Gender, Adjectives & Adverbs',
     level: 'A2',
-    title: 'Unit 29: Adverbs (Formation with -ment & Syntactic Placement)',
-    frenchTitle: 'Unité 29 : Les adverbes (Formation en -ment et place dans la phrase)',
+    title: 'Unit 28: Adverbs (Formation with -ment & Syntactic Placement)',
+    frenchTitle: 'Unité 28 : Les adverbes (Formation en -ment et place dans la phrase)',
     subtitle: 'Form adverbs from feminine adjectives and position them accurately in simple and compound tenses.',
     formula: 'Règle générale = [Adjectif Féminin] + [-ment] (lent → lente → lentement)  |  Terminaison -ant: -amment  |  Terminaison -ent: -emment',
     goldenRule: 'To form an adverb, take the feminine singular form of the adjective and add **« -ment »**. In simple tenses, adverbs sit immediately **after the conjugated verb** (**« Il parle lentement »**); in compound tenses, short/common adverbs sit **between the auxiliary and participle** (**« J\'ai bien dormi »**).',

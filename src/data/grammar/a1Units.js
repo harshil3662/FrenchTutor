@@ -510,15 +510,16 @@ export const A1_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 6: Building Sentences
+  // Unit 5: Building Sentences
   // ==========================================
   {
-    id: 'unit-6-building-sentences',
-    unitNumber: 6,
+    id: 'unit-5-building-sentences',
+    legacyId: 'unit-6-building-sentences',
+    unitNumber: 5,
     category: 'Sentence Structure & Clauses',
     level: 'A1',
-    title: 'Unit 6: Building Sentences (Word Order & Negation)',
-    frenchTitle: 'Unité 6 : La structure de la phrase simple et la négation',
+    title: 'Unit 5: Building Sentences (Word Order & Negation)',
+    frenchTitle: 'Unité 5 : La structure de la phrase simple et la négation',
     subtitle: 'Master standard SVO word order, adverb placement, and the "ne... pas" negation sandwich.',
     formula: 'Affirmation: [Sujet] + [Verbe] + [Complément d\'Objet] + [Adverbe / Lieu / Temps]  |  Négation: [Sujet] + [ne / n\'] + [Verbe] + [pas] + [Complément]',
     goldenRule: 'Standard French declarative word order is strictly Subject + Verb + Direct/Indirect Object. In compound tenses, short adverbs (bien, mal, toujours, souvent, déjà) sit directly between the auxiliary and the past participle.',
@@ -601,15 +602,16 @@ export const A1_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 7: Asking Questions
+  // Unit 6: Asking Questions
   // ==========================================
   {
-    id: 'unit-7-asking-questions',
-    unitNumber: 7,
+    id: 'unit-6-asking-questions',
+    legacyId: 'unit-7-asking-questions',
+    unitNumber: 6,
     category: 'Sentence Structure & Clauses',
     level: 'A1',
-    title: 'Unit 7: Asking Questions (3 Interrogation Registers)',
-    frenchTitle: 'Unité 7 : L\'interrogation (Intonation, Est-ce que, Inversion)',
+    title: 'Unit 6: Asking Questions (3 Interrogation Registers)',
+    frenchTitle: 'Unité 6 : L\'interrogation (Intonation, Est-ce que, Inversion)',
     subtitle: 'Learn informal, standard, and formal questioning techniques and interrogative pronouns.',
     formula: '1. Informelle: [Phrase affirmative] ? (Tu viens ?)  |  2. Standard: Est-ce que + [Sujet] + [Verbe] ?  |  3. Formelle: [Verbe]-[Sujet] ? (Viens-tu ?)',
     goldenRule: 'French offers three grammatical registers for yes/no and open questions: rising intonation (casual), "Est-ce que" (neutral/everyday), and subject-verb inversion with a hyphen (formal/literary). With inversion, insert "-t-" between vowels: "A-t-il compris ?".',
@@ -863,15 +865,16 @@ export const A1_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 8: Exclamations and Commands
+  // Unit 7: Exclamations and Commands
   // ==========================================
   {
-    id: 'unit-8-exclamations-commands',
-    unitNumber: 8,
+    id: 'unit-7-exclamations-commands',
+    legacyId: 'unit-8-exclamations-commands',
+    unitNumber: 7,
     category: 'Sentence Structure & Clauses',
     level: 'A1',
-    title: 'Unit 8: Exclamations and Commands (L\'impératif & Exclamations)',
-    frenchTitle: 'Unité 8 : Les exclamations et les ordres (Impératif)',
+    title: 'Unit 7: Exclamations and Commands (L\'impératif & Exclamations)',
+    frenchTitle: 'Unité 7 : Les exclamations et les ordres (Impératif)',
     subtitle: 'Express commands, advice, requests, and emotional exclamations using "que", "comme", and "quel".',
     formula: 'Impératif: [Tu] → Parle ! (no -s for -er)  |  [Nous] → Parlons !  |  [Vous] → Parlez !  |  Exclamations: Quel(le)(s) + Nom ! / Comme + Phrase ! / Qu\'est-ce que + Phrase !',
     goldenRule: 'For regular -er verbs (and aller), the "tu" form of the imperative DROPS the final "-s" (Parle !, Va !), except when followed by "y" or "en" for phonetics (Vas-y !, Manges-en !).',
@@ -932,15 +935,16 @@ export const A1_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 10: Present Tense of -ER Verbs
+  // Unit 9: Present Tense of -ER Verbs
   // ==========================================
   {
-    id: 'unit-10-present-er-verbs',
-    unitNumber: 10,
+    id: 'unit-9-present-er-verbs',
+    legacyId: 'unit-10-present-er-verbs',
+    unitNumber: 9,
     category: 'Present Tense & Core Conjugations',
     level: 'A1',
-    title: 'Unit 10: The Present Tense of -ER Verbs (1st Group)',
-    frenchTitle: 'Unité 10 : Le présent de l\'indicatif des verbes en -ER',
+    title: 'Unit 9: The Present Tense of -ER Verbs (1st Group)',
+    frenchTitle: 'Unité 9 : Le présent de l\'indicatif des verbes en -ER',
     subtitle: 'Conjugate over 85% of French verbs, including spelling changes in -cer, -ger, -yer, and -eler.',
     formula: 'Radical = Infinitif - [er]  |  Terminaisons: je -e, tu -es, il -e, nous -ons, vous -ez, ils -ent',
     goldenRule: 'The endings **-e, -es, and -ent** are completely **SILENT phonetically**; only the stem consonant is heard (je parle, tu parles, ils parlent all sound identical: **/paʁl/**).',
@@ -1065,15 +1069,16 @@ export const A1_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 11: Present of -IR and -RE Verbs
+  // Unit 10: Present of -IR and -RE Verbs
   // ==========================================
   {
-    id: 'unit-11-present-ir-re-verbs',
-    unitNumber: 11,
+    id: 'unit-10-present-ir-re-verbs',
+    legacyId: 'unit-11-present-ir-re-verbs',
+    unitNumber: 10,
     category: 'Present Tense & Core Conjugations',
     level: 'A1',
-    title: 'Unit 11: The Present of -IR and -RE Verbs (2nd & 3rd Groups)',
-    frenchTitle: 'Unité 11 : Le présent des verbes en -IR et en -RE',
+    title: 'Unit 10: The Present of -IR and -RE Verbs (2nd & 3rd Groups)',
+    frenchTitle: 'Unité 10 : Le présent des verbes en -IR et en -RE',
     subtitle: 'Conjugate regular 2nd group verbs with "-iss-" infix and standard 3rd group -re verbs.',
     formula: '-IR (2e groupe): je -is, tu -is, il -it, nous -issons, vous -issez, ils -issent  |  -RE: je -s, tu -s, il [rien/d], nous -ons, vous -ez, ils -ent',
     goldenRule: 'Regular 2nd-group **-IR verbs** (finir, choisir, réfléchir) expand with the **« -iss- »** infix in all plural forms (**nous finissons, vous finissez, ils finissent**). Regular **-RE verbs** take no extra letter after "d" in the *il/elle* form (**il vend, elle attend**).',
@@ -1229,15 +1234,16 @@ export const A1_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 12: Être, Avoir and Irregular Verbs
+  // Unit 11: Être, Avoir and Irregular Verbs
   // ==========================================
   {
-    id: 'unit-12-etre-avoir-irregulars',
-    unitNumber: 12,
+    id: 'unit-11-etre-avoir-irregulars',
+    legacyId: 'unit-12-etre-avoir-irregulars',
+    unitNumber: 11,
     category: 'Present Tense & Core Conjugations',
     level: 'A1',
-    title: 'Unit 12: Être, Avoir, Aller, Faire & Essential Irregular Verbs',
-    frenchTitle: 'Unité 12 : Être, avoir, aller, faire et les verbes irréguliers fondamentaux',
+    title: 'Unit 11: Être, Avoir, Aller, Faire & Essential Irregular Verbs',
+    frenchTitle: 'Unité 11 : Être, avoir, aller, faire et les verbes irréguliers fondamentaux',
     subtitle: 'Master the top high-frequency auxiliary and modal verbs in the French language.',
     formula: 'Être: suis, es, est, sommes, êtes, sont  |  Avoir: ai, as, a, avons, avez, ont  |  Aller: vais, vas, va, allons, allez, vont  |  Faire: fais, fais, fait, faisons, faites, font',
     goldenRule: 'Watch out for **« vous êtes »** and **« vous faites »** (two of only three present verbs ending in **-tes** for vous: vous êtes, vous faites, vous dites) and third person plurals ending in **-ont** (ils sont, ils ont, ils vont, ils font).',
@@ -1460,15 +1466,16 @@ export const A1_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 28: Adjectives
+  // Unit 27: Adjectives
   // ==========================================
   {
-    id: 'unit-28-adjectives',
-    unitNumber: 28,
+    id: 'unit-27-adjectives',
+    legacyId: 'unit-28-adjectives',
+    unitNumber: 27,
     category: 'Nouns, Gender, Adjectives & Adverbs',
     level: 'A1',
-    title: 'Unit 28: Adjectives (Agreement, BAGS Position & Dual Forms)',
-    frenchTitle: 'Unité 28 : Les adjectifs qualificatifs (Accords, place et adjectifs BANGS)',
+    title: 'Unit 27: Adjectives (Agreement, BAGS Position & Dual Forms)',
+    frenchTitle: 'Unité 27 : Les adjectifs qualificatifs (Accords, place et adjectifs BANGS)',
     subtitle: 'Master gender/number agreements, pre-nominal BANGS exceptions, and adjectives that change meaning by placement.',
     formula: 'Règle générale de position: [Nom] + [Adjectif] (une voiture rouge)  |  BANGS (avant le nom): Beauty, Age, Number, Goodness, Size  |  Devant voyelle: beau → bel, nouveau → nouvel, vieux → vieil',
     goldenRule: 'Most French adjectives sit **AFTER the noun** (colors, shapes, nationalities). However, short common adjectives describing **Beauty, Age, Number, Goodness, and Size (BANGS)** go **BEFORE the noun**. Five adjectives change form before masculine vowels: **beau → bel, nouveau → nouvel, vieux → vieil**.',

@@ -1,6 +1,6 @@
 import { GRAMMAR_ASPECT_LESSONS } from '../data/grammarAspectsData.js';
 
-const UNITS_STORAGE_KEY = 'french_grammar_units_v1';
+const UNITS_STORAGE_KEY = 'french_grammar_units_v2';
 const AI_PRACTICE_STORAGE_KEY = 'french_ai_practice_exercises_v1';
 
 export function getStoredAiPracticeExercises(lessonId) {
@@ -41,16 +41,20 @@ export function clearStoredAiPracticeExercises(lessonId) {
   }
 }
 
-const PREDEFINED_DRILLS_BY_LESSON_ID = new Map(
-  GRAMMAR_ASPECT_LESSONS.map((lesson) => [
-    lesson.id,
-    lesson.practiceExercises || lesson.exercises || [],
-  ])
-);
+const PREDEFINED_DRILLS_BY_LESSON_ID = new Map();
+GRAMMAR_ASPECT_LESSONS.forEach((lesson) => {
+  const drills = lesson.practiceExercises || lesson.exercises || [];
+  PREDEFINED_DRILLS_BY_LESSON_ID.set(lesson.id, drills);
+  if (lesson.legacyId) {
+    PREDEFINED_DRILLS_BY_LESSON_ID.set(lesson.legacyId, drills);
+  }
+});
 
 function restorePredefinedDrills(units) {
   return units.map((unit) => {
-    const predefinedDrills = PREDEFINED_DRILLS_BY_LESSON_ID.get(unit.id);
+    const predefinedDrills =
+      PREDEFINED_DRILLS_BY_LESSON_ID.get(unit.id) ||
+      (unit.legacyId && PREDEFINED_DRILLS_BY_LESSON_ID.get(unit.legacyId));
     if (!predefinedDrills?.length) {
       return unit;
     }
@@ -67,6 +71,11 @@ function restorePredefinedDrills(units) {
  */
 export function getStoredUnits() {
   try {
+    // Clear deprecated v1 cache if present to prevent obsolete unit gaps
+    try {
+      localStorage.removeItem('french_grammar_units_v1');
+    } catch {}
+
     const raw = localStorage.getItem(UNITS_STORAGE_KEY);
     if (!raw) {
       return GRAMMAR_ASPECT_LESSONS;

@@ -1,14 +1,15 @@
 export const B1_GRAMMAR_LESSONS = [
   // ==========================================
-  // Unit 17: Simple Future & Past Future
+  // Unit 16: Simple Future & Past Future
   // ==========================================
   {
-    id: 'unit-17-simple-future-past-future',
-    unitNumber: 17,
+    id: 'unit-16-simple-future-past-future',
+    legacyId: 'unit-17-simple-future-past-future',
+    unitNumber: 16,
     category: 'Future, Conditionals & Modals',
     level: 'B1',
-    title: 'Unit 17: The Simple Future and the Past Future (Futur Simple & Futur Antérieur)',
-    frenchTitle: 'Unité 17 : Le futur simple et le futur antérieur',
+    title: 'Unit 16: The Simple Future and the Past Future (Futur Simple & Futur Antérieur)',
+    frenchTitle: 'Unité 16 : Le futur simple et le futur antérieur',
     subtitle: 'Express definitive future projections, plans, promises, and actions completed prior to a future moment.',
     formula: 'Futur Simple = [Infinitif / Radical en -r] + [-ai, -as, -a, -ons, -ez, -ont]  |  Futur Antérieur = [Auxiliaire au futur simple] + [Participe Passé]',
     goldenRule: 'Unlike English (which uses the present after when/as soon as), French **REQUIRES the Future Simple or Futur Antérieur** after temporal conjunctions: **quand**, **lorsque**, **dès que**, **aussitôt que**.',
@@ -143,15 +144,16 @@ export const B1_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 18: Present & Past Conditional
+  // Unit 17: Present & Past Conditional
   // ==========================================
   {
-    id: 'unit-18-present-past-conditional',
-    unitNumber: 18,
+    id: 'unit-17-present-past-conditional',
+    legacyId: 'unit-18-present-past-conditional',
+    unitNumber: 17,
     category: 'Future, Conditionals & Modals',
     level: 'B1',
-    title: 'Unit 18: The Present Conditional and Past Conditional',
-    frenchTitle: 'Unité 18 : Le conditionnel présent et le conditionnel passé',
+    title: 'Unit 17: The Present Conditional and Past Conditional',
+    frenchTitle: 'Unité 17 : Le conditionnel présent et le conditionnel passé',
     subtitle: 'Express politeness, unconfirmed journalistic news, hypothetical outcomes, and past regrets.',
     formula: 'Conditionnel Présent = [Radical du Futur] + [-ais, -ais, -ait, -ions, -iez, -aient]  |  Conditionnel Passé = [Auxiliaire au conditionnel] + [Participe Passé]',
     goldenRule: 'Master the 3 "Si" systems: **Si + Présent → Futur** ; **Si + Imparfait → Conditionnel Présent** ; **Si + Plus-que-parfait → Conditionnel Passé**. Never put a conditional directly inside the "Si" clause!',
@@ -247,15 +249,16 @@ export const B1_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 19: Could, Should, Would?
+  // Unit 18: Could, Should, Would?
   // ==========================================
   {
-    id: 'unit-19-could-should-would',
-    unitNumber: 19,
+    id: 'unit-18-could-should-would',
+    legacyId: 'unit-19-could-should-would',
+    unitNumber: 18,
     category: 'Future, Conditionals & Modals',
     level: 'B1',
-    title: 'Unit 19: Could, Should, Would? (Pouvoir, Devoir, Vouloir Nuances)',
-    frenchTitle: 'Unité 19 : Exprimer la possibilité, le devoir et le regret (Pouvoir, Devoir, Vouloir)',
+    title: 'Unit 18: Could, Should, Would? (Pouvoir, Devoir, Vouloir Nuances)',
+    frenchTitle: 'Unité 18 : Exprimer la possibilité, le devoir et le regret (Pouvoir, Devoir, Vouloir)',
     subtitle: 'Translate nuanced English modal verbs into precise French conditional, past, and compound structures.',
     formula: 'Could = Pourrait  |  Could have = Aurait pu + Infinitif  |  Should = Devrait  |  Should have = Aurait dû + Infinitif  |  Would = Conditionnel / Imparfait',
     goldenRule: '**« Should have »** is ALWAYS rendered by the conditional past of Devoir: **« Tu aurais dû + Infinitif »**. **« Could have »** is ALWAYS rendered by the conditional past of Pouvoir: **« Tu aurais pu + Infinitif »**.',
@@ -441,15 +444,16 @@ export const B1_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 20: Present & Past Subjunctive
+  // Unit 19: Present & Past Subjunctive
   // ==========================================
   {
-    id: 'unit-20-present-past-subjunctive',
-    unitNumber: 20,
+    id: 'unit-19-present-past-subjunctive',
+    legacyId: 'unit-20-present-past-subjunctive',
+    unitNumber: 19,
     category: 'Subjunctive & Non-Finite Moods',
     level: 'B1',
-    title: 'Unit 20: The Present Subjunctive and Past Subjunctive',
-    frenchTitle: 'Unité 20 : Le subjonctif présent et le subjonctif passé (Déclencheurs W.E.I.R.O.)',
+    title: 'Unit 19: The Present Subjunctive and Past Subjunctive',
+    frenchTitle: 'Unité 19 : Le subjonctif présent et le subjonctif passé (Déclencheurs W.E.I.R.O.)',
     subtitle: 'Master the mood of subjectivity, doubt, will, necessity, emotion, and concessive triggers.',
     formula: 'Subjonctif Présent: [Radical de "ils" au présent] + [-e, -es, -e, -ions, -iez, -ent]  |  Subjonctif Passé = [Être/Avoir au subjonctif] + [Participe Passé]',
     goldenRule: 'The Subjunctive is **NOT a tense, but a MOOD**. It requires three conditions: (1) A triggering expression of Will, Emotion, Impersonal necessity, or Doubt, (2) The subordinating conjunction **« que »**, and (3) **TWO DIFFERENT SUBJECTS**.',
@@ -622,15 +626,16 @@ export const B1_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 24: Present Participle & Gerund
+  // Unit 23: Present Participle & Gerund
   // ==========================================
   {
-    id: 'unit-24-present-participle-gerund',
-    unitNumber: 24,
+    id: 'unit-23-present-participle-gerund',
+    legacyId: 'unit-24-present-participle-gerund',
+    unitNumber: 23,
     category: 'Subjunctive & Non-Finite Moods',
     level: 'B1',
-    title: 'Unit 24: The Present Participle and Gerund (Le participe présent & gérondif)',
-    frenchTitle: 'Unité 24 : Le participe présent et le gérondif (En + Participe Présent)',
+    title: 'Unit 23: The Present Participle and Gerund (Le participe présent & gérondif)',
+    frenchTitle: 'Unité 23 : Le participe présent et le gérondif (En + Participe Présent)',
     subtitle: 'Express simultaneous actions, causality, manner, condition, and adverbial circumstances.',
     formula: 'Participe Présent = [Radical de "nous" au présent] + [-ant] (parlant, finissant)  |  Gérondif = [en] + [Participe Présent] (en parlant, en marchant)',
     goldenRule: 'The Gérondif (**« en + participe présent »**) expresses simultaneity (while doing), means/manner (by doing), or cause (because of doing), and **MUST share the exact same subject** as the main verb.',
@@ -684,15 +689,16 @@ export const B1_GRAMMAR_LESSONS = [
   },
 
   // ==========================================
-  // Unit 27: Relative Pronouns
+  // Unit 26: Relative Pronouns
   // ==========================================
   {
-    id: 'unit-27-relative-pronouns',
-    unitNumber: 27,
+    id: 'unit-26-relative-pronouns',
+    legacyId: 'unit-27-relative-pronouns',
+    unitNumber: 26,
     category: 'Prepositions, Voice & Pronouns',
     level: 'B1',
-    title: 'Unit 27: Relative Pronouns (Qui, Que, Où, Dont & Composés)',
-    frenchTitle: 'Unité 27 : Les pronoms relatifs simples et composés (Qui, que, où, dont, lequel)',
+    title: 'Unit 26: Relative Pronouns (Qui, Que, Où, Dont & Composés)',
+    frenchTitle: 'Unité 26 : Les pronoms relatifs simples et composés (Qui, que, où, dont, lequel)',
     subtitle: 'Combine clauses seamlessly using grammatical relative connectors and prepositional relative pronouns.',
     formula: 'Qui + [Verbe] (Sujet)  |  Que + [Sujet] + [Verbe] (COD)  |  Où (Lieu/Temps)  |  Dont (remplace "de + Nom")  |  Composés: lequel, laquelle, lesquels, lesquelles',
     goldenRule: '**« Qui »** is the grammatical subject (followed immediately by a verb). **« Que »** is the direct object (followed by a subject + verb). **« Dont »** replaces any phrase governed by **« de »** (parler de, avoir besoin de, avoir peur de, l\'auteur de).',

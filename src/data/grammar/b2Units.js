@@ -1,14 +1,15 @@
 export const B2_GRAMMAR_LESSONS = [
   // ==========================================
-  // Unit 25: Simple Past, Passive Voice & Indirect Speech
+  // Unit 24: Simple Past, Passive Voice & Indirect Speech
   // ==========================================
   {
-    id: 'unit-25-simple-past-passive-indirect-speech',
-    unitNumber: 25,
+    id: 'unit-24-simple-past-passive-indirect-speech',
+    legacyId: 'unit-25-simple-past-passive-indirect-speech',
+    unitNumber: 24,
     category: 'Prepositions, Voice & Pronouns',
     level: 'B2',
-    title: 'Unit 25: The Simple Past, Passive Voice & Indirect Speech',
-    frenchTitle: 'Unité 25 : Le passé simple, la voix passive et le discours indirect',
+    title: 'Unit 24: The Simple Past, Passive Voice & Indirect Speech',
+    frenchTitle: 'Unité 24 : Le passé simple, la voix passive et le discours indirect',
     subtitle: 'Navigate literary historical past narration, passive transformations with "par", and backshifting tenses in reported speech.',
     formula: 'Passé Simple: -er (-a, -èrent), -ir/-re (-it, -irent), irréguliers (-ut, -urent)  |  Voix Passive: [Être au temps voulu] + [Participe Passé] + [par / de]  |  Discours Indirect: Présent → Imparfait, Futur → Conditionnel, Passé Composé → Plus-que-parfait',
     goldenRule: 'In Indirect Reported Speech, when the reporting verb is in the past (il a dit que...), the reported tenses backshift: Present becomes Imparfait, Futur Simple becomes Conditionnel Présent, and Passé Composé becomes Plus-que-parfait.',
