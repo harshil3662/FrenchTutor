@@ -159,8 +159,8 @@ export default function App() {
               <div
                 className={`flex-1 min-w-0 flex items-center transition-[border-radius,background-color,border-color,box-shadow] duration-250 ease-out ${
                   isScrolled
-                    ? 'rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#E7F2E4]/85 via-[#FAF7EE]/80 to-[#F5ECE6]/85 backdrop-blur-md border border-[#C8DAC3]/85 shadow-md shadow-[#34342E]/5 ring-1 ring-[#5A7A5A]/10'
-                    : 'w-full bg-gradient-to-r from-[#E7F2E4]/70 via-[#FAF7EE]/65 to-[#F5ECE6]/70 backdrop-blur-md border-b border-[#C8DAC3]/60 shadow-none rounded-none'
+                    ? 'rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#FAF8F5]/90 via-[#F5F2EB]/85 to-[#FAF8F5]/90 backdrop-blur-md border border-[#DCDCCF]/85 shadow-md shadow-[#34342E]/5 ring-1 ring-[#5A5A40]/10'
+                    : 'w-full bg-gradient-to-r from-[#FAF8F5]/85 via-[#F5F2EB]/80 to-[#FAF8F5]/85 backdrop-blur-md border-b border-[#DCDCCF]/60 shadow-none rounded-none'
                 }`}
               >
                 <div className="w-full">
@@ -195,7 +195,7 @@ export default function App() {
                     className={`self-stretch shrink-0 px-4 sm:px-5 rounded-2xl sm:rounded-3xl flex items-center justify-center transition-colors duration-200 cursor-pointer shadow-md backdrop-blur-md select-none group ${
                       isNavMenuOpen
                         ? 'bg-[#5A5A40] text-white border border-[#5A5A40] shadow-md shadow-[#5A5A40]/25 ring-2 ring-[#5A5A40]/20'
-                        : 'bg-gradient-to-r from-[#FAF7EE]/90 via-[#F5ECE6]/85 to-[#E7F2E4]/90 text-[#34342E] border border-[#C8DAC3]/85 hover:border-[#5A5A40]/50 hover:bg-white hover:shadow-lg ring-1 ring-[#5A7A5A]/10'
+                        : 'bg-gradient-to-r from-[#FAF8F5]/95 via-[#F5F2EB]/90 to-[#FAF8F5]/95 text-[#34342E] border border-[#DCDCCF]/85 hover:border-[#5A5A40]/50 hover:bg-white hover:shadow-lg ring-1 ring-[#5A5A40]/10'
                     }`}
                     title={isNavMenuOpen ? 'Fermer le menu' : 'Menu de navigation'}
                     aria-label={isNavMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
@@ -314,6 +314,7 @@ export default function App() {
           <FlashcardsView
             progress={progress}
             audioSpeed={audioSpeed}
+            activeLevel={activeLevel}
             onToggleMastery={handleToggleMastery}
             onAwardXp={handleAwardXp}
           />

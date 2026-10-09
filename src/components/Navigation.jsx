@@ -110,7 +110,7 @@ export const Navigation = ({
             {/* Segmented Glass Dock Track with Horizontal Scroll */}
             <div
               ref={scrollContainerRef}
-              className="relative p-1.5 bg-white/50 backdrop-blur-md rounded-2xl border border-[#C8DAC3]/70 shadow-xs flex items-center overflow-x-auto no-scrollbar"
+              className="relative p-1.5 bg-white/70 backdrop-blur-md rounded-2xl border border-[#DCDCCF]/80 shadow-xs flex items-center overflow-x-auto no-scrollbar"
             >
               <div className="flex space-x-1 sm:space-x-1.5 min-w-max mx-auto px-1">
                 {NAV_TABS.map((tab) => {
@@ -184,7 +184,7 @@ export const Navigation = ({
           animate={{ height: 'auto', opacity: 1, y: 0 }}
           exit={{ height: 0, opacity: 0, y: -10 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#E7F2E4]/90 via-[#FAF7EE]/85 to-[#F5ECE6]/90 backdrop-blur-xl border border-[#C8DAC3]/80 shadow-xl shadow-[#34342E]/8 px-3 sm:px-6 py-3.5"
+          className="overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#FAF8F5]/95 via-[#F5F2EB]/90 to-[#FAF8F5]/95 backdrop-blur-xl border border-[#DCDCCF]/85 shadow-xl shadow-[#34342E]/8 px-3 sm:px-6 py-3.5"
         >
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2">
             {NAV_TABS.map((tab, idx) => {
@@ -204,7 +204,7 @@ export const Navigation = ({
                   className={`p-3 rounded-2xl border flex flex-col items-center justify-center text-center gap-1.5 transition-all cursor-pointer select-none group shadow-xs ${
                     isActive
                       ? 'bg-gradient-to-br from-[#4A663F] via-[#525E3E] to-[#5A5A40] text-white border-[#4A663F] shadow-md shadow-[#4A663F]/25 ring-1 ring-white/20'
-                      : 'bg-white/70 hover:bg-white text-[#34342E] border-[#C8DAC3]/70 hover:border-[#5A5A40]/40'
+                      : 'bg-white/70 hover:bg-white text-[#34342E] border-[#DCDCCF]/80 hover:border-[#5A5A40]/40'
                   }`}
                 >
                   <div

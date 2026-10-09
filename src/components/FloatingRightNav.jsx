@@ -32,7 +32,7 @@ export const FloatingRightNav = ({
               className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full flex flex-col items-center justify-center transition-all duration-300 cursor-pointer shadow-lg backdrop-blur-xl ${
                 isMenuOpen
                   ? 'bg-[#5A5A40] text-white ring-2 ring-[#5A5A40]/50 shadow-md shadow-[#5A5A40]/30'
-                  : 'bg-gradient-to-br from-[#FAF8F2]/95 to-[#E7F2E4]/90 text-[#34342E] border border-[#C8DAC3]/90 hover:border-[#5A5A40]/50'
+                  : 'bg-gradient-to-br from-[#FAF8F5]/95 to-[#F5F2EB]/90 text-[#34342E] border border-[#DCDCCF]/90 hover:border-[#5A5A40]/50'
               }`}
               title={isMenuOpen ? 'Close Menu' : 'Open Navigation Menu'}
               aria-label={isMenuOpen ? 'Close Menu' : 'Open Navigation Menu'}
@@ -80,7 +80,7 @@ export const FloatingRightNav = ({
               onClick={scrollToTop}
               whileHover={{ scale: 1.12 }}
               whileTap={{ scale: 0.92 }}
-              className="w-9 h-9 rounded-full bg-white/80 hover:bg-[#5A5A40] text-[#5A5A40] hover:text-white flex items-center justify-center transition-all duration-200 cursor-pointer border border-[#C8DAC3]/80 shadow-md backdrop-blur-md"
+              className="w-9 h-9 rounded-full bg-white/80 hover:bg-[#5A5A40] text-[#5A5A40] hover:text-white flex items-center justify-center transition-all duration-200 cursor-pointer border border-[#DCDCCF]/90 shadow-md backdrop-blur-md"
               title="Scroll to Top"
               aria-label="Scroll to Top"
             >
