@@ -4,6 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
 import { createServer as createViteServer } from 'vite';
+import { GRAMMAR_ASPECT_LESSONS } from './src/data/grammar/index.js';
 
 dotenv.config({ path: ['.env.local', '.env'] });
 
@@ -1248,13 +1249,34 @@ Format STRICTLY as valid JSON matching this schema:
 });
 
 // Dynamic AI Practice Quiz Generator
+const QUIZ_SUPPORTED_TYPES = ['multiple-choice', 'fill-in-the-blank', 'complete-the-sentence', 'translate-english-to-french'];
+
 app.post('/api/ai/generate-quiz', async (req, res) => {
   const {
     topic = 'Passé Composé vs Imparfait',
     level = 'B1',
     questionCount = 4,
-    unitContext = {},
+    lessonId,
+    unitContext: requestedUnitContext = {},
   } = req.body;
+
+  const lesson = GRAMMAR_ASPECT_LESSONS.find((item) => item.id === lessonId);
+  const unitContext = lesson
+    ? {
+        ...requestedUnitContext,
+        unitNumber: lesson.unitNumber,
+        category: lesson.category,
+        title: lesson.title,
+        frenchTitle: lesson.frenchTitle,
+        subtitle: lesson.subtitle,
+        formula: lesson.formula,
+        goldenRule: lesson.goldenRule,
+        rules: lesson.rules,
+        commonTraps: lesson.commonTraps,
+        topics: lesson.topics,
+        practiceExercises: lesson.practiceExercises,
+      }
+    : requestedUnitContext;
 
   const genericFallback = {
     title: `Quiz de Révision: ${topic}`,
@@ -1301,25 +1323,39 @@ app.post('/api/ai/generate-quiz', async (req, res) => {
 
   const unitFallbackQuestions = Array.isArray(unitContext.practiceExercises) && unitContext.practiceExercises.length
     ? unitContext.practiceExercises
-        .filter((exercise) =>
-          typeof exercise?.prompt === 'string' &&
-          Array.isArray(exercise.options) &&
-          exercise.options.length >= 2 &&
-          typeof exercise.correctAnswer === 'string'
-        )
+        .filter((exercise) => {
+          const type = exercise?.type || 'multiple-choice';
+          if (!QUIZ_SUPPORTED_TYPES.includes(type)) return false;
+          const hasPrompt = typeof exercise?.prompt === 'string' && exercise.prompt.trim();
+          const hasAnswer = typeof (exercise?.correctAnswer || exercise?.answer) === 'string' && (exercise.correctAnswer || exercise.answer).trim();
+          if (type === 'multiple-choice') {
+            return hasPrompt && Array.isArray(exercise.options) && exercise.options.length >= 2 && hasAnswer;
+          }
+          return hasPrompt && hasAnswer;
+        })
         .slice(0, questionCount)
         .map((exercise, index) => ({
           id: exercise.id || `q${index + 1}`,
           type: exercise.type || 'multiple-choice',
           prompt: exercise.prompt,
-          promptEnglish: exercise.promptEnglish || exercise.english || exercise.translation || `In the context of ${topic}, choose the correct form.`,
-          options: exercise.options,
-          correctAnswer: exercise.correctAnswer,
+          promptEnglish: exercise.promptEnglish || exercise.english || exercise.translation || `In the context of ${topic}, answer this French question.`,
+          options: Array.isArray(exercise.options) ? exercise.options : [],
+          correctAnswer: exercise.correctAnswer || exercise.answer || '',
+          acceptableAnswers: Array.isArray(exercise.acceptableAnswers) ? exercise.acceptableAnswers.filter(Boolean) : [],
           explanation: exercise.explanation || exercise.hint || `Apply the grammatical rule for ${topic}.`,
         }))
     : [
         {
           id: 'q1',
+          type: 'fill-in-the-blank',
+          prompt: `Complétez la phrase : ${unitContext.frenchTitle || topic} est ___ pour expliquer la règle de base.`,
+          promptEnglish: `Complete the sentence: "${unitContext.frenchTitle || topic}" is ___ to explain the basic rule.`,
+          correctAnswer: 'essentiel',
+          acceptableAnswers: ['essentiel'],
+          explanation: `A concise, specific learning cue is useful when describing the rule: ${unitContext.goldenRule || 'Use the core grammar pattern precisely.'}`
+        },
+        {
+          id: 'q2',
           type: 'multiple-choice',
           prompt: `Dans le contexte de « ${unitContext.frenchTitle || topic} », quelle proposition est grammaticalement correcte ?`,
           promptEnglish: `In the context of "${unitContext.frenchTitle || topic}", which statement is grammatically correct?`,
@@ -1332,7 +1368,16 @@ app.post('/api/ai/generate-quiz', async (req, res) => {
           correctAnswer: unitContext.goldenRule ? unitContext.goldenRule.slice(0, 60) + '...' : `Application exacte de la règle de ${topic}`,
           explanation: `According to the unit rule: ${unitContext.goldenRule || 'Review the core formula and apply agreement constraints accurately.'}`
         },
-        ...genericFallback.questions.slice(1, questionCount)
+        {
+          id: 'q3',
+          type: 'complete-the-sentence',
+          prompt: 'Complétez la phrase : Hier, nous ___ au marché avant le déjeuner.',
+          promptEnglish: 'Complete the sentence: "Yesterday, we ___ at the market before lunch."',
+          correctAnswer: 'sommes allés',
+          acceptableAnswers: ['sommes allés', 'sommes allées'],
+          explanation: 'The passé composé is used for a completed action in the past, and the verb aller takes être as its auxiliary.'
+        },
+        ...genericFallback.questions.slice(3, questionCount)
       ];
 
   const defaultFallback = {
@@ -1354,16 +1399,36 @@ app.post('/api/ai/generate-quiz', async (req, res) => {
     ];
     const variationCue = variationCues[Math.floor(Math.random() * variationCues.length)];
     const variationToken = Math.random().toString(36).slice(2, 10);
+
+    const typeMix = {
+      A1: ['fill-in-the-blank', 'multiple-choice', 'complete-the-sentence'],
+      A2: ['fill-in-the-blank', 'multiple-choice', 'complete-the-sentence', 'translate-english-to-french'],
+      B1: ['fill-in-the-blank', 'multiple-choice', 'complete-the-sentence', 'translate-english-to-french'],
+      B2: ['fill-in-the-blank', 'multiple-choice', 'complete-the-sentence', 'translate-english-to-french'],
+      C1: ['fill-in-the-blank', 'multiple-choice', 'complete-the-sentence', 'translate-english-to-french'],
+      C2: ['fill-in-the-blank', 'multiple-choice', 'complete-the-sentence', 'translate-english-to-french'],
+    };
+    const allowedTypes = typeMix[level] || typeMix.A2;
+
     const prompt = `Generate a fresh ${questionCount}-question French interactive grammar quiz strictly focused on grammatical aspects for topic: "${topic}" and level ${level}.
 
   Use this unit-specific curriculum context as the source of truth. Test its rules and terminology, not a generic grammar topic:
   ${JSON.stringify(unitContext)}
 
+  STRICT GROUNDING: The curriculum context above is the lesson's knowledge base. Every question must test a rule, pattern, table, trap, or contrast that appears in that lesson. Do not introduce grammar points, vocabulary patterns, or exceptions that are not covered in the lesson content. The lesson's practiceExercises show the expected style and difficulty only; do not copy them.
+
   Make this quiz substantially different from a standard or previously generated quiz. Use the scenario cue "${variationCue}" as inspiration, vary names, verbs, sentence structures, and contexts, and avoid stock examples. Use existing drills only to understand the unit content; do not copy their questions or answers verbatim. Give every question in this quiz a distinct sentence and test case. Variation token: ${variationToken}.
 
 Important: every explanation must be written in English, even though the question text is in French. Keep the explanation clear, concise, and focused on the grammar rule being tested.
 
-Use multiple-choice questions only, with exactly 4 string options per question. Every correctAnswer must exactly match one of its options.
+Use a mixed question set according to level, and DO NOT make every question multiple-choice. Allowed types for this level: ${allowedTypes.join(', ')}. Keep the mix balanced and appropriate to the learner level.
+
+Rules:
+- For multiple-choice: exactly 4 string options and every correctAnswer must exactly match one option.
+- For fill-in-the-blank and complete-the-sentence: include a blank marker like ___ and make the task self-contained. The learner must be able to tell exactly what to write from the prompt alone. Do not say only "avec la forme correcte" or "complétez". Name the target instead: give the verb infinitive and tense in parentheses (e.g. "(verbe prendre, passé composé)"), or name the word class or grammar item to fill in (e.g. "(article partitif)", "(pronom COD)"). correctAnswer must be the exact missing fragment or phrase.
+- For translate-english-to-french: the prompt must ask the learner to translate an English sentence into French and the correctAnswer must be the French translation.
+- Every question must include promptEnglish, which is a natural English translation or explanation of the prompt.
+- Keep questions realistic, level-appropriate, and varied in structure.
 
 Format as JSON:
 {
@@ -1372,21 +1437,44 @@ Format as JSON:
   "questions": [
     {
       "id": "q1",
+      "type": "fill-in-the-blank",
+      "prompt": "Complétez avec le verbe aller au passé composé : Hier, nous ___ au marché avant le déjeuner.",
+      "promptEnglish": "Complete the sentence: 'Yesterday, we ___ at the market before lunch.'",
+      "correctAnswer": "sommes allés",
+      "acceptableAnswers": ["sommes allés", "sommes allées"],
+      "explanation": "Clear grammatical explanation in English of why this is correct"
+    },
+    {
+      "id": "q2",
       "type": "multiple-choice",
-      "prompt": "The question prompt in French with blank or verb to conjugate",
-      "promptEnglish": "Accurate, fluent English translation of the prompt so the user can toggle between French and English",
+      "prompt": "Quelle est la forme correcte ?",
+      "promptEnglish": "Which is the correct form?",
       "options": ["option 1", "option 2", "option 3", "option 4"],
-      "correctAnswer": "The exact correct string",
+      "correctAnswer": "option 1",
+      "explanation": "Clear grammatical explanation in English of why this is correct"
+    },
+    {
+      "id": "q3",
+      "type": "translate-english-to-french",
+      "prompt": "Traduisez en français : 'We went to the market early this morning.'",
+      "promptEnglish": "Translate into French: 'We went to the market early this morning.'",
+      "correctAnswer": "Nous sommes allés au marché très tôt ce matin.",
+      "acceptableAnswers": ["Nous sommes allés au marché très tôt ce matin."],
       "explanation": "Clear grammatical explanation in English of why this is correct"
     }
   ]
 }`;
 
-    const result = await generateAiJson(prompt, defaultFallback, { task: 'generate-quiz', temperature: 0.9 });
-    res.json(result);
+    const result = await generateAiJson(prompt, defaultFallback, {
+      task: 'generate-quiz',
+      temperature: 0.9,
+      preferOpenRouter: true,
+      openRouterTimeoutMs: 60000,
+    });
+    res.json(result === defaultFallback ? { ...defaultFallback, usedFallback: true } : result);
   } catch (error) {
     console.error('Error in /api/ai/generate-quiz:', error);
-    res.json(defaultFallback);
+    res.json({ ...defaultFallback, usedFallback: true });
   }
 });
 

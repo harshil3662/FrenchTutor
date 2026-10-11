@@ -161,35 +161,6 @@ export const A1_GRAMMAR_LESSONS = [
       'Saying "beaucoup des amis" instead of "beaucoup d\'amis" (quantifiers require "de").',
       'Saying "Je n\'ai pas un stylo" instead of "Je n\'ai pas de stylo".',
     ],
-    practiceExercises: [
-      {
-        id: 'ex-u1-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct article: "Le matin, je bois _____ café avec _____ lait."',
-        options: ['du / du', 'le / le', 'de / de', 'un / des'],
-        correctAnswer: 'du / du',
-        hint: 'Both "café" and "lait" are masculine uncountable nouns taking partitive articles in positive sentences.',
-        explanation: 'We use partitive "du" (de + le) for masculine uncountable food and drinks.',
-      },
-      {
-        id: 'ex-u1-2',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct form under negation: "Elle a des frères, mais elle n\'a pas _____ sœurs."',
-        options: ['de', 'des', 'du', 'une'],
-        correctAnswer: 'de',
-        hint: 'In negative sentences with "ne... pas", indefinite/partitive articles become "de".',
-        explanation: 'Indefinite plural "des" converts to "de" under direct negation.',
-      },
-      {
-        id: 'ex-u1-3',
-        type: 'sentence-builder',
-        prompt: 'Arrange into: "Nous achetons beaucoup de légumes frais."',
-        words: ['légumes', 'frais.', 'Nous', 'beaucoup', 'achetons', 'de'],
-        correctAnswer: 'Nous achetons beaucoup de légumes frais.',
-        hint: 'Adverb of quantity "beaucoup" is immediately followed by "de".',
-        explanation: 'Correct structure: Subject + Verb + Adverb of quantity + de + Noun + Adjective.',
-      },
-    ],
   },
 
   // ==========================================
@@ -227,26 +198,6 @@ export const A1_GRAMMAR_LESSONS = [
     commonTraps: [
       'Assuming all nouns ending in -e are feminine (e.g. "le problème", "le système", "le musée" are masculine!).',
       'Forgetting that "la plage", "la page", "l\'image" are feminine exceptions to the -age rule.',
-    ],
-    practiceExercises: [
-      {
-        id: 'ex-u2-1',
-        type: 'multiple-choice',
-        prompt: 'Which of the following nouns is feminine?',
-        options: ['La solution', 'Le développement', 'Le voyage', 'Le romantisme'],
-        correctAnswer: 'La solution',
-        hint: 'Nouns ending in -tion are reliably feminine.',
-        explanation: 'Words ending in "-tion" (la solution, la nation, la création) are feminine.',
-      },
-      {
-        id: 'ex-u2-2',
-        type: 'multiple-choice',
-        prompt: 'What is the feminine counterpart of "un serveur"?',
-        options: ['une serveuse', 'une servante', 'une servatrice', 'une serveure'],
-        correctAnswer: 'une serveuse',
-        hint: 'Verbs of action with stem + eur generally become -euse.',
-        explanation: 'Un serveur → une serveuse (from servir).',
-      },
     ],
   },
 
@@ -297,26 +248,6 @@ export const A1_GRAMMAR_LESSONS = [
           'Wines and Cheeses are typically masculine, but some regional varieties may be feminine.',
         ]
       }
-    ],
-    practiceExercises: [
-      {
-        id: 'ex-u3-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct article for "programme": "C\'est _____ programme intéressant."',
-        options: ['un', 'une', 'de la', 'des'],
-        correctAnswer: 'un',
-        hint: 'Greek-rooted words ending in -gramme are masculine.',
-        explanation: 'Programme is masculine: un programme.',
-      },
-      {
-        id: 'ex-u3-2',
-        type: 'multiple-choice',
-        prompt: 'What is the plural form of "le travail"?',
-        options: ['les travaux', 'les travails', 'les travailleux', 'les travailles'],
-        correctAnswer: 'les travaux',
-        hint: 'Irregular plural of -ail.',
-        explanation: 'Le travail → les travaux.',
-      },
     ],
   },
 
@@ -487,26 +418,6 @@ export const A1_GRAMMAR_LESSONS = [
         ],
       }
     ],
-    practiceExercises: [
-      {
-        id: 'ex-u4-1',
-        type: 'multiple-choice',
-        prompt: 'How do you say 95 in French?',
-        options: ['quatre-vingt-quinze', 'soixante-quinze', 'quatre-vingts-dix-cinq', 'nonante-cinq'],
-        correctAnswer: 'quatre-vingt-quinze',
-        hint: '80 (quatre-vingt) + 15 (quinze).',
-        explanation: '95 is constructed as 80 + 15 = quatre-vingt-quinze.',
-      },
-      {
-        id: 'ex-u4-2',
-        type: 'multiple-choice',
-        prompt: 'Select the correctly spelled number for 300:',
-        options: ['trois cents', 'trois cent', 'trois-cents', 'trois centes'],
-        correctAnswer: 'trois cents',
-        hint: 'Cent takes an "s" when multiplied and not followed by another number.',
-        explanation: 'Trois cents takes an "s" because it is a whole multiple of 100.',
-      },
-    ],
   },
 
   // ==========================================
@@ -578,26 +489,6 @@ export const A1_GRAMMAR_LESSONS = [
           }
         ]
       }
-    ],
-    practiceExercises: [
-      {
-        id: 'ex-u6-1',
-        type: 'sentence-builder',
-        prompt: 'Build the correct negative sentence: "Paul ne comprend pas cette question."',
-        words: ['cette', 'Paul', 'comprend', 'ne', 'question.', 'pas'],
-        correctAnswer: 'Paul ne comprend pas cette question.',
-        hint: 'Subject + ne + verb + pas + complement.',
-        explanation: 'The conjugated verb "comprend" is sandwiched by "ne" and "pas".',
-      },
-      {
-        id: 'ex-u6-2',
-        type: 'multiple-choice',
-        prompt: 'Where does the adverb "souvent" go? "Nous voyageons (souvent) en train."',
-        options: ['Nous voyageons souvent en train.', 'Nous souvent voyageons en train.', 'Souvent nous voyageons en train.', 'Nous voyageons en train souvent.'],
-        correctAnswer: 'Nous voyageons souvent en train.',
-        hint: 'In simple tenses, adverbs follow immediately after the conjugated verb.',
-        explanation: 'Adverbs of frequency in French sit right after the conjugated verb: "voyageons souvent".',
-      },
     ],
   },
 
@@ -842,26 +733,6 @@ export const A1_GRAMMAR_LESSONS = [
         ],
       }
     ],
-    practiceExercises: [
-      {
-        id: 'ex-u7-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct formal inversion for: "Elle habite à Paris."',
-        options: ['Habite-t-elle à Paris ?', 'Habite-elle à Paris ?', 'Est-ce qu\'elle habite à Paris ?', 'Elle habite-t-elle à Paris ?'],
-        correctAnswer: 'Habite-t-elle à Paris ?',
-        hint: 'Add euphonic "-t-" between verb ending in vowel and "elle".',
-        explanation: 'Because "habite" ends in "e" and "elle" begins with "e", French inserts "-t-": "Habite-t-elle ?".',
-      },
-      {
-        id: 'ex-u7-2',
-        type: 'sentence-builder',
-        prompt: 'Build the question: "Quand est-ce que le train arrive ?"',
-        words: ['le', 'Quand', 'arrive', 'est-ce', 'que', 'train', '?'],
-        correctAnswer: 'Quand est-ce que le train arrive ?',
-        hint: 'Interrogative word + est-ce que + subject + verb.',
-        explanation: 'Correct standard interrogation: Quand + est-ce que + le train + arrive ?',
-      },
-    ],
   },
 
   // ==========================================
@@ -911,26 +782,6 @@ export const A1_GRAMMAR_LESSONS = [
     commonTraps: [
       'Writing "Manges ta soupe !" with an -s (it must be "Mange ta soupe !").',
       'Using subject pronouns in commands (e.g. "Tu viens ici !" is not a true imperative).',
-    ],
-    practiceExercises: [
-      {
-        id: 'ex-u8-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct imperative command for "écouter" (to tu):',
-        options: ['Écoute !', 'Écoutes !', 'Écoutez !', 'Tu écoutes !'],
-        correctAnswer: 'Écoute !',
-        hint: '-ER verbs drop the -s for the tu command.',
-        explanation: 'In the imperative "tu" form of -er verbs, the final "s" is dropped: "Écoute !".',
-      },
-      {
-        id: 'ex-u8-2',
-        type: 'multiple-choice',
-        prompt: 'Complete the exclamation: "_____ belle vue sur la mer !"',
-        options: ['Quelle', 'Quel', 'Quels', 'Comme'],
-        correctAnswer: 'Quelle',
-        hint: '"Vue" is feminine singular.',
-        explanation: 'Feminine singular exclamative adjective is "Quelle".',
-      },
     ],
   },
 
@@ -1045,26 +896,6 @@ export const A1_GRAMMAR_LESSONS = [
           }
         ],
       }
-    ],
-    practiceExercises: [
-      {
-        id: 'ex-u10-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct conjugation: "Nous _____ (commencer) le projet."',
-        options: ['commençons', 'commencons', 'commenceons', 'commencez'],
-        correctAnswer: 'commençons',
-        hint: 'A cedilla is needed under the "c" before "o".',
-        explanation: 'To maintain the soft /s/ sound before "o", "c" becomes "ç": commençons.',
-      },
-      {
-        id: 'ex-u10-2',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct form: "Ils _____ (parler) français couramment."',
-        options: ['parlent', 'parlons', 'parlez', 'parles'],
-        correctAnswer: 'parlent',
-        hint: 'Third-person plural ends in -ent.',
-        explanation: 'Ils/elles takes the ending "-ent": parlent.',
-      },
     ],
   },
 
@@ -1210,26 +1041,6 @@ export const A1_GRAMMAR_LESSONS = [
           }
         ],
       }
-    ],
-    practiceExercises: [
-      {
-        id: 'ex-u11-1',
-        type: 'multiple-choice',
-        prompt: 'Conjugate "choisir" for "nous": "Nous _____ une table près de la fenêtre."',
-        options: ['choisissons', 'choisons', 'choisissez', 'choisit'],
-        correctAnswer: 'choisissons',
-        hint: '2nd group -ir verbs use the "-issons" ending.',
-        explanation: 'Regular 2nd group verbs take "-issons" for nous: choisissons.',
-      },
-      {
-        id: 'ex-u11-2',
-        type: 'multiple-choice',
-        prompt: 'Conjugate "attendre" for "elle": "Elle _____ son ami à la gare."',
-        options: ['attend', 'attends', 'attendt', 'attende'],
-        correctAnswer: 'attend',
-        hint: 'Regular -re verbs take no ending after the "d" in 3rd person singular.',
-        explanation: 'Elle attend (stem ends in d, no additional ending).',
-      },
     ],
   },
 
@@ -1443,26 +1254,6 @@ export const A1_GRAMMAR_LESSONS = [
         ]
       }
     ],
-    practiceExercises: [
-      {
-        id: 'ex-u12-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct form for "vous" with the verb "faire":',
-        options: ['Vous faites', 'Vous faisez', 'Vous faisons', 'Vous font'],
-        correctAnswer: 'Vous faites',
-        hint: 'One of the 3 verbs ending in -tes for vous.',
-        explanation: 'Faire conjugates as "vous faites".',
-      },
-      {
-        id: 'ex-u12-2',
-        type: 'multiple-choice',
-        prompt: 'Select the correct verb: "Elles _____ (aller) au cinéma ce soir."',
-        options: ['vont', 'allent', 'vas', 'vons'],
-        correctAnswer: 'vont',
-        hint: 'Irregular 3rd person plural of aller.',
-        explanation: 'Aller conjugates as "elles vont".',
-      },
-    ],
   },
 
   // ==========================================
@@ -1617,26 +1408,6 @@ export const A1_GRAMMAR_LESSONS = [
     commonTraps: [
       'Writing "un beau appartement" instead of "un bel appartement".',
       'Placing color or nationality adjectives before the noun (e.g. "un rouge ballon" is wrong; say "un ballon rouge").',
-    ],
-    practiceExercises: [
-      {
-        id: 'ex-u28-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct form for: "C\'est un _____ (vieux) ami."',
-        options: ['vieil', 'vieux', 'vieille', 'vieu'],
-        correctAnswer: 'vieil',
-        hint: 'Masculine noun starting with a vowel requires the special euphonic form.',
-        explanation: 'Before a masculine singular noun starting with a vowel, "vieux" becomes "vieil": un vieil ami.',
-      },
-      {
-        id: 'ex-u28-2',
-        type: 'sentence-builder',
-        prompt: 'Arrange into: "Elle porte une belle robe rouge."',
-        words: ['robe', 'Elle', 'rouge.', 'une', 'belle', 'porte'],
-        correctAnswer: 'Elle porte une belle robe rouge.',
-        hint: 'BANGS adjective (belle) goes before noun, color (rouge) goes after.',
-        explanation: 'Belle (Beauty) precedes the noun; rouge (Color) follows the noun.',
-      },
     ],
   },
 ];

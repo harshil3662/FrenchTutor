@@ -1,4 +1,4 @@
-import { getCurrentUserLevel } from './progressionUtils.js';
+import { getCurrentUserLevel, PASS_THRESHOLD_PERCENT } from './progressionUtils.js';
 
 const STORAGE_KEY = 'french_learning_progress_v1';
 
@@ -102,13 +102,21 @@ export function addXp(amount) {
   return updated;
 }
 
-export function markLessonCompleted(lessonId, xpEarned, isMastered = false) {
+export function markLessonCompleted(lessonId, xpEarned, isMastered = false, percent = null) {
   const current = loadUserProgress();
   const completed = new Set(current.completedLessons || []);
   const mastered = new Set(current.masteredLessons || []);
-  
+  const lessonScores = { ...(current.lessonScores || {}) };
+
   const isFirstTime = !completed.has(lessonId);
-  completed.add(lessonId);
+  const hasScore = typeof percent === 'number' && !Number.isNaN(percent);
+  if (hasScore) {
+    lessonScores[lessonId] = Math.max(lessonScores[lessonId] ?? 0, percent);
+  }
+  // A lesson only counts as completed (and unlocks the next one) when the quiz score meets the pass threshold.
+  if (hasScore && percent >= PASS_THRESHOLD_PERCENT) {
+    completed.add(lessonId);
+  }
 
   if (isMastered) {
     mastered.add(lessonId);
@@ -119,6 +127,7 @@ export function markLessonCompleted(lessonId, xpEarned, isMastered = false) {
     ...current,
     completedLessons: updatedCompleted,
     masteredLessons: Array.from(mastered),
+    lessonScores,
     level: getCurrentUserLevel(updatedCompleted),
     xp: current.xp + (isFirstTime ? xpEarned : Math.floor(xpEarned / 2)),
     todayXp: current.todayXp + (isFirstTime ? xpEarned : Math.floor(xpEarned / 2)),

@@ -39,6 +39,38 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
     };
   }, []);
 
+  const normalizeAnswerValue = (value) =>
+    String(value ?? '')
+      .trim()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[.,!?;:]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+  const normalizeGeneratedQuestion = (question, idx) => {
+    const rawType = question?.type || 'multiple-choice';
+    const type = rawType === 'fill-in-the-blank' || rawType === 'complete-the-sentence' || rawType === 'translate-english-to-french' || rawType === 'multiple-choice'
+      ? rawType
+      : 'multiple-choice';
+    const rawAnswer = question?.correctAnswer ?? question?.answer ?? '';
+    const acceptableAnswers = Array.isArray(question?.acceptableAnswers)
+      ? question.acceptableAnswers.filter((answer) => typeof answer === 'string' && answer.trim())
+      : [];
+
+    return {
+      id: question?.id || `quiz-q-${idx + 1}`,
+      type,
+      prompt: typeof question?.prompt === 'string' ? question.prompt : '',
+      promptEnglish: typeof question?.promptEnglish === 'string' ? question.promptEnglish : '',
+      options: Array.isArray(question?.options) ? question.options.filter((opt) => typeof opt === 'string') : [],
+      correctAnswer: typeof rawAnswer === 'string' ? rawAnswer : '',
+      acceptableAnswers,
+      explanation: question?.explanation || '',
+    };
+  };
+
   useEffect(() => {
     const controller = new AbortController();
 
@@ -60,6 +92,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
             topic,
             level,
             questionCount: 4,
+            lessonId: unit?.id,
             unitContext: {
               unitNumber: unit?.unitNumber || unit?.unit,
               category: unit?.category,
@@ -78,27 +111,17 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
         const data = await res.json();
         const validQuestions = Array.isArray(data.questions)
           ? data.questions
-              .filter((question) =>
-                typeof question?.prompt === 'string' &&
-                question.prompt.trim() &&
-                Array.isArray(question.options) &&
-                question.options.length >= 2 &&
-                question.options.every((option) => typeof option === 'string') &&
-                typeof question.correctAnswer === 'string' &&
-                question.options.includes(question.correctAnswer)
-              )
-              .map((question, idx) => ({
-                id: question.id || `quiz-q-${idx + 1}`,
-                type: 'multiple-choice',
-                prompt: question.prompt,
-                promptEnglish: question.promptEnglish || '',
-                options: question.options,
-                correctAnswer: question.correctAnswer,
-                explanation: question.explanation || '',
-              }))
+              .map((question, idx) => normalizeGeneratedQuestion(question, idx))
+              .filter((question) => {
+                if (!question.prompt.trim() || !question.correctAnswer.trim()) return false;
+                if (question.type === 'multiple-choice') {
+                  return question.options.length >= 2 && question.options.every((option) => typeof option === 'string') && question.options.includes(question.correctAnswer);
+                }
+                return true;
+              })
           : [];
         if (!validQuestions.length) {
-          throw new Error('Quiz response did not contain valid multiple-choice questions.');
+          throw new Error('Quiz response did not contain valid questions.');
         }
         setQuizTitle(data.title || `Practice Quiz: ${topic}`);
         setQuestions(validQuestions);
@@ -188,7 +211,18 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
 
   const handleCheck = () => {
     if (!selectedOption || !currentQ) return;
-    const isCorrect = selectedOption.trim() === currentQ.correctAnswer.trim();
+
+    const acceptableAnswers = [
+      currentQ.correctAnswer,
+      ...(Array.isArray(currentQ.acceptableAnswers) ? currentQ.acceptableAnswers : []),
+    ].filter((value) => typeof value === 'string' && value.trim());
+
+    const normalizedAnswers = acceptableAnswers.map((value) => normalizeAnswerValue(value));
+    const userAnswer = normalizeAnswerValue(selectedOption);
+    const isCorrect = currentQ.type === 'multiple-choice'
+      ? selectedOption.trim() === currentQ.correctAnswer.trim()
+      : normalizedAnswers.includes(userAnswer);
+
     setHasChecked(true);
 
     if (isCorrect) {
@@ -334,34 +368,57 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                 </h4>
               </div>
 
-              {/* Options */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {currentQ.options.map((opt, idx) => {
-                  const isSelected = selectedOption === opt;
-                  let style = 'bg-white border-[#DCDCCF] text-[#34342E] hover:bg-[#FAF7F2]';
+              {currentQ.type === 'multiple-choice' ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {currentQ.options.map((opt, idx) => {
+                    const isSelected = selectedOption === opt;
+                    let style = 'bg-white border-[#DCDCCF] text-[#34342E] hover:bg-[#FAF7F2]';
 
-                  if (hasChecked) {
-                    if (opt === currentQ.correctAnswer) {
-                      style = 'bg-[#EEF4EE] border-[#5A7A5A] text-[#3A5A3A] font-bold';
-                    } else if (isSelected && opt !== currentQ.correctAnswer) {
-                      style = 'bg-[#FAF3EE] border-[#C05C54] text-[#C05C54] font-bold';
+                    if (hasChecked) {
+                      if (opt === currentQ.correctAnswer) {
+                        style = 'bg-[#EEF4EE] border-[#5A7A5A] text-[#3A5A3A] font-bold';
+                      } else if (isSelected && opt !== currentQ.correctAnswer) {
+                        style = 'bg-[#FAF3EE] border-[#C05C54] text-[#C05C54] font-bold';
+                      }
+                    } else if (isSelected) {
+                      style = 'bg-[#F0ECE1] border-[#5A5A40] text-[#34342E] font-semibold shadow-xs';
                     }
-                  } else if (isSelected) {
-                    style = 'bg-[#F0ECE1] border-[#5A5A40] text-[#34342E] font-semibold shadow-xs';
-                  }
 
-                  return (
-                    <button
-                      key={idx}
-                      disabled={hasChecked}
-                      onClick={() => setSelectedOption(opt)}
-                      className={`p-3.5 rounded-xl border text-left text-xs font-medium transition-all cursor-pointer ${style}`}
-                    >
-                      {opt}
-                    </button>
-                  );
-                })}
-              </div>
+                    return (
+                      <button
+                        key={idx}
+                        disabled={hasChecked}
+                        onClick={() => setSelectedOption(opt)}
+                        className={`p-3.5 rounded-xl border text-left text-xs font-medium transition-all cursor-pointer ${style}`}
+                      >
+                        {opt}
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="space-y-2.5">
+                  <label className="text-[11px] font-bold uppercase tracking-wider text-[#7A7A6A]">
+                    {currentQ.type === 'translate-english-to-french'
+                      ? 'Your French translation'
+                      : currentQ.type === 'fill-in-the-blank'
+                        ? 'Type the missing phrase'
+                        : 'Complete the sentence'}
+                  </label>
+                  <textarea
+                    value={selectedOption || ''}
+                    onChange={(event) => setSelectedOption(event.target.value)}
+                    disabled={hasChecked}
+                    rows={3}
+                    placeholder={
+                      currentQ.type === 'translate-english-to-french'
+                        ? 'Écrivez la traduction en français...'
+                        : 'Répondez en français...'
+                    }
+                    className="w-full rounded-xl border border-[#DCDCCF] bg-white px-3.5 py-3 text-xs text-[#34342E] shadow-2xs outline-none focus:border-[#5A5A40] focus:ring-2 focus:ring-[#5A5A40]/10 resize-none disabled:opacity-60"
+                  />
+                </div>
+              )}
 
               {/* Explanation */}
               {hasChecked && (

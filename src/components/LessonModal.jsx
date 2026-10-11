@@ -43,7 +43,6 @@ export const LessonModal = ({
   const [hasChecked, setHasChecked] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [score, setScore] = useState(0);
-  const [showHint, setShowHint] = useState(false);
   const [isQuestionTranslated, setIsQuestionTranslated] = useState(false);
   const [isTranslating, setIsTranslating] = useState(false);
   const [translationMap, setTranslationMap] = useState({});
@@ -75,7 +74,6 @@ export const LessonModal = ({
     setHasChecked(false);
     setIsCorrect(false);
     setScore(0);
-    setShowHint(false);
     setIsQuestionTranslated(false);
     setAiExercises(saved);
     setAiExercisesLessonId(saved ? lesson?.id : null);
@@ -152,6 +150,39 @@ export const LessonModal = ({
     speakFrench(text, audioSpeed || 0.95);
   };
 
+  const normalizeAnswerValue = (value) =>
+    String(value ?? '')
+      .trim()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[.,!?;:]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+  const normalizeGeneratedQuestion = (question, idx) => {
+    const rawType = question?.type || 'multiple-choice';
+    const type = rawType === 'fill-in-the-blank' || rawType === 'complete-the-sentence' || rawType === 'translate-english-to-french' || rawType === 'multiple-choice'
+      ? rawType
+      : 'multiple-choice';
+    const rawAnswer = question?.correctAnswer ?? question?.answer ?? '';
+    const acceptableAnswers = Array.isArray(question?.acceptableAnswers)
+      ? question.acceptableAnswers.filter((answer) => typeof answer === 'string' && answer.trim())
+      : [];
+
+    return {
+      id: question?.id || `lesson-q-${idx + 1}`,
+      type,
+      prompt: typeof question?.prompt === 'string' ? question.prompt : '',
+      promptEnglish: typeof question?.promptEnglish === 'string' ? question.promptEnglish : '',
+      options: Array.isArray(question?.options) ? question.options.filter((opt) => typeof opt === 'string') : [],
+      correctAnswer: typeof rawAnswer === 'string' ? rawAnswer : '',
+      acceptableAnswers,
+      hint: question?.hint || question?.explanation || '',
+      explanation: question?.explanation || 'Review the unit rule and apply it to the sentence.',
+    };
+  };
+
   const handleGenerateAiQuiz = async (forceFresh = false) => {
     if (isGeneratingQuiz) return;
 
@@ -191,6 +222,7 @@ export const LessonModal = ({
           topic: lesson.title,
           level: lesson.level || 'A1',
           questionCount: 4,
+          lessonId: lesson.id,
           unitContext: {
             unitNumber: lesson.unit,
             category: lesson.category,
@@ -203,31 +235,26 @@ export const LessonModal = ({
         }),
       });
       const data = await res.json();
+      if (forceFresh && data.usedFallback) {
+        throw new Error('The AI model did not return new questions. Please try again.');
+      }
       const validQuestions = Array.isArray(data.questions)
-        ? data.questions.filter((q) =>
-            typeof q?.prompt === 'string' &&
-            q.prompt.trim() &&
-            Array.isArray(q.options) &&
-            q.options.length >= 2 &&
-            typeof q.correctAnswer === 'string' &&
-            q.options.includes(q.correctAnswer)
-          )
+        ? data.questions
+            .map((q, idx) => normalizeGeneratedQuestion(q, idx))
+            .filter((q) => {
+              if (!q.prompt.trim() || !q.correctAnswer.trim()) return false;
+              if (q.type === 'multiple-choice') {
+                return q.options.length >= 2 && q.options.includes(q.correctAnswer);
+              }
+              return true;
+            })
         : [];
 
       if (!res.ok || !validQuestions.length) {
         throw new Error(data.error || 'Could not generate AI quiz questions.');
       }
 
-      const formatted = validQuestions.map((q, idx) => ({
-        id: q.id || `lesson-q-${idx + 1}`,
-        type: 'multiple-choice',
-        prompt: q.prompt,
-        promptEnglish: q.promptEnglish || '',
-        options: q.options,
-        correctAnswer: q.correctAnswer,
-        hint: q.hint || q.explanation || '',
-        explanation: q.explanation || 'Review the unit rule and apply it to the sentence.',
-      }));
+      const formatted = validQuestions;
 
       saveStoredAiPracticeExercises(lesson.id, formatted);
       setAiExercises(formatted);
@@ -295,12 +322,19 @@ export const LessonModal = ({
   };
 
   const handleCheckAnswer = () => {
-    if (!currentExercise || !selectedAnswer) return;
+    if (!currentExercise || !selectedAnswer || !String(selectedAnswer).trim()) return;
 
-    const cleanUser = selectedAnswer.trim().toLowerCase().replace(/[.,!?;:]/g, '');
-    const cleanCorrect = currentExercise.correctAnswer.trim().toLowerCase().replace(/[.,!?;:]/g, '');
+    const userValue = normalizeAnswerValue(selectedAnswer);
+    const acceptableAnswers = [
+      currentExercise.correctAnswer,
+      ...(Array.isArray(currentExercise.acceptableAnswers) ? currentExercise.acceptableAnswers : []),
+    ].filter((value) => typeof value === 'string' && value.trim());
+    const cleaned = acceptableAnswers.map((value) => normalizeAnswerValue(value));
 
-    const correct = cleanUser === cleanCorrect;
+    const correct = currentExercise.type === 'multiple-choice'
+      ? normalizeAnswerValue(selectedAnswer) === normalizeAnswerValue(currentExercise.correctAnswer)
+      : cleaned.includes(userValue);
+
     setIsCorrect(correct);
     setHasChecked(true);
 
@@ -318,7 +352,6 @@ export const LessonModal = ({
       setSelectedAnswer(null);
       setHasChecked(false);
       setIsCorrect(false);
-      setShowHint(false);
       setIsQuestionTranslated(false);
     } else {
       // Completed!
@@ -341,7 +374,7 @@ export const LessonModal = ({
           playChime('incorrect');
         } catch {}
       }
-      onComplete?.(lesson.id, totalEarnedXp, isMastered);
+      onComplete?.(lesson.id, totalEarnedXp, isMastered, exercises.length > 0 ? Math.round((score / exercises.length) * 100) : 0);
     }
   };
 
@@ -891,54 +924,65 @@ export const LessonModal = ({
                     </h3>
                   </div>
 
-                  {/* Multiple Choice Options */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    {currentExercise.options?.map((option, idx) => {
-                      const isSelected = selectedAnswer === option;
-                      const letter = String.fromCharCode(65 + idx);
-                      return (
-                        <button
-                          key={idx}
-                          disabled={hasChecked}
-                          onClick={() => {
-                            playChime('click');
-                            setSelectedAnswer(option);
-                          }}
-                          className={`p-4 rounded-2xl border text-left text-sm sm:text-base font-semibold transition-all cursor-pointer flex items-center justify-between gap-3 ${
-                            isSelected
-                              ? 'bg-[#5A5A40] text-white border-[#5A5A40] shadow-xs'
-                              : 'bg-white text-[#34342E] border-[#E8E2D9] hover:bg-[#FAF7F2]'
-                          }`}
-                        >
-                          <div className="flex items-center gap-3">
-                            <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
-                              isSelected ? 'bg-white/20 text-white' : 'bg-[#F0ECE1] text-[#5A5A40]'
-                            }`}>
-                              {letter}
-                            </span>
-                            <span>{option}</span>
-                          </div>
-                          {isSelected && <CheckCircle2 className="w-5 h-5 shrink-0 text-white" />}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {/* Hint Toggle */}
-                  {currentExercise.hint && (
-                    <div>
-                      <button
-                        onClick={() => setShowHint(!showHint)}
-                        className="text-xs sm:text-sm font-bold text-[#D98E73] flex items-center gap-1.5 hover:underline cursor-pointer"
-                      >
-                        <Lightbulb className="w-4 h-4" />
-                        {showHint ? 'Hide Grammar Hint' : 'Need a Grammar Hint?'}
-                      </button>
-                      {showHint && (
-                        <div className="p-3.5 mt-2 bg-[#FAF3EE] border border-[#D98E73]/30 rounded-xl text-xs sm:text-sm text-[#525248]">
-                          💡 {currentExercise.hint}
-                        </div>
-                      )}
+                  {currentExercise.type === 'multiple-choice' ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                      {currentExercise.options?.map((option, idx) => {
+                        const isSelected = selectedAnswer === option;
+                        const letter = String.fromCharCode(65 + idx);
+                        const isCorrectOption = hasChecked && option === currentExercise.correctAnswer;
+                        return (
+                          <button
+                            key={idx}
+                            disabled={hasChecked}
+                            onClick={() => {
+                              playChime('click');
+                              setSelectedAnswer(option);
+                            }}
+                            className={`p-4 rounded-2xl border text-left text-sm sm:text-base font-semibold transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                              isCorrectOption
+                                ? 'bg-[#EEF4EE] text-[#3A5A3A] border-[#5A7A5A]/60'
+                                : hasChecked && isSelected
+                                  ? 'bg-[#FAF3EE] text-[#C05C54] border-[#D98E73]/60'
+                                  : isSelected
+                                    ? 'bg-[#5A5A40] text-white border-[#5A5A40] shadow-xs'
+                                    : 'bg-white text-[#34342E] border-[#E8E2D9] hover:bg-[#FAF7F2]'
+                            }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
+                                isSelected ? 'bg-white/20 text-white' : 'bg-[#F0ECE1] text-[#5A5A40]'
+                              }`}>
+                                {letter}
+                              </span>
+                              <span>{option}</span>
+                            </div>
+                            {isCorrectOption && <CheckCircle2 className="w-5 h-5 shrink-0 text-[#5A7A5A]" />}
+                            {hasChecked && isSelected && !isCorrectOption && <XCircle className="w-5 h-5 shrink-0 text-[#C05C54]" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="space-y-2.5">
+                      <label className="text-xs font-bold uppercase tracking-wider text-[#7A7A6A]">
+                        {currentExercise.type === 'translate-english-to-french'
+                          ? 'Your French translation'
+                          : currentExercise.type === 'fill-in-the-blank'
+                            ? 'Type the missing word or phrase'
+                            : 'Complete the sentence'}
+                      </label>
+                      <textarea
+                        value={selectedAnswer || ''}
+                        onChange={(event) => setSelectedAnswer(event.target.value)}
+                        disabled={hasChecked}
+                        rows={3}
+                        placeholder={
+                          currentExercise.type === 'translate-english-to-french'
+                            ? 'Écrivez la traduction en français...'
+                            : 'Répondez en français...'
+                        }
+                        className="w-full rounded-2xl border border-[#DCDCCF] bg-white px-4 py-3 text-sm sm:text-base text-[#34342E] shadow-2xs outline-none focus:border-[#5A5A40] focus:ring-2 focus:ring-[#5A5A40]/10 resize-none disabled:opacity-60"
+                      />
                     </div>
                   )}
 
@@ -960,10 +1004,13 @@ export const LessonModal = ({
                         ) : (
                           <>
                             <AlertTriangle className="w-5 h-5 text-[#C05C54]" />
-                            <span>Incorrect. Correct Answer: {currentExercise.correctAnswer}</span>
+                            <span>Incorrect.</span>
                           </>
                         )}
                       </div>
+                      <p className="text-xs sm:text-sm font-semibold">
+                        Correct answer: {currentExercise.correctAnswer}
+                      </p>
                       <p className="text-xs sm:text-sm leading-relaxed">{currentExercise.explanation}</p>
                     </div>
                   )}

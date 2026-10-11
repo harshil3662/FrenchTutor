@@ -119,8 +119,8 @@ export default function App() {
     };
   }, []);
 
-  const handleLessonCompleted = (lessonId, xpEarned, isMastered = false) => {
-    const updated = markLessonCompleted(lessonId, xpEarned, isMastered);
+  const handleLessonCompleted = (lessonId, xpEarned, isMastered = false, percent = null) => {
+    const updated = markLessonCompleted(lessonId, xpEarned, isMastered, percent);
     setProgress(updated);
   };
 
@@ -361,8 +361,8 @@ export default function App() {
           isOpen={!!previewUnit}
           audioSpeed={audioSpeed}
           onClose={() => setPreviewUnit(null)}
-          onComplete={(lessonId, xp, isMastered) => {
-            handleLessonCompleted(lessonId, xp, isMastered);
+          onComplete={(lessonId, xp, isMastered, percent) => {
+            handleLessonCompleted(lessonId, xp, isMastered, percent);
           }}
         />
       )}

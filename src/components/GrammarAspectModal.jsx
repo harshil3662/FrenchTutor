@@ -7,7 +7,6 @@ import {
   Lightbulb,
   Volume2,
   Sparkles,
-  HelpCircle,
   Trophy,
   ArrowRight,
   RotateCcw,
@@ -42,7 +41,6 @@ export const GrammarAspectModal = ({
   const [activeTopicIndex, setActiveTopicIndex] = useState(0);
   const [currentExIdx, setCurrentExIdx] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
-  const [showHint, setShowHint] = useState(false);
   const [isAnswerChecked, setIsAnswerChecked] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [score, setScore] = useState(0);
@@ -73,7 +71,6 @@ export const GrammarAspectModal = ({
     setActiveTab('guide');
     setCurrentExIdx(0);
     setSelectedAnswer('');
-    setShowHint(false);
     setIsAnswerChecked(false);
     setIsCorrect(false);
     setScore(0);
@@ -147,6 +144,39 @@ export const GrammarAspectModal = ({
     speakFrench(text, audioSpeed || 0.95);
   };
 
+  const normalizeAnswerValue = (value) =>
+    String(value ?? '')
+      .trim()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[.,!?;:]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+  const normalizeGeneratedQuestion = (question, idx) => {
+    const rawType = question?.type || 'multiple-choice';
+    const type = rawType === 'fill-in-the-blank' || rawType === 'complete-the-sentence' || rawType === 'translate-english-to-french' || rawType === 'multiple-choice'
+      ? rawType
+      : 'multiple-choice';
+    const rawAnswer = question?.correctAnswer ?? question?.answer ?? '';
+    const acceptableAnswers = Array.isArray(question?.acceptableAnswers)
+      ? question.acceptableAnswers.filter((answer) => typeof answer === 'string' && answer.trim())
+      : [];
+
+    return {
+      id: question?.id || `ai-${idx + 1}`,
+      type,
+      prompt: typeof question?.prompt === 'string' ? question.prompt : '',
+      promptEnglish: typeof question?.promptEnglish === 'string' ? question.promptEnglish : '',
+      options: Array.isArray(question?.options) ? question.options.filter((opt) => typeof opt === 'string') : [],
+      correctAnswer: typeof rawAnswer === 'string' ? rawAnswer : '',
+      acceptableAnswers,
+      hint: question?.hint || question?.explanation || '',
+      explanation: question?.explanation || 'Review the grammar rule and apply it to the sentence.',
+    };
+  };
+
   const handleGenerateAiExercises = async (forceFresh = false) => {
     if (isGeneratingExercises) return;
 
@@ -188,6 +218,7 @@ export const GrammarAspectModal = ({
           topic: lesson.title || lesson.frenchTitle,
           level: lesson.level || 'A2',
           questionCount: 4,
+          lessonId: lesson.id,
           unitContext: {
             unitNumber: lesson.unitNumber,
             category: lesson.category,
@@ -202,31 +233,25 @@ export const GrammarAspectModal = ({
         }),
       });
       const data = await res.json();
+      if (forceFresh && data.usedFallback) {
+        throw new Error('The AI model did not return new questions. Please try again.');
+      }
       const questions = Array.isArray(data.questions)
-        ? data.questions.filter((question) =>
-            typeof question?.prompt === 'string' &&
-            question.prompt.trim() &&
-            Array.isArray(question.options) &&
-            question.options.length >= 2 &&
-            question.options.every((option) => typeof option === 'string') &&
-            typeof question.correctAnswer === 'string' &&
-            question.options.includes(question.correctAnswer)
-          )
+        ? data.questions
+            .map((question, index) => normalizeGeneratedQuestion(question, index))
+            .filter((question) => {
+              if (!question.prompt.trim() || !question.correctAnswer.trim()) return false;
+              if (question.type === 'multiple-choice') {
+                return question.options.length >= 2 && question.options.every((option) => typeof option === 'string') && question.options.includes(question.correctAnswer);
+              }
+              return true;
+            })
         : [];
       if (!res.ok || !questions.length) {
         throw new Error(data.error || 'Could not generate AI quiz questions.');
       }
 
-      const generatedExercises = questions.map((question, index) => ({
-        id: question.id || `ai-${index + 1}`,
-        type: 'multiple-choice',
-        prompt: question.prompt,
-        promptEnglish: question.promptEnglish || '',
-        options: question.options,
-        correctAnswer: question.correctAnswer,
-        hint: question.hint || question.explanation || '',
-        explanation: question.explanation || 'Review the grammar rule and apply it to the sentence.',
-      }));
+      const generatedExercises = questions;
       saveStoredAiPracticeExercises(lesson.id, generatedExercises);
       setAiExercises(generatedExercises);
       setAiExercisesLessonId(lesson.id);
@@ -294,12 +319,17 @@ export const GrammarAspectModal = ({
   };
 
   const handleCheckAnswer = () => {
-    if (!currentExercise || !selectedAnswer) return;
+    if (!currentExercise || !selectedAnswer || !String(selectedAnswer).trim()) return;
 
-    const cleanUser = selectedAnswer.trim().toLowerCase().replace(/[.,!?;:]/g, '');
-    const cleanCorrect = currentExercise.correctAnswer.trim().toLowerCase().replace(/[.,!?;:]/g, '');
+    const acceptableAnswers = [
+      currentExercise.correctAnswer,
+      ...(Array.isArray(currentExercise.acceptableAnswers) ? currentExercise.acceptableAnswers : []),
+    ].filter((value) => typeof value === 'string' && value.trim());
+    const normalizedAnswers = acceptableAnswers.map((value) => normalizeAnswerValue(value));
+    const correct = currentExercise.type === 'multiple-choice'
+      ? normalizeAnswerValue(selectedAnswer) === normalizeAnswerValue(currentExercise.correctAnswer)
+      : normalizedAnswers.includes(normalizeAnswerValue(selectedAnswer));
 
-    const correct = cleanUser === cleanCorrect;
     setIsCorrect(correct);
     setIsAnswerChecked(true);
 
@@ -312,7 +342,6 @@ export const GrammarAspectModal = ({
     if (!currentExercise) {
       setCurrentExIdx(0);
       setSelectedAnswer('');
-      setShowHint(false);
       setIsAnswerChecked(false);
       setIsCorrect(false);
       setScore(0);
@@ -322,7 +351,6 @@ export const GrammarAspectModal = ({
 
     setIsAnswerChecked(false);
     setSelectedAnswer('');
-    setShowHint(false);
     setIsQuestionTranslated(false);
 
     if (currentExIdx < exercises.length - 1) {
@@ -347,14 +375,13 @@ export const GrammarAspectModal = ({
           playChime('incorrect');
         } catch {}
       }
-      onComplete?.(lesson.id, earnedXp, isMastered);
+      onComplete?.(lesson.id, earnedXp, isMastered, exercises.length > 0 ? Math.round((score / exercises.length) * 100) : 0);
     }
   };
 
   const handleResetExercises = () => {
     setCurrentExIdx(0);
     setSelectedAnswer('');
-    setShowHint(false);
     setIsAnswerChecked(false);
     setIsCorrect(false);
     setScore(0);
@@ -987,52 +1014,57 @@ export const GrammarAspectModal = ({
                     </div>
                   </div>
 
-                  {/* Multiple Choice Options */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    {currentExercise.options?.map((opt, idx) => {
-                      const isSelected = selectedAnswer === opt;
-                      const letter = String.fromCharCode(65 + idx);
-                      return (
-                        <button
-                          key={idx}
-                          id={`quiz-option-${idx}`}
-                          disabled={isAnswerChecked}
-                          onClick={() => setSelectedAnswer(opt)}
-                          className={`p-4 rounded-2xl border text-left text-sm sm:text-base font-semibold transition-all cursor-pointer flex items-center justify-between gap-3 ${
-                            isSelected
-                              ? 'bg-[#5A5A40] text-white border-[#5A5A40] shadow-xs'
-                              : 'bg-white text-[#34342E] border-[#E8E2D9] hover:bg-[#FAF7F2]'
-                          }`}
-                        >
-                          <div className="flex items-center gap-3">
-                            <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
-                              isSelected ? 'bg-white/20 text-white' : 'bg-[#F0ECE1] text-[#5A5A40]'
-                            }`}>
-                              {letter}
-                            </span>
-                            <span>{opt}</span>
-                          </div>
-                          {isSelected && <CheckCircle2 className="w-5 h-5 shrink-0 text-white" />}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {/* Hint Toggle */}
-                  {currentExercise.hint && (
-                    <div>
-                      <button
-                        onClick={() => setShowHint(!showHint)}
-                        className="text-xs sm:text-sm font-bold text-[#D98E73] flex items-center gap-1.5 hover:underline cursor-pointer"
-                      >
-                        <HelpCircle className="w-4 h-4" />
-                        {showHint ? 'Hide Grammar Hint' : 'Need a Grammar Hint?'}
-                      </button>
-                      {showHint && (
-                        <div className="p-3.5 mt-2 bg-[#FAF3EE] border border-[#D98E73]/30 rounded-xl text-xs sm:text-sm text-[#525248]">
-                          💡 {currentExercise.hint}
-                        </div>
-                      )}
+                  {currentExercise.type === 'multiple-choice' ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                      {currentExercise.options?.map((opt, idx) => {
+                        const isSelected = selectedAnswer === opt;
+                        const letter = String.fromCharCode(65 + idx);
+                        return (
+                          <button
+                            key={idx}
+                            id={`quiz-option-${idx}`}
+                            disabled={isAnswerChecked}
+                            onClick={() => setSelectedAnswer(opt)}
+                            className={`p-4 rounded-2xl border text-left text-sm sm:text-base font-semibold transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                              isSelected
+                                ? 'bg-[#5A5A40] text-white border-[#5A5A40] shadow-xs'
+                                : 'bg-white text-[#34342E] border-[#E8E2D9] hover:bg-[#FAF7F2]'
+                            }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
+                                isSelected ? 'bg-white/20 text-white' : 'bg-[#F0ECE1] text-[#5A5A40]'
+                              }`}>
+                                {letter}
+                              </span>
+                              <span>{opt}</span>
+                            </div>
+                            {isSelected && <CheckCircle2 className="w-5 h-5 shrink-0 text-white" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="space-y-2.5">
+                      <label className="text-xs font-bold uppercase tracking-wider text-[#7A7A6A]">
+                        {currentExercise.type === 'translate-english-to-french'
+                          ? 'Your French translation'
+                          : currentExercise.type === 'fill-in-the-blank'
+                            ? 'Type the missing word or phrase'
+                            : 'Complete the sentence'}
+                      </label>
+                      <textarea
+                        value={selectedAnswer || ''}
+                        onChange={(event) => setSelectedAnswer(event.target.value)}
+                        disabled={isAnswerChecked}
+                        rows={3}
+                        placeholder={
+                          currentExercise.type === 'translate-english-to-french'
+                            ? 'Écrivez la traduction en français...'
+                            : 'Répondez en français...'
+                        }
+                        className="w-full rounded-2xl border border-[#DCDCCF] bg-white px-4 py-3 text-sm sm:text-base text-[#34342E] shadow-2xs outline-none focus:border-[#5A5A40] focus:ring-2 focus:ring-[#5A5A40]/10 resize-none disabled:opacity-60"
+                      />
                     </div>
                   )}
 

@@ -102,30 +102,5 @@ export const B2_GRAMMAR_LESSONS = [
         ]
       },
     ],
-    practiceExercises: [
-      {
-        id: 'ex-u25-1',
-        type: 'multiple-choice',
-        prompt: 'Transform into passive voice: "Le peintre a réalisé ce tableau."',
-        options: [
-          'Ce tableau a été réalisé par le peintre.',
-          'Ce tableau est réalisé par le peintre.',
-          'Ce tableau avait été réalisé par le peintre.',
-          'Ce tableau sera réalisé par le peintre.',
-        ],
-        correctAnswer: 'Ce tableau a été réalisé par le peintre.',
-        hint: 'Active tense is Passé Composé (a réalisé) -> Passive uses Être in Passé Composé (a été réalisé).',
-        explanation: 'Active passé composé translates to "a été" + past participle.',
-      },
-      {
-        id: 'ex-u25-2',
-        type: 'multiple-choice',
-        prompt: 'Convert to reported speech: Paul a dit : "Je partirai demain." → Paul a dit qu\'il _____ le lendemain.',
-        options: ['partirait', 'partira', 'partait', 'est parti'],
-        correctAnswer: 'partirait',
-        hint: 'Future simple backshifts to conditionnel présent in reported speech.',
-        explanation: 'In past reported speech, future simple (partirai) becomes conditionnel présent (partirait).',
-      },
-    ],
   },
 ];

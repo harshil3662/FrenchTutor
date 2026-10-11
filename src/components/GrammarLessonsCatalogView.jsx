@@ -153,17 +153,6 @@ export const GrammarLessonsCatalogView = ({
         commonTraps: [
           `Ne pas confondre les accords avec l'auxiliaire avoir et les accords avec être ou les pronoms précédents.`,
         ],
-        practiceExercises: [
-          {
-            id: 'ex-fb-1',
-            type: 'multiple-choice',
-            prompt: `Choisissez la forme correcte relative à : ${customPrompt}`,
-            options: ['Forme grammaticale A (correcte)', 'Forme B', 'Forme C', 'Forme D'],
-            correctAnswer: 'Forme grammaticale A (correcte)',
-            hint: `Appliquez la règle d'accord vue ci-dessus.`,
-            explanation: `La forme A respecte parfaitement les contraintes syntaxiques et morphologiques du français.`,
-          },
-        ],
       };
       setCustomLessons((prev) => [fallbackLesson, ...prev]);
       setIsGeneratorOpen(false);
@@ -615,8 +604,8 @@ export const GrammarLessonsCatalogView = ({
           isOpen={Boolean(selectedLesson)}
           audioSpeed={audioSpeed}
           onClose={() => setSelectedLesson(null)}
-          onComplete={(lessonId, earnedXp) => {
-            onLessonComplete(lessonId, earnedXp);
+          onComplete={(lessonId, earnedXp, isMastered, percent) => {
+            onLessonComplete(lessonId, earnedXp, isMastered, percent);
           }}
         />
       )}

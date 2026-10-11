@@ -121,26 +121,6 @@ export const B1_GRAMMAR_LESSONS = [
         ]
       }
     ],
-    practiceExercises: [
-      {
-        id: 'ex-u17-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct form: "Dès que nous _____ (recevoir) les résultats, nous vous préviendrons."',
-        options: ['aurons reçu', 'recevons', 'avons reçu', 'recevrons'],
-        correctAnswer: 'aurons reçu',
-        hint: 'Futur Antérieur is required after "dès que" for the prior completed action.',
-        explanation: 'Futur Antérieur indicates the completion of an action before another future action: "aurons reçu".',
-      },
-      {
-        id: 'ex-u17-2',
-        type: 'multiple-choice',
-        prompt: 'What is the futur simple of "pouvoir" for "je"?',
-        options: ['je pourrai', 'je pouvrai', 'je peux', 'je pourrais'],
-        correctAnswer: 'je pourrai',
-        hint: 'Irregular double-r stem "pourr-". Single "ai" ending distinguishes future from conditional.',
-        explanation: 'Futur simple of pouvoir: je pourrai (conditional is je pourrais).',
-      },
-    ],
   },
 
   // ==========================================
@@ -224,26 +204,6 @@ export const B1_GRAMMAR_LESSONS = [
             english: 'In case the project is not finished by this afternoon, call me.',
           }
         ]
-      },
-    ],
-    practiceExercises: [
-      {
-        id: 'ex-u18-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct form: "Si nous avions su la vérité, nous _____ (agir) différemment."',
-        options: ['aurions agi', 'agissions', 'agirons', 'avions agi'],
-        correctAnswer: 'aurions agi',
-        hint: 'Si + Plus-que-parfait requires the Conditionnel Passé in the main clause.',
-        explanation: 'Hypothetical past condition requires the conditionnel passé: "aurions agi".',
-      },
-      {
-        id: 'ex-u18-2',
-        type: 'sentence-builder',
-        prompt: 'Build the polite request: "Pourriez-vous me passer le sel ?"',
-        words: ['le', 'me', 'passer', 'sel', 'Pourriez-vous', '?'],
-        correctAnswer: 'Pourriez-vous me passer le sel ?',
-        hint: 'Conditional polite inversion + object pronoun + infinitive + object.',
-        explanation: 'Polite request uses conditionnel: Pourriez-vous me passer le sel ?',
       },
     ],
   },
@@ -421,26 +381,6 @@ export const B1_GRAMMAR_LESSONS = [
       'Translating "He would visit every summer" as a conditional instead of the Imparfait of habit.',
       'Translating "should have" word-for-word instead of "aurais dû".',
     ],
-    practiceExercises: [
-      {
-        id: 'ex-u19-1',
-        type: 'multiple-choice',
-        prompt: 'How do you say: "You should have called me"?',
-        options: ['Tu aurais dû m\'appeler', 'Tu devrais m\'appeler', 'Tu as dû m\'appeler', 'Tu aurais pu m\'appeler'],
-        correctAnswer: 'Tu aurais dû m\'appeler',
-        hint: 'Should have = Conditionnel passé of devoir (aurais dû).',
-        explanation: '"Should have" corresponds to "aurais dû + infinitif".',
-      },
-      {
-        id: 'ex-u19-2',
-        type: 'multiple-choice',
-        prompt: 'How do you say: "We could have won the match"?',
-        options: ['Nous aurions pu gagner le match', 'Nous pourrions gagner le match', 'Nous avons pu gagner le match', 'Nous aurions dû gagner le match'],
-        correctAnswer: 'Nous aurions pu gagner le match',
-        hint: 'Could have = Conditionnel passé of pouvoir (aurions pu).',
-        explanation: '"Could have" corresponds to "aurions pu + infinitif".',
-      },
-    ],
   },
 
   // ==========================================
@@ -603,26 +543,6 @@ export const B1_GRAMMAR_LESSONS = [
         ]
       }
     ],
-    practiceExercises: [
-      {
-        id: 'ex-u20-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct verb form: "Il faut absolument que vous _____ (faire) attention."',
-        options: ['fassiez', 'faites', 'faisez', 'ferez'],
-        correctAnswer: 'fassiez',
-        hint: 'Subjunctive of faire for "vous".',
-        explanation: 'Faire in the subjunctive for "vous" is "fassiez".',
-      },
-      {
-        id: 'ex-u20-2',
-        type: 'multiple-choice',
-        prompt: 'Which phrase does NOT trigger the subjunctive?',
-        options: ['J\'espère que tu seras là', 'Il est nécessaire que tu sois là', 'Je crains que tu ne sois là', 'Bien que tu sois là'],
-        correctAnswer: 'J\'espère que tu seras là',
-        hint: 'Espérer triggers the indicative future, not subjunctive.',
-        explanation: 'Espérer que takes the indicative future (seras), unlike expressions of doubt or necessity.',
-      },
-    ],
   },
 
   // ==========================================
@@ -665,26 +585,6 @@ export const B1_GRAMMAR_LESSONS = [
           '**Tout en étant** un bon joueur, il ne marquait jamais de but. - While being (Even though he was) a good player, he never scored a goal.'
         ]
       }
-    ],
-    practiceExercises: [
-      {
-        id: 'ex-u24-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct form: "Elle a trouvé la solution _____ (réfléchir)."',
-        options: ['en réfléchissant', 'en réfléchant', 'réfléchissant', 'par réfléchir'],
-        correctAnswer: 'en réfléchissant',
-        hint: 'Gérondif of 2nd group verb (nous réfléchissons stem) + en.',
-        explanation: 'En + stem of nous (réfléchiss-) + ant = en réfléchissant.',
-      },
-      {
-        id: 'ex-u24-2',
-        type: 'multiple-choice',
-        prompt: 'What is the present participle of the irregular verb "avoir"?',
-        options: ['ayant', 'avants', 'avaient', 'étant'],
-        correctAnswer: 'ayant',
-        hint: 'One of the 3 irregular present participles.',
-        explanation: 'The present participle of avoir is "ayant".',
-      },
     ],
   },
 
@@ -805,26 +705,6 @@ export const B1_GRAMMAR_LESSONS = [
           }
         ]
       }
-    ],
-    practiceExercises: [
-      {
-        id: 'ex-u27-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct relative pronoun: "Le film _____ j\'ai vu hier était incroyable."',
-        options: ['que', 'qui', 'dont', 'où'],
-        correctAnswer: 'que',
-        hint: 'Direct object followed by subject "j\'".',
-        explanation: '"Que" acts as the direct object for "j\'ai vu".',
-      },
-      {
-        id: 'ex-u27-2',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct pronoun: "C\'est l\'artiste _____ tout le monde parle."',
-        options: ['dont', 'que', 'qui', 'auquel'],
-        correctAnswer: 'dont',
-        hint: 'The verb is "parler de".',
-        explanation: 'Because the verbal construction is "parler de quelqu\'un", the relative pronoun is "dont".',
-      },
     ],
   },
 ];

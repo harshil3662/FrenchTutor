@@ -101,26 +101,6 @@ export const A2_GRAMMAR_LESSONS = [
         ]
       }
     ],
-    practiceExercises: [
-      {
-        id: 'ex-u9-1',
-        type: 'multiple-choice',
-        prompt: 'Which conjunction means "therefore / so"?',
-        options: ['donc', 'car', 'mais', 'or'],
-        correctAnswer: 'donc',
-        hint: 'From the mnemonic "Mais où est donc Ornicar ?".',
-        explanation: '"Donc" expresses a consequence or logical conclusion (therefore/so).',
-      },
-      {
-        id: 'ex-u9-2',
-        type: 'sentence-builder',
-        prompt: 'Build the sentence: "Il étudie car il a un examen demain."',
-        words: ['examen', 'Il', 'étudie', 'car', 'a', 'demain.', 'il', 'un'],
-        correctAnswer: 'Il étudie car il a un examen demain.',
-        hint: 'Clause 1 + car + Clause 2.',
-        explanation: 'Coordinating conjunction "car" links the two clauses.',
-      },
-    ],
   },
 
   // ==========================================
@@ -296,26 +276,6 @@ export const A2_GRAMMAR_LESSONS = [
         ]
       }
     ],
-    practiceExercises: [
-      {
-        id: 'ex-u13-1',
-        type: 'multiple-choice',
-        prompt: 'How do you say "We have just arrived" in French?',
-        options: ['Nous venons d\'arriver', 'Nous allons arriver', 'Nous faisons arriver', 'Nous sommes arrivés juste'],
-        correctAnswer: 'Nous venons d\'arriver',
-        hint: 'Venir + de + infinitive.',
-        explanation: 'Passé récent uses "venir de" + infinitive: "Nous venons d\'arriver".',
-      },
-      {
-        id: 'ex-u13-2',
-        type: 'sentence-builder',
-        prompt: 'Build: "Elle va faire réparer son vélo."',
-        words: ['réparer', 'va', 'Elle', 'vélo.', 'son', 'faire'],
-        correctAnswer: 'Elle va faire réparer son vélo.',
-        hint: 'Futur proche + causative faire + infinitive.',
-        explanation: 'Futur proche (va) + causative (faire réparer) + complement (son vélo).',
-      },
-    ],
   },
 
   // ==========================================
@@ -407,26 +367,6 @@ export const A2_GRAMMAR_LESSONS = [
             english: 'This is not done.',
           }
         ]
-      },
-    ],
-    practiceExercises: [
-      {
-        id: 'ex-u14-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct form: "Elles se sont _____ (rencontrer) à Paris."',
-        options: ['rencontrées', 'rencontré', 'rencontrés', 'rencontrer'],
-        correctAnswer: 'rencontrées',
-        hint: 'Reciprocal direct object agreeing with feminine plural subject "Elles".',
-        explanation: 'Rencontrer quelqu\'un (direct object). The reflexive pronoun is COD and precedes the verb, so agreement is required: rencontrées.',
-      },
-      {
-        id: 'ex-u14-2',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct form: "Elle s\'est _____ (brosser) les dents."',
-        options: ['brossé', 'brossée', 'brossés', 'brosser'],
-        correctAnswer: 'brossé',
-        hint: 'Direct object "les dents" comes AFTER the verb.',
-        explanation: 'When the specific body part / COD follows the verb, the past participle remains uninflected: brossé.',
       },
     ],
   },
@@ -608,26 +548,6 @@ export const A2_GRAMMAR_LESSONS = [
         ]
       }
     ],
-    practiceExercises: [
-      {
-        id: 'ex-u15-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct form: "Voici la lettre que j\'ai _____ (écrire)."',
-        options: ['écrite', 'écrit', 'écrits', 'écrites'],
-        correctAnswer: 'écrite',
-        hint: 'Direct object "la lettre" (fem. sing.) precedes the verb via relative pronoun "que".',
-        explanation: 'With avoir, agreement occurs with the preceding COD "que" (la lettre): écrite.',
-      },
-      {
-        id: 'ex-u15-2',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct form: "Mes sœurs sont _____ (arriver) hier."',
-        options: ['arrivées', 'arrivé', 'arrivés', 'arrivée'],
-        correctAnswer: 'arrivées',
-        hint: 'Être auxiliary agrees in gender and number with subject "Mes sœurs" (fem. plural).',
-        explanation: 'Arriver uses Être; feminine plural subject requires "-ées": arrivées.',
-      },
-    ],
   },
 
   // ==========================================
@@ -763,26 +683,6 @@ export const A2_GRAMMAR_LESSONS = [
           '**Si seulement il n’avait pas attrapé un rhume!** - If only he had not caught a cold!'
         ]
       }
-    ],
-    practiceExercises: [
-      {
-        id: 'ex-u16-1',
-        type: 'multiple-choice',
-        prompt: 'Conjugate "faire" in the imparfait for "nous": "À cette époque, nous _____ du ski chaque hiver."',
-        options: ['faisions', 'faisons', 'faisiez', 'avaient fait'],
-        correctAnswer: 'faisions',
-        hint: 'Nous form of present is faisons -> stem is "fais" + ions.',
-        explanation: 'Imparfait of faire for nous: faisions.',
-      },
-      {
-        id: 'ex-u16-2',
-        type: 'multiple-choice',
-        prompt: 'Complete with the plus-que-parfait: "Elle ne pouvait pas payer car elle _____ (perdre) son portefeuille."',
-        options: ['avait perdu', 'a perdu', 'perdra', 'perdait'],
-        correctAnswer: 'avait perdu',
-        hint: 'Action that occurred prior to the past state.',
-        explanation: 'Plus-que-parfait indicates anteriority: avait perdu.',
-      },
     ],
   },
 
@@ -1020,26 +920,6 @@ export const A2_GRAMMAR_LESSONS = [
         ]
       }
     ],
-    practiceExercises: [
-      {
-        id: 'ex-u21-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct preposition: "Mon frère part vivre _____ États-Unis le mois prochain."',
-        options: ['aux', 'en', 'au', 'à les'],
-        correctAnswer: 'aux',
-        hint: 'Plural country name.',
-        explanation: 'Plural countries take the preposition "aux" (à + les): aux États-Unis.',
-      },
-      {
-        id: 'ex-u21-2',
-        type: 'multiple-choice',
-        prompt: 'Complete: "J\'apprends le français _____ six mois et je continue."',
-        options: ['depuis', 'pendant', 'pour', 'dans'],
-        correctAnswer: 'depuis',
-        hint: 'Action began in the past and continues in the present.',
-        explanation: '"Depuis" is used with the present tense for ongoing durations.',
-      },
-    ],
   },
 
   // ==========================================
@@ -1253,26 +1133,6 @@ export const A2_GRAMMAR_LESSONS = [
         ]
       }
     ],
-    practiceExercises: [
-      {
-        id: 'ex-u22-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct form: "_____ (rentrer) chez lui, il a préparé le dîner."',
-        options: ['Après être rentré', 'Après rentrer', 'Avant être rentré', 'En rentré'],
-        correctAnswer: 'Après être rentré',
-        hint: '"Après" requires the past infinitive (auxiliary être + past participle).',
-        explanation: '"Après" takes the past infinitive: "Après être rentré".',
-      },
-      {
-        id: 'ex-u22-2',
-        type: 'multiple-choice',
-        prompt: 'Where does "ne pas" go with an infinitive? "Je préfère (ne pas / parler)."',
-        options: ['ne pas parler', 'ne parler pas', 'pas parler ne', 'parler ne pas'],
-        correctAnswer: 'ne pas parler',
-        hint: '"Ne pas" remains undivided before the infinitive.',
-        explanation: 'Before an infinitive, "ne pas" sits directly together in front: "ne pas parler".',
-      },
-    ],
   },
 
   // ==========================================
@@ -1368,26 +1228,6 @@ export const A2_GRAMMAR_LESSONS = [
           }
         ]
       }
-    ],
-    practiceExercises: [
-      {
-        id: 'ex-u23-1',
-        type: 'multiple-choice',
-        prompt: 'Choose the correct affirmative command for: "Give it to us!" (le livre à nous):',
-        options: ['Donnez-le-nous !', 'Donnez-nous-le !', 'Donnez le à nous !', 'Nous le donnez !'],
-        correctAnswer: 'Donnez-le-nous !',
-        hint: 'In affirmative imperative: Verb + Direct (le) + Indirect (nous).',
-        explanation: 'Affirmative imperative orders direct pronouns (le/la/les) before indirect pronouns: Donnez-le-nous !',
-      },
-      {
-        id: 'ex-u23-2',
-        type: 'sentence-builder',
-        prompt: 'Build the negative command: "Ne lui parle pas de cette histoire !"',
-        words: ['parle', 'cette', 'Ne', 'lui', 'de', 'histoire !', 'pas'],
-        correctAnswer: 'Ne lui parle pas de cette histoire !',
-        hint: 'Ne + pronoun + verb + pas + complement.',
-        explanation: 'In negative commands, the pronoun precedes the verb: Ne lui parle pas...',
-      },
     ],
   },
 
@@ -1671,26 +1511,6 @@ export const A2_GRAMMAR_LESSONS = [
         ]
       }
     ],
-    practiceExercises: [
-      {
-        id: 'ex-u26-1',
-        type: 'multiple-choice',
-        prompt: 'Replace the underlined words: "Marie prête sa voiture à ses amis."',
-        options: ['Marie la leur prête.', 'Marie leur la prête.', 'Marie les lui prête.', 'Marie la lui prête.'],
-        correctAnswer: 'Marie la leur prête.',
-        hint: 'Sa voiture = la (COD) ; à ses amis = leur (COI). Matrix: le/la before lui/leur.',
-        explanation: 'Direct object pronoun "la" precedes indirect pronoun "leur": Marie la leur prête.',
-      },
-      {
-        id: 'ex-u26-2',
-        type: 'sentence-builder',
-        prompt: 'Build the sentence: "Nous y allons en train."',
-        words: ['allons', 'y', 'Nous', 'en', 'train.'],
-        correctAnswer: 'Nous y allons en train.',
-        hint: 'Subject + y + verb + manner.',
-        explanation: 'Pronoun "y" precedes the conjugated verb: Nous y allons en train.',
-      },
-    ],
   },
 
   // ==========================================
@@ -1791,26 +1611,6 @@ export const A2_GRAMMAR_LESSONS = [
             ]
           }
         ],
-      },
-    ],
-    practiceExercises: [
-      {
-        id: 'ex-u29-1',
-        type: 'multiple-choice',
-        prompt: 'What is the correct adverb formed from "patient"?',
-        options: ['patiemment', 'patientement', 'patientamment', 'patiement'],
-        correctAnswer: 'patiemment',
-        hint: 'Adjectives ending in -ent take -emment.',
-        explanation: 'Patient ends in -ent, so the adverb is "patiemment".',
-      },
-      {
-        id: 'ex-u29-2',
-        type: 'multiple-choice',
-        prompt: 'Select the correct word: "Ce gâteau est très _____ (bon/bien) et le chef cuisine _____ (bon/bien)."',
-        options: ['bon / bien', 'bien / bon', 'bon / bon', 'bien / bien'],
-        correctAnswer: 'bon / bien',
-        hint: 'Adjective modifies the noun (gâteau); adverb modifies the verb (cuisine).',
-        explanation: 'Un gâteau est bon (adjective); on cuisine bien (adverb).',
       },
     ],
   },
