@@ -73,60 +73,60 @@ export const ProgressStatsView = ({ progress, activeLevel }) => {
   return (
     <div id="progress-stats-view" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-in fade-in">
       {/* Hero Stats Banner */}
-      <div className="bg-white border border-[#E8E2D9] rounded-3xl p-6 sm:p-8 shadow-sm text-[#34342E]">
+      <div className="bg-white border border-[#E6DCC8] rounded-3xl p-6 sm:p-8 shadow-sm text-[#1B2433]">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-2xl bg-[#F0ECE1] border border-[#5A5A40]/20 flex items-center justify-center text-3xl shadow-xs">
+            <div className="w-16 h-16 rounded-2xl bg-[#F2EBDC] border border-[#1F3A5F]/20 flex items-center justify-center text-3xl shadow-xs">
               🇫🇷
             </div>
             <div>
               <div className="flex items-center space-x-2">
                 <h2 className="text-2xl font-bold font-serif">Your Learning Profile</h2>
-                <span className="bg-[#EEF4EE] text-[#3A5A3A] border border-[#5A7A5A]/30 text-xs font-bold px-2.5 py-0.5 rounded-full">
+                <span className="bg-[#E9F3EE] text-[#245243] border border-[#2F6F57]/30 text-xs font-bold px-2.5 py-0.5 rounded-full">
                   Level {progress.level}
                 </span>
               </div>
-              <p className="text-xs text-[#7A7A6A] mt-0.5">On your path to French fluency</p>
+              <p className="text-xs text-[#5F6B7A] mt-0.5">On your path to French fluency</p>
             </div>
           </div>
 
           {/* Quick Metrics */}
           <div className="grid grid-cols-3 gap-3 w-full md:w-auto">
-            <div className="bg-[#FAF7F2] border border-[#E8E2D9] p-3 rounded-2xl text-center shadow-xs">
-              <Flame className="w-4 h-4 text-[#D98E73] mx-auto fill-[#D98E73]" />
-              <span className="text-lg font-bold text-[#34342E] block mt-0.5 font-serif">{progress.streakDays}</span>
-              <span className="text-[10px] text-[#7A7A6A] font-medium">Day Streak</span>
+            <div className="bg-[#FBF7EE] border border-[#E6DCC8] p-3 rounded-2xl text-center shadow-xs">
+              <Flame className="w-4 h-4 text-[#C23B3B] mx-auto fill-[#C23B3B]" />
+              <span className="text-lg font-bold text-[#1B2433] block mt-0.5 font-serif">{progress.streakDays}</span>
+              <span className="text-[10px] text-[#5F6B7A] font-medium">Day Streak</span>
             </div>
-            <div className="bg-[#FAF7F2] border border-[#E8E2D9] p-3 rounded-2xl text-center shadow-xs">
-              <Sparkles className="w-4 h-4 text-[#5A5A40] mx-auto" />
-              <span className="text-lg font-bold text-[#34342E] block mt-0.5 font-serif">{progress.xp}</span>
-              <span className="text-[10px] text-[#7A7A6A] font-medium">Total XP</span>
+            <div className="bg-[#FBF7EE] border border-[#E6DCC8] p-3 rounded-2xl text-center shadow-xs">
+              <Sparkles className="w-4 h-4 text-[#1F3A5F] mx-auto" />
+              <span className="text-lg font-bold text-[#1B2433] block mt-0.5 font-serif">{progress.xp}</span>
+              <span className="text-[10px] text-[#5F6B7A] font-medium">Total XP</span>
             </div>
-            <div className="bg-[#FAF7F2] border border-[#E8E2D9] p-3 rounded-2xl text-center shadow-xs">
-              <BookOpen className="w-4 h-4 text-[#5A7A5A] mx-auto" />
-              <span className="text-lg font-bold text-[#34342E] block mt-0.5 font-serif">{(progress.completedLessons || []).length}</span>
-              <span className="text-[10px] text-[#7A7A6A] font-medium">Lessons</span>
+            <div className="bg-[#FBF7EE] border border-[#E6DCC8] p-3 rounded-2xl text-center shadow-xs">
+              <BookOpen className="w-4 h-4 text-[#2F6F57] mx-auto" />
+              <span className="text-lg font-bold text-[#1B2433] block mt-0.5 font-serif">{(progress.completedLessons || []).length}</span>
+              <span className="text-[10px] text-[#5F6B7A] font-medium">Lessons</span>
             </div>
           </div>
         </div>
 
         {/* CEFR Progression Track */}
-        <div className="mt-8 pt-6 border-t border-[#E8E2D9] space-y-3">
-          <div className="flex items-center justify-between text-xs font-semibold text-[#525248]">
+        <div className="mt-8 pt-6 border-t border-[#E6DCC8] space-y-3">
+          <div className="flex items-center justify-between text-xs font-semibold text-[#2B4468]">
             <span>Level {progress.level} Progress ({currentBenchmark.name})</span>
-            <span className="font-mono text-[#5A5A40]">{progress.xp} / {currentBenchmark.maxXp} XP</span>
+            <span className="font-mono text-[#1F3A5F]">{progress.xp} / {currentBenchmark.maxXp} XP</span>
           </div>
 
-          <div className="w-full bg-[#FAF7F2] h-3 rounded-full overflow-hidden p-0.5 border border-[#E8E2D9]">
+          <div className="w-full bg-[#FBF7EE] h-3 rounded-full overflow-hidden p-0.5 border border-[#E6DCC8]">
             <div
-              className="bg-[#5A5A40] h-full rounded-full transition-all duration-500"
+              className="bg-[#1F3A5F] h-full rounded-full transition-all duration-500"
               style={{ width: `${levelProgressPercent}%` }}
             />
           </div>
 
-          <div className="grid grid-cols-4 text-center text-[11px] font-medium text-[#7A7A6A] pt-1">
+          <div className="grid grid-cols-4 text-center text-[11px] font-medium text-[#5F6B7A] pt-1">
             {levelBenchmarks.map((b) => (
-              <span key={b.level} className={progress.level === b.level ? 'text-[#5A5A40] font-bold' : 'opacity-60'}>
+              <span key={b.level} className={progress.level === b.level ? 'text-[#1F3A5F] font-bold' : 'opacity-60'}>
                 {b.level}: {b.name}
               </span>
             ))}
@@ -135,11 +135,11 @@ export const ProgressStatsView = ({ progress, activeLevel }) => {
       </div>
 
       {/* Badges & Achievements Grid */}
-      <div className="bg-white border border-[#E8E2D9] rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
+      <div className="bg-white border border-[#E6DCC8] rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Trophy className="w-5 h-5 text-[#D98E73]" />
-            <h3 className="text-lg font-bold text-[#34342E] font-serif">Badges & Achievements ({allBadges.filter(b => b.unlocked).length}/{allBadges.length})</h3>
+            <Trophy className="w-5 h-5 text-[#C23B3B]" />
+            <h3 className="text-lg font-bold text-[#1B2433] font-serif">Badges & Achievements ({allBadges.filter(b => b.unlocked).length}/{allBadges.length})</h3>
           </div>
         </div>
 
@@ -149,19 +149,19 @@ export const ProgressStatsView = ({ progress, activeLevel }) => {
               key={badge.id}
               className={`p-4 rounded-2xl border transition-all flex items-start space-x-3.5 ${
                 badge.unlocked
-                  ? 'bg-[#FAF7F2] border-[#E8E2D9] shadow-xs'
-                  : 'bg-white/50 border-[#E8E2D9]/60 opacity-40 grayscale'
+                  ? 'bg-[#FBF7EE] border-[#E6DCC8] shadow-xs'
+                  : 'bg-white/50 border-[#E6DCC8]/60 opacity-40 grayscale'
               }`}
             >
               <div className="text-3xl flex-shrink-0">{badge.icon}</div>
               <div className="space-y-1">
                 <div className="flex items-center space-x-2">
-                  <h4 className="text-sm font-bold text-[#34342E] font-serif">{badge.name}</h4>
+                  <h4 className="text-sm font-bold text-[#1B2433] font-serif">{badge.name}</h4>
                   {badge.unlocked && (
-                    <CheckCircle2 className="w-4 h-4 text-[#5A7A5A]" />
+                    <CheckCircle2 className="w-4 h-4 text-[#2F6F57]" />
                   )}
                 </div>
-                <p className="text-xs text-[#7A7A6A] leading-relaxed">{badge.description}</p>
+                <p className="text-xs text-[#5F6B7A] leading-relaxed">{badge.description}</p>
               </div>
             </div>
           ))}

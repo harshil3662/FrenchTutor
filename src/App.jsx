@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Pause, Play, X } from 'lucide-react';
+import { LayoutGrid, Pause, Play, X } from 'lucide-react';
 import { Header } from './components/Header.jsx';
 import { Navigation } from './components/Navigation.jsx';
+import { HomeView } from './components/HomeView.jsx';
 import { AnimatedBackground } from './components/AnimatedBackground.jsx';
 import { GrammarLessonsCatalogView } from './components/GrammarLessonsCatalogView.jsx';
 import { GrammarWorkbenchView } from './components/GrammarWorkbenchView.jsx';
@@ -21,7 +22,7 @@ import { resumeFrench } from './utils/audioUtils.js';
 import { getUnlockedLevels } from './utils/progressionUtils.js';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('grammar-lessons');
+  const [activeTab, setActiveTab] = useState('home');
   const [activeLevel, setActiveLevel] = useState('A1');
   const [audioSpeed, setAudioSpeed] = useState(0.9);
   const [progress, setProgress] = useState(loadUserProgress());
@@ -139,7 +140,7 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#F5F5F0] text-[#34342E] flex flex-col font-sans selection:bg-[#5A5A40] selection:text-white">
+    <div className="relative min-h-screen bg-[#F7F2E7] text-[#1B2433] flex flex-col font-sans selection:bg-[#1F3A5F] selection:text-white">
       {/* Animated Moving Background Canvas */}
       <AnimatedBackground isPaused={isModalOpen} />
 
@@ -157,12 +158,22 @@ export default function App() {
             <div className="flex items-stretch gap-2.5 sm:gap-3 pointer-events-auto">
               {/* Main Header Capsule */}
               <div
-                className={`flex-1 min-w-0 flex items-center transition-[border-radius,background-color,border-color,box-shadow] duration-250 ease-out ${
+                className={`relative flex-1 min-w-0 flex items-center transition-[border-radius,background-color,border-color,box-shadow] duration-250 ease-out ${
                   isScrolled
-                    ? 'rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#FAF8F5]/90 via-[#F5F2EB]/85 to-[#FAF8F5]/90 backdrop-blur-md border border-[#DCDCCF]/85 shadow-md shadow-[#34342E]/5 ring-1 ring-[#5A5A40]/10'
-                    : 'w-full bg-gradient-to-r from-[#FAF8F5]/85 via-[#F5F2EB]/80 to-[#FAF8F5]/85 backdrop-blur-md border-b border-[#DCDCCF]/60 shadow-none rounded-none'
+                    ? 'rounded-2xl sm:rounded-3xl bg-transparent border border-transparent shadow-none ring-0'
+                    : 'w-full bg-[#EFE6D2]/90 backdrop-blur-md border-b-2 border-[#1F3A5F] shadow-none rounded-none'
                 }`}
               >
+                {!isScrolled && (
+                  <span
+                    aria-hidden="true"
+                    className="absolute bottom-[-2px] inset-x-0 h-[3px] flex pointer-events-none"
+                  >
+                    <span className="flex-1 bg-[#1F3A5F]" />
+                    <span className="flex-1 bg-[#FBF8F1]" />
+                    <span className="flex-1 bg-[#C8102E]" />
+                  </span>
+                )}
                 <div className="w-full">
                   <Header
                     progress={progress}
@@ -180,51 +191,35 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Menu Button with Three Little Lines - Same Height, Refined, Crisp & Gorgeous */}
+              {/* Scrolled menu toggle: labeled pill that swaps between grid and close icons */}
               <AnimatePresence>
                 {isScrolled && (
                   <motion.button
                     id="header-side-menu-btn"
-                    initial={{ opacity: 0, scale: 0.9, width: 0 }}
-                    animate={{ opacity: 1, scale: 1, width: 'auto' }}
-                    exit={{ opacity: 0, scale: 0.9, width: 0 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
                     transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                     onClick={() => setIsNavMenuOpen((prev) => !prev)}
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.96 }}
-                    className={`self-stretch shrink-0 px-4 sm:px-5 rounded-2xl sm:rounded-3xl flex items-center justify-center transition-colors duration-200 cursor-pointer shadow-md backdrop-blur-md select-none group ${
+                    className={`self-center shrink-0 h-10 pl-1.5 pr-3.5 sm:pr-4 rounded-full flex items-center gap-2 border shadow-md cursor-pointer select-none text-sm font-bold transition-colors duration-200 ${
                       isNavMenuOpen
-                        ? 'bg-[#5A5A40] text-white border border-[#5A5A40] shadow-md shadow-[#5A5A40]/25 ring-2 ring-[#5A5A40]/20'
-                        : 'bg-gradient-to-r from-[#FAF8F5]/95 via-[#F5F2EB]/90 to-[#FAF8F5]/95 text-[#34342E] border border-[#DCDCCF]/85 hover:border-[#5A5A40]/50 hover:bg-white hover:shadow-lg ring-1 ring-[#5A5A40]/10'
+                        ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-[#1F3A5F]/25'
+                        : 'bg-[#FBF8F1]/95 text-[#1F3A5F] border-[#D9CFBA]/85 hover:bg-white hover:border-[#1F3A5F]/50'
                     }`}
-                    title={isNavMenuOpen ? 'Fermer le menu' : 'Menu de navigation'}
+                    title={isNavMenuOpen ? 'Close menu' : 'Open menu'}
                     aria-label={isNavMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
                     aria-expanded={isNavMenuOpen}
                   >
-                    {/* Three Little Lines: Refined, Crisp & Perfectly Balanced */}
-                    <div className="relative w-5 h-4 flex flex-col justify-between items-center pointer-events-none">
-                      <motion.span
-                        animate={isNavMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                        transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                        className={`w-5 h-[2px] rounded-full block transform origin-center transition-colors ${
-                          isNavMenuOpen ? 'bg-white' : 'bg-[#34342E]'
-                        }`}
-                      />
-                      <motion.span
-                        animate={isNavMenuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
-                        transition={{ duration: 0.12 }}
-                        className={`w-3.5 h-[2px] rounded-full block transition-colors ${
-                          isNavMenuOpen ? 'bg-white' : 'bg-[#34342E]'
-                        }`}
-                      />
-                      <motion.span
-                        animate={isNavMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                        transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                        className={`w-5 h-[2px] rounded-full block transform origin-center transition-colors ${
-                          isNavMenuOpen ? 'bg-white' : 'bg-[#34342E]'
-                        }`}
-                      />
-                    </div>
+                    <span
+                      className={`w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-200 ${
+                        isNavMenuOpen ? 'bg-white/20' : 'bg-[#1F3A5F]/10'
+                      }`}
+                    >
+                      {isNavMenuOpen ? <X className="w-3.5 h-3.5" /> : <LayoutGrid className="w-3.5 h-3.5" />}
+                    </span>
+                    <span className="pointer-events-none">{isNavMenuOpen ? 'Close' : 'Menu'}</span>
                   </motion.button>
                 )}
               </AnimatePresence>
@@ -280,6 +275,14 @@ export default function App() {
 
       {/* Main Viewport Content */}
       <main className="relative z-10 flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        {activeTab === 'home' && (
+          <HomeView
+            progress={progress}
+            unlockedLevels={unlockedLevels}
+            onNavigate={setActiveTab}
+          />
+        )}
+
         {activeTab === 'grammar-lessons' && (
           <GrammarLessonsCatalogView
             activeLevel={activeLevel}
@@ -390,7 +393,7 @@ export default function App() {
             transition={{ duration: 0.18 }}
             role="status"
             aria-live="polite"
-            className="fixed bottom-4 right-4 z-[110] flex items-center gap-3 rounded-xl border border-[#DCDCCF] bg-[#34342E] px-4 py-3 text-white shadow-lg"
+            className="fixed bottom-4 right-4 z-[110] flex items-center gap-3 rounded-xl border border-[#D9CFBA] bg-[#1B2433] px-4 py-3 text-white shadow-lg"
           >
             <Pause className="h-4 w-4 text-[#E3C66B]" aria-hidden="true" />
             <span className="text-sm font-medium">Narration paused</span>

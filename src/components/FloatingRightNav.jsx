@@ -31,8 +31,8 @@ export const FloatingRightNav = ({
               whileTap={{ scale: 0.92 }}
               className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full flex flex-col items-center justify-center transition-all duration-300 cursor-pointer shadow-lg backdrop-blur-xl ${
                 isMenuOpen
-                  ? 'bg-[#5A5A40] text-white ring-2 ring-[#5A5A40]/50 shadow-md shadow-[#5A5A40]/30'
-                  : 'bg-gradient-to-br from-[#FAF8F5]/95 to-[#F5F2EB]/90 text-[#34342E] border border-[#DCDCCF]/90 hover:border-[#5A5A40]/50'
+                  ? 'bg-[#1F3A5F] text-white ring-2 ring-[#1F3A5F]/50 shadow-md shadow-[#1F3A5F]/30'
+                  : 'bg-gradient-to-br from-[#FBF8F1]/95 to-[#F6F1E5]/90 text-[#1B2433] border border-[#D9CFBA]/90 hover:border-[#1F3A5F]/50'
               }`}
               title={isMenuOpen ? 'Close Menu' : 'Open Navigation Menu'}
               aria-label={isMenuOpen ? 'Close Menu' : 'Open Navigation Menu'}
@@ -44,21 +44,21 @@ export const FloatingRightNav = ({
                   animate={isMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
                   transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                   className={`w-4.5 h-[2px] rounded-full block transform origin-center transition-colors ${
-                    isMenuOpen ? 'bg-white' : 'bg-[#34342E]'
+                    isMenuOpen ? 'bg-white' : 'bg-[#1B2433]'
                   }`}
                 />
                 <motion.span
                   animate={isMenuOpen ? { opacity: 0, scale: 0.2 } : { opacity: 1, scale: 1 }}
                   transition={{ duration: 0.15 }}
                   className={`w-4.5 h-[2px] rounded-full block transition-colors ${
-                    isMenuOpen ? 'bg-white' : 'bg-[#34342E]'
+                    isMenuOpen ? 'bg-white' : 'bg-[#1B2433]'
                   }`}
                 />
                 <motion.span
                   animate={isMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
                   transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                   className={`w-4.5 h-[2px] rounded-full block transform origin-center transition-colors ${
-                    isMenuOpen ? 'bg-white' : 'bg-[#34342E]'
+                    isMenuOpen ? 'bg-white' : 'bg-[#1B2433]'
                   }`}
                 />
               </div>
@@ -80,7 +80,7 @@ export const FloatingRightNav = ({
               onClick={scrollToTop}
               whileHover={{ scale: 1.12 }}
               whileTap={{ scale: 0.92 }}
-              className="w-9 h-9 rounded-full bg-white/80 hover:bg-[#5A5A40] text-[#5A5A40] hover:text-white flex items-center justify-center transition-all duration-200 cursor-pointer border border-[#DCDCCF]/90 shadow-md backdrop-blur-md"
+              className="w-9 h-9 rounded-full bg-white/80 hover:bg-[#1F3A5F] text-[#1F3A5F] hover:text-white flex items-center justify-center transition-all duration-200 cursor-pointer border border-[#D9CFBA]/90 shadow-md backdrop-blur-md"
               title="Scroll to Top"
               aria-label="Scroll to Top"
             >

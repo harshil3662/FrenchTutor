@@ -24,18 +24,18 @@ export const AnimatedBackground = ({ isPaused = false }) => {
   // French grammatical & typographical diacritics drifting serenely through the atelier
   const typographicGlyphs = useMemo(
     () => [
-      { id: 1, text: 'é', xStart: 8, delay: 0, duration: 26, size: 'text-4xl', color: 'text-[#5A5A40]/16' },
-      { id: 2, text: '« »', xStart: 24, delay: 3, duration: 32, size: 'text-3xl', color: 'text-[#3E3E2C]/14' },
-      { id: 3, text: 'ê', xStart: 42, delay: 6, duration: 28, size: 'text-5xl', color: 'text-[#5A5A40]/15' },
-      { id: 4, text: 'ç', xStart: 58, delay: 2, duration: 30, size: 'text-4xl', color: 'text-[#9C4B2E]/14' },
-      { id: 5, text: 'œ', xStart: 72, delay: 5, duration: 34, size: 'text-4xl', color: 'text-[#5A5A40]/18' },
-      { id: 6, text: 'à', xStart: 86, delay: 1, duration: 27, size: 'text-3xl', color: 'text-[#3E3E2C]/15' },
-      { id: 7, text: 'è', xStart: 16, delay: 9, duration: 31, size: 'text-4xl', color: 'text-[#5A5A40]/14' },
-      { id: 8, text: 'î', xStart: 34, delay: 11, duration: 29, size: 'text-3xl', color: 'text-[#9C4B2E]/12' },
-      { id: 9, text: 'ô', xStart: 66, delay: 7, duration: 33, size: 'text-4xl', color: 'text-[#5A5A40]/16' },
-      { id: 10, text: '—', xStart: 80, delay: 4, duration: 35, size: 'text-2xl', color: 'text-[#3E3E2C]/14' },
-      { id: 11, text: 'ù', xStart: 50, delay: 8, duration: 28, size: 'text-3xl', color: 'text-[#5A5A40]/15' },
-      { id: 12, text: 'ë', xStart: 92, delay: 12, duration: 30, size: 'text-4xl', color: 'text-[#5A5A40]/14' },
+      { id: 1, text: 'é', xStart: 8, delay: 0, duration: 26, size: 'text-4xl', color: 'text-[#1F3A5F]/16' },
+      { id: 2, text: '« »', xStart: 24, delay: 3, duration: 32, size: 'text-3xl', color: 'text-[#152A47]/14' },
+      { id: 3, text: 'ê', xStart: 42, delay: 6, duration: 28, size: 'text-5xl', color: 'text-[#1F3A5F]/15' },
+      { id: 4, text: 'ç', xStart: 58, delay: 2, duration: 30, size: 'text-4xl', color: 'text-[#8A2430]/14' },
+      { id: 5, text: 'œ', xStart: 72, delay: 5, duration: 34, size: 'text-4xl', color: 'text-[#1F3A5F]/18' },
+      { id: 6, text: 'à', xStart: 86, delay: 1, duration: 27, size: 'text-3xl', color: 'text-[#152A47]/15' },
+      { id: 7, text: 'è', xStart: 16, delay: 9, duration: 31, size: 'text-4xl', color: 'text-[#1F3A5F]/14' },
+      { id: 8, text: 'î', xStart: 34, delay: 11, duration: 29, size: 'text-3xl', color: 'text-[#8A2430]/12' },
+      { id: 9, text: 'ô', xStart: 66, delay: 7, duration: 33, size: 'text-4xl', color: 'text-[#1F3A5F]/16' },
+      { id: 10, text: '—', xStart: 80, delay: 4, duration: 35, size: 'text-2xl', color: 'text-[#152A47]/14' },
+      { id: 11, text: 'ù', xStart: 50, delay: 8, duration: 28, size: 'text-3xl', color: 'text-[#1F3A5F]/15' },
+      { id: 12, text: 'ë', xStart: 92, delay: 12, duration: 30, size: 'text-4xl', color: 'text-[#1F3A5F]/14' },
     ],
     []
   );
@@ -71,7 +71,7 @@ export const AnimatedBackground = ({ isPaused = false }) => {
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden transform-gpu will-change-transform select-none"
       style={{ isolation: 'isolate', contain: 'strict', transform: 'translateZ(0)' }}
     >
-      {/* 1. Atelier Ambient Light Pools — perfectly harmonized with #F5F5F0 base palette */}
+      {/* 1. Atelier Ambient Light Pools — perfectly harmonized with #F7F2E7 base palette */}
       {/* Warm Ivory & Parchment Light Pool (Top Left) */}
       <motion.div
         animate={
@@ -169,7 +169,7 @@ export const AnimatedBackground = ({ isPaused = false }) => {
         className="absolute inset-0 opacity-[0.035]"
         style={{
           backgroundImage: `
-            radial-gradient(#5A5A40 1px, transparent 1px)
+            radial-gradient(#1F3A5F 1px, transparent 1px)
           `,
           backgroundSize: '36px 36px',
         }}
@@ -196,11 +196,11 @@ export const AnimatedBackground = ({ isPaused = false }) => {
                     ease: 'linear',
                   }
             }
-            className={`absolute rounded-full border border-dashed border-[#5A5A40]/[0.07] ${ring.size}`}
+            className={`absolute rounded-full border border-dashed border-[#1F3A5F]/[0.07] ${ring.size}`}
             style={{ left: ring.left, top: ring.top }}
           >
             {/* Inner concentric fine ring */}
-            <div className="absolute inset-4 rounded-full border border-[#5A5A40]/[0.04]" />
+            <div className="absolute inset-4 rounded-full border border-[#1F3A5F]/[0.04]" />
           </motion.div>
         ))}
       </div>
@@ -269,7 +269,7 @@ export const AnimatedBackground = ({ isPaused = false }) => {
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              className={`absolute rounded-full bg-gradient-to-br from-[#D98E73]/40 to-[#5A5A40]/30 blur-[0.5px] ${mote.size}`}
+              className={`absolute rounded-full bg-gradient-to-br from-[#C23B3B]/40 to-[#1F3A5F]/30 blur-[0.5px] ${mote.size}`}
               style={{ left: mote.left, top: mote.top }}
             />
           ))}

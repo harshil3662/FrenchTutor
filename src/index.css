@@ -8,8 +8,8 @@
 
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    background-color: #F5F5F0;
-    color: #34342E;
+    background-color: #F7F2E7;
+    color: #1B2433;
     line-height: 1.65;
     letter-spacing: -0.01em;
   }
@@ -25,14 +25,14 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F5F5F0;
+  background: #F7F2E7;
 }
 ::-webkit-scrollbar-thumb {
-  background: #DCDCCF;
+  background: #D9CFBA;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #B8B8A8;
+  background: #B9AD92;
 }
 
 .no-scrollbar::-webkit-scrollbar {

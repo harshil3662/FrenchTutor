@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { BookOpen, Cpu, Stethoscope, Layers, BookCheck, MessageSquare, Trophy } from 'lucide-react';
+import { House, BookOpen, Cpu, Stethoscope, Layers, BookCheck, MessageSquare, Trophy } from 'lucide-react';
 
 export const NAV_TABS = [
+  { id: 'home', label: 'Home', icon: House, tag: 'Start Here' },
   { id: 'grammar-lessons', label: 'Grammar Lessons', icon: BookOpen, tag: '8 Aspects' },
   { id: 'workbench', label: 'Workbench', icon: Cpu, tag: 'Transformer' },
   { id: 'grammar-doctor', label: 'Grammar Doctor', icon: Stethoscope, tag: 'Diagnostics' },
@@ -110,7 +111,7 @@ export const Navigation = ({
             {/* Segmented Glass Dock Track with Horizontal Scroll */}
             <div
               ref={scrollContainerRef}
-              className="relative p-1.5 bg-white/70 backdrop-blur-md rounded-2xl border border-[#DCDCCF]/80 shadow-xs flex items-center overflow-x-auto no-scrollbar"
+              className="relative p-1 bg-white/70 backdrop-blur-md rounded-full border border-[#D9CFBA]/80 shadow-xs flex items-center overflow-x-auto no-scrollbar"
             >
               <div className="flex space-x-1 sm:space-x-1.5 min-w-max mx-auto px-1">
                 {NAV_TABS.map((tab) => {
@@ -123,17 +124,17 @@ export const Navigation = ({
                       id={`nav-tab-${tab.id}`}
                       data-tab-id={tab.id}
                       onClick={() => handleTabClick(tab.id)}
-                      className={`relative flex items-center space-x-2 px-3.5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-colors duration-300 cursor-pointer whitespace-nowrap z-10 group select-none ${
+                      className={`relative flex items-center space-x-2 px-3.5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-colors duration-300 cursor-pointer whitespace-nowrap z-10 group select-none ${
                         isActive
                           ? 'text-white'
-                          : 'text-[#6A6A5A] hover:text-[#2A2A22] hover:bg-white/60'
+                          : 'text-[#5F6B7A] hover:text-[#1B2433] hover:bg-white/60'
                       }`}
                     >
                       {/* Active Smooth Relaxed Sliding Background Pill */}
                       {isActive && (
                         <motion.div
                           layoutId="active-nav-pill"
-                          className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#4A663F] via-[#525E3E] to-[#5A5A40] shadow-md shadow-[#4A663F]/25 -z-10"
+                          className="absolute inset-0 rounded-full bg-gradient-to-r from-[#2B4468] via-[#223F66] to-[#1F3A5F] shadow-md shadow-[#2B4468]/25 -z-10"
                           transition={{
                             type: 'spring',
                             stiffness: 150,
@@ -148,7 +149,7 @@ export const Navigation = ({
                         className={`w-4 h-4 transition-transform duration-300 shrink-0 ${
                           isActive
                             ? 'text-white scale-110 drop-shadow-xs'
-                            : 'text-[#7A7A6A] group-hover:text-[#34342E] group-hover:scale-105'
+                            : 'text-[#5F6B7A] group-hover:text-[#1B2433] group-hover:scale-105'
                         }`}
                       />
 
@@ -161,7 +162,7 @@ export const Navigation = ({
                           className={`text-[10px] font-bold px-2 py-0.5 rounded-full transition-colors duration-300 shrink-0 ${
                             isActive
                               ? 'bg-white/20 text-white/95 shadow-2xs border border-white/20'
-                              : 'bg-[#5A5A40]/10 text-[#5A5A40] border border-[#5A5A40]/15 group-hover:bg-[#5A5A40]/15'
+                              : 'bg-[#1F3A5F]/10 text-[#1F3A5F] border border-[#1F3A5F]/15 group-hover:bg-[#1F3A5F]/15'
                           }`}
                         >
                           {tab.tag}
@@ -184,9 +185,9 @@ export const Navigation = ({
           animate={{ height: 'auto', opacity: 1, y: 0 }}
           exit={{ height: 0, opacity: 0, y: -10 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#FAF8F5]/95 via-[#F5F2EB]/90 to-[#FAF8F5]/95 backdrop-blur-xl border border-[#DCDCCF]/85 shadow-xl shadow-[#34342E]/8 px-3 sm:px-6 py-3.5"
+          className="overflow-hidden rounded-3xl bg-[#FBF8F1]/60 backdrop-blur-md border border-[#D9CFBA]/80 shadow-lg shadow-[#1B2433]/5 px-3 sm:px-5 py-3.5"
         >
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2">
             {NAV_TABS.map((tab, idx) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -203,15 +204,15 @@ export const Navigation = ({
                   whileTap={{ scale: 0.96 }}
                   className={`p-3 rounded-2xl border flex flex-col items-center justify-center text-center gap-1.5 transition-all cursor-pointer select-none group shadow-xs ${
                     isActive
-                      ? 'bg-gradient-to-br from-[#4A663F] via-[#525E3E] to-[#5A5A40] text-white border-[#4A663F] shadow-md shadow-[#4A663F]/25 ring-1 ring-white/20'
-                      : 'bg-white/70 hover:bg-white text-[#34342E] border-[#DCDCCF]/80 hover:border-[#5A5A40]/40'
+                      ? 'bg-gradient-to-br from-[#2B4468]/90 via-[#223F66]/90 to-[#1F3A5F]/90 text-white border-[#2B4468]/80 shadow-md shadow-[#2B4468]/25'
+                      : 'bg-white/45 hover:bg-white/70 text-[#1B2433] border-[#D9CFBA]/70 hover:border-[#1F3A5F]/40'
                   }`}
                 >
                   <div
-                    className={`w-8 h-8 rounded-xl flex items-center justify-center transition-colors ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
                       isActive
                         ? 'bg-white/20 text-white'
-                        : 'bg-[#5A5A40]/10 text-[#5A5A40] group-hover:bg-[#5A5A40]/15'
+                        : 'bg-[#1F3A5F]/10 text-[#1F3A5F] group-hover:bg-[#1F3A5F]/15'
                     }`}
                   >
                     <Icon className="w-4 h-4" />
@@ -225,7 +226,7 @@ export const Navigation = ({
                         className={`inline-block mt-1 text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                           isActive
                             ? 'bg-white/20 text-white/95'
-                            : 'bg-[#5A5A40]/10 text-[#5A5A40]'
+                            : 'bg-[#1F3A5F]/10 text-[#1F3A5F]'
                         }`}
                       >
                         {tab.tag}

@@ -251,20 +251,20 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
   };
 
   const modalContent = (
-    <div id="ai-quiz-modal-overlay" className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-[#34342E]/70 backdrop-blur-sm animate-in fade-in overscroll-contain">
-      <div className="bg-white border border-[#E8E2D9] rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl flex flex-col text-[#34342E]">
+    <div id="ai-quiz-modal-overlay" className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-[#1B2433]/70 backdrop-blur-sm animate-in fade-in overscroll-contain">
+      <div className="bg-white border border-[#E6DCC8] rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl flex flex-col text-[#1B2433]">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8E2D9] bg-[#FAF7F2] shrink-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E6DCC8] bg-[#FBF7EE] shrink-0">
           <div className="flex items-center space-x-2.5">
-            <BrainCircuit className="w-5 h-5 text-[#5A5A40]" />
-            <h3 className="font-bold text-[#34342E] text-base font-serif">
+            <BrainCircuit className="w-5 h-5 text-[#1F3A5F]" />
+            <h3 className="font-bold text-[#1B2433] text-base font-serif">
               {isLoading ? 'Generating Quiz...' : quizTitle}
             </h3>
           </div>
           <button
             onClick={onClose}
             aria-label="Close quiz modal"
-            className="p-1.5 text-[#7A7A6A] hover:text-[#34342E] hover:bg-[#F0ECE1] rounded-xl cursor-pointer shrink-0"
+            className="p-1.5 text-[#5F6B7A] hover:text-[#1B2433] hover:bg-[#F2EBDC] rounded-xl cursor-pointer shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
@@ -274,8 +274,8 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
         <div className="p-6 space-y-6 overflow-y-auto overscroll-contain flex-1">
           {isLoading ? (
             <div className="text-center py-12 space-y-4">
-              <div className="w-12 h-12 border-4 border-[#5A5A40] border-t-transparent rounded-full animate-spin mx-auto" />
-              <p className="text-sm text-[#525248] font-medium">
+              <div className="w-12 h-12 border-4 border-[#1F3A5F] border-t-transparent rounded-full animate-spin mx-auto" />
+              <p className="text-sm text-[#2B4468] font-medium">
                 Generating tailored questions for your {level} level...
               </p>
             </div>
@@ -283,19 +283,19 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
             <div className="text-center py-8 space-y-6 animate-in zoom-in-95">
               <div className="text-5xl">🏆</div>
               <div className="space-y-1">
-                <h4 className="text-2xl font-bold text-[#34342E] font-serif">Quiz Completed!</h4>
-                <p className="text-sm text-[#7A7A6A]">
-                  Your score: <strong className="text-[#5A7A5A] font-serif">{score} / {questions.length}</strong>
+                <h4 className="text-2xl font-bold text-[#1B2433] font-serif">Quiz Completed!</h4>
+                <p className="text-sm text-[#5F6B7A]">
+                  Your score: <strong className="text-[#2F6F57] font-serif">{score} / {questions.length}</strong>
                 </p>
               </div>
 
-              <div className="p-4 bg-[#FAF7F2] rounded-2xl border border-[#E8E2D9] max-w-xs mx-auto text-xs text-[#5A5A40] font-bold">
+              <div className="p-4 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] max-w-xs mx-auto text-xs text-[#1F3A5F] font-bold">
                 +{score * 15 + 20} XP added to your profile!
               </div>
 
               <button
                 onClick={onClose}
-                className="px-6 py-3 bg-[#5A5A40] hover:bg-[#4A4A35] text-white font-bold text-xs rounded-xl shadow-sm cursor-pointer"
+                className="px-6 py-3 bg-[#1F3A5F] hover:bg-[#223F66] text-white font-bold text-xs rounded-xl shadow-sm cursor-pointer"
               >
                 Close & Continue
               </button>
@@ -305,7 +305,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
               <p className="text-sm text-[#7A4A3A]">This quiz question could not be displayed.</p>
               <button
                 onClick={() => setReloadToken((value) => value + 1)}
-                className="px-5 py-2.5 bg-[#5A5A40] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 mx-auto cursor-pointer"
+                className="px-5 py-2.5 bg-[#1F3A5F] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 mx-auto cursor-pointer"
               >
                 <RotateCcw className="w-4 h-4" />
                 <span>Reload Quiz</span>
@@ -314,15 +314,15 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
           ) : (
             <div className="space-y-6">
               {/* Progress */}
-              <div className="flex items-center justify-between text-xs text-[#7A7A6A]">
+              <div className="flex items-center justify-between text-xs text-[#5F6B7A]">
                 <span>Question {currentIndex + 1} of {questions.length}</span>
-                <span className="text-[#5A5A40] font-bold">Score: {score}</span>
+                <span className="text-[#1F3A5F] font-bold">Score: {score}</span>
               </div>
 
-              <div className="p-5 bg-[#FAF7F2] rounded-2xl border border-[#E8E2D9] space-y-3">
+              <div className="p-5 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] uppercase font-bold tracking-wider text-[#5A5A40] bg-[#F0ECE1] px-2.5 py-0.5 rounded-md border border-[#5A5A40]/15">
+                    <span className="text-[11px] uppercase font-bold tracking-wider text-[#1F3A5F] bg-[#F2EBDC] px-2.5 py-0.5 rounded-md border border-[#1F3A5F]/15">
                       Question {currentIndex + 1}
                     </span>
                     {isQuestionTranslated && (
@@ -339,8 +339,8 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                       disabled={isTranslating}
                       className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer border ${
                         isQuestionTranslated
-                          ? 'bg-[#5A5A40] text-white border-[#5A5A40] shadow-2xs'
-                          : 'bg-white hover:bg-[#FAF7F2] text-[#5A5A40] border-[#DCDCCF]'
+                          ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-2xs'
+                          : 'bg-white hover:bg-[#FBF7EE] text-[#1F3A5F] border-[#D9CFBA]'
                       }`}
                       title={isQuestionTranslated ? 'Translate back to French' : 'Translate question into English'}
                       aria-label={isQuestionTranslated ? 'Translate back to French' : 'Translate question into English'}
@@ -353,7 +353,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
 
                     <button
                       onClick={() => speakFrench(currentQ.prompt)}
-                      className="p-1.5 text-[#7A7A6A] hover:text-[#34342E] rounded-lg transition-colors cursor-pointer"
+                      className="p-1.5 text-[#5F6B7A] hover:text-[#1B2433] rounded-lg transition-colors cursor-pointer"
                       title="Listen to French prompt"
                     >
                       <Volume2 className="w-4 h-4" />
@@ -361,7 +361,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                   </div>
                 </div>
 
-                <h4 className="text-base sm:text-lg font-bold text-[#34342E] leading-snug font-serif">
+                <h4 className="text-base sm:text-lg font-bold text-[#1B2433] leading-snug font-serif">
                   {isQuestionTranslated
                     ? (currentQ.promptEnglish || translationMap[currentQ.prompt] || currentQ.prompt)
                     : currentQ.prompt}
@@ -372,16 +372,16 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {currentQ.options.map((opt, idx) => {
                     const isSelected = selectedOption === opt;
-                    let style = 'bg-white border-[#DCDCCF] text-[#34342E] hover:bg-[#FAF7F2]';
+                    let style = 'bg-white border-[#D9CFBA] text-[#1B2433] hover:bg-[#FBF7EE]';
 
                     if (hasChecked) {
                       if (opt === currentQ.correctAnswer) {
-                        style = 'bg-[#EEF4EE] border-[#5A7A5A] text-[#3A5A3A] font-bold';
+                        style = 'bg-[#E9F3EE] border-[#2F6F57] text-[#245243] font-bold';
                       } else if (isSelected && opt !== currentQ.correctAnswer) {
-                        style = 'bg-[#FAF3EE] border-[#C05C54] text-[#C05C54] font-bold';
+                        style = 'bg-[#FCF0EE] border-[#B3262F] text-[#B3262F] font-bold';
                       }
                     } else if (isSelected) {
-                      style = 'bg-[#F0ECE1] border-[#5A5A40] text-[#34342E] font-semibold shadow-xs';
+                      style = 'bg-[#F2EBDC] border-[#1F3A5F] text-[#1B2433] font-semibold shadow-xs';
                     }
 
                     return (
@@ -398,7 +398,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                 </div>
               ) : (
                 <div className="space-y-2.5">
-                  <label className="text-[11px] font-bold uppercase tracking-wider text-[#7A7A6A]">
+                  <label className="text-[11px] font-bold uppercase tracking-wider text-[#5F6B7A]">
                     {currentQ.type === 'translate-english-to-french'
                       ? 'Your French translation'
                       : currentQ.type === 'fill-in-the-blank'
@@ -415,15 +415,15 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                         ? 'Écrivez la traduction en français...'
                         : 'Répondez en français...'
                     }
-                    className="w-full rounded-xl border border-[#DCDCCF] bg-white px-3.5 py-3 text-xs text-[#34342E] shadow-2xs outline-none focus:border-[#5A5A40] focus:ring-2 focus:ring-[#5A5A40]/10 resize-none disabled:opacity-60"
+                    className="w-full rounded-xl border border-[#D9CFBA] bg-white px-3.5 py-3 text-xs text-[#1B2433] shadow-2xs outline-none focus:border-[#1F3A5F] focus:ring-2 focus:ring-[#1F3A5F]/10 resize-none disabled:opacity-60"
                   />
                 </div>
               )}
 
               {/* Explanation */}
               {hasChecked && (
-                <div className="p-4 bg-[#FAF7F2] rounded-xl border border-[#E8E2D9] text-xs text-[#525248] animate-in fade-in">
-                  <strong className="text-[#5A5A40] block mb-0.5 font-serif">Explanation:</strong>
+                <div className="p-4 bg-[#FBF7EE] rounded-xl border border-[#E6DCC8] text-xs text-[#2B4468] animate-in fade-in">
+                  <strong className="text-[#1F3A5F] block mb-0.5 font-serif">Explanation:</strong>
                   {currentQ.explanation}
                 </div>
               )}
@@ -434,14 +434,14 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                   <button
                     disabled={!selectedOption}
                     onClick={handleCheck}
-                    className="w-full py-3 bg-[#5A5A40] hover:bg-[#4A4A35] disabled:opacity-40 text-white font-bold text-xs rounded-xl shadow-xs transition-all cursor-pointer"
+                    className="w-full py-3 bg-[#1F3A5F] hover:bg-[#223F66] disabled:opacity-40 text-white font-bold text-xs rounded-xl shadow-xs transition-all cursor-pointer"
                   >
                     Check Answer
                   </button>
                 ) : (
                   <button
                     onClick={handleNext}
-                    className="w-full py-3 bg-[#5A5A40] hover:bg-[#4A4A35] text-white font-bold text-xs rounded-xl shadow-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
+                    className="w-full py-3 bg-[#1F3A5F] hover:bg-[#223F66] text-white font-bold text-xs rounded-xl shadow-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
                   >
                     <span>Continue</span>
                     <ArrowRight className="w-4 h-4" />

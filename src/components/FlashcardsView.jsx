@@ -320,30 +320,30 @@ export const FlashcardsView = ({
   return (
     <div id="flashcards-view" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-in fade-in">
       {/* Header & Stats Banner */}
-      <div className="bg-white border border-[#E8E2D9] rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
+      <div className="bg-white border border-[#E6DCC8] rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
         <div className="space-y-2">
-          <div className="inline-flex items-center space-x-2 bg-[#F0ECE1] border border-[#5A5A40]/20 text-[#5A5A40] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5 text-[#5A5A40]" />
+          <div className="inline-flex items-center space-x-2 bg-[#F2EBDC] border border-[#1F3A5F]/20 text-[#1F3A5F] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+            <Sparkles className="w-3.5 h-3.5 text-[#1F3A5F]" />
             <span>Atelier Lexical & Vocabulaire IA</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#34342E] font-serif">French Vocabulary Studio</h2>
-          <p className="text-sm text-[#525248] max-w-xl leading-relaxed">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#1B2433] font-serif">French Vocabulary Studio</h2>
+          <p className="text-sm text-[#2B4468] max-w-xl leading-relaxed">
             Expand your French lexicon with AI-generated daily vocabulary across diverse cultural domains, reinforced by spaced repetition (SRS).
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <div className="bg-[#FAF7F2] px-4 py-3 rounded-2xl border border-[#E8E2D9] text-center shadow-xs">
-            <span className="text-xs text-[#7A7A6A] block font-medium">Deck Size</span>
-            <span className="text-lg font-bold text-[#34342E] font-serif">{cards.length} words</span>
+          <div className="bg-[#FBF7EE] px-4 py-3 rounded-2xl border border-[#E6DCC8] text-center shadow-xs">
+            <span className="text-xs text-[#5F6B7A] block font-medium">Deck Size</span>
+            <span className="text-lg font-bold text-[#1B2433] font-serif">{cards.length} words</span>
           </div>
-          <div className="bg-[#FAF7F2] px-4 py-3 rounded-2xl border border-[#E8E2D9] text-center shadow-xs">
-            <span className="text-xs text-[#7A7A6A] block font-medium">Mastered</span>
-            <span className="text-lg font-bold text-[#5A5A40] font-serif">{progress.masteredCards.length} cards</span>
+          <div className="bg-[#FBF7EE] px-4 py-3 rounded-2xl border border-[#E6DCC8] text-center shadow-xs">
+            <span className="text-xs text-[#5F6B7A] block font-medium">Mastered</span>
+            <span className="text-lg font-bold text-[#1F3A5F] font-serif">{progress.masteredCards.length} cards</span>
           </div>
           <button
             onClick={() => setIsAddingCard(true)}
-            className="flex items-center gap-2 px-4 py-3 bg-[#5A5A40] hover:bg-[#4A4A35] text-white rounded-2xl font-bold text-xs shadow-sm transition-all cursor-pointer"
+            className="flex items-center gap-2 px-4 py-3 bg-[#1F3A5F] hover:bg-[#223F66] text-white rounded-2xl font-bold text-xs shadow-sm transition-all cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>Add Custom Card</span>
@@ -352,9 +352,9 @@ export const FlashcardsView = ({
       </div>
 
       {/* Mode Switcher Tabs */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-b border-[#DCDCCF] pb-4">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-b border-[#D9CFBA] pb-4">
         {/* Main View Mode Selector */}
-        <div className="flex flex-wrap gap-2 p-1.5 bg-white/70 backdrop-blur-sm rounded-2xl border border-[#DCDCCF] shadow-xs">
+        <div className="flex flex-wrap gap-2 p-1.5 bg-white/70 backdrop-blur-sm rounded-2xl border border-[#D9CFBA] shadow-xs">
           <button
             onClick={() => {
               setViewMode('daily-ai');
@@ -362,8 +362,8 @@ export const FlashcardsView = ({
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               viewMode === 'daily-ai'
-                ? 'bg-[#5A5A40] text-white shadow-xs'
-                : 'text-[#6A6A5A] hover:text-[#34342E] hover:bg-white'
+                ? 'bg-[#1F3A5F] text-white shadow-xs'
+                : 'text-[#6A6A5A] hover:text-[#1B2433] hover:bg-white'
             }`}
           >
             <Sparkles className="w-3.5 h-3.5" />
@@ -380,8 +380,8 @@ export const FlashcardsView = ({
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               viewMode === 'srs' && !srsDeck
-                ? 'bg-[#5A5A40] text-white shadow-xs'
-                : 'text-[#6A6A5A] hover:text-[#34342E] hover:bg-white'
+                ? 'bg-[#1F3A5F] text-white shadow-xs'
+                : 'text-[#6A6A5A] hover:text-[#1B2433] hover:bg-white'
             }`}
           >
             <Layers className="w-3.5 h-3.5" />
@@ -395,8 +395,8 @@ export const FlashcardsView = ({
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               viewMode === 'grid'
-                ? 'bg-[#5A5A40] text-white shadow-xs'
-                : 'text-[#6A6A5A] hover:text-[#34342E] hover:bg-white'
+                ? 'bg-[#1F3A5F] text-white shadow-xs'
+                : 'text-[#6A6A5A] hover:text-[#1B2433] hover:bg-white'
             }`}
           >
             <BookOpen className="w-3.5 h-3.5" />
@@ -407,13 +407,13 @@ export const FlashcardsView = ({
         {/* Search Input for Deck Modes */}
         {viewMode !== 'daily-ai' && (
           <div className="relative flex-1 max-w-xs">
-            <Search className="w-4 h-4 text-[#7A7A6A] absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#5F6B7A] absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search word (FR or EN)..."
-              className="w-full bg-white border border-[#DCDCCF] rounded-xl pl-10 pr-4 py-2 text-xs text-[#34342E] placeholder-[#7A7A6A] focus:outline-none focus:border-[#5A5A40] shadow-xs"
+              className="w-full bg-white border border-[#D9CFBA] rounded-xl pl-10 pr-4 py-2 text-xs text-[#1B2433] placeholder-[#5F6B7A] focus:outline-none focus:border-[#1F3A5F] shadow-xs"
             />
           </div>
         )}
@@ -425,22 +425,22 @@ export const FlashcardsView = ({
       {viewMode === 'daily-ai' && (
         <div className="space-y-8 animate-in fade-in duration-300">
           {/* Daily Date & Domain Control Deck */}
-          <div className="bg-gradient-to-br from-white via-[#FAF8F5] to-[#F5F2EB] border border-[#E8E2D9] rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
+          <div className="bg-gradient-to-br from-white via-[#FBF8F1] to-[#F6F1E5] border border-[#E6DCC8] rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
             {/* Top Bar: Today's date + Level + Quick Regenerate */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E8E2D9] pb-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E6DCC8] pb-5">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-[#5A5A40] text-white flex items-center justify-center shadow-xs">
+                <div className="w-10 h-10 rounded-2xl bg-[#1F3A5F] text-white flex items-center justify-center shadow-xs">
                   <Calendar className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#5A5A40]">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#1F3A5F]">
                       Vocabulaire du Jour
                     </span>
-                    <span className="text-xs text-[#7A7A6A]">·</span>
-                    <span className="text-xs font-medium text-[#7A7A6A]">{formattedTodayDate}</span>
+                    <span className="text-xs text-[#5F6B7A]">·</span>
+                    <span className="text-xs font-medium text-[#5F6B7A]">{formattedTodayDate}</span>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#34342E] font-serif capitalize">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#1B2433] font-serif capitalize">
                     {dailyData?.areaTitle || selectedArea}
                   </h3>
                 </div>
@@ -448,7 +448,7 @@ export const FlashcardsView = ({
 
               {/* CEFR Level Selector & Refresh Button */}
               <div className="flex items-center gap-2.5">
-                <div className="flex items-center bg-white p-1 rounded-xl border border-[#DCDCCF] shadow-xs">
+                <div className="flex items-center bg-white p-1 rounded-xl border border-[#D9CFBA] shadow-xs">
                   {['A1', 'A2', 'B1', 'B2'].map((lvl) => (
                     <button
                       key={lvl}
@@ -458,8 +458,8 @@ export const FlashcardsView = ({
                       }}
                       className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer ${
                         dailyLevel === lvl
-                          ? 'bg-[#5A5A40] text-white shadow-2xs'
-                          : 'text-[#7A7A6A] hover:text-[#34342E]'
+                          ? 'bg-[#1F3A5F] text-white shadow-2xs'
+                          : 'text-[#5F6B7A] hover:text-[#1B2433]'
                       }`}
                     >
                       {lvl}
@@ -470,10 +470,10 @@ export const FlashcardsView = ({
                 <button
                   onClick={() => fetchDailyVocabulary(selectedArea, dailyLevel, true)}
                   disabled={isLoadingDaily}
-                  className="flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-[#F5F2EB] text-[#34342E] border border-[#DCDCCF] rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer disabled:opacity-60"
+                  className="flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-[#F6F1E5] text-[#1B2433] border border-[#D9CFBA] rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer disabled:opacity-60"
                   title="Generate a fresh daily vocabulary set for this area"
                 >
-                  <RefreshCw className={`w-3.5 h-3.5 text-[#5A5A40] ${isLoadingDaily ? 'animate-spin' : ''}`} />
+                  <RefreshCw className={`w-3.5 h-3.5 text-[#1F3A5F] ${isLoadingDaily ? 'animate-spin' : ''}`} />
                   <span className="hidden sm:inline">Refresh Set</span>
                 </button>
               </div>
@@ -482,11 +482,11 @@ export const FlashcardsView = ({
             {/* Thematic Area Carousel / Pill Selector */}
             <div className="space-y-2.5">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-bold uppercase tracking-wider text-[#525248] flex items-center gap-1.5">
-                  <Compass className="w-3.5 h-3.5 text-[#5A5A40]" />
+                <label className="text-xs font-bold uppercase tracking-wider text-[#2B4468] flex items-center gap-1.5">
+                  <Compass className="w-3.5 h-3.5 text-[#1F3A5F]" />
                   <span>Choose Domain / Area of Interest</span>
                 </label>
-                <span className="text-xs text-[#7A7A6A]">11 cultural areas + custom topic</span>
+                <span className="text-xs text-[#5F6B7A]">11 cultural areas + custom topic</span>
               </div>
 
               <div className="flex flex-wrap gap-2">
@@ -498,8 +498,8 @@ export const FlashcardsView = ({
                       onClick={() => handleSelectArea(area.id)}
                       className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border ${
                         isSelected
-                          ? 'bg-[#5A5A40] text-white border-[#5A5A40] shadow-sm'
-                          : 'bg-white text-[#525248] border-[#DCDCCF] hover:border-[#5A5A40]/40 hover:bg-[#FAF8F5]'
+                          ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-sm'
+                          : 'bg-white text-[#2B4468] border-[#D9CFBA] hover:border-[#1F3A5F]/40 hover:bg-[#FBF8F1]'
                       }`}
                     >
                       <span>{area.icon}</span>
@@ -513,8 +513,8 @@ export const FlashcardsView = ({
                   onClick={() => setIsCustomAreaActive(true)}
                   className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border ${
                     isCustomAreaActive
-                      ? 'bg-[#5A5A40] text-white border-[#5A5A40] shadow-sm'
-                      : 'bg-white text-[#525248] border-[#DCDCCF] hover:border-[#5A5A40]/40 hover:bg-[#FAF8F5]'
+                      ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-sm'
+                      : 'bg-white text-[#2B4468] border-[#D9CFBA] hover:border-[#1F3A5F]/40 hover:bg-[#FBF8F1]'
                   }`}
                 >
                   <span>✏️</span>
@@ -533,13 +533,13 @@ export const FlashcardsView = ({
                     value={customAreaInput}
                     onChange={(e) => setCustomAreaInput(e.target.value)}
                     placeholder="Enter any domain (e.g. Space exploration, French Wine Tasting, Law & Justice)..."
-                    className="flex-1 bg-white border border-[#DCDCCF] rounded-xl px-3.5 py-2 text-xs text-[#34342E] placeholder-[#7A7A6A] focus:outline-none focus:border-[#5A5A40] shadow-xs"
+                    className="flex-1 bg-white border border-[#D9CFBA] rounded-xl px-3.5 py-2 text-xs text-[#1B2433] placeholder-[#5F6B7A] focus:outline-none focus:border-[#1F3A5F] shadow-xs"
                     autoFocus
                   />
                   <button
                     type="submit"
                     disabled={!customAreaInput.trim() || isLoadingDaily}
-                    className="px-4 py-2 bg-[#5A5A40] hover:bg-[#4A4A35] text-white rounded-xl text-xs font-bold transition-all shadow-xs disabled:opacity-50 cursor-pointer"
+                    className="px-4 py-2 bg-[#1F3A5F] hover:bg-[#223F66] text-white rounded-xl text-xs font-bold transition-all shadow-xs disabled:opacity-50 cursor-pointer"
                   >
                     Generate
                   </button>
@@ -549,14 +549,14 @@ export const FlashcardsView = ({
 
             {/* Cultural Proverb or Quote of the Day */}
             {dailyData?.dailyQuote && (
-              <div className="p-4 sm:p-5 bg-[#FAF7F2] rounded-2xl border border-[#E8E2D9] flex items-start gap-3.5 shadow-2xs">
-                <Quote className="w-5 h-5 text-[#5A5A40] shrink-0 mt-0.5" />
+              <div className="p-4 sm:p-5 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] flex items-start gap-3.5 shadow-2xs">
+                <Quote className="w-5 h-5 text-[#1F3A5F] shrink-0 mt-0.5" />
                 <div className="space-y-1">
-                  <p className="text-sm sm:text-base font-serif italic text-[#34342E] font-medium">
+                  <p className="text-sm sm:text-base font-serif italic text-[#1B2433] font-medium">
                     "{dailyData.dailyQuote.french}"
                   </p>
-                  <p className="text-xs text-[#7A7A6A]">
-                    {dailyData.dailyQuote.english} — <span className="font-semibold text-[#5A5A40]">{dailyData.dailyQuote.author}</span>
+                  <p className="text-xs text-[#5F6B7A]">
+                    {dailyData.dailyQuote.english} — <span className="font-semibold text-[#1F3A5F]">{dailyData.dailyQuote.author}</span>
                   </p>
                 </div>
               </div>
@@ -565,14 +565,14 @@ export const FlashcardsView = ({
 
           {/* Loading Skeleton during AI Generation */}
           {isLoadingDaily && (
-            <div className="text-center py-16 space-y-4 bg-white border border-[#E8E2D9] rounded-3xl p-8">
-              <div className="w-10 h-10 border-3 border-[#5A5A40] border-t-transparent rounded-full animate-spin mx-auto" />
+            <div className="text-center py-16 space-y-4 bg-white border border-[#E6DCC8] rounded-3xl p-8">
+              <div className="w-10 h-10 border-3 border-[#1F3A5F] border-t-transparent rounded-full animate-spin mx-auto" />
               <div className="space-y-1">
-                <p className="text-base font-bold text-[#34342E] font-serif">
+                <p className="text-base font-bold text-[#1B2433] font-serif">
                   Generating Daily Vocabulary with AI...
                 </p>
-                <p className="text-xs text-[#7A7A6A]">
-                  Consulting authentic French lexicographical usage in <span className="font-semibold text-[#5A5A40]">{selectedArea}</span> for level {dailyLevel}
+                <p className="text-xs text-[#5F6B7A]">
+                  Consulting authentic French lexicographical usage in <span className="font-semibold text-[#1F3A5F]">{selectedArea}</span> for level {dailyLevel}
                 </p>
               </div>
             </div>
@@ -583,10 +583,10 @@ export const FlashcardsView = ({
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-1">
                 <div>
-                  <h4 className="text-base font-bold text-[#34342E] font-serif">
+                  <h4 className="text-base font-bold text-[#1B2433] font-serif">
                     Today's Curated Vocabulary ({dailyData.vocabulary.length} Words)
                   </h4>
-                  <p className="text-xs text-[#7A7A6A]">
+                  <p className="text-xs text-[#5F6B7A]">
                     Click the speaker icon to listen, add to your personal review deck, or practice in SRS mode.
                   </p>
                 </div>
@@ -594,15 +594,15 @@ export const FlashcardsView = ({
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handleAddAllDailyToDeck}
-                    className="flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-[#FAF7F2] text-[#34342E] border border-[#DCDCCF] rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer"
+                    className="flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-[#FBF7EE] text-[#1B2433] border border-[#D9CFBA] rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer"
                   >
-                    <BookmarkPlus className="w-3.5 h-3.5 text-[#5A5A40]" />
+                    <BookmarkPlus className="w-3.5 h-3.5 text-[#1F3A5F]" />
                     <span>Add All to Deck</span>
                   </button>
 
                   <button
                     onClick={handlePracticeDailyInSrs}
-                    className="flex items-center gap-1.5 px-4 py-2 bg-[#5A5A40] hover:bg-[#4A4A35] text-white rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer"
+                    className="flex items-center gap-1.5 px-4 py-2 bg-[#1F3A5F] hover:bg-[#223F66] text-white rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer"
                   >
                     <Layers className="w-3.5 h-3.5" />
                     <span>Practice in SRS</span>
@@ -620,29 +620,29 @@ export const FlashcardsView = ({
                   return (
                     <div
                       key={item.id || idx}
-                      className="bg-white border border-[#E8E2D9] rounded-3xl p-5 sm:p-6 space-y-4 hover:border-[#5A5A40]/40 transition-all shadow-xs hover:shadow-sm flex flex-col justify-between"
+                      className="bg-white border border-[#E6DCC8] rounded-3xl p-5 sm:p-6 space-y-4 hover:border-[#1F3A5F]/40 transition-all shadow-xs hover:shadow-sm flex flex-col justify-between"
                     >
                       {/* Top Header: Word + IPA + Gender / Part of Speech */}
                       <div className="space-y-2.5">
                         <div className="flex items-start justify-between gap-3">
                           <div className="min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
-                              <h5 className="text-xl font-bold text-[#34342E] font-serif tracking-tight">
+                              <h5 className="text-xl font-bold text-[#1B2433] font-serif tracking-tight">
                                 {item.french}
                               </h5>
                               {item.gender ? (
                                 <span
                                   className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-md ${
                                     item.gender === 'm'
-                                      ? 'bg-[#F0ECE1] text-[#5A5A40] border border-[#5A5A40]/20'
-                                      : 'bg-[#FAF3EE] text-[#9C4B2E] border border-[#D98E73]/30'
+                                      ? 'bg-[#F2EBDC] text-[#1F3A5F] border border-[#1F3A5F]/20'
+                                      : 'bg-[#FCF0EE] text-[#8A2430] border border-[#C23B3B]/30'
                                   }`}
                                 >
                                   {item.gender === 'm' ? 'Masculin' : 'Féminin'}
                                 </span>
                               ) : (
                                 item.partOfSpeech && (
-                                  <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-md bg-[#FAF7F2] text-[#7A7A6A] border border-[#E8E2D9]">
+                                  <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-md bg-[#FBF7EE] text-[#5F6B7A] border border-[#E6DCC8]">
                                     {item.partOfSpeech}
                                   </span>
                                 )
@@ -650,7 +650,7 @@ export const FlashcardsView = ({
                             </div>
 
                             {item.ipa && (
-                              <p className="text-xs font-mono text-[#5A5A40] pt-0.5">{item.ipa}</p>
+                              <p className="text-xs font-mono text-[#1F3A5F] pt-0.5">{item.ipa}</p>
                             )}
                           </div>
 
@@ -660,8 +660,8 @@ export const FlashcardsView = ({
                             title="Listen to French pronunciation"
                             className={`p-2.5 rounded-xl border transition-all cursor-pointer shadow-2xs ${
                               isAudioPlaying
-                                ? 'bg-[#5A5A40] text-white border-[#5A5A40]'
-                                : 'bg-[#FAF7F2] text-[#5A5A40] border-[#E8E2D9] hover:bg-[#5A5A40] hover:text-white'
+                                ? 'bg-[#1F3A5F] text-white border-[#1F3A5F]'
+                                : 'bg-[#FBF7EE] text-[#1F3A5F] border-[#E6DCC8] hover:bg-[#1F3A5F] hover:text-white'
                             }`}
                           >
                             <Volume2 className="w-4 h-4" />
@@ -670,57 +670,57 @@ export const FlashcardsView = ({
 
                         {/* English Meaning */}
                         <div className="pt-1">
-                          <span className="text-[11px] uppercase font-bold text-[#7A7A6A] block">Meaning</span>
-                          <p className="text-sm font-semibold text-[#34342E]">{item.english}</p>
+                          <span className="text-[11px] uppercase font-bold text-[#5F6B7A] block">Meaning</span>
+                          <p className="text-sm font-semibold text-[#1B2433]">{item.english}</p>
                         </div>
 
                         {/* Contextual French Example Sentence */}
                         {item.exampleFrench && (
-                          <div className="p-3 bg-[#FAF7F2] rounded-2xl border border-[#E8E2D9] space-y-1">
+                          <div className="p-3 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] space-y-1">
                             <div className="flex items-center justify-between">
-                              <span className="text-[10px] uppercase font-bold text-[#7A7A6A]">Context in {dailyData.area}</span>
+                              <span className="text-[10px] uppercase font-bold text-[#5F6B7A]">Context in {dailyData.area}</span>
                               <button
                                 onClick={() => handlePlayWordAudio(item.exampleFrench, `${item.id}-ex`)}
-                                className="text-[#7A7A6A] hover:text-[#34342E] p-0.5"
+                                className="text-[#5F6B7A] hover:text-[#1B2433] p-0.5"
                                 title="Listen to example"
                               >
                                 <Volume2 className="w-3 h-3" />
                               </button>
                             </div>
-                            <p className="text-xs text-[#34342E] italic font-serif">"{item.exampleFrench}"</p>
-                            <p className="text-[11px] text-[#7A7A6A]">{item.exampleEnglish}</p>
+                            <p className="text-xs text-[#1B2433] italic font-serif">"{item.exampleFrench}"</p>
+                            <p className="text-[11px] text-[#5F6B7A]">{item.exampleEnglish}</p>
                           </div>
                         )}
 
                         {/* Usage Note / Cultural Tip */}
                         {item.usageNote && (
-                          <div className="text-[11px] text-[#5A5A40] bg-[#F5F2EB]/60 border border-[#5A5A40]/15 rounded-xl p-2.5 space-y-0.5">
-                            <span className="font-bold block text-[10px] uppercase tracking-wider text-[#5A5A40]">
+                          <div className="text-[11px] text-[#1F3A5F] bg-[#F6F1E5]/60 border border-[#1F3A5F]/15 rounded-xl p-2.5 space-y-0.5">
+                            <span className="font-bold block text-[10px] uppercase tracking-wider text-[#1F3A5F]">
                               💡 Usage Note
                             </span>
-                            <p className="text-[#525248] leading-relaxed">{item.usageNote}</p>
+                            <p className="text-[#2B4468] leading-relaxed">{item.usageNote}</p>
                           </div>
                         )}
                       </div>
 
                       {/* Card Action Footer */}
-                      <div className="pt-3 border-t border-[#E8E2D9] flex items-center justify-between gap-2">
+                      <div className="pt-3 border-t border-[#E6DCC8] flex items-center justify-between gap-2">
                         <button
                           onClick={() => handleAddWordToDeck(item)}
                           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                             isAdded
-                              ? 'bg-[#EEF4EE] text-[#3A5A3A] border border-[#5A7A5A]/30'
-                              : 'bg-white hover:bg-[#FAF7F2] text-[#34342E] border border-[#DCDCCF]'
+                              ? 'bg-[#E9F3EE] text-[#245243] border border-[#2F6F57]/30'
+                              : 'bg-white hover:bg-[#FBF7EE] text-[#1B2433] border border-[#D9CFBA]'
                           }`}
                         >
                           {isAdded ? (
                             <>
-                              <CheckCircle2 className="w-3.5 h-3.5 text-[#5A7A5A]" />
+                              <CheckCircle2 className="w-3.5 h-3.5 text-[#2F6F57]" />
                               <span>In Deck</span>
                             </>
                           ) : (
                             <>
-                              <BookmarkPlus className="w-3.5 h-3.5 text-[#5A5A40]" />
+                              <BookmarkPlus className="w-3.5 h-3.5 text-[#1F3A5F]" />
                               <span>Add to Deck</span>
                             </>
                           )}
@@ -730,8 +730,8 @@ export const FlashcardsView = ({
                           onClick={() => onToggleMastery(item.id)}
                           className={`p-2 rounded-xl border transition-all cursor-pointer ${
                             isMastered
-                              ? 'bg-[#FAF3EE] text-[#D98E73] border-[#D98E73]/40'
-                              : 'bg-white text-[#DCDCCF] border-[#DCDCCF] hover:text-[#D98E73]'
+                              ? 'bg-[#FCF0EE] text-[#C23B3B] border-[#C23B3B]/40'
+                              : 'bg-white text-[#D9CFBA] border-[#D9CFBA] hover:text-[#C23B3B]'
                           }`}
                           title={isMastered ? 'Mastered' : 'Mark as mastered'}
                         >
@@ -754,14 +754,14 @@ export const FlashcardsView = ({
         <div className="max-w-xl mx-auto space-y-6">
           {/* Deck mode indicator if practicing custom daily set */}
           {srsDeck && (
-            <div className="bg-[#FAF7F2] border border-[#5A5A40]/20 rounded-2xl p-3.5 flex items-center justify-between text-xs">
-              <span className="font-semibold text-[#5A5A40] flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#5A5A40]" />
+            <div className="bg-[#FBF7EE] border border-[#1F3A5F]/20 rounded-2xl p-3.5 flex items-center justify-between text-xs">
+              <span className="font-semibold text-[#1F3A5F] flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-[#1F3A5F]" />
                 Practicing Today's AI Vocabulary ({selectedArea})
               </span>
               <button
                 onClick={() => setSrsDeck(null)}
-                className="text-[#7A7A6A] hover:text-[#34342E] font-bold underline"
+                className="text-[#5F6B7A] hover:text-[#1B2433] font-bold underline"
               >
                 Switch to Full Deck
               </button>
@@ -769,16 +769,16 @@ export const FlashcardsView = ({
           )}
 
           {/* Card counter */}
-          <div className="flex items-center justify-between text-xs text-[#7A7A6A] px-2">
+          <div className="flex items-center justify-between text-xs text-[#5F6B7A] px-2">
             <span>Card {srsIndex + 1} of {activeSrsCards.length}</span>
-            <span className="font-semibold text-[#5A5A40]">{currentSrsCard.category} • {currentSrsCard.level}</span>
+            <span className="font-semibold text-[#1F3A5F]">{currentSrsCard.category} • {currentSrsCard.level}</span>
           </div>
 
           {/* 3D Flip Card Container */}
           <div
             id="srs-card"
             onClick={handleFlip}
-            className="min-h-[300px] bg-white border-2 border-[#E8E2D9] hover:border-[#5A5A40]/40 rounded-3xl p-8 flex flex-col justify-between cursor-pointer shadow-sm hover:shadow-md transition-all relative select-none"
+            className="min-h-[300px] bg-white border-2 border-[#E6DCC8] hover:border-[#1F3A5F]/40 rounded-3xl p-8 flex flex-col justify-between cursor-pointer shadow-sm hover:shadow-md transition-all relative select-none"
           >
             {/* Top actions inside card */}
             <div className="flex items-center justify-between">
@@ -786,14 +786,14 @@ export const FlashcardsView = ({
                 <span
                   className={`text-xs font-bold uppercase px-2.5 py-1 rounded-lg ${
                     currentSrsCard.gender === 'm'
-                      ? 'bg-[#F0ECE1] text-[#5A5A40] border border-[#5A5A40]/20'
-                      : 'bg-[#FAF3EE] text-[#9C4B2E] border border-[#D98E73]/30'
+                      ? 'bg-[#F2EBDC] text-[#1F3A5F] border border-[#1F3A5F]/20'
+                      : 'bg-[#FCF0EE] text-[#8A2430] border border-[#C23B3B]/30'
                   }`}
                 >
                   {currentSrsCard.gender === 'm' ? 'Masculine (Le / Un)' : 'Feminine (La / Une)'}
                 </span>
               ) : (
-                <span className="text-xs font-bold uppercase px-2.5 py-1 rounded-lg bg-[#FAF7F2] text-[#7A7A6A] border border-[#E8E2D9]">
+                <span className="text-xs font-bold uppercase px-2.5 py-1 rounded-lg bg-[#FBF7EE] text-[#5F6B7A] border border-[#E6DCC8]">
                   {currentSrsCard.partOfSpeech}
                 </span>
               )}
@@ -804,7 +804,7 @@ export const FlashcardsView = ({
                     e.stopPropagation();
                     speakFrench(currentSrsCard.french, audioSpeed);
                   }}
-                  className="p-2.5 rounded-xl bg-[#FAF7F2] text-[#5A5A40] hover:bg-[#5A5A40] hover:text-white border border-[#E8E2D9] transition-all shadow-xs cursor-pointer"
+                  className="p-2.5 rounded-xl bg-[#FBF7EE] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white border border-[#E6DCC8] transition-all shadow-xs cursor-pointer"
                   title="Listen to French pronunciation"
                 >
                   <Volume2 className="w-4 h-4" />
@@ -816,8 +816,8 @@ export const FlashcardsView = ({
                   }}
                   className={`p-2.5 rounded-xl transition-all border cursor-pointer ${
                     progress.masteredCards.includes(currentSrsCard.id)
-                      ? 'bg-[#FAF3EE] text-[#D98E73] border-[#D98E73]/40'
-                      : 'bg-[#FAF7F2] text-[#7A7A6A] border-[#E8E2D9] hover:text-[#D98E73]'
+                      ? 'bg-[#FCF0EE] text-[#C23B3B] border-[#C23B3B]/40'
+                      : 'bg-[#FBF7EE] text-[#5F6B7A] border-[#E6DCC8] hover:text-[#C23B3B]'
                   }`}
                 >
                   <Star className="w-4 h-4 fill-current" />
@@ -830,13 +830,13 @@ export const FlashcardsView = ({
               {!isFlipped ? (
                 /* Front side */
                 <>
-                  <h3 className="text-3xl sm:text-4xl font-bold text-[#34342E] tracking-tight font-serif">
+                  <h3 className="text-3xl sm:text-4xl font-bold text-[#1B2433] tracking-tight font-serif">
                     {currentSrsCard.french}
                   </h3>
                   {currentSrsCard.ipa && (
-                    <p className="text-sm font-mono text-[#5A5A40] font-semibold">{currentSrsCard.ipa}</p>
+                    <p className="text-sm font-mono text-[#1F3A5F] font-semibold">{currentSrsCard.ipa}</p>
                   )}
-                  <p className="text-xs text-[#7A7A6A] pt-3">
+                  <p className="text-xs text-[#5F6B7A] pt-3">
                     Tap the card to reveal translation & example...
                   </p>
                 </>
@@ -844,18 +844,18 @@ export const FlashcardsView = ({
                 /* Back side */
                 <div className="space-y-4 animate-in zoom-in-95">
                   <div>
-                    <span className="text-xs uppercase font-bold text-[#7A7A6A] block mb-1">
+                    <span className="text-xs uppercase font-bold text-[#5F6B7A] block mb-1">
                       Translation
                     </span>
-                    <h3 className="text-2xl font-bold text-[#5A5A40] font-serif">
+                    <h3 className="text-2xl font-bold text-[#1F3A5F] font-serif">
                       {currentSrsCard.english}
                     </h3>
                   </div>
 
                   {currentSrsCard.exampleFrench && (
-                    <div className="p-3.5 bg-[#FAF7F2] rounded-xl border border-[#E8E2D9] text-left text-xs space-y-1">
-                      <p className="text-[#34342E] italic font-medium font-serif">"{currentSrsCard.exampleFrench}"</p>
-                      <p className="text-[#7A7A6A]">{currentSrsCard.exampleEnglish}</p>
+                    <div className="p-3.5 bg-[#FBF7EE] rounded-xl border border-[#E6DCC8] text-left text-xs space-y-1">
+                      <p className="text-[#1B2433] italic font-medium font-serif">"{currentSrsCard.exampleFrench}"</p>
+                      <p className="text-[#5F6B7A]">{currentSrsCard.exampleEnglish}</p>
                     </div>
                   )}
                 </div>
@@ -863,9 +863,9 @@ export const FlashcardsView = ({
             </div>
 
             {/* Bottom hint */}
-            <div className="flex items-center justify-between text-xs text-[#7A7A6A]">
+            <div className="flex items-center justify-between text-xs text-[#5F6B7A]">
               <span>{isFlipped ? 'Back of card' : 'Front'}</span>
-              <span className="flex items-center gap-1 text-[#5A5A40] font-semibold">
+              <span className="flex items-center gap-1 text-[#1F3A5F] font-semibold">
                 <RotateCcw className="w-3.5 h-3.5" />
                 Click to flip
               </span>
@@ -877,28 +877,28 @@ export const FlashcardsView = ({
             <div className="grid grid-cols-4 gap-2 pt-2 animate-in fade-in">
               <button
                 onClick={() => handleSrsResponse('again')}
-                className="py-3 px-2 rounded-xl bg-[#FAF3EE] border border-[#C05C54]/30 text-[#C05C54] font-bold text-xs hover:bg-[#FBEAE8] transition-all text-center cursor-pointer shadow-xs"
+                className="py-3 px-2 rounded-xl bg-[#FCF0EE] border border-[#B3262F]/30 text-[#B3262F] font-bold text-xs hover:bg-[#FBEAE8] transition-all text-center cursor-pointer shadow-xs"
               >
                 <span>Again</span>
                 <span className="block text-[10px] font-normal opacity-80">&lt; 1 min</span>
               </button>
               <button
                 onClick={() => handleSrsResponse('hard')}
-                className="py-3 px-2 rounded-xl bg-[#FAF7F2] border border-[#C98A4B]/30 text-[#A26425] font-bold text-xs hover:bg-[#FAF3E8] transition-all text-center cursor-pointer shadow-xs"
+                className="py-3 px-2 rounded-xl bg-[#FBF7EE] border border-[#C98A4B]/30 text-[#A26425] font-bold text-xs hover:bg-[#FAF3E8] transition-all text-center cursor-pointer shadow-xs"
               >
                 <span>Hard</span>
                 <span className="block text-[10px] font-normal opacity-80">1 day</span>
               </button>
               <button
                 onClick={() => handleSrsResponse('good')}
-                className="py-3 px-2 rounded-xl bg-[#F0ECE1] border border-[#5A5A40]/30 text-[#5A5A40] font-bold text-xs hover:bg-[#EAE6DF] transition-all text-center cursor-pointer shadow-xs"
+                className="py-3 px-2 rounded-xl bg-[#F2EBDC] border border-[#1F3A5F]/30 text-[#1F3A5F] font-bold text-xs hover:bg-[#E9E2D2] transition-all text-center cursor-pointer shadow-xs"
               >
                 <span>Good</span>
                 <span className="block text-[10px] font-normal opacity-80">3 days</span>
               </button>
               <button
                 onClick={() => handleSrsResponse('easy')}
-                className="py-3 px-2 rounded-xl bg-[#EEF4EE] border border-[#5A7A5A]/30 text-[#3A5A3A] font-bold text-xs hover:bg-[#E2ECE2] transition-all text-center cursor-pointer shadow-xs"
+                className="py-3 px-2 rounded-xl bg-[#E9F3EE] border border-[#2F6F57]/30 text-[#245243] font-bold text-xs hover:bg-[#E2ECE2] transition-all text-center cursor-pointer shadow-xs"
               >
                 <span>Easy</span>
                 <span className="block text-[10px] font-normal opacity-80">7 days</span>
@@ -915,9 +915,9 @@ export const FlashcardsView = ({
         <div className="space-y-6">
           {/* Category preferences */}
           <fieldset className="space-y-3">
-            <legend className="text-sm font-bold text-[#34342E]">Filter by category</legend>
+            <legend className="text-sm font-bold text-[#1B2433]">Filter by category</legend>
             <div className="flex flex-wrap gap-2">
-              <label className="inline-flex items-center gap-2 rounded-xl border border-[#5A5A40]/30 bg-[#F0ECE1] px-3 py-2 text-xs font-semibold text-[#34342E] cursor-pointer">
+              <label className="inline-flex items-center gap-2 rounded-xl border border-[#1F3A5F]/30 bg-[#F2EBDC] px-3 py-2 text-xs font-semibold text-[#1B2433] cursor-pointer">
                 <input
                   type="checkbox"
                   checked={selectedCategories.length === VOCABULARY_CATEGORIES.length}
@@ -927,12 +927,12 @@ export const FlashcardsView = ({
                     setSrsIndex(0);
                     setIsFlipped(false);
                   }}
-                  className="accent-[#5A5A40]"
+                  className="accent-[#1F3A5F]"
                 />
                 All categories
               </label>
               {VOCABULARY_CATEGORIES.map((category) => (
-                <label key={category} className="inline-flex items-center gap-2 rounded-xl border border-[#DCDCCF] bg-white px-3 py-2 text-xs font-medium text-[#525248] hover:border-[#5A5A40]/50 cursor-pointer">
+                <label key={category} className="inline-flex items-center gap-2 rounded-xl border border-[#D9CFBA] bg-white px-3 py-2 text-xs font-medium text-[#2B4468] hover:border-[#1F3A5F]/50 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={selectedCategories.includes(category)}
@@ -944,7 +944,7 @@ export const FlashcardsView = ({
                       setSrsIndex(0);
                       setIsFlipped(false);
                     }}
-                    className="accent-[#5A5A40]"
+                    className="accent-[#1F3A5F]"
                   />
                   {category}
                 </label>
@@ -954,16 +954,16 @@ export const FlashcardsView = ({
 
           {/* Suggested words from selected categories */}
           <section aria-labelledby="suggested-words-heading" className="space-y-3">
-            <div className="flex items-center justify-between gap-3 border-b border-[#DCDCCF] pb-2">
+            <div className="flex items-center justify-between gap-3 border-b border-[#D9CFBA] pb-2">
               <div>
-                <h3 id="suggested-words-heading" className="text-sm font-bold text-[#34342E]">Suggested words</h3>
-                <p className="text-xs text-[#7A7A6A]">Based on your selected categories</p>
+                <h3 id="suggested-words-heading" className="text-sm font-bold text-[#1B2433]">Suggested words</h3>
+                <p className="text-xs text-[#5F6B7A]">Based on your selected categories</p>
               </div>
               {availableSuggestions.length > 4 && (
                 <button
                   type="button"
                   onClick={() => setSuggestionOffset((current) => (current + 8) % availableSuggestions.length)}
-                  className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-[#5A5A40] hover:bg-white cursor-pointer"
+                  className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-[#1F3A5F] hover:bg-white cursor-pointer"
                 >
                   <Shuffle className="h-3.5 w-3.5" />
                   More words
@@ -973,17 +973,17 @@ export const FlashcardsView = ({
             {suggestedCards.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 {suggestedCards.map((card) => (
-                  <div key={card.id} className="flex items-center justify-between gap-3 border-l-2 border-[#5A7A5A] bg-white px-3.5 py-3 rounded-r-xl shadow-2xs">
+                  <div key={card.id} className="flex items-center justify-between gap-3 border-l-2 border-[#2F6F57] bg-white px-3.5 py-3 rounded-r-xl shadow-2xs">
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-bold text-[#34342E] font-serif">{card.french}</p>
-                      <p className="truncate text-xs text-[#5A5A40]">{card.english}</p>
-                      <p className="mt-1 text-[10px] text-[#7A7A6A]">{card.category} · {card.level}</p>
+                      <p className="truncate text-sm font-bold text-[#1B2433] font-serif">{card.french}</p>
+                      <p className="truncate text-xs text-[#1F3A5F]">{card.english}</p>
+                      <p className="mt-1 text-[10px] text-[#5F6B7A]">{card.category} · {card.level}</p>
                     </div>
                     <button
                       type="button"
                       onClick={() => speakFrench(card.french, audioSpeed)}
                       aria-label={`Listen to ${card.french}`}
-                      className="shrink-0 rounded-lg p-2 text-[#7A7A6A] hover:bg-[#F0ECE1] hover:text-[#34342E] cursor-pointer"
+                      className="shrink-0 rounded-lg p-2 text-[#5F6B7A] hover:bg-[#F2EBDC] hover:text-[#1B2433] cursor-pointer"
                     >
                       <Volume2 className="h-4 w-4" />
                     </button>
@@ -991,12 +991,12 @@ export const FlashcardsView = ({
                 ))}
               </div>
             ) : (
-              <p className="text-xs text-[#7A7A6A]">Select at least one category to get word suggestions.</p>
+              <p className="text-xs text-[#5F6B7A]">Select at least one category to get word suggestions.</p>
             )}
           </section>
 
           {filteredCards.length === 0 && (
-            <p role="status" className="border-l-2 border-[#D98E73] bg-[#FAF3EE] px-4 py-3 text-xs text-[#5C382A]">
+            <p role="status" className="border-l-2 border-[#C23B3B] bg-[#FCF0EE] px-4 py-3 text-xs text-[#5C382A]">
               No words match your selected categories or search.
             </p>
           )}
@@ -1008,46 +1008,46 @@ export const FlashcardsView = ({
               return (
                 <div
                   key={card.id}
-                  className="bg-white border border-[#E8E2D9] rounded-3xl p-5 space-y-3 flex flex-col justify-between hover:border-[#5A5A40]/40 transition-all shadow-sm"
+                  className="bg-white border border-[#E6DCC8] rounded-3xl p-5 space-y-3 flex flex-col justify-between hover:border-[#1F3A5F]/40 transition-all shadow-sm"
                 >
                   <div className="space-y-2">
                     <div className="flex items-start justify-between">
                       <div>
                         <div className="flex items-center space-x-2">
-                          <h4 className="text-base font-bold text-[#34342E] font-serif">{card.french}</h4>
+                          <h4 className="text-base font-bold text-[#1B2433] font-serif">{card.french}</h4>
                           {card.gender && (
                             <span className={`text-[10px] uppercase font-bold px-1.5 py-0.2 rounded ${
-                              card.gender === 'm' ? 'bg-[#F0ECE1] text-[#5A5A40]' : 'bg-[#FAF3EE] text-[#9C4B2E]'
+                              card.gender === 'm' ? 'bg-[#F2EBDC] text-[#1F3A5F]' : 'bg-[#FCF0EE] text-[#8A2430]'
                             }`}>
                               {card.gender === 'm' ? 'm' : 'f'}
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-[#5A5A40] font-semibold mt-0.5">{card.english}</p>
+                        <p className="text-xs text-[#1F3A5F] font-semibold mt-0.5">{card.english}</p>
                       </div>
 
                       <div className="flex space-x-1">
                         <button
                           onClick={() => speakFrench(card.french, audioSpeed)}
-                          className="p-1.5 text-[#7A7A6A] hover:text-[#34342E] cursor-pointer"
+                          className="p-1.5 text-[#5F6B7A] hover:text-[#1B2433] cursor-pointer"
                         >
                           <Volume2 className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => onToggleMastery(card.id)}
-                          className={`p-1.5 cursor-pointer ${isMastered ? 'text-[#D98E73]' : 'text-[#DCDCCF] hover:text-[#D98E73]'}`}
+                          className={`p-1.5 cursor-pointer ${isMastered ? 'text-[#C23B3B]' : 'text-[#D9CFBA] hover:text-[#C23B3B]'}`}
                         >
                           <Star className="w-4 h-4 fill-current" />
                         </button>
                       </div>
                     </div>
 
-                    <p className="text-xs text-[#525248] italic font-serif pt-1">"{card.exampleFrench}"</p>
+                    <p className="text-xs text-[#2B4468] italic font-serif pt-1">"{card.exampleFrench}"</p>
                   </div>
 
-                  <div className="flex items-center justify-between text-[11px] text-[#7A7A6A] pt-2 border-t border-[#E8E2D9]">
+                  <div className="flex items-center justify-between text-[11px] text-[#5F6B7A] pt-2 border-t border-[#E6DCC8]">
                     <span>{card.category}</span>
-                    <span className="font-mono text-[#5A5A40]">{card.ipa}</span>
+                    <span className="font-mono text-[#1F3A5F]">{card.ipa}</span>
                   </div>
                 </div>
               );
@@ -1058,42 +1058,42 @@ export const FlashcardsView = ({
 
       {/* Modal to add custom card */}
       {isAddingCard && typeof document !== 'undefined' && createPortal(
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#34342E]/70 backdrop-blur-sm animate-in fade-in">
-          <div className="bg-white border border-[#E8E2D9] rounded-3xl w-full max-w-md p-6 space-y-4 shadow-xl">
-            <h3 className="text-lg font-bold text-[#34342E] font-serif">Add Custom Flashcard</h3>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#1B2433]/70 backdrop-blur-sm animate-in fade-in">
+          <div className="bg-white border border-[#E6DCC8] rounded-3xl w-full max-w-md p-6 space-y-4 shadow-xl">
+            <h3 className="text-lg font-bold text-[#1B2433] font-serif">Add Custom Flashcard</h3>
             <form onSubmit={handleAddCustomCard} className="space-y-3">
               <div>
-                <label className="text-xs font-semibold text-[#34342E] block mb-1">French Word or Expression</label>
+                <label className="text-xs font-semibold text-[#1B2433] block mb-1">French Word or Expression</label>
                 <input
                   type="text"
                   required
                   value={newFrench}
                   onChange={(e) => setNewFrench(e.target.value)}
                   placeholder="e.g. Le coucher de soleil"
-                  className="w-full bg-[#FAF7F2] border border-[#DCDCCF] rounded-xl px-3 py-2 text-sm text-[#34342E] focus:outline-none focus:border-[#5A5A40]"
+                  className="w-full bg-[#FBF7EE] border border-[#D9CFBA] rounded-xl px-3 py-2 text-sm text-[#1B2433] focus:outline-none focus:border-[#1F3A5F]"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-[#34342E] block mb-1">English Meaning</label>
+                <label className="text-xs font-semibold text-[#1B2433] block mb-1">English Meaning</label>
                 <input
                   type="text"
                   required
                   value={newEnglish}
                   onChange={(e) => setNewEnglish(e.target.value)}
                   placeholder="e.g. The sunset"
-                  className="w-full bg-[#FAF7F2] border border-[#DCDCCF] rounded-xl px-3 py-2 text-sm text-[#34342E] focus:outline-none focus:border-[#5A5A40]"
+                  className="w-full bg-[#FBF7EE] border border-[#D9CFBA] rounded-xl px-3 py-2 text-sm text-[#1B2433] focus:outline-none focus:border-[#1F3A5F]"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-[#34342E] block mb-1">Example Sentence (Optional)</label>
+                <label className="text-xs font-semibold text-[#1B2433] block mb-1">Example Sentence (Optional)</label>
                 <input
                   type="text"
                   value={newExample}
                   onChange={(e) => setNewExample(e.target.value)}
                   placeholder="e.g. Nous admirons le coucher de soleil."
-                  className="w-full bg-[#FAF7F2] border border-[#DCDCCF] rounded-xl px-3 py-2 text-sm text-[#34342E] focus:outline-none focus:border-[#5A5A40]"
+                  className="w-full bg-[#FBF7EE] border border-[#D9CFBA] rounded-xl px-3 py-2 text-sm text-[#1B2433] focus:outline-none focus:border-[#1F3A5F]"
                 />
               </div>
 
@@ -1101,13 +1101,13 @@ export const FlashcardsView = ({
                 <button
                   type="button"
                   onClick={() => setIsAddingCard(false)}
-                  className="px-4 py-2 text-xs font-semibold text-[#7A7A6A] hover:text-[#34342E] cursor-pointer"
+                  className="px-4 py-2 text-xs font-semibold text-[#5F6B7A] hover:text-[#1B2433] cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-[#5A5A40] hover:bg-[#4A4A35] text-white font-bold text-xs rounded-xl shadow cursor-pointer"
+                  className="px-4 py-2 bg-[#1F3A5F] hover:bg-[#223F66] text-white font-bold text-xs rounded-xl shadow cursor-pointer"
                 >
                   Save Flashcard
                 </button>
