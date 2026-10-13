@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { LayoutGrid, Pause, Play, X } from 'lucide-react';
-import { Header } from './components/Header.jsx';
+import { Header, HeaderControls } from './components/Header.jsx';
 import { Navigation } from './components/Navigation.jsx';
 import { HomeView } from './components/HomeView.jsx';
 import { AnimatedBackground } from './components/AnimatedBackground.jsx';
@@ -139,6 +139,12 @@ export default function App() {
     setQuizModalData({ topic, level, unit });
   };
 
+  const handleHeaderLevelChange = (lvl) => {
+    if (unlockedLevels.includes(lvl)) {
+      setActiveLevel(lvl);
+    }
+  };
+
   return (
     <div className="relative min-h-screen bg-[#F7F2E7] text-[#1B2433] flex flex-col font-sans selection:bg-[#1F3A5F] selection:text-white">
       {/* Animated Moving Background Canvas */}
@@ -179,11 +185,7 @@ export default function App() {
                     progress={progress}
                     activeLevel={activeLevel}
                     unlockedLevels={unlockedLevels}
-                    onLevelChange={(lvl) => {
-                      if (unlockedLevels.includes(lvl)) {
-                        setActiveLevel(lvl);
-                      }
-                    }}
+                    onLevelChange={handleHeaderLevelChange}
                     audioSpeed={audioSpeed}
                     onSpeedChange={setAudioSpeed}
                     isScrolled={isScrolled}
@@ -203,7 +205,7 @@ export default function App() {
                     onClick={() => setIsNavMenuOpen((prev) => !prev)}
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.96 }}
-                    className={`self-center shrink-0 h-10 pl-1.5 pr-3.5 sm:pr-4 rounded-full flex items-center gap-2 border shadow-md cursor-pointer select-none text-sm font-bold transition-colors duration-200 ${
+                    className={`self-center shrink-0 h-10 w-10 sm:w-auto justify-center sm:justify-start px-0 sm:pl-1.5 sm:pr-4 rounded-full flex items-center gap-2 border shadow-md cursor-pointer select-none text-sm font-bold transition-colors duration-200 ${
                       isNavMenuOpen
                         ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-[#1F3A5F]/25'
                         : 'bg-[#FBF8F1]/95 text-[#1F3A5F] border-[#D9CFBA]/85 hover:bg-white hover:border-[#1F3A5F]/50'
@@ -219,7 +221,7 @@ export default function App() {
                     >
                       {isNavMenuOpen ? <X className="w-3.5 h-3.5" /> : <LayoutGrid className="w-3.5 h-3.5" />}
                     </span>
-                    <span className="pointer-events-none">{isNavMenuOpen ? 'Close' : 'Menu'}</span>
+                    <span className="hidden sm:inline pointer-events-none">{isNavMenuOpen ? 'Close' : 'Menu'}</span>
                   </motion.button>
                 )}
               </AnimatePresence>
@@ -250,9 +252,9 @@ export default function App() {
               {isScrolled && isNavMenuOpen && (
                 <motion.div
                   key="scrolled-dropdown-nav"
-                  initial={{ height: 0, opacity: 0, y: -8 }}
-                  animate={{ height: 'auto', opacity: 1, y: 0 }}
-                  exit={{ height: 0, opacity: 0, y: -8 }}
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                   className="overflow-hidden pointer-events-auto"
                 >
@@ -265,6 +267,16 @@ export default function App() {
                     isScrolled={true}
                     isMenuOpen={true}
                     onCloseMenu={() => setIsNavMenuOpen(false)}
+                    controls={
+                      <HeaderControls
+                        progress={progress}
+                        activeLevel={activeLevel}
+                        unlockedLevels={unlockedLevels}
+                        onLevelChange={handleHeaderLevelChange}
+                        audioSpeed={audioSpeed}
+                        onSpeedChange={setAudioSpeed}
+                      />
+                    }
                   />
                 </motion.div>
               )}
@@ -393,7 +405,7 @@ export default function App() {
             transition={{ duration: 0.18 }}
             role="status"
             aria-live="polite"
-            className="fixed bottom-4 right-4 z-[110] flex items-center gap-3 rounded-xl border border-[#D9CFBA] bg-[#1B2433] px-4 py-3 text-white shadow-lg"
+            className="fixed inset-x-3 bottom-3 z-[110] flex items-center gap-3 rounded-xl border border-[#D9CFBA] bg-[#1B2433] px-4 py-3 text-white shadow-lg sm:inset-x-auto sm:bottom-4 sm:right-4"
           >
             <Pause className="h-4 w-4 text-[#E3C66B]" aria-hidden="true" />
             <span className="text-sm font-medium">Narration paused</span>

@@ -462,10 +462,10 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                     <Icon className="w-4 h-4" />
                   </div>
                   <div className="min-w-0">
-                    <p className={`text-xs font-bold truncate ${isSelected ? 'text-white' : 'text-[#1B2433]'}`}>
+                    <p className={`text-xs font-bold leading-snug sm:truncate ${isSelected ? 'text-white' : 'text-[#1B2433]'}`}>
                       {pub.label}
                     </p>
-                    <p className={`text-[10px] truncate ${isSelected ? 'text-white/80' : 'text-[#5F6B7A]'}`}>
+                    <p className={`text-[10px] leading-snug sm:truncate ${isSelected ? 'text-white/80' : 'text-[#5F6B7A]'}`}>
                       {pub.sub}
                     </p>
                   </div>
@@ -527,14 +527,14 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                       setCustomSearchQuery(preset);
                       handleGenerateArticle(preset, sourceType, activeLevel);
                     }}
-                    className={`text-xs px-3.5 py-1.5 rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs ${
+                    className={`max-w-full text-xs px-3.5 py-1.5 rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs ${
                       topicInput === preset
                         ? 'bg-[#1F3A5F] text-white border-[#1F3A5F]'
                         : 'bg-white hover:bg-[#FBF7EE] text-[#2B4468] border-[#D9CFBA]'
                     }`}
                   >
                     <span>{cat.icon}</span>
-                    <span className="truncate max-w-[240px]">{preset}</span>
+                    <span className="min-w-0 truncate max-w-[240px]">{preset}</span>
                   </button>
                 ))}
               </React.Fragment>

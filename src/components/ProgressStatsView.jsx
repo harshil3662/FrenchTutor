@@ -75,13 +75,13 @@ export const ProgressStatsView = ({ progress, activeLevel }) => {
       {/* Hero Stats Banner */}
       <div className="bg-white border border-[#E6DCC8] rounded-3xl p-6 sm:p-8 shadow-sm text-[#1B2433]">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-2xl bg-[#F2EBDC] border border-[#1F3A5F]/20 flex items-center justify-center text-3xl shadow-xs">
+          <div className="flex items-center space-x-4 min-w-0">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-2xl bg-[#F2EBDC] border border-[#1F3A5F]/20 flex items-center justify-center text-3xl shadow-xs">
               🇫🇷
             </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <h2 className="text-2xl font-bold font-serif">Your Learning Profile</h2>
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                <h2 className="text-xl sm:text-2xl font-bold font-serif">Your Learning Profile</h2>
                 <span className="bg-[#E9F3EE] text-[#245243] border border-[#2F6F57]/30 text-xs font-bold px-2.5 py-0.5 rounded-full">
                   Level {progress.level}
                 </span>
@@ -112,9 +112,9 @@ export const ProgressStatsView = ({ progress, activeLevel }) => {
 
         {/* CEFR Progression Track */}
         <div className="mt-8 pt-6 border-t border-[#E6DCC8] space-y-3">
-          <div className="flex items-center justify-between text-xs font-semibold text-[#2B4468]">
+          <div className="flex items-start justify-between gap-3 text-xs font-semibold text-[#2B4468]">
             <span>Level {progress.level} Progress ({currentBenchmark.name})</span>
-            <span className="font-mono text-[#1F3A5F]">{progress.xp} / {currentBenchmark.maxXp} XP</span>
+            <span className="font-mono text-[#1F3A5F] whitespace-nowrap shrink-0">{progress.xp} / {currentBenchmark.maxXp} XP</span>
           </div>
 
           <div className="w-full bg-[#FBF7EE] h-3 rounded-full overflow-hidden p-0.5 border border-[#E6DCC8]">
@@ -124,7 +124,7 @@ export const ProgressStatsView = ({ progress, activeLevel }) => {
             />
           </div>
 
-          <div className="grid grid-cols-4 text-center text-[11px] font-medium text-[#5F6B7A] pt-1">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-3 gap-y-1.5 text-center text-[11px] font-medium text-[#5F6B7A] pt-1">
             {levelBenchmarks.map((b) => (
               <span key={b.level} className={progress.level === b.level ? 'text-[#1F3A5F] font-bold' : 'opacity-60'}>
                 {b.level}: {b.name}

@@ -2,8 +2,14 @@
 
 @layer base {
   html {
-    font-size: 118.75%; /* Base ~19px for comfortable high-readability study experience */
+    font-size: 106.25%; /* ~17px on phones; 19px from 640px up (below) */
     -webkit-text-size-adjust: 100%;
+  }
+
+  @media (min-width: 40rem) {
+    html {
+      font-size: 118.75%; /* Base ~19px for comfortable high-readability study experience */
+    }
   }
 
   body {
@@ -41,4 +47,70 @@
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Ambient background (AnimatedBackground.jsx). Only transform and opacity are animated, so the
+   compositor runs these without JavaScript or repainting. Keyframes mirror the original motion tracks. */
+.atelier-blob-1 { animation: atelier-blob-1 28s ease-in-out infinite; }
+.atelier-blob-2 { animation: atelier-blob-2 32s ease-in-out infinite; }
+.atelier-blob-3 { animation: atelier-blob-3 30s ease-in-out infinite; }
+.atelier-blob-4 { animation: atelier-blob-4 29s ease-in-out infinite; }
+.atelier-ring-cw { animation: atelier-spin 48s linear infinite; }
+.atelier-ring-ccw { animation: atelier-spin-reverse 48s linear infinite; }
+.atelier-glyph-even { animation: atelier-glyph-even 30s linear infinite both; }
+.atelier-glyph-odd { animation: atelier-glyph-odd 30s linear infinite both; }
+.atelier-mote { animation: atelier-mote 20s ease-in-out infinite both; }
+#atelier-animated-background.is-paused * { animation-play-state: paused; }
+
+@keyframes atelier-blob-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(35px, -30px) scale(1.08); }
+  50% { transform: translate(-25px, 20px) scale(0.96); }
+  75% { transform: translate(20px, -15px) scale(1.04); }
+}
+@keyframes atelier-blob-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-40px, 35px) scale(0.94); }
+  50% { transform: translate(30px, -30px) scale(1.08); }
+  75% { transform: translate(-20px, 25px) scale(0.98); }
+}
+@keyframes atelier-blob-3 {
+  0%, 100% { transform: translate(0, 0) scale(0.96); }
+  25% { transform: translate(30px, 25px) scale(1.06); }
+  50% { transform: translate(-20px, 45px) scale(0.98); }
+  75% { transform: translate(30px, -20px) scale(1.08); }
+}
+@keyframes atelier-blob-4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-25px, -25px) scale(1.05); }
+  50% { transform: translate(15px, 30px) scale(0.95); }
+  75% { transform: translate(-10px, -15px) scale(1.03); }
+}
+@keyframes atelier-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes atelier-spin-reverse {
+  to { transform: rotate(-360deg); }
+}
+/* Glyphs travel from -5vh to 110vh; x offsets, rotation and opacity are sampled at the union of their breakpoints. */
+@keyframes atelier-glyph-even {
+  0% { transform: translate(0vw, -5vh) rotate(0deg); opacity: 0; }
+  33.3333% { transform: translate(3vw, 33.3333vh) rotate(10deg); opacity: 0.9; }
+  50% { transform: translate(0.5vw, 52.5vh) rotate(15deg); opacity: 0.9; }
+  66.6667% { transform: translate(-2vw, 71.6667vh) rotate(10deg); opacity: 0.9; }
+  100% { transform: translate(4vw, 110vh) rotate(0deg); opacity: 0; }
+}
+@keyframes atelier-glyph-odd {
+  0% { transform: translate(0vw, -5vh) rotate(0deg); opacity: 0; }
+  33.3333% { transform: translate(-3vw, 33.3333vh) rotate(-10deg); opacity: 0.9; }
+  50% { transform: translate(-0.25vw, 52.5vh) rotate(-15deg); opacity: 0.9; }
+  66.6667% { transform: translate(2.5vw, 71.6667vh) rotate(-10deg); opacity: 0.9; }
+  100% { transform: translate(-4vw, 110vh) rotate(0deg); opacity: 0; }
+}
+@keyframes atelier-mote {
+  0% { transform: translate(0px, 0px) scale(0.85); opacity: 0.15; }
+  33.3333% { transform: translate(10px, -20px) scale(1.1167); opacity: 0.4167; }
+  50% { transform: translate(1px, -30px) scale(1.25); opacity: 0.55; }
+  66.6667% { transform: translate(-8px, -20px) scale(1.1167); opacity: 0.4167; }
+  100% { transform: translate(0px, 0px) scale(0.85); opacity: 0.15; }
 }

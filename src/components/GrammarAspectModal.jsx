@@ -398,7 +398,7 @@ export const GrammarAspectModal = ({
         {/* Modal Header */}
         <div className="p-4 sm:p-6 bg-[#FBF7EE] border-b border-[#E6DCC8] flex items-start justify-between shrink-0">
           <div className="space-y-1">
-            <div className="flex items-center space-x-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#1F3A5F] text-white">
                 {lesson.level}
               </span>
@@ -428,20 +428,20 @@ export const GrammarAspectModal = ({
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex border-b border-[#E6DCC8] bg-[#F7F2E7] px-6">
+        <div className="flex border-b border-[#E6DCC8] bg-[#F7F2E7] px-2 sm:px-6">
           <button
             id="tab-grammar-guide"
             onClick={() => setActiveTab('guide')}
-            className={`py-3 px-4 font-bold text-xs sm:text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer ${
+            className={`flex-1 sm:flex-none min-w-0 py-3 px-2 sm:px-4 font-bold text-xs sm:text-sm text-center border-b-2 transition-all flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer ${
               activeTab === 'guide'
                 ? 'border-[#1F3A5F] text-[#1F3A5F] bg-white'
                 : 'border-transparent text-[#5F6B7A] hover:text-[#1B2433]'
             }`}
           >
-            <BookOpen className="w-4 h-4" />
+            <BookOpen className="w-4 h-4 shrink-0" />
             <span>Grammar Rules & Blueprint</span>
             {hasMultipleTopics && (
-              <span className="ml-1 px-1.5 py-0.5 rounded-full bg-[#1F3A5F]/10 text-[#1F3A5F] text-[10px] font-bold">
+              <span className="hidden sm:inline-block ml-1 px-1.5 py-0.5 rounded-full bg-[#1F3A5F]/10 text-[#1F3A5F] text-[10px] font-bold">
                 {topicsList.length} topics
               </span>
             )}
@@ -449,19 +449,19 @@ export const GrammarAspectModal = ({
           <button
             id="tab-unit-ai-quiz"
             onClick={handleOpenAiQuiz}
-            className={`py-3 px-4 font-bold text-xs sm:text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer ${
+            className={`flex-1 sm:flex-none min-w-0 py-3 px-2 sm:px-4 font-bold text-xs sm:text-sm text-center border-b-2 transition-all flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer ${
               activeTab === 'quiz'
                 ? 'border-[#1F3A5F] text-[#1F3A5F] bg-white'
                 : 'border-transparent text-[#5F6B7A] hover:text-[#1B2433]'
             }`}
           >
-            <BrainCircuit className="w-4 h-4 text-[#1F3A5F]" />
+            <BrainCircuit className="w-4 h-4 shrink-0 text-[#1F3A5F]" />
             <span>Unit Quiz {exercises.length ? `(${exercises.length})` : ''}</span>
           </button>
         </div>
 
         {/* Modal Body */}
-        <div ref={scrollContainerRef} className="p-6 sm:p-8 overflow-y-auto overscroll-contain flex-1 space-y-6">
+        <div ref={scrollContainerRef} className="p-4 sm:p-8 overflow-y-auto overscroll-contain flex-1 space-y-6">
           {activeTab === 'guide' ? (
             <div className="space-y-6 animate-in fade-in">
               {/* Sub-Topics Segmented Selector (When Unit Has Multiple Topics) */}

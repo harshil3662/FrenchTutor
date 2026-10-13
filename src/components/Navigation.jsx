@@ -19,6 +19,7 @@ export const Navigation = ({
   isScrolled = false,
   isMenuOpen = false,
   onCloseMenu,
+  controls = null,
 }) => {
   const scrollContainerRef = useRef(null);
   const scrollAnimationRef = useRef(null);
@@ -159,7 +160,7 @@ export const Navigation = ({
                       {/* Tag Chip */}
                       {tab.tag && (
                         <span
-                          className={`text-[10px] font-bold px-2 py-0.5 rounded-full transition-colors duration-300 shrink-0 ${
+                          className={`hidden sm:inline-block text-[10px] font-bold px-2 py-0.5 rounded-full transition-colors duration-300 shrink-0 ${
                             isActive
                               ? 'bg-white/20 text-white/95 shadow-2xs border border-white/20'
                               : 'bg-[#1F3A5F]/10 text-[#1F3A5F] border border-[#1F3A5F]/15 group-hover:bg-[#1F3A5F]/15'
@@ -181,12 +182,13 @@ export const Navigation = ({
       {isScrolled && isMenuOpen && (
         <motion.nav
           id="scrolled-dropdown-navigation"
-          initial={{ height: 0, opacity: 0, y: -10 }}
-          animate={{ height: 'auto', opacity: 1, y: 0 }}
-          exit={{ height: 0, opacity: 0, y: -10 }}
+          initial={{ clipPath: 'inset(0% 0% 100% 0% round 1.5rem)', opacity: 0, y: -10 }}
+          animate={{ clipPath: 'inset(0% 0% 0% 0% round 1.5rem)', opacity: 1, y: 0 }}
+          exit={{ clipPath: 'inset(0% 0% 100% 0% round 1.5rem)', opacity: 0, y: -10 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="overflow-hidden rounded-3xl bg-[#FBF8F1]/60 backdrop-blur-md border border-[#D9CFBA]/80 shadow-lg shadow-[#1B2433]/5 px-3 sm:px-5 py-3.5"
+          className="overflow-y-auto overflow-x-hidden max-h-[calc(100dvh-7.5rem)] rounded-3xl bg-[#FBF8F1]/60 backdrop-blur-md border border-[#D9CFBA]/80 shadow-lg shadow-[#1B2433]/5 px-3 sm:px-5 py-3.5"
         >
+          {controls && <div className="min-[1370px]:hidden pb-3 mb-3 border-b border-[#D9CFBA]/60">{controls}</div>}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2">
             {NAV_TABS.map((tab, idx) => {
               const Icon = tab.icon;
@@ -202,14 +204,14 @@ export const Navigation = ({
                   transition={{ delay: idx * 0.035, duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                   whileHover={{ scale: 1.04, y: -2 }}
                   whileTap={{ scale: 0.96 }}
-                  className={`p-3 rounded-2xl border flex flex-col items-center justify-center text-center gap-1.5 transition-all cursor-pointer select-none group shadow-xs ${
+                  className={`p-2.5 sm:p-3 rounded-2xl border flex flex-row sm:flex-col items-center sm:justify-center text-left sm:text-center gap-2.5 sm:gap-1.5 transition-all cursor-pointer select-none group shadow-xs ${
                     isActive
                       ? 'bg-gradient-to-br from-[#2B4468]/90 via-[#223F66]/90 to-[#1F3A5F]/90 text-white border-[#2B4468]/80 shadow-md shadow-[#2B4468]/25'
                       : 'bg-white/45 hover:bg-white/70 text-[#1B2433] border-[#D9CFBA]/70 hover:border-[#1F3A5F]/40'
                   }`}
                 >
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+                    className={`w-8 h-8 shrink-0 rounded-full flex items-center justify-center transition-colors ${
                       isActive
                         ? 'bg-white/20 text-white'
                         : 'bg-[#1F3A5F]/10 text-[#1F3A5F] group-hover:bg-[#1F3A5F]/15'
@@ -217,13 +219,13 @@ export const Navigation = ({
                   >
                     <Icon className="w-4 h-4" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <div className="text-xs font-bold leading-tight tracking-tight">
                       {tab.label}
                     </div>
                     {tab.tag && (
                       <span
-                        className={`inline-block mt-1 text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                        className={`hidden sm:inline-block mt-1 max-w-full truncate whitespace-nowrap text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                           isActive
                             ? 'bg-white/20 text-white/95'
                             : 'bg-[#1F3A5F]/10 text-[#1F3A5F]'

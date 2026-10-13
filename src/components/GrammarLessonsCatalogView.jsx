@@ -366,7 +366,7 @@ export const GrammarLessonsCatalogView = ({
             >
               <div className="space-y-3">
                 {/* Badges row */}
-                <div className="flex items-center justify-between gap-2 flex-wrap sm:flex-nowrap">
+                <div className="flex items-center justify-between gap-2 flex-wrap">
                   <div className="flex items-center space-x-2 shrink-0">
                     {lesson.unitNumber && (
                       <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-[#C23B3B] text-white tracking-wider">
@@ -383,11 +383,11 @@ export const GrammarLessonsCatalogView = ({
                   <div className="flex items-center flex-wrap gap-1.5 justify-end">
                     {!isUnlocked ? (
                       <span
-                        className="flex items-center gap-1 text-xs font-semibold text-[#8C7A65] bg-[#FAF5EE] px-2.5 py-0.5 rounded-full border border-[#E8DAC8] shadow-2xs"
+                        className="flex items-center gap-1 max-w-full text-xs font-semibold text-[#8C7A65] bg-[#FAF5EE] px-2.5 py-0.5 rounded-full border border-[#E8DAC8] shadow-2xs"
                         title={lockReason}
                       >
-                        <Lock className="w-3.5 h-3.5 text-[#B3262F]" />
-                        <span>{lockReason}</span>
+                        <Lock className="w-3.5 h-3.5 shrink-0 text-[#B3262F]" />
+                        <span className="min-w-0">{lockReason}</span>
                       </span>
                     ) : isMastered ? (
                       <span className="flex items-center gap-1 text-xs font-bold text-[#245243] bg-[#E9F3EE] px-2.5 py-0.5 rounded-full border border-[#2F6F57]/30 shadow-2xs">
