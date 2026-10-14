@@ -33,7 +33,7 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
   return (
     <div className="space-y-8 sm:space-y-10 pb-10">
       {/* Hero */}
-      <section className="rounded-3xl border border-[#D9CFBA]/80 bg-white/70 backdrop-blur-sm p-6 sm:p-10 shadow-sm">
+      <section className="rounded-3xl border border-[#D9CFBA]/80 bg-white/90 p-6 sm:p-10 shadow-sm">
         <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#C23B3B]">Bienvenue</p>
         <h1 className="mt-2 font-serif text-3xl sm:text-4xl font-bold text-[#1B2433] leading-tight">
           Welcome to L'Atelier Grammaire
@@ -54,7 +54,7 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
       </section>
 
       {/* Your path */}
-      <section className="rounded-3xl border border-[#D9CFBA]/80 bg-white/70 backdrop-blur-sm p-6 sm:p-8 shadow-sm">
+      <section className="rounded-3xl border border-[#D9CFBA]/80 bg-white/90 p-6 sm:p-8 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5F6B7A]">Your path</p>

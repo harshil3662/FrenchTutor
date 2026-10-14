@@ -354,7 +354,7 @@ export const FlashcardsView = ({
       {/* Mode Switcher Tabs */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-b border-[#D9CFBA] pb-4">
         {/* Main View Mode Selector */}
-        <div className="flex flex-wrap gap-2 p-1.5 bg-white/70 backdrop-blur-sm rounded-2xl border border-[#D9CFBA] shadow-xs">
+        <div className="flex flex-wrap gap-2 p-1.5 bg-white/90 rounded-2xl border border-[#D9CFBA] shadow-xs">
           <button
             onClick={() => {
               setViewMode('daily-ai');

@@ -153,21 +153,23 @@ export default function App() {
       {/* Sticky Top Header & Navigation Container (hidden when modal is open) */}
       {!isModalOpen && (
         <header
-          className={`sticky top-0 z-30 transition-[padding] duration-250 ease-out will-change-transform transform-gpu pointer-events-none ${
-            isScrolled
-              ? 'pt-2.5 sm:pt-3.5 px-3 sm:px-6 lg:px-8 pb-1'
-              : 'pt-0 px-0 pb-0'
-          }`}
+          className="sticky top-0 z-30 will-change-transform transform-gpu pointer-events-none"
         >
-          <div className="max-w-7xl mx-auto flex flex-col gap-2.5">
+          <div
+            className={`max-w-7xl mx-auto flex flex-col gap-2.5 ${
+              isScrolled
+                ? 'pt-2.5 sm:pt-3.5 px-3 sm:px-6 lg:px-8 pb-1'
+                : 'pt-0 px-0 pb-0'
+            }`}
+          >
             {/* Top Bar Row: Header Capsule + Same-Height Companion Menu Button */}
             <div className="flex items-stretch gap-2.5 sm:gap-3 pointer-events-auto">
               {/* Main Header Capsule */}
               <div
-                className={`relative flex-1 min-w-0 flex items-center transition-[border-radius,background-color,border-color,box-shadow] duration-250 ease-out ${
+                className={`relative flex-1 min-w-0 flex items-center transition-[background-color,border-color,box-shadow] duration-250 ease-out ${
                   isScrolled
                     ? 'rounded-2xl sm:rounded-3xl bg-transparent border border-transparent shadow-none ring-0'
-                    : 'w-full bg-[#EFE6D2]/90 backdrop-blur-md border-b-2 border-[#1F3A5F] shadow-none rounded-none'
+                    : 'w-full bg-[#EFE6D2]/95 border-b-2 border-[#1F3A5F] shadow-none rounded-none'
                 }`}
               >
                 {!isScrolled && (
@@ -228,24 +230,16 @@ export default function App() {
             </div>
 
             {/* Dynamic Horizontal Tab Navigation (Normal top view when not scrolled) */}
-            <AnimatePresence initial={false}>
-              {!isScrolled && (
-                <motion.div
-                  key="top-horizontal-nav"
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                  className="overflow-hidden pointer-events-auto"
-                >
-                  <Navigation
-                    activeTab={activeTab}
-                    onTabChange={(tabId) => setActiveTab(tabId)}
-                    isScrolled={false}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/* Not height-animated: motion's height measurement resets window scroll mid-swipe. */}
+            {!isScrolled && (
+              <div className="pointer-events-auto">
+                <Navigation
+                  activeTab={activeTab}
+                  onTabChange={(tabId) => setActiveTab(tabId)}
+                  isScrolled={false}
+                />
+              </div>
+            )}
 
             {/* When scrolled down and menu is open: Dropdown Navigation Panel with Butter-smooth transition */}
             <AnimatePresence>

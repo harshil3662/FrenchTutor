@@ -4,6 +4,8 @@
   html {
     font-size: 106.25%; /* ~17px on phones; 19px from 640px up (below) */
     -webkit-text-size-adjust: 100%;
+    /* The header shrinks as the user scrolls. Scroll anchoring would then jump the page back to the top. */
+    overflow-anchor: none;
   }
 
   @media (min-width: 40rem) {

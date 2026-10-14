@@ -112,7 +112,7 @@ export const Navigation = ({
             {/* Segmented Glass Dock Track with Horizontal Scroll */}
             <div
               ref={scrollContainerRef}
-              className="relative p-1 bg-white/70 backdrop-blur-md rounded-full border border-[#D9CFBA]/80 shadow-xs flex items-center overflow-x-auto no-scrollbar"
+              className="relative p-1 bg-white/95 rounded-full border border-[#D9CFBA]/80 shadow-xs flex items-center overflow-x-auto no-scrollbar"
             >
               <div className="flex space-x-1 sm:space-x-1.5 min-w-max mx-auto px-1">
                 {NAV_TABS.map((tab) => {
@@ -186,7 +186,7 @@ export const Navigation = ({
           animate={{ clipPath: 'inset(0% 0% 0% 0% round 1.5rem)', opacity: 1, y: 0 }}
           exit={{ clipPath: 'inset(0% 0% 100% 0% round 1.5rem)', opacity: 0, y: -10 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="overflow-y-auto overflow-x-hidden max-h-[calc(100dvh-7.5rem)] rounded-3xl bg-[#FBF8F1]/60 backdrop-blur-md border border-[#D9CFBA]/80 shadow-lg shadow-[#1B2433]/5 px-3 sm:px-5 py-3.5"
+          className="overflow-y-auto overflow-x-hidden max-h-[calc(100dvh-7.5rem)] rounded-3xl bg-[#FBF8F1]/95 border border-[#D9CFBA]/80 shadow-lg shadow-[#1B2433]/5 px-3 sm:px-5 py-3.5"
         >
           {controls && <div className="min-[1370px]:hidden pb-3 mb-3 border-b border-[#D9CFBA]/60">{controls}</div>}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2">

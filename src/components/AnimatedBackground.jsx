@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
-// Ambient motion lives in CSS keyframes (index.css) on transform and opacity only. The browser runs
-// them on the compositor, so scrolling does not trigger per-frame JavaScript or repaints of this layer.
+// Soft glows use radial gradients instead of blur filters. Blur filters are costly to repaint on
+// phones and tablets, and this fixed layer sits behind the page while it scrolls.
 
 // French grammatical & typographical diacritics drifting serenely through the atelier
 const TYPOGRAPHIC_GLYPHS = [
@@ -18,6 +18,9 @@ const TYPOGRAPHIC_GLYPHS = [
   { id: 11, text: 'ù', xStart: 50, delay: 8, duration: 28, size: 'text-3xl', color: 'text-[#1F3A5F]/15' },
   { id: 12, text: 'ë', xStart: 92, delay: 12, duration: 30, size: 'text-4xl', color: 'text-[#1F3A5F]/14' },
 ];
+
+// Fixed vertical placement for each glyph (in % of the viewport), spread so the accents stay scattered.
+const GLYPH_TOP = [14, 62, 28, 74, 40, 8, 84, 52, 20, 68, 34, 92];
 
 // Soft ambient study motes (warm sunlight drifting in an atelier)
 const STUDY_MOTES = [
@@ -41,23 +44,21 @@ const AnimatedBackgroundBase = ({ isPaused = false }) => {
     <div
       aria-hidden="true"
       id="atelier-animated-background"
-      className={`pointer-events-none fixed inset-0 z-0 overflow-hidden transform-gpu will-change-transform select-none ${
-        isPaused ? 'is-paused' : ''
-      }`}
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden transform-gpu will-change-transform select-none"
       style={{ isolation: 'isolate', contain: 'strict', transform: 'translateZ(0)' }}
     >
       {/* 1. Atelier Ambient Light Pools — perfectly harmonized with #F7F2E7 base palette */}
       {/* Warm Ivory & Parchment Light Pool (Top Left) */}
-      <div className="atelier-blob-1 absolute -top-[12%] -left-[10%] w-[58vw] h-[58vw] rounded-full bg-gradient-to-br from-[#FFFDF8]/70 via-[#FAF5EC]/45 to-transparent blur-3xl" />
+      <div className="absolute -top-[12%] -left-[10%] w-[58vw] h-[58vw] rounded-full bg-radial from-[#FFFDF8]/70 via-[#FAF5EC]/45 to-transparent" />
 
       {/* French Olive & Atelier Sage Pool (Top Right) */}
-      <div className="atelier-blob-2 absolute top-[3%] -right-[10%] w-[52vw] h-[52vw] rounded-full bg-gradient-to-bl from-[#E6EDE0]/55 via-[#EEF2E8]/35 to-transparent blur-3xl" />
+      <div className="absolute top-[3%] -right-[10%] w-[52vw] h-[52vw] rounded-full bg-radial from-[#E6EDE0]/55 via-[#EEF2E8]/35 to-transparent" />
 
       {/* Terracotta & Warm Parchment Subtle Glow (Bottom Center-Left) */}
-      <div className="atelier-blob-3 absolute -bottom-[16%] left-[8%] w-[56vw] h-[56vw] rounded-full bg-gradient-to-tr from-[#F8EDE6]/50 via-[#F4E9E2]/30 to-transparent blur-3xl" />
+      <div className="absolute -bottom-[16%] left-[8%] w-[56vw] h-[56vw] rounded-full bg-radial from-[#F8EDE6]/50 via-[#F4E9E2]/30 to-transparent" />
 
       {/* Alabaster & Warm Linen Depth (Bottom Right) */}
-      <div className="atelier-blob-4 absolute -bottom-[12%] -right-[8%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-tl from-[#EDECE4]/55 via-[#F6F5EC]/35 to-transparent blur-3xl" />
+      <div className="absolute -bottom-[12%] -right-[8%] w-[50vw] h-[50vw] rounded-full bg-radial from-[#EDECE4]/55 via-[#F6F5EC]/35 to-transparent" />
 
       {/* 2. Atelier Drafting Paper Grid Overlay (Papier Vélin / Carnet d'Étude) */}
       <div
@@ -75,10 +76,8 @@ const AnimatedBackgroundBase = ({ isPaused = false }) => {
         {DRAFTING_RINGS.map((ring) => (
           <div
             key={`drafting-ring-${ring.id}`}
-            className={`absolute rounded-full border border-dashed border-[#1F3A5F]/[0.07] ${ring.size} ${
-              ring.clockwise ? 'atelier-ring-cw' : 'atelier-ring-ccw'
-            }`}
-            style={{ left: ring.left, top: ring.top, animationDuration: `${ring.duration}s` }}
+            className={`absolute rounded-full border border-dashed border-[#1F3A5F]/[0.07] ${ring.size}`}
+            style={{ left: ring.left, top: ring.top }}
           >
             {/* Inner concentric fine ring */}
             <div className="absolute inset-4 rounded-full border border-[#1F3A5F]/[0.04]" />
@@ -96,14 +95,8 @@ const AnimatedBackgroundBase = ({ isPaused = false }) => {
           TYPOGRAPHIC_GLYPHS.map((glyph) => (
             <div
               key={`glyph-${glyph.id}`}
-              className={`absolute top-0 font-serif font-normal select-none pointer-events-none ${glyph.size} ${
-                glyph.color
-              } ${glyph.id % 2 === 0 ? 'atelier-glyph-even' : 'atelier-glyph-odd'}`}
-              style={{
-                left: `${glyph.xStart}vw`,
-                animationDuration: `${glyph.duration}s`,
-                animationDelay: `${glyph.delay}s`,
-              }}
+              className={`absolute font-serif font-normal select-none pointer-events-none ${glyph.size} ${glyph.color}`}
+              style={{ left: `${glyph.xStart}vw`, top: `${GLYPH_TOP[glyph.id - 1]}%` }}
             >
               {glyph.text}
             </div>
@@ -120,13 +113,8 @@ const AnimatedBackgroundBase = ({ isPaused = false }) => {
           STUDY_MOTES.map((mote) => (
             <div
               key={`study-mote-${mote.id}`}
-              className={`atelier-mote absolute rounded-full bg-gradient-to-br from-[#C23B3B]/40 to-[#1F3A5F]/30 blur-[0.5px] ${mote.size}`}
-              style={{
-                left: mote.left,
-                top: mote.top,
-                animationDuration: `${mote.duration}s`,
-                animationDelay: `${mote.delay}s`,
-              }}
+              className={`absolute rounded-full bg-gradient-to-br from-[#C23B3B]/40 to-[#1F3A5F]/30 ${mote.size}`}
+              style={{ left: mote.left, top: mote.top }}
             />
           ))}
       </div>
