@@ -236,7 +236,7 @@ export const LessonModal = ({
       });
       const data = await res.json();
       if (forceFresh && data.usedFallback) {
-        throw new Error('The AI model did not return new questions. Please try again.');
+        throw new Error('No new questions were returned. Please try again.');
       }
       const validQuestions = Array.isArray(data.questions)
         ? data.questions
@@ -251,7 +251,7 @@ export const LessonModal = ({
         : [];
 
       if (!res.ok || !validQuestions.length) {
-        throw new Error(data.error || 'Could not generate AI quiz questions.');
+        throw new Error(data.error || 'Could not prepare quiz questions.');
       }
 
       const formatted = validQuestions;
@@ -263,7 +263,7 @@ export const LessonModal = ({
       setQuizError('');
     } catch (e) {
       if (controller.signal.aborted) return;
-      setQuizError(e.message || 'Could not generate AI quiz.');
+      setQuizError(e.message || 'Could not prepare the quiz.');
     } finally {
       if (!controller.signal.aborted) setIsGeneratingQuiz(false);
     }
@@ -388,13 +388,13 @@ export const LessonModal = ({
         <div className="p-4 sm:p-6 bg-[#FBF7EE] border-b border-[#E6DCC8] flex items-start justify-between shrink-0">
           <div className="space-y-1">
             <div className="flex items-center space-x-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#1F3A5F] text-white">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#C23B3B] text-white">
                 Unit {lesson.unit || 1} • {lesson.level}
               </span>
               <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#F2EBDC] text-[#1F3A5F] border border-[#1F3A5F]/20">
                 {lesson.category}
               </span>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#FCF0EE] text-[#8A2430] border border-[#C23B3B]/20 flex items-center gap-1">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#FCF0EE] text-[#C23B3B] border border-[#C23B3B]/20 flex items-center gap-1">
                 <BrainCircuit className="w-3 h-3" />
                 <span>Quiz</span>
               </span>
@@ -477,7 +477,7 @@ export const LessonModal = ({
                         }}
                         className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer flex items-center gap-2 ${
                           activeTopicIndex === idx
-                            ? 'bg-[#1F3A5F] text-white shadow-xs'
+                            ? 'bg-[#C23B3B] text-white shadow-xs'
                             : 'bg-white text-[#1F3A5F] hover:bg-[#F2EBDC] border border-[#E6DCC8]'
                         }`}
                       >
@@ -493,7 +493,7 @@ export const LessonModal = ({
                 </div>
               )}
 
-              {/* Topic Header & Jump to AI Quiz CTA */}
+              {/* Topic Header & Jump to Quiz CTA */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-[#E6DCC8]">
                 <div>
                   <h3 className="text-lg font-bold text-[#1B2433] font-serif">
@@ -539,9 +539,9 @@ export const LessonModal = ({
               {/* 2. Golden Rule */}
               {goldenRuleText && (
                 <div className="p-5 bg-[#E9F3EE] rounded-2xl border border-[#2F6F57]/30 flex items-start gap-3">
-                  <Lightbulb className="w-5 h-5 text-[#245243] shrink-0 mt-0.5" />
+                  <Lightbulb className="w-5 h-5 text-[#2F6F57] shrink-0 mt-0.5" />
                   <div className="space-y-1">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#245243]">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#2F6F57]">
                       Golden Grammar Rule
                     </h4>
                     <p className="text-sm text-[#1B2433] font-medium leading-relaxed">
@@ -680,7 +680,7 @@ export const LessonModal = ({
                 </div>
               )}
 
-              {/* Bottom Actions: Next Topic or Start AI Quiz */}
+              {/* Bottom Actions: Next Topic or Start Quiz */}
               <div className="pt-4 border-t border-[#E6DCC8] flex justify-between items-center">
                 {hasMultipleTopics && activeTopicIndex > 0 ? (
                   <button
@@ -712,7 +712,7 @@ export const LessonModal = ({
                         setActiveTopicIndex((prev) => prev + 1);
                         scrollToTop();
                       }}
-                      className="px-5 py-2.5 bg-[#1F3A5F] hover:bg-[#223F66] text-white rounded-xl font-bold text-xs shadow-xs flex items-center gap-2 transition-all cursor-pointer"
+                      className="px-5 py-2.5 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl font-bold text-xs shadow-xs flex items-center gap-2 transition-all cursor-pointer"
                     >
                       <span>Next Topic: {topicsList[activeTopicIndex + 1]?.title}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -721,7 +721,7 @@ export const LessonModal = ({
                     <button
                       id="start-lesson-ai-quiz-btn"
                       onClick={handleOpenQuizPhase}
-                      className="px-6 py-2.5 bg-[#1F3A5F] hover:bg-[#223F66] text-white rounded-xl font-bold text-xs shadow-xs flex items-center gap-2 transition-all cursor-pointer"
+                      className="px-6 py-2.5 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl font-bold text-xs shadow-xs flex items-center gap-2 transition-all cursor-pointer"
                     >
                       <BrainCircuit className="w-4 h-4 text-white" />
                       <span>Start Unit Quiz</span>
@@ -748,7 +748,7 @@ export const LessonModal = ({
                           <span className="text-lg font-bold text-[#1B2433] font-serif">{v.french}</span>
                           {v.gender && (
                             <span className={`text-xs uppercase font-bold px-2 py-0.5 rounded-md ${
-                              v.gender === 'masculine' ? 'bg-[#F2EBDC] text-[#1F3A5F]' : 'bg-[#FCF0EE] text-[#B3262F]'
+                              v.gender === 'masculine' ? 'bg-[#F2EBDC] text-[#1F3A5F]' : 'bg-[#FCF0EE] text-[#C23B3B]'
                             }`}>
                               {v.gender === 'masculine' ? 'Masc' : 'Fem'}
                             </span>
@@ -759,7 +759,7 @@ export const LessonModal = ({
                       </div>
                       <button
                         onClick={() => handleAudioPlay(v.french)}
-                        className="p-2.5 rounded-xl bg-[#F2EBDC] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white transition-colors border border-[#1F3A5F]/20 cursor-pointer shadow-xs"
+                        className="p-2.5 rounded-xl bg-[#F2EBDC] text-[#1F3A5F] hover:bg-[#C23B3B] hover:text-white transition-colors border border-[#1F3A5F]/20 cursor-pointer shadow-xs"
                       >
                         <Volume2 className="w-4 h-4" />
                       </button>
@@ -783,7 +783,7 @@ export const LessonModal = ({
                 <button
                   id="vocab-to-quiz-btn"
                   onClick={handleOpenQuizPhase}
-                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#1F3A5F] hover:bg-[#223F66] text-white font-bold text-xs transition-all shadow-xs cursor-pointer"
+                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#C23B3B] hover:bg-[#C23B3B] text-white font-bold text-xs transition-all shadow-xs cursor-pointer"
                 >
                   <BrainCircuit className="w-4 h-4 text-white" />
                   <span>Start Unit Quiz</span>
@@ -793,10 +793,10 @@ export const LessonModal = ({
             </div>
           )}
 
-          {/* PHASE 3: UNIT AI QUIZ */}
+          {/* PHASE 3: UNIT QUIZ */}
           {phase === 'quiz' && (
             <div className="space-y-6 animate-in fade-in">
-              {/* Header inside AI Quiz */}
+              {/* Header inside Unit Quiz */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#E6DCC8]">
                 <div className="flex items-center gap-2.5">
                   <div className="p-2 bg-[#F2EBDC] text-[#1F3A5F] rounded-xl border border-[#1F3A5F]/15">
@@ -837,7 +837,7 @@ export const LessonModal = ({
                 </div>
               ) : quizError ? (
                 <div className="text-center py-12 space-y-4 bg-[#FCF0EE] rounded-3xl p-8 border border-[#C23B3B]/30">
-                  <AlertTriangle className="w-10 h-10 text-[#B3262F] mx-auto" />
+                  <AlertTriangle className="w-10 h-10 text-[#C23B3B] mx-auto" />
                   <div className="space-y-1">
                     <h4 className="text-base font-bold text-[#1B2433] font-serif">
                       Could not generate quiz
@@ -846,7 +846,7 @@ export const LessonModal = ({
                   </div>
                   <button
                     onClick={() => handleGenerateAiQuiz(true)}
-                    className="px-5 py-2.5 bg-[#1F3A5F] hover:bg-[#223F66] text-white rounded-xl text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-xs"
+                    className="px-5 py-2.5 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-xs"
                   >
                     <RotateCcw className="w-4 h-4" />
                     <span>Try Generating Again</span>
@@ -861,8 +861,8 @@ export const LessonModal = ({
                       Question {currentExIndex + 1} of {exercises.length}
                     </span>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-bold text-[#8A2430] bg-[#FCF0EE] px-2 py-0.5 rounded-full border border-[#C23B3B]/30 flex items-center gap-1">
-                        <AlertTriangle className="w-3 h-3 text-[#B3262F]" />
+                      <span className="text-[10px] font-bold text-[#C23B3B] bg-[#FCF0EE] px-2 py-0.5 rounded-full border border-[#C23B3B]/30 flex items-center gap-1">
+                        <AlertTriangle className="w-3 h-3 text-[#C23B3B]" />
                         <span>100% correct required to finish unit</span>
                       </span>
                       <span className="font-bold text-[#1B2433]">Score: {score}</span>
@@ -870,7 +870,7 @@ export const LessonModal = ({
                   </div>
                   <div className="w-full bg-[#E9E2D2] h-2 rounded-full overflow-hidden">
                     <div
-                      className="bg-[#1F3A5F] h-full transition-all duration-300"
+                      className="bg-[#C23B3B] h-full transition-all duration-300"
                       style={{ width: `${((currentExIndex + 1) / exercises.length) * 100}%` }}
                     />
                   </div>
@@ -883,7 +883,7 @@ export const LessonModal = ({
                           French Grammar Challenge
                         </span>
                         {isQuestionTranslated && (
-                          <span className="text-[10px] uppercase font-semibold text-[#8C6D23] bg-[#FEF9ED] px-2 py-0.5 rounded border border-[#E0D0A5]">
+                          <span className="text-[10px] uppercase font-semibold text-[#C23B3B] bg-[#FCF0EE] px-2 py-0.5 rounded border border-[#D9CFBA]">
                             English Translation
                           </span>
                         )}
@@ -896,7 +896,7 @@ export const LessonModal = ({
                           disabled={isTranslating}
                           className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer border ${
                             isQuestionTranslated
-                              ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-2xs'
+                              ? 'bg-[#C23B3B] text-white border-[#1F3A5F] shadow-2xs'
                               : 'bg-white hover:bg-[#FBF7EE] text-[#1F3A5F] border-[#D9CFBA]'
                           }`}
                           title={isQuestionTranslated ? 'Translate back to French' : 'Translate question into English'}
@@ -940,11 +940,11 @@ export const LessonModal = ({
                             }}
                             className={`p-4 rounded-2xl border text-left text-sm sm:text-base font-semibold transition-all cursor-pointer flex items-center justify-between gap-3 ${
                               isCorrectOption
-                                ? 'bg-[#E9F3EE] text-[#245243] border-[#2F6F57]/60'
+                                ? 'bg-[#E9F3EE] text-[#2F6F57] border-[#2F6F57]/60'
                                 : hasChecked && isSelected
-                                  ? 'bg-[#FCF0EE] text-[#B3262F] border-[#C23B3B]/60'
+                                  ? 'bg-[#FCF0EE] text-[#C23B3B] border-[#C23B3B]/60'
                                   : isSelected
-                                    ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-xs'
+                                    ? 'bg-[#C23B3B] text-white border-[#1F3A5F] shadow-xs'
                                     : 'bg-white text-[#1B2433] border-[#E6DCC8] hover:bg-[#FBF7EE]'
                             }`}
                           >
@@ -957,7 +957,7 @@ export const LessonModal = ({
                               <span>{option}</span>
                             </div>
                             {isCorrectOption && <CheckCircle2 className="w-5 h-5 shrink-0 text-[#2F6F57]" />}
-                            {hasChecked && isSelected && !isCorrectOption && <XCircle className="w-5 h-5 shrink-0 text-[#B3262F]" />}
+                            {hasChecked && isSelected && !isCorrectOption && <XCircle className="w-5 h-5 shrink-0 text-[#C23B3B]" />}
                           </button>
                         );
                       })}
@@ -981,7 +981,7 @@ export const LessonModal = ({
                             ? 'Écrivez la traduction en français...'
                             : 'Répondez en français...'
                         }
-                        className="w-full rounded-2xl border border-[#D9CFBA] bg-white px-4 py-3 text-sm sm:text-base text-[#1B2433] shadow-2xs outline-none focus:border-[#1F3A5F] focus:ring-2 focus:ring-[#1F3A5F]/10 resize-none disabled:opacity-60"
+                        className="w-full rounded-2xl border border-[#D9CFBA] bg-white px-4 py-3 text-sm sm:text-base text-[#1B2433] shadow-2xs outline-none focus:border-[#1F3A5F] focus:ring-2 focus:ring-[#C23B3B]/10 resize-none disabled:opacity-60"
                       />
                     </div>
                   )}
@@ -991,8 +991,8 @@ export const LessonModal = ({
                     <div
                       className={`p-5 rounded-2xl border text-sm sm:text-base space-y-2 animate-in fade-in ${
                         isCorrect
-                          ? 'bg-[#E9F3EE] border-[#2F6F57]/40 text-[#245243]'
-                          : 'bg-[#FCF0EE] border-[#C23B3B]/40 text-[#2B4468]'
+                          ? 'bg-[#E9F3EE] border-[#2F6F57]/40 text-[#2F6F57]'
+                          : 'bg-[#FCF0EE] border-[#C23B3B]/40 text-[#1F3A5F]'
                       }`}
                     >
                       <div className="flex items-center gap-2 font-bold text-base">
@@ -1003,7 +1003,7 @@ export const LessonModal = ({
                           </>
                         ) : (
                           <>
-                            <AlertTriangle className="w-5 h-5 text-[#B3262F]" />
+                            <AlertTriangle className="w-5 h-5 text-[#C23B3B]" />
                             <span>Incorrect.</span>
                           </>
                         )}
@@ -1022,7 +1022,7 @@ export const LessonModal = ({
                         id="lesson-quiz-check-btn"
                         disabled={!selectedAnswer}
                         onClick={handleCheckAnswer}
-                        className="px-6 py-3 bg-[#1F3A5F] text-white rounded-2xl font-bold text-xs shadow-sm hover:bg-[#223F66] transition-all cursor-pointer disabled:opacity-50"
+                        className="px-6 py-3 bg-[#C23B3B] text-white rounded-2xl font-bold text-xs shadow-sm hover:bg-[#C23B3B] transition-all cursor-pointer disabled:opacity-50"
                       >
                         Check Answer
                       </button>
@@ -1030,7 +1030,7 @@ export const LessonModal = ({
                       <button
                         id="lesson-quiz-next-btn"
                         onClick={handleNextExercise}
-                        className="px-6 py-3 bg-[#1F3A5F] text-white rounded-2xl font-bold text-xs shadow-sm hover:bg-[#223F66] transition-all cursor-pointer flex items-center gap-2"
+                        className="px-6 py-3 bg-[#C23B3B] text-white rounded-2xl font-bold text-xs shadow-sm hover:bg-[#C23B3B] transition-all cursor-pointer flex items-center gap-2"
                       >
                         <span>{currentExIndex < exercises.length - 1 ? 'Next Question' : 'Complete Quiz & View Score'}</span>
                         <ArrowRight className="w-4 h-4" />
@@ -1051,7 +1051,7 @@ export const LessonModal = ({
                   </div>
                   <button
                     onClick={() => handleGenerateAiQuiz(false)}
-                    className="px-6 py-2.5 bg-[#1F3A5F] hover:bg-[#223F66] text-white rounded-xl text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-xs"
+                    className="px-6 py-2.5 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-xs"
                   >
                     <Sparkles className="w-4 h-4 text-[#C23B3B]" />
                     <span>Launch Unit Quiz</span>
@@ -1067,12 +1067,12 @@ export const LessonModal = ({
               {exercises.length > 0 && score === exercises.length ? (
                 /* 100% Correct: Mastered */
                 <>
-                  <div className="w-20 h-20 bg-[#E9F3EE] text-[#245243] rounded-full flex items-center justify-center mx-auto border-2 border-[#2F6F57] shadow-xs">
+                  <div className="w-20 h-20 bg-[#E9F3EE] text-[#2F6F57] rounded-full flex items-center justify-center mx-auto border-2 border-[#2F6F57] shadow-xs">
                     <Trophy className="w-10 h-10" />
                   </div>
 
                   <div className="space-y-1">
-                    <div className="inline-flex items-center gap-1.5 bg-[#E9F3EE] text-[#245243] border border-[#2F6F57]/30 px-3.5 py-1 rounded-full text-xs font-bold">
+                    <div className="inline-flex items-center gap-1.5 bg-[#E9F3EE] text-[#2F6F57] border border-[#2F6F57]/30 px-3.5 py-1 rounded-full text-xs font-bold">
                       <Sparkles className="w-3.5 h-3.5 text-[#2F6F57]" />
                       <span>100% Score • Unit Mastered</span>
                     </div>
@@ -1110,7 +1110,7 @@ export const LessonModal = ({
                     <button
                       id="finish-lesson-modal-btn"
                       onClick={onClose}
-                      className="px-6 py-2.5 bg-[#1F3A5F] text-white rounded-xl text-xs font-bold hover:bg-[#223F66] transition-all cursor-pointer shadow-xs"
+                      className="px-6 py-2.5 bg-[#C23B3B] text-white rounded-xl text-xs font-bold hover:bg-[#C23B3B] transition-all cursor-pointer shadow-xs"
                     >
                       <span>Finish & Continue</span>
                     </button>
@@ -1119,13 +1119,13 @@ export const LessonModal = ({
               ) : score === 0 ? (
                 /* 0% Correct: Needs Practice / Not Mastered */
                 <>
-                  <div className="w-20 h-20 bg-[#FCF0EE] text-[#B3262F] rounded-full flex items-center justify-center mx-auto border-2 border-[#C23B3B]/40 shadow-xs">
+                  <div className="w-20 h-20 bg-[#FCF0EE] text-[#C23B3B] rounded-full flex items-center justify-center mx-auto border-2 border-[#C23B3B]/40 shadow-xs">
                     <AlertTriangle className="w-10 h-10" />
                   </div>
 
                   <div className="space-y-1">
-                    <div className="inline-flex items-center gap-1.5 bg-[#FCF0EE] text-[#8A2430] border border-[#C23B3B]/30 px-3.5 py-1 rounded-full text-xs font-bold">
-                      <XCircle className="w-3.5 h-3.5 text-[#B3262F]" />
+                    <div className="inline-flex items-center gap-1.5 bg-[#FCF0EE] text-[#C23B3B] border border-[#C23B3B]/30 px-3.5 py-1 rounded-full text-xs font-bold">
+                      <XCircle className="w-3.5 h-3.5 text-[#C23B3B]" />
                       <span>Not Mastered (0 / {exercises.length} Correct)</span>
                     </div>
                     <h3 className="text-2xl sm:text-3xl font-bold text-[#1B2433] font-serif">
@@ -1146,7 +1146,7 @@ export const LessonModal = ({
                         setScore(0);
                         setPhase('quiz');
                       }}
-                      className="px-6 py-2.5 bg-[#1F3A5F] text-white rounded-xl text-xs font-bold hover:bg-[#223F66] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                      className="px-6 py-2.5 bg-[#C23B3B] text-white rounded-xl text-xs font-bold hover:bg-[#C23B3B] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
                     >
                       <RotateCcw className="w-4 h-4" />
                       <span>Retake Quiz to Master (0/{exercises.length})</span>
@@ -1172,13 +1172,13 @@ export const LessonModal = ({
               ) : (
                 /* Partial Score: Completed but Not Mastered */
                 <>
-                  <div className="w-20 h-20 bg-[#FAF7EE] text-[#8C6D23] rounded-full flex items-center justify-center mx-auto border-2 border-[#D4AC0D]/40 shadow-xs">
+                  <div className="w-20 h-20 bg-[#FCF0EE] text-[#C23B3B] rounded-full flex items-center justify-center mx-auto border-2 border-[#C23B3B]/40 shadow-xs">
                     <CheckCircle2 className="w-10 h-10" />
                   </div>
 
                   <div className="space-y-1">
-                    <div className="inline-flex items-center gap-1.5 bg-[#FEF9E7] text-[#8C6D23] border border-[#D4AC0D]/30 px-3.5 py-1 rounded-full text-xs font-bold">
-                      <Sparkles className="w-3.5 h-3.5 text-[#D4AC0D]" />
+                    <div className="inline-flex items-center gap-1.5 bg-[#FCF0EE] text-[#C23B3B] border border-[#C23B3B]/30 px-3.5 py-1 rounded-full text-xs font-bold">
+                      <Sparkles className="w-3.5 h-3.5 text-[#C23B3B]" />
                       <span>Almost There ({score} / {exercises.length} Correct)</span>
                     </div>
                     <h3 className="text-2xl sm:text-3xl font-bold text-[#1B2433] font-serif">
@@ -1200,7 +1200,7 @@ export const LessonModal = ({
                         setScore(0);
                         setPhase('quiz');
                       }}
-                      className="px-6 py-2.5 bg-[#1F3A5F] text-white rounded-xl text-xs font-bold hover:bg-[#223F66] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                      className="px-6 py-2.5 bg-[#C23B3B] text-white rounded-xl text-xs font-bold hover:bg-[#C23B3B] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
                     >
                       <RotateCcw className="w-4 h-4" />
                       <span>Retake to Master ({score}/{exercises.length})</span>

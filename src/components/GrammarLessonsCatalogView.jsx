@@ -51,7 +51,7 @@ export const GrammarLessonsCatalogView = ({
     }
   }, [activeLevel]);
 
-  // AI Generator state
+  // Question Generator state
   const [isGeneratorOpen, setIsGeneratorOpen] = useState(false);
   const [customPrompt, setCustomPrompt] = useState('');
   const [customCategory, setCustomCategory] = useState('Subjunctive & Non-Finite Moods');
@@ -177,7 +177,7 @@ export const GrammarLessonsCatalogView = ({
           <h2 className="text-2xl sm:text-3xl font-bold text-[#1B2433] font-serif">
             Grammar Lessons & Aspects Curriculum
           </h2>
-          <p className="text-sm text-[#2B4468] max-w-2xl leading-relaxed">
+          <p className="text-sm text-[#1F3A5F] max-w-2xl leading-relaxed">
             Master the architecture of French grammar by aspect: tense boundaries, subjunctive triggers, preceding COD agreements, pronoun syntax, and hypothetical clauses.
           </p>
         </div>
@@ -194,7 +194,7 @@ export const GrammarLessonsCatalogView = ({
               onClick={() => setSelectedCategory(isSelected ? 'All' : cat.id)}
               className={`p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between space-y-2 ${
                 isSelected
-                  ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-xs'
+                  ? 'bg-[#C23B3B] text-white border-[#1F3A5F] shadow-xs'
                   : 'bg-white text-[#1B2433] border-[#E6DCC8] hover:bg-[#FBF7EE]'
               }`}
             >
@@ -228,7 +228,7 @@ export const GrammarLessonsCatalogView = ({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by unit # (e.g. 15), title, formula, or grammar rule..."
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#FBF7EE] border border-[#E6DCC8] text-xs text-[#1B2433] focus:outline-none focus:ring-1 focus:ring-[#1F3A5F]"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#FBF7EE] border border-[#E6DCC8] text-xs text-[#1B2433] focus:outline-none focus:ring-1 focus:ring-[#C23B3B]"
           />
         </div>
 
@@ -249,7 +249,7 @@ export const GrammarLessonsCatalogView = ({
                   }}
                   className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all flex items-center gap-1 ${
                     selectedLevelFilter === lvl
-                      ? 'bg-[#1F3A5F] text-white shadow-xs'
+                      ? 'bg-[#C23B3B] text-white shadow-xs'
                       : isUnlocked
                       ? 'text-[#5F6B7A] hover:text-[#1B2433] cursor-pointer'
                       : 'text-[#B0ABA0] opacity-50 cursor-not-allowed'
@@ -271,7 +271,7 @@ export const GrammarLessonsCatalogView = ({
             }}
             className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
               selectedCategory === 'All' && selectedLevelFilter === (activeLevel || 'A1') && !searchQuery
-                ? 'bg-[#1F3A5F] text-white'
+                ? 'bg-[#C23B3B] text-white'
                 : 'bg-[#F2EBDC] text-[#5F6B7A] hover:text-[#1B2433]'
             }`}
           >
@@ -282,10 +282,10 @@ export const GrammarLessonsCatalogView = ({
 
       {/* Locked Progression Alert Banner */}
       {lockedNotice && (
-        <div className="bg-[#FCF0EE] border-2 border-[#C23B3B]/50 text-[#8A2430] rounded-2xl p-4 flex items-center justify-between gap-3 shadow-md animate-in fade-in slide-in-from-top-2">
+        <div className="bg-[#FCF0EE] border-2 border-[#C23B3B]/50 text-[#C23B3B] rounded-2xl p-4 flex items-center justify-between gap-3 shadow-md animate-in fade-in slide-in-from-top-2">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-white border border-[#C23B3B]/40 flex items-center justify-center shrink-0">
-              <Lock className="w-4 h-4 text-[#B3262F]" />
+              <Lock className="w-4 h-4 text-[#C23B3B]" />
             </div>
             <div>
               <p className="text-xs font-bold font-serif">{lockedNotice}</p>
@@ -296,7 +296,7 @@ export const GrammarLessonsCatalogView = ({
           </div>
           <button
             onClick={() => setLockedNotice(null)}
-            className="p-1.5 hover:bg-[#F2EBDC] rounded-xl text-[#8A2430] cursor-pointer shrink-0 transition-colors"
+            className="p-1.5 hover:bg-[#F2EBDC] rounded-xl text-[#C23B3B] cursor-pointer shrink-0 transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -335,12 +335,12 @@ export const GrammarLessonsCatalogView = ({
                 }}
                 className={`px-2.5 py-1 rounded-lg text-[11px] font-bold shrink-0 border transition-all cursor-pointer ${
                   searchQuery.toLowerCase().includes(`unit ${l.unitNumber}`) || searchQuery === `${l.unitNumber}`
-                    ? 'bg-[#1F3A5F] text-white border-[#1F3A5F]'
+                    ? 'bg-[#C23B3B] text-white border-[#1F3A5F]'
                     : isMastered
-                    ? 'bg-[#E9F3EE] text-[#245243] border-[#2F6F57]/30'
+                    ? 'bg-[#E9F3EE] text-[#2F6F57] border-[#2F6F57]/30'
                     : isCompleted
-                    ? 'bg-[#FEF9E7] text-[#8C6D23] border-[#D4AC0D]/30'
-                    : 'bg-white text-[#2B4468] border-[#E6DCC8] hover:bg-[#FBF7EE]'
+                    ? 'bg-[#FCF0EE] text-[#C23B3B] border-[#C23B3B]/30'
+                    : 'bg-white text-[#1F3A5F] border-[#E6DCC8] hover:bg-[#FBF7EE]'
                 }`}
                 title={l.title}
               >
@@ -373,7 +373,7 @@ export const GrammarLessonsCatalogView = ({
                         Unit {lesson.unitNumber}
                       </span>
                     )}
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#1F3A5F] text-white">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#C23B3B] text-white">
                       {lesson.level}
                     </span>
                     <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#F2EBDC] text-[#1F3A5F] border border-[#1F3A5F]/20 max-w-[130px] truncate hidden sm:inline-block">
@@ -386,25 +386,25 @@ export const GrammarLessonsCatalogView = ({
                         className="flex items-center gap-1 max-w-full text-xs font-semibold text-[#8C7A65] bg-[#FAF5EE] px-2.5 py-0.5 rounded-full border border-[#E8DAC8] shadow-2xs"
                         title={lockReason}
                       >
-                        <Lock className="w-3.5 h-3.5 shrink-0 text-[#B3262F]" />
+                        <Lock className="w-3.5 h-3.5 shrink-0 text-[#C23B3B]" />
                         <span className="min-w-0">{lockReason}</span>
                       </span>
                     ) : isMastered ? (
-                      <span className="flex items-center gap-1 text-xs font-bold text-[#245243] bg-[#E9F3EE] px-2.5 py-0.5 rounded-full border border-[#2F6F57]/30 shadow-2xs">
+                      <span className="flex items-center gap-1 text-xs font-bold text-[#2F6F57] bg-[#E9F3EE] px-2.5 py-0.5 rounded-full border border-[#2F6F57]/30 shadow-2xs">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         Mastered
                       </span>
                     ) : isCompleted ? (
                       <>
-                        <span className="flex items-center gap-1 text-xs font-bold text-[#8C6D23] bg-[#FEF9E7] px-2.5 py-0.5 rounded-full border border-[#D4AC0D]/30 shadow-2xs">
+                        <span className="flex items-center gap-1 text-xs font-bold text-[#C23B3B] bg-[#FCF0EE] px-2.5 py-0.5 rounded-full border border-[#C23B3B]/30 shadow-2xs">
                           <CheckCircle2 className="w-3.5 h-3.5" />
                           Completed
                         </span>
                         <span
-                          className="flex items-center gap-1 text-[11px] font-bold text-[#8A2430] bg-[#FCF0EE] px-2.5 py-0.5 rounded-full border border-[#C23B3B]/30 shadow-2xs"
+                          className="flex items-center gap-1 text-[11px] font-bold text-[#C23B3B] bg-[#FCF0EE] px-2.5 py-0.5 rounded-full border border-[#C23B3B]/30 shadow-2xs"
                           title="You must get all questions correct to finish and master the whole unit"
                         >
-                          <AlertTriangle className="w-3 h-3 text-[#B3262F]" />
+                          <AlertTriangle className="w-3 h-3 text-[#C23B3B]" />
                           Needs 100% to Finish
                         </span>
                       </>
@@ -446,7 +446,7 @@ export const GrammarLessonsCatalogView = ({
                 {/* Golden Rule Preview */}
                 {lesson.goldenRule && (
                   <div className="p-3 bg-[#E9F3EE] rounded-xl border border-[#2F6F57]/20 flex items-start gap-2">
-                    <Lightbulb className="w-3.5 h-3.5 text-[#245243] shrink-0 mt-0.5" />
+                    <Lightbulb className="w-3.5 h-3.5 text-[#2F6F57] shrink-0 mt-0.5" />
                     <p className="text-xs text-[#1B2433] font-medium leading-relaxed line-clamp-2">
                       {formatBoldText(lesson.goldenRule)}
                     </p>
@@ -461,8 +461,8 @@ export const GrammarLessonsCatalogView = ({
                     {isMastered ? 'Mastered • Ready to review' : isCompleted ? 'Completed • Retake for 100%' : 'Next up in sequence'}
                   </span>
                 ) : (
-                  <span className="text-[11px] text-[#8A2430] font-medium flex items-center gap-1 truncate">
-                    <Lock className="w-3 h-3 text-[#B3262F] shrink-0" />
+                  <span className="text-[11px] text-[#C23B3B] font-medium flex items-center gap-1 truncate">
+                    <Lock className="w-3 h-3 text-[#C23B3B] shrink-0" />
                     <span>{lockReason}</span>
                   </span>
                 )}
@@ -470,7 +470,7 @@ export const GrammarLessonsCatalogView = ({
                 {isUnlocked ? (
                   <button
                     onClick={() => handleOpenLesson(lesson)}
-                    className="px-4 py-2 bg-[#1F3A5F] hover:bg-[#223F66] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs shrink-0"
+                    className="px-4 py-2 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs shrink-0"
                   >
                     <span>{isCompleted ? 'Review & Practice' : 'Study & Practice'}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -515,7 +515,7 @@ export const GrammarLessonsCatalogView = ({
               <h3 className="text-xl font-bold text-[#1B2433] font-serif">
                 Generate Custom Grammar Aspect Module
               </h3>
-              <p className="text-xs text-[#2B4468]">
+              <p className="text-xs text-[#1F3A5F]">
                 Enter any French grammar rule, tense comparison, or syntactic question. The generator will create a full lesson with formula blueprints, traps, and exercises.
               </p>
             </div>
@@ -530,7 +530,7 @@ export const GrammarLessonsCatalogView = ({
                   value={customPrompt}
                   onChange={(e) => setCustomPrompt(e.target.value)}
                   placeholder="e.g. L'accord du participe passé avec le pronom 'en' ou Les verbes pronominaux réciproques"
-                  className="w-full px-4 py-3 rounded-2xl bg-[#FBF7EE] border border-[#E6DCC8] text-xs sm:text-sm text-[#1B2433] focus:outline-none focus:ring-2 focus:ring-[#1F3A5F]"
+                  className="w-full px-4 py-3 rounded-2xl bg-[#FBF7EE] border border-[#E6DCC8] text-xs sm:text-sm text-[#1B2433] focus:outline-none focus:ring-2 focus:ring-[#C23B3B]"
                 />
               </div>
 
@@ -541,7 +541,7 @@ export const GrammarLessonsCatalogView = ({
                 <select
                   value={customCategory}
                   onChange={(e) => setCustomCategory(e.target.value)}
-                  className="w-full px-4 py-3 rounded-2xl bg-[#FBF7EE] border border-[#E6DCC8] text-xs sm:text-sm text-[#1B2433] focus:outline-none focus:ring-2 focus:ring-[#1F3A5F]"
+                  className="w-full px-4 py-3 rounded-2xl bg-[#FBF7EE] border border-[#E6DCC8] text-xs sm:text-sm text-[#1B2433] focus:outline-none focus:ring-2 focus:ring-[#C23B3B]"
                 >
                   {GRAMMAR_ASPECT_CATEGORIES.map((cat) => (
                     <option key={cat.id} value={cat.id}>
@@ -567,7 +567,7 @@ export const GrammarLessonsCatalogView = ({
                     <button
                       key={idx}
                       onClick={() => setCustomPrompt(sugg)}
-                      className="px-2.5 py-1 rounded-lg bg-[#FBF7EE] border border-[#E6DCC8] text-[11px] text-[#2B4468] hover:bg-[#E9E2D2] transition-all cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg bg-[#FBF7EE] border border-[#E6DCC8] text-[11px] text-[#1F3A5F] hover:bg-[#E9E2D2] transition-all cursor-pointer"
                     >
                       {sugg}
                     </button>
@@ -586,7 +586,7 @@ export const GrammarLessonsCatalogView = ({
               <button
                 onClick={handleGenerateLesson}
                 disabled={isGenerating || !customPrompt.trim()}
-                className="px-6 py-2.5 rounded-xl bg-[#1F3A5F] hover:bg-[#223F66] text-white text-xs font-bold flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50 shadow-xs"
+                className="px-6 py-2.5 rounded-xl bg-[#C23B3B] hover:bg-[#C23B3B] text-white text-xs font-bold flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50 shadow-xs"
               >
                 <Sparkles className="w-4 h-4 text-[#C23B3B]" />
                 <span>{isGenerating ? 'Synthesizing Lesson...' : 'Generate Lesson'}</span>

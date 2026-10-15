@@ -205,7 +205,7 @@ export const GrammarWorkbenchView = ({
           <h2 className="text-2xl sm:text-3xl font-bold text-[#1B2433] font-serif">
             Grammar Aspect Workbench & Transformer
           </h2>
-          <p className="text-sm text-[#2B4468] max-w-2xl leading-relaxed">
+          <p className="text-sm text-[#1F3A5F] max-w-2xl leading-relaxed">
             Shift grammatical aspects, tenses, negation polarity, and voice in real-time. Witness how French syntax, agreement rules, and pronouns mathematically adapt.
           </p>
         </div>
@@ -239,8 +239,8 @@ export const GrammarWorkbenchView = ({
               }}
               className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-all text-left cursor-pointer ${
                 sourceSentence === preset.text
-                  ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-xs'
-                  : 'bg-white text-[#2B4468] border-[#E6DCC8] hover:bg-[#FBF7EE]'
+                  ? 'bg-[#C23B3B] text-white border-[#1F3A5F] shadow-xs'
+                  : 'bg-white text-[#1F3A5F] border-[#E6DCC8] hover:bg-[#FBF7EE]'
               }`}
             >
               <span className="font-semibold">{preset.label}: </span>
@@ -272,7 +272,7 @@ export const GrammarWorkbenchView = ({
             value={sourceSentence}
             onChange={(e) => setSourceSentence(e.target.value)}
             placeholder="Type any French sentence to transform or dissect..."
-            className="w-full px-4 py-3.5 rounded-2xl bg-[#FBF7EE] border border-[#E6DCC8] text-[#1B2433] text-base font-serif focus:outline-none focus:ring-2 focus:ring-[#1F3A5F] transition-all"
+            className="w-full px-4 py-3.5 rounded-2xl bg-[#FBF7EE] border border-[#E6DCC8] text-[#1B2433] text-base font-serif focus:outline-none focus:ring-2 focus:ring-[#C23B3B] transition-all"
           />
         </div>
 
@@ -295,7 +295,7 @@ export const GrammarWorkbenchView = ({
                 }}
                 className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   selectedCategoryIdx === idx
-                    ? 'bg-[#1F3A5F] text-white shadow-xs'
+                    ? 'bg-[#C23B3B] text-white shadow-xs'
                     : 'text-[#5F6B7A] hover:text-[#1B2433] hover:bg-white/70'
                 }`}
               >
@@ -312,8 +312,8 @@ export const GrammarWorkbenchView = ({
                 onClick={() => setSelectedOperation(opt.id)}
                 className={`p-3 rounded-2xl border text-left text-xs font-semibold transition-all cursor-pointer flex items-center justify-between ${
                   selectedOperation === opt.id
-                    ? 'bg-[#F2EBDC] border-[#1F3A5F] text-[#1B2433] shadow-xs ring-1 ring-[#1F3A5F]'
-                    : 'bg-white border-[#E6DCC8] text-[#2B4468] hover:bg-[#FBF7EE]'
+                    ? 'bg-[#F2EBDC] border-[#1F3A5F] text-[#1B2433] shadow-xs ring-1 ring-[#C23B3B]'
+                    : 'bg-white border-[#E6DCC8] text-[#1F3A5F] hover:bg-[#FBF7EE]'
                 }`}
               >
                 <span>{opt.label}</span>
@@ -327,7 +327,7 @@ export const GrammarWorkbenchView = ({
             <button
               onClick={handleTransform}
               disabled={isTransforming || !sourceSentence.trim()}
-              className="px-6 py-3 bg-[#1F3A5F] hover:bg-[#223F66] text-white rounded-2xl font-bold text-xs shadow-sm flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50"
+              className="px-6 py-3 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-2xl font-bold text-xs shadow-sm flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50"
             >
               <Wand2 className="w-4 h-4" />
               <span>{isTransforming ? 'Transforming Aspect...' : `Apply ${selectedOperation}`}</span>
@@ -341,13 +341,13 @@ export const GrammarWorkbenchView = ({
         <div className="bg-white border border-[#1F3A5F]/30 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm animate-in fade-in">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E6DCC8] pb-4">
             <div className="flex items-center space-x-3">
-              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#E9F3EE] text-[#245243] border border-[#2F6F57]/30">
+              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#E9F3EE] text-[#2F6F57] border border-[#2F6F57]/30">
                 Transformed Result • {transformationResult.aspectComparison?.targetAspect || selectedOperation}
               </span>
             </div>
             <button
               onClick={() => handleAudioPlay(transformationResult.transformedSentence)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F2EBDC] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white transition-all text-xs font-bold cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F2EBDC] text-[#1F3A5F] hover:bg-[#C23B3B] hover:text-white transition-all text-xs font-bold cursor-pointer"
             >
               <Volume2 className="w-4 h-4" />
               <span>Listen Narration</span>
@@ -362,7 +362,7 @@ export const GrammarWorkbenchView = ({
             <div className="text-xl sm:text-2xl font-bold text-[#1B2433] font-serif">
               {transformationResult.transformedSentence}
             </div>
-            <div className="text-sm text-[#2B4468] italic pt-1">
+            <div className="text-sm text-[#1F3A5F] italic pt-1">
               « {transformationResult.englishTranslation} »
             </div>
           </div>
@@ -376,8 +376,8 @@ export const GrammarWorkbenchView = ({
               </h4>
               <ul className="space-y-2">
                 {transformationResult.rulesApplied?.map((rule, idx) => (
-                  <li key={idx} className="text-xs text-[#2B4468] flex items-start gap-2 bg-[#FBF7EE] p-3 rounded-xl border border-[#E6DCC8]">
-                    <span className="w-5 h-5 rounded-full bg-[#1F3A5F] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                  <li key={idx} className="text-xs text-[#1F3A5F] flex items-start gap-2 bg-[#FBF7EE] p-3 rounded-xl border border-[#E6DCC8]">
+                    <span className="w-5 h-5 rounded-full bg-[#C23B3B] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
                       {idx + 1}
                     </span>
                     <span className="leading-relaxed">{rule}</span>
@@ -391,7 +391,7 @@ export const GrammarWorkbenchView = ({
                 <Info className="w-4 h-4 text-[#C23B3B]" />
                 Linguistic Nuance & Syntactic Notes
               </h4>
-              <div className="p-4 bg-[#FCF0EE] rounded-2xl border border-[#C23B3B]/30 text-xs text-[#2B4468] space-y-2">
+              <div className="p-4 bg-[#FCF0EE] rounded-2xl border border-[#C23B3B]/30 text-xs text-[#1F3A5F] space-y-2">
                 <p className="leading-relaxed font-medium">
                   {transformationResult.explanation}
                 </p>
@@ -457,7 +457,7 @@ export const GrammarWorkbenchView = ({
                   </div>
                   <div className="text-xs text-[#5F6B7A]">{tok.type}</div>
                   {tok.details && (
-                    <div className="text-[11px] text-[#2B4468] italic pt-1 border-t border-[#E6DCC8]/70">
+                    <div className="text-[11px] text-[#1F3A5F] italic pt-1 border-t border-[#E6DCC8]/70">
                       {tok.details}
                     </div>
                   )}
@@ -477,10 +477,10 @@ export const GrammarWorkbenchView = ({
                 {dissectionResult.agreementChecks.map((chk, idx) => (
                   <div key={idx} className="p-3 bg-[#E9F3EE] rounded-xl border border-[#2F6F57]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
                     <div>
-                      <strong className="text-[#245243] font-serif block">{chk.element}:</strong>
-                      <span className="text-[#2B4468]">{chk.rule}</span>
+                      <strong className="text-[#2F6F57] font-serif block">{chk.element}:</strong>
+                      <span className="text-[#1F3A5F]">{chk.rule}</span>
                     </div>
-                    <span className="px-2.5 py-0.5 rounded-full bg-white text-[#245243] font-bold text-[10px] uppercase border border-[#2F6F57]/20 self-start sm:self-auto">
+                    <span className="px-2.5 py-0.5 rounded-full bg-white text-[#2F6F57] font-bold text-[10px] uppercase border border-[#2F6F57]/20 self-start sm:self-auto">
                       {chk.status}
                     </span>
                   </div>
@@ -490,7 +490,7 @@ export const GrammarWorkbenchView = ({
           )}
 
           {/* Summary */}
-          <div className="p-4 bg-[#F2EBDC] rounded-2xl border border-[#1F3A5F]/20 text-xs text-[#2B4468] leading-relaxed">
+          <div className="p-4 bg-[#F2EBDC] rounded-2xl border border-[#1F3A5F]/20 text-xs text-[#1F3A5F] leading-relaxed">
             <strong className="text-[#1F3A5F] block mb-1 font-serif">Syntactic Summary:</strong>
             {dissectionResult.grammaticalSummary}
           </div>

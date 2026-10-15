@@ -256,7 +256,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#E6DCC8] bg-[#FBF7EE] shrink-0">
           <div className="flex items-center space-x-2.5">
-            <BrainCircuit className="w-5 h-5 text-[#1F3A5F]" />
+            <BrainCircuit className="w-5 h-5 text-[#C23B3B]" />
             <h3 className="font-bold text-[#1B2433] text-base font-serif">
               {isLoading ? 'Generating Quiz...' : quizTitle}
             </h3>
@@ -275,7 +275,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
           {isLoading ? (
             <div className="text-center py-12 space-y-4">
               <div className="w-12 h-12 border-4 border-[#1F3A5F] border-t-transparent rounded-full animate-spin mx-auto" />
-              <p className="text-sm text-[#2B4468] font-medium">
+              <p className="text-sm text-[#1F3A5F] font-medium">
                 Generating tailored questions for your {level} level...
               </p>
             </div>
@@ -295,7 +295,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
 
               <button
                 onClick={onClose}
-                className="px-6 py-3 bg-[#1F3A5F] hover:bg-[#223F66] text-white font-bold text-xs rounded-xl shadow-sm cursor-pointer"
+                className="px-6 py-3 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white font-bold text-xs rounded-xl shadow-sm cursor-pointer"
               >
                 Close & Continue
               </button>
@@ -326,7 +326,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                       Question {currentIndex + 1}
                     </span>
                     {isQuestionTranslated && (
-                      <span className="text-[10px] uppercase font-semibold text-[#8C6D23] bg-[#FEF9ED] px-2 py-0.5 rounded border border-[#E0D0A5]">
+                      <span className="text-[10px] uppercase font-semibold text-[#C23B3B] bg-[#FCF0EE] px-2 py-0.5 rounded border border-[#D9CFBA]">
                         English Translation
                       </span>
                     )}
@@ -376,9 +376,9 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
 
                     if (hasChecked) {
                       if (opt === currentQ.correctAnswer) {
-                        style = 'bg-[#E9F3EE] border-[#2F6F57] text-[#245243] font-bold';
+                        style = 'bg-[#E9F3EE] border-[#2F6F57] text-[#2F6F57] font-bold';
                       } else if (isSelected && opt !== currentQ.correctAnswer) {
-                        style = 'bg-[#FCF0EE] border-[#B3262F] text-[#B3262F] font-bold';
+                        style = 'bg-[#FCF0EE] border-[#C23B3B] text-[#C23B3B] font-bold';
                       }
                     } else if (isSelected) {
                       style = 'bg-[#F2EBDC] border-[#1F3A5F] text-[#1B2433] font-semibold shadow-xs';
@@ -422,7 +422,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
 
               {/* Explanation */}
               {hasChecked && (
-                <div className="p-4 bg-[#FBF7EE] rounded-xl border border-[#E6DCC8] text-xs text-[#2B4468] animate-in fade-in">
+                <div className="p-4 bg-[#FBF7EE] rounded-xl border border-[#E6DCC8] text-xs text-[#1F3A5F] animate-in fade-in">
                   <strong className="text-[#1F3A5F] block mb-0.5 font-serif">Explanation:</strong>
                   {currentQ.explanation}
                 </div>
@@ -434,14 +434,14 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                   <button
                     disabled={!selectedOption}
                     onClick={handleCheck}
-                    className="w-full py-3 bg-[#1F3A5F] hover:bg-[#223F66] disabled:opacity-40 text-white font-bold text-xs rounded-xl shadow-xs transition-all cursor-pointer"
+                    className="w-full py-3 bg-[#1F3A5F] hover:bg-[#1F3A5F] disabled:opacity-40 text-white font-bold text-xs rounded-xl shadow-xs transition-all cursor-pointer"
                   >
                     Check Answer
                   </button>
                 ) : (
                   <button
                     onClick={handleNext}
-                    className="w-full py-3 bg-[#1F3A5F] hover:bg-[#223F66] text-white font-bold text-xs rounded-xl shadow-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
+                    className="w-full py-3 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white font-bold text-xs rounded-xl shadow-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
                   >
                     <span>Continue</span>
                     <ArrowRight className="w-4 h-4" />

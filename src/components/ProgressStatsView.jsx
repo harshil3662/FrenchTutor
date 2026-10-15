@@ -82,7 +82,7 @@ export const ProgressStatsView = ({ progress, activeLevel }) => {
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                 <h2 className="text-xl sm:text-2xl font-bold font-serif">Your Learning Profile</h2>
-                <span className="bg-[#E9F3EE] text-[#245243] border border-[#2F6F57]/30 text-xs font-bold px-2.5 py-0.5 rounded-full">
+                <span className="bg-[#E9F3EE] text-[#2F6F57] border border-[#2F6F57]/30 text-xs font-bold px-2.5 py-0.5 rounded-full">
                   Level {progress.level}
                 </span>
               </div>
@@ -98,7 +98,7 @@ export const ProgressStatsView = ({ progress, activeLevel }) => {
               <span className="text-[10px] text-[#5F6B7A] font-medium">Day Streak</span>
             </div>
             <div className="bg-[#FBF7EE] border border-[#E6DCC8] p-3 rounded-2xl text-center shadow-xs">
-              <Sparkles className="w-4 h-4 text-[#1F3A5F] mx-auto" />
+              <Sparkles className="w-4 h-4 text-[#C23B3B] mx-auto" />
               <span className="text-lg font-bold text-[#1B2433] block mt-0.5 font-serif">{progress.xp}</span>
               <span className="text-[10px] text-[#5F6B7A] font-medium">Total XP</span>
             </div>
@@ -112,7 +112,7 @@ export const ProgressStatsView = ({ progress, activeLevel }) => {
 
         {/* CEFR Progression Track */}
         <div className="mt-8 pt-6 border-t border-[#E6DCC8] space-y-3">
-          <div className="flex items-start justify-between gap-3 text-xs font-semibold text-[#2B4468]">
+          <div className="flex items-start justify-between gap-3 text-xs font-semibold text-[#1F3A5F]">
             <span>Level {progress.level} Progress ({currentBenchmark.name})</span>
             <span className="font-mono text-[#1F3A5F] whitespace-nowrap shrink-0">{progress.xp} / {currentBenchmark.maxXp} XP</span>
           </div>

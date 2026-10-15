@@ -184,7 +184,7 @@ export const TutorChatView = ({
                   className={`w-full text-left p-3 rounded-2xl transition-all cursor-pointer flex items-center space-x-3 border ${
                     isSelected
                       ? 'bg-[#FCF0EE] border-[#C23B3B]/50 text-[#1B2433] shadow-xs'
-                      : 'bg-[#F7F2E7] border-[#E6DCC8] text-[#2B4468] hover:bg-[#E9E2D2] hover:text-[#1B2433]'
+                      : 'bg-[#F7F2E7] border-[#E6DCC8] text-[#1F3A5F] hover:bg-[#E9E2D2] hover:text-[#1B2433]'
                   }`}
                 >
                   <span className="text-2xl flex-shrink-0">{sc.icon}</span>
@@ -210,13 +210,13 @@ export const TutorChatView = ({
               <p className="text-[11px] text-[#1F3A5F] font-semibold">{selectedScenario.character.role}</p>
             </div>
           </div>
-          <p className="text-xs text-[#2B4468] italic leading-relaxed">{selectedScenario.description}</p>
+          <p className="text-xs text-[#1F3A5F] italic leading-relaxed">{selectedScenario.description}</p>
 
           <div className="pt-2 border-t border-[#E6DCC8]">
             <h5 className="text-[11px] font-bold uppercase tracking-wider text-[#5F6B7A] mb-2">
               Conversation Goals
             </h5>
-            <ul className="space-y-1.5 text-xs text-[#2B4468]">
+            <ul className="space-y-1.5 text-xs text-[#1F3A5F]">
               {selectedScenario.recommendedObjectives.map((obj, idx) => (
                 <li key={idx} className="flex items-start gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#2F6F57] flex-shrink-0 mt-0.5" />
@@ -239,8 +239,8 @@ export const TutorChatView = ({
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <h3 className="text-sm font-bold text-[#1B2433] font-serif">Émile — French AI Tutor</h3>
-                <span className="bg-[#E9F3EE] text-[#245243] text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#2F6F57]/20">
+                <h3 className="text-sm font-bold text-[#1B2433] font-serif">Émile — French Conversation Tutor</h3>
+                <span className="bg-[#E9F3EE] text-[#2F6F57] text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#2F6F57]/20">
                   Online
                 </span>
               </div>
@@ -288,7 +288,7 @@ export const TutorChatView = ({
                 <div
                   className={`max-w-2xl rounded-2xl p-4 shadow-xs ${
                     isUser
-                      ? 'bg-[#1F3A5F] text-white rounded-br-xs'
+                      ? 'bg-[#C23B3B] text-white rounded-br-xs'
                       : 'bg-white text-[#1B2433] border border-[#E6DCC8] rounded-bl-xs'
                   }`}
                 >
@@ -304,7 +304,7 @@ export const TutorChatView = ({
                       <button
                         onClick={() => toggleTranslation(msg.id)}
                         className={`flex items-center gap-1 text-[11px] font-semibold mt-1 transition-colors cursor-pointer ${
-                          isUser ? 'text-white/80 hover:text-white' : 'text-[#1F3A5F] hover:text-[#152A47]'
+                          isUser ? 'text-white/80 hover:text-white' : 'text-[#1F3A5F] hover:text-[#1F3A5F]'
                         }`}
                       >
                         <Languages className="w-3 h-3" />
@@ -318,7 +318,7 @@ export const TutorChatView = ({
                     <div className="flex items-center justify-between mt-3 pt-2 border-t border-[#E6DCC8]/60 text-xs text-[#5F6B7A]">
                       <button
                         onClick={() => speakFrench(msg.content, audioSpeed)}
-                        className="flex items-center gap-1.5 text-[#1F3A5F] hover:text-[#152A47] font-bold cursor-pointer"
+                        className="flex items-center gap-1.5 text-[#1F3A5F] hover:text-[#1F3A5F] font-bold cursor-pointer"
                       >
                         <Volume2 className="w-3.5 h-3.5" />
                         <span>Listen</span>
@@ -328,17 +328,17 @@ export const TutorChatView = ({
                   )}
                 </div>
 
-                {/* AI Tutor Feedback Pill / Correction for user mistakes */}
+                {/* Tutor Feedback Pill / Correction for user mistakes */}
                 {msg.feedback && (msg.feedback.correction || msg.feedback.betterAlternative || msg.feedback.grammarTip) && (
-                  <div className="max-w-2xl bg-[#FCF0EE] border border-[#C23B3B]/40 rounded-2xl p-4 text-xs text-[#5C382A] space-y-1.5 mt-1 animate-in fade-in shadow-xs">
-                    <div className="flex items-center space-x-1.5 font-bold text-[#8A2430]">
+                  <div className="max-w-2xl bg-[#FCF0EE] border border-[#C23B3B]/40 rounded-2xl p-4 text-xs text-[#1B2433] space-y-1.5 mt-1 animate-in fade-in shadow-xs">
+                    <div className="flex items-center space-x-1.5 font-bold text-[#C23B3B]">
                       <Sparkles className="w-3.5 h-3.5 text-[#C23B3B]" />
                       <span className="font-serif">Émile's Pedagogical Feedback</span>
                     </div>
 
                     {msg.feedback.correction && (
                       <p>
-                        <strong className="text-[#B3262F]">Correction:</strong> {msg.feedback.correction}
+                        <strong className="text-[#C23B3B]">Correction:</strong> {msg.feedback.correction}
                       </p>
                     )}
 
@@ -349,7 +349,7 @@ export const TutorChatView = ({
                     )}
 
                     {msg.feedback.grammarTip && (
-                      <p className="text-[#2B4468]">
+                      <p className="text-[#1F3A5F]">
                         <strong>💡 Language Tip:</strong> {msg.feedback.grammarTip}
                       </p>
                     )}
@@ -359,7 +359,7 @@ export const TutorChatView = ({
                         {msg.feedback.vocabularyHighlight.map((voc, i) => (
                           <span
                             key={i}
-                            className="bg-white text-[#8A2430] border border-[#C23B3B]/30 text-[10px] font-semibold px-2 py-0.5 rounded-md"
+                            className="bg-white text-[#C23B3B] border border-[#C23B3B]/30 text-[10px] font-semibold px-2 py-0.5 rounded-md"
                           >
                             {voc}
                           </span>
@@ -374,9 +374,9 @@ export const TutorChatView = ({
 
           {isLoading && (
             <div className="flex items-center space-x-2 text-[#5F6B7A] text-xs p-3 bg-white border border-[#E6DCC8] rounded-2xl w-max shadow-xs">
-              <div className="w-2 h-2 rounded-full bg-[#1F3A5F] animate-pulse" />
-              <div className="w-2 h-2 rounded-full bg-[#1F3A5F] animate-pulse delay-150" />
-              <div className="w-2 h-2 rounded-full bg-[#1F3A5F] animate-pulse delay-300" />
+              <div className="w-2 h-2 rounded-full bg-[#C23B3B] animate-pulse" />
+              <div className="w-2 h-2 rounded-full bg-[#C23B3B] animate-pulse delay-150" />
+              <div className="w-2 h-2 rounded-full bg-[#C23B3B] animate-pulse delay-300" />
               <span className="text-[#1B2433] font-medium ml-1">Émile is typing in French...</span>
             </div>
           )}
@@ -388,7 +388,7 @@ export const TutorChatView = ({
             <button
               key={idx}
               onClick={() => handleSendMessage(phrase.french)}
-              className="text-xs bg-white hover:bg-[#FCF0EE] hover:border-[#C23B3B]/50 text-[#1F3A5F] hover:text-[#8A2430] border border-[#D9CFBA] px-3.5 py-1.5 rounded-full whitespace-nowrap transition-all flex items-center space-x-1.5 cursor-pointer font-medium shadow-xs"
+              className="text-xs bg-white hover:bg-[#FCF0EE] hover:border-[#C23B3B]/50 text-[#1F3A5F] hover:text-[#C23B3B] border border-[#D9CFBA] px-3.5 py-1.5 rounded-full whitespace-nowrap transition-all flex items-center space-x-1.5 cursor-pointer font-medium shadow-xs"
             >
               <span>💬 {phrase.french}</span>
             </button>
@@ -429,7 +429,7 @@ export const TutorChatView = ({
             id="send-message-btn"
             disabled={!inputText.trim() || isLoading}
             onClick={() => handleSendMessage()}
-            className="p-3 bg-[#1F3A5F] hover:bg-[#223F66] disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-2xl font-bold shadow-sm transition-all cursor-pointer"
+            className="p-3 bg-[#C23B3B] hover:bg-[#C23B3B] disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-2xl font-bold shadow-sm transition-all cursor-pointer"
           >
             <Send className="w-5 h-5" />
           </button>

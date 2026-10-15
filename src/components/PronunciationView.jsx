@@ -97,15 +97,15 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
             <span>Phonetics & Diction Studio</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-[#1B2433] font-serif">Master the Sounds of French</h2>
-          <p className="text-sm text-[#2B4468] max-w-2xl leading-relaxed">
-            Perfect the uvular "R", the 4 nasal vowels, the crucial "U" vs "OU" distinction, and melodious liaisons with real-time AI acoustic analysis.
+          <p className="text-sm text-[#1F3A5F] max-w-2xl leading-relaxed">
+            Perfect the uvular "R", the 4 nasal vowels, the crucial "U" vs "OU" distinction, and melodious liaisons with real-time pronunciation analysis.
           </p>
         </div>
 
         {/* Quick Tongue Twister Card */}
         {selectedDrill.tongueTwister && (
           <div className="bg-[#FBF7EE] border border-[#E6DCC8] rounded-2xl p-4 max-w-sm space-y-2">
-            <div className="flex items-center space-x-1.5 text-xs font-bold text-[#8A2430]">
+            <div className="flex items-center space-x-1.5 text-xs font-bold text-[#C23B3B]">
               <Zap className="w-4 h-4 text-[#C23B3B]" />
               <span className="font-serif">Tongue Twister of the Day</span>
             </div>
@@ -116,7 +116,7 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
               <span className="text-[10px] text-[#5F6B7A]">Focus: {selectedDrill.tongueTwister.focusSound}</span>
               <button
                 onClick={() => speakFrench(selectedDrill.tongueTwister.french, audioSpeed * 0.85)}
-                className="text-xs text-[#1F3A5F] hover:text-[#152A47] font-bold flex items-center gap-1 cursor-pointer"
+                className="text-xs text-[#1F3A5F] hover:text-[#1F3A5F] font-bold flex items-center gap-1 cursor-pointer"
               >
                 <Volume2 className="w-3.5 h-3.5" />
                 Listen
@@ -141,7 +141,7 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
               }}
               className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                 isSelected
-                  ? 'bg-[#1F3A5F] border-[#1F3A5F] text-white shadow-sm'
+                  ? 'bg-[#C23B3B] border-[#1F3A5F] text-white shadow-sm'
                   : 'bg-white border-[#E6DCC8] text-[#5F6B7A] hover:text-[#1B2433] hover:border-[#D9CFBA]'
               }`}
             >
@@ -179,7 +179,7 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
                       setTranscript('');
                     }}
                     className={`w-3 h-3 rounded-full transition-all ${
-                      activePhraseIndex === idx ? 'bg-[#1F3A5F] scale-125' : 'bg-[#D9CFBA] hover:bg-[#B9AD92]'
+                      activePhraseIndex === idx ? 'bg-[#C23B3B] scale-125' : 'bg-[#D9CFBA] hover:bg-[#B9AD92]'
                     }`}
                   />
                 ))}
@@ -197,7 +197,7 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
               <div className="pt-2 flex flex-wrap justify-center gap-3">
                 <button
                   onClick={() => speakFrench(activePhrase.french, audioSpeed)}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#1F3A5F] hover:bg-[#223F66] text-white rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
                 >
                   <Volume2 className="w-4 h-4" />
                   Standard Pronunciation
@@ -213,8 +213,8 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
             </div>
 
             {/* Phonetic Breakdown Note */}
-            <div className="bg-[#FCF0EE] border border-[#C23B3B]/40 rounded-xl p-4 text-xs text-[#5C382A]">
-              <strong className="text-[#8A2430]">💡 Phonetic Key:</strong> {activePhrase.breakdownNote}
+            <div className="bg-[#FCF0EE] border border-[#C23B3B]/40 rounded-xl p-4 text-xs text-[#1B2433]">
+              <strong className="text-[#C23B3B]">💡 Phonetic Key:</strong> {activePhrase.breakdownNote}
             </div>
 
             {/* Voice Recording / Practice Zone */}
@@ -230,7 +230,7 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
                   className={`w-20 h-20 rounded-full flex items-center justify-center transition-all cursor-pointer ${
                     isRecording
                       ? 'bg-[#C23B3B] text-white animate-pulse ring-8 ring-[#C23B3B]/20 shadow-xl shadow-[#C23B3B]/40'
-                      : 'bg-[#1F3A5F] hover:bg-[#223F66] text-white hover:scale-105 shadow-md shadow-[#1F3A5F]/25'
+                      : 'bg-[#C23B3B] hover:bg-[#C23B3B] text-white hover:scale-105 shadow-md shadow-[#C23B3B]/25'
                   }`}
                 >
                   {isRecording ? <MicOff className="w-8 h-8" /> : <Mic className="w-8 h-8" />}
@@ -258,16 +258,16 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
                     id="evaluate-speech-btn"
                     disabled={isAnalyzing}
                     onClick={handleEvaluate}
-                    className="w-full py-2.5 rounded-xl bg-[#1F3A5F] hover:bg-[#223F66] disabled:opacity-50 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
+                    className="w-full py-2.5 rounded-xl bg-[#C23B3B] hover:bg-[#C23B3B] disabled:opacity-50 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
                   >
                     <Sparkles className="w-4 h-4" />
-                    <span>{isAnalyzing ? 'Evaluating with AI...' : 'Analyze My Pronunciation with AI'}</span>
+                    <span>{isAnalyzing ? 'Evaluating pronunciation...' : 'Analyze My Pronunciation'}</span>
                   </button>
                 </div>
               )}
             </div>
 
-            {/* AI Feedback Report */}
+            {/* Pronunciation Feedback Report */}
             {feedback && (
               <div className="bg-[#FCF0EE] border border-[#C23B3B]/40 rounded-2xl p-6 space-y-4 animate-in fade-in">
                 <div className="flex items-center justify-between">
@@ -278,7 +278,7 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
                   <div className="flex items-center space-x-2">
                     <span className="text-xs text-[#5F6B7A]">Accuracy:</span>
                     <span className={`text-base font-bold px-2.5 py-0.5 rounded-lg ${
-                      feedback.score >= 80 ? 'bg-[#E9F3EE] text-[#245243] border border-[#2F6F57]/30' : 'bg-white text-[#8A2430] border border-[#C23B3B]/30'
+                      feedback.score >= 80 ? 'bg-[#E9F3EE] text-[#2F6F57] border border-[#2F6F57]/30' : 'bg-white text-[#C23B3B] border border-[#C23B3B]/30'
                     }`}>
                       {feedback.score}%
                     </span>
@@ -291,7 +291,7 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
                       <CheckCircle2 className="w-3.5 h-3.5" />
                       Strengths
                     </span>
-                    <ul className="list-disc list-inside text-[#2B4468] space-y-0.5">
+                    <ul className="list-disc list-inside text-[#1F3A5F] space-y-0.5">
                       {feedback.strengths?.map((s, i) => (
                         <li key={i}>{s}</li>
                       ))}
@@ -299,11 +299,11 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
                   </div>
 
                   <div className="p-3 bg-white rounded-xl border border-[#C23B3B]/30 space-y-1">
-                    <span className="font-bold text-[#8A2430] flex items-center gap-1">
+                    <span className="font-bold text-[#C23B3B] flex items-center gap-1">
                       <AlertCircle className="w-3.5 h-3.5" />
                       Areas for Improvement
                     </span>
-                    <ul className="list-disc list-inside text-[#2B4468] space-y-0.5">
+                    <ul className="list-disc list-inside text-[#1F3A5F] space-y-0.5">
                       {feedback.areasToImprove?.map((a, i) => (
                         <li key={i}>{a}</li>
                       ))}
@@ -322,7 +322,7 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
             
             <div className="p-4 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] space-y-3">
               <div className="text-3xl text-center py-2">👄</div>
-              <p className="text-xs text-[#2B4468] leading-relaxed font-medium">
+              <p className="text-xs text-[#1F3A5F] leading-relaxed font-medium">
                 {selectedDrill.mouthGuide}
               </p>
             </div>
@@ -331,7 +331,7 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
               <span className="text-xs font-bold uppercase tracking-wider text-[#1F3A5F] block">
                 Auditory Tip
               </span>
-              <p className="text-xs text-[#2B4468] leading-relaxed">
+              <p className="text-xs text-[#1F3A5F] leading-relaxed">
                 {selectedDrill.audioGuideTip}
               </p>
             </div>

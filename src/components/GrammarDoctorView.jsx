@@ -62,7 +62,7 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
             <span>Grammar & Linguistics Clinic</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-[#1B2433] font-serif">Diagnostics & Conjugator</h2>
-          <p className="text-sm text-[#2B4468] max-w-2xl leading-relaxed">
+          <p className="text-sm text-[#1F3A5F] max-w-2xl leading-relaxed">
             Enter any French sentence to get a full grammatical checkup, agreement corrections, conjugation tables, and register analysis.
           </p>
         </div>
@@ -106,7 +106,7 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
             id="run-grammar-check-btn"
             disabled={!inputText.trim() || isLoading}
             onClick={() => handleAnalyze()}
-            className="px-6 py-3 bg-[#1F3A5F] hover:bg-[#223F66] disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-sm flex items-center gap-2 transition-all cursor-pointer"
+            className="px-6 py-3 bg-[#C23B3B] hover:bg-[#C23B3B] disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-sm flex items-center gap-2 transition-all cursor-pointer"
           >
             <Sparkles className="w-4 h-4" />
             <span>{isLoading ? 'Analyzing grammar...' : 'Diagnose Sentence'}</span>
@@ -153,7 +153,7 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
                 </p>
                 <button
                   onClick={() => speakFrench(result.correctedText, audioSpeed)}
-                  className="p-2 rounded-xl bg-[#F2EBDC] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white transition-colors border border-[#1F3A5F]/20 shadow-xs"
+                  className="p-2 rounded-xl bg-[#F2EBDC] text-[#1F3A5F] hover:bg-[#C23B3B] hover:text-white transition-colors border border-[#1F3A5F]/20 shadow-xs"
                 >
                   <Volume2 className="w-4 h-4" />
                 </button>
@@ -173,10 +173,10 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
                       className="p-4 bg-[#FBF7EE] rounded-xl border border-[#E6DCC8] space-y-1.5"
                     >
                       <div className="flex items-center justify-between text-xs">
-                        <span className="font-bold text-[#B3262F] line-through">{err.mistake}</span>
+                        <span className="font-bold text-[#C23B3B] line-through">{err.mistake}</span>
                         <span className="text-[#2F6F57] font-bold">→ {err.correction}</span>
                       </div>
-                      <p className="text-xs text-[#2B4468] leading-relaxed">{err.rule}</p>
+                      <p className="text-xs text-[#1F3A5F] leading-relaxed">{err.rule}</p>
                     </div>
                   ))}
                 </div>

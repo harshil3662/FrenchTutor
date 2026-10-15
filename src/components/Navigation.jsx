@@ -135,7 +135,7 @@ export const Navigation = ({
                       {isActive && (
                         <motion.div
                           layoutId="active-nav-pill"
-                          className="absolute inset-0 rounded-full bg-gradient-to-r from-[#2B4468] via-[#223F66] to-[#1F3A5F] shadow-md shadow-[#2B4468]/25 -z-10"
+                          className="absolute inset-0 rounded-full bg-gradient-to-r from-[#1F3A5F] via-[#1F3A5F] to-[#1F3A5F] shadow-md shadow-[#1F3A5F]/25 -z-10"
                           transition={{
                             type: 'spring',
                             stiffness: 150,
@@ -163,7 +163,7 @@ export const Navigation = ({
                           className={`hidden sm:inline-block text-[10px] font-bold px-2 py-0.5 rounded-full transition-colors duration-300 shrink-0 ${
                             isActive
                               ? 'bg-white/20 text-white/95 shadow-2xs border border-white/20'
-                              : 'bg-[#1F3A5F]/10 text-[#1F3A5F] border border-[#1F3A5F]/15 group-hover:bg-[#1F3A5F]/15'
+                              : 'bg-[#C23B3B]/10 text-[#C23B3B] border border-[#C23B3B]/20 group-hover:bg-[#C23B3B]/15'
                           }`}
                         >
                           {tab.tag}
@@ -206,7 +206,7 @@ export const Navigation = ({
                   whileTap={{ scale: 0.96 }}
                   className={`p-2.5 sm:p-3 rounded-2xl border flex flex-row sm:flex-col items-center sm:justify-center text-left sm:text-center gap-2.5 sm:gap-1.5 transition-all cursor-pointer select-none group shadow-xs ${
                     isActive
-                      ? 'bg-gradient-to-br from-[#2B4468]/90 via-[#223F66]/90 to-[#1F3A5F]/90 text-white border-[#2B4468]/80 shadow-md shadow-[#2B4468]/25'
+                      ? 'bg-gradient-to-br from-[#1F3A5F]/90 via-[#1F3A5F]/90 to-[#1F3A5F]/90 text-white border-[#1F3A5F]/80 shadow-md shadow-[#1F3A5F]/25'
                       : 'bg-white/45 hover:bg-white/70 text-[#1B2433] border-[#D9CFBA]/70 hover:border-[#1F3A5F]/40'
                   }`}
                 >

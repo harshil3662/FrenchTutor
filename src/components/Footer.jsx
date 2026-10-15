@@ -11,7 +11,7 @@ export const Footer = () => {
         {/* Detailed French Architectural Vector Skyline (Eiffel Tower, Notre-Dame, Arc de Triomphe, Louvre, Sacré-Cœur, Mansard Roofs) */}
         <svg
           viewBox="0 0 1440 220"
-          className="absolute inset-0 w-full h-full text-[#223F66]/35 preserve-3d pointer-events-none"
+          className="absolute inset-0 w-full h-full text-[#1F3A5F]/35 preserve-3d pointer-events-none"
           preserveAspectRatio="none"
           aria-hidden="true"
         >
@@ -117,14 +117,14 @@ export const Footer = () => {
             <rect x="1325" y="148" width="115" height="72" />
 
             {/* Manicured French Garden Trees & Boxwood Topiaries in Foreground */}
-            <ellipse cx="38" cy="216" rx="12" ry="7" fill="#2F5E4A" opacity="0.9" />
-            <ellipse cx="295" cy="216" rx="10" ry="6" fill="#2F5E4A" opacity="0.9" />
-            <ellipse cx="405" cy="216" rx="11" ry="7" fill="#2F5E4A" opacity="0.9" />
-            <ellipse cx="625" cy="217" rx="14" ry="8" fill="#2F5E4A" opacity="0.9" />
-            <ellipse cx="778" cy="217" rx="14" ry="8" fill="#2F5E4A" opacity="0.9" />
-            <ellipse cx="802" cy="217" rx="10" ry="6" fill="#2F5E4A" opacity="0.9" />
-            <ellipse cx="1026" cy="216" rx="12" ry="7" fill="#2F5E4A" opacity="0.9" />
-            <ellipse cx="1320" cy="216" rx="14" ry="8" fill="#2F5E4A" opacity="0.9" />
+            <ellipse cx="38" cy="216" rx="12" ry="7" fill="#2F6F57" opacity="0.9" />
+            <ellipse cx="295" cy="216" rx="10" ry="6" fill="#2F6F57" opacity="0.9" />
+            <ellipse cx="405" cy="216" rx="11" ry="7" fill="#2F6F57" opacity="0.9" />
+            <ellipse cx="625" cy="217" rx="14" ry="8" fill="#2F6F57" opacity="0.9" />
+            <ellipse cx="778" cy="217" rx="14" ry="8" fill="#2F6F57" opacity="0.9" />
+            <ellipse cx="802" cy="217" rx="10" ry="6" fill="#2F6F57" opacity="0.9" />
+            <ellipse cx="1026" cy="216" rx="12" ry="7" fill="#2F6F57" opacity="0.9" />
+            <ellipse cx="1320" cy="216" rx="14" ry="8" fill="#2F6F57" opacity="0.9" />
           </g>
         </svg>
       </div>

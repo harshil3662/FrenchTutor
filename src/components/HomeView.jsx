@@ -9,7 +9,7 @@ const TAB_GUIDE = {
   'grammar-doctor': 'Paste French text to check for grammar mistakes, with clear explanations and a conjugator.',
   flashcards: 'Study vocabulary decks with flashcards, add your own cards, and mark the ones you know.',
   stories: 'Read short articles on topics you choose, with audio, to see grammar used in context.',
-  tutor: 'Chat with Émile, an AI tutor, in immersion scenarios and get feedback on your French.',
+  tutor: 'Chat with Émile, a French conversation tutor, in immersion scenarios and get feedback on your French.',
   progress: 'Track your XP, daily streak, mastered lessons, and badges as you move forward.',
 };
 
@@ -46,7 +46,7 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
           <button
             type="button"
             onClick={() => onNavigate('grammar-lessons')}
-            className="inline-flex items-center gap-2 rounded-full bg-[#1F3A5F] px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-[#1F3A5F]/20 hover:bg-[#152A47] transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-full bg-[#1F3A5F] px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-[#1F3A5F]/20 hover:bg-[#1F3A5F] transition-colors cursor-pointer"
           >
             Start learning <ArrowRight className="w-4 h-4" />
           </button>
@@ -72,7 +72,7 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
           {nextUnit ? (
             <>
               <div className="flex items-center gap-3 min-w-0">
-                <div className="w-10 h-10 shrink-0 rounded-full bg-[#1F3A5F]/10 text-[#1F3A5F] flex items-center justify-center">
+                <div className="w-10 h-10 shrink-0 rounded-full bg-[#C23B3B]/10 text-[#C23B3B] flex items-center justify-center">
                   <Target className="w-5 h-5" />
                 </div>
                 <div className="min-w-0">

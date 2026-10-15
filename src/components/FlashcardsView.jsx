@@ -30,7 +30,7 @@ const VOCABULARY_CATEGORIES = [...new Set(VOCABULARY_FLASHCARDS.map((card) => ca
 export const VOCABULARY_AREAS = [
   { id: 'Gastronomy & Culinary Arts', label: 'Gastronomy & Cuisine', icon: '🍷', french: 'Gastronomie & Vins' },
   { id: 'Art & Architecture', label: 'Art & Architecture', icon: '🎨', french: 'Art & Patrimoine' },
-  { id: 'Technology & Innovation', label: 'Tech & Digital Culture', icon: '💻', french: 'Numérique & IA' },
+  { id: 'Technology & Innovation', label: 'Tech & Digital Culture', icon: '💻', french: 'Numérique & Innovation' },
   { id: 'Travel & City Life', label: 'Travel & Urban Flânerie', icon: '✈️', french: 'Voyages & Découvertes' },
   { id: 'Business & Career', label: 'Business & Economy', icon: '💼', french: 'Affaires & Startups' },
   { id: 'Nature & Ecology', label: 'Nature & Ecology', icon: '🌿', french: 'Écologie & Climat' },
@@ -56,7 +56,7 @@ export const FlashcardsView = ({
   const [viewMode, setViewMode] = useState('daily-ai'); // 'daily-ai' | 'srs' | 'grid'
   const [suggestionOffset, setSuggestionOffset] = useState(0);
 
-  // Daily AI Vocabulary State
+  // Daily Vocabulary State
   const [selectedArea, setSelectedArea] = useState('Gastronomy & Culinary Arts');
   const [customAreaInput, setCustomAreaInput] = useState('');
   const [isCustomAreaActive, setIsCustomAreaActive] = useState(false);
@@ -99,7 +99,7 @@ export const FlashcardsView = ({
     return now.toLocaleDateString('fr-FR', options);
   }, []);
 
-  // Fetch or generate daily vocabulary from AI
+  // Fetch or prepare daily vocabulary
   const fetchDailyVocabulary = async (targetArea, targetLevel, forceRefresh = false) => {
     const areaToFetch = targetArea || selectedArea;
     const levelToFetch = targetLevel || dailyLevel;
@@ -324,30 +324,12 @@ export const FlashcardsView = ({
         <div className="space-y-2">
           <div className="inline-flex items-center space-x-2 bg-[#F2EBDC] border border-[#1F3A5F]/20 text-[#1F3A5F] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5 text-[#1F3A5F]" />
-            <span>Atelier Lexical & Vocabulaire IA</span>
+            <span>Atelier Lexical & Vocabulaire</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-[#1B2433] font-serif">French Vocabulary Studio</h2>
-          <p className="text-sm text-[#2B4468] max-w-xl leading-relaxed">
-            Expand your French lexicon with AI-generated daily vocabulary across diverse cultural domains, reinforced by spaced repetition (SRS).
+          <p className="text-sm text-[#1F3A5F] max-w-xl leading-relaxed">
+            Expand your French lexicon with a fresh daily vocabulary set across diverse cultural domains, reinforced by spaced repetition (SRS).
           </p>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="bg-[#FBF7EE] px-4 py-3 rounded-2xl border border-[#E6DCC8] text-center shadow-xs">
-            <span className="text-xs text-[#5F6B7A] block font-medium">Deck Size</span>
-            <span className="text-lg font-bold text-[#1B2433] font-serif">{cards.length} words</span>
-          </div>
-          <div className="bg-[#FBF7EE] px-4 py-3 rounded-2xl border border-[#E6DCC8] text-center shadow-xs">
-            <span className="text-xs text-[#5F6B7A] block font-medium">Mastered</span>
-            <span className="text-lg font-bold text-[#1F3A5F] font-serif">{progress.masteredCards.length} cards</span>
-          </div>
-          <button
-            onClick={() => setIsAddingCard(true)}
-            className="flex items-center gap-2 px-4 py-3 bg-[#1F3A5F] hover:bg-[#223F66] text-white rounded-2xl font-bold text-xs shadow-sm transition-all cursor-pointer"
-          >
-            <Plus className="w-4 h-4" />
-            <span>Add Custom Card</span>
-          </button>
         </div>
       </div>
 
@@ -362,12 +344,12 @@ export const FlashcardsView = ({
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               viewMode === 'daily-ai'
-                ? 'bg-[#1F3A5F] text-white shadow-xs'
+                ? 'bg-[#C23B3B] text-white shadow-xs'
                 : 'text-[#6A6A5A] hover:text-[#1B2433] hover:bg-white'
             }`}
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Daily AI Vocabulary</span>
+            <span>Daily Vocabulary</span>
             <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-white/20 text-white font-medium">
               Today
             </span>
@@ -380,7 +362,7 @@ export const FlashcardsView = ({
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               viewMode === 'srs' && !srsDeck
-                ? 'bg-[#1F3A5F] text-white shadow-xs'
+                ? 'bg-[#C23B3B] text-white shadow-xs'
                 : 'text-[#6A6A5A] hover:text-[#1B2433] hover:bg-white'
             }`}
           >
@@ -395,7 +377,7 @@ export const FlashcardsView = ({
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               viewMode === 'grid'
-                ? 'bg-[#1F3A5F] text-white shadow-xs'
+                ? 'bg-[#C23B3B] text-white shadow-xs'
                 : 'text-[#6A6A5A] hover:text-[#1B2433] hover:bg-white'
             }`}
           >
@@ -420,7 +402,7 @@ export const FlashcardsView = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* 1. DAILY AI VOCABULARY MODE                                              */}
+      {/* 1. DAILY VOCABULARY MODE                                                */}
       {/* ========================================================================= */}
       {viewMode === 'daily-ai' && (
         <div className="space-y-8 animate-in fade-in duration-300">
@@ -429,7 +411,7 @@ export const FlashcardsView = ({
             {/* Top Bar: Today's date + Level + Quick Regenerate */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E6DCC8] pb-5">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-[#1F3A5F] text-white flex items-center justify-center shadow-xs">
+                <div className="w-10 h-10 rounded-2xl bg-[#C23B3B] text-white flex items-center justify-center shadow-xs">
                   <Calendar className="w-5 h-5" />
                 </div>
                 <div>
@@ -458,7 +440,7 @@ export const FlashcardsView = ({
                       }}
                       className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer ${
                         dailyLevel === lvl
-                          ? 'bg-[#1F3A5F] text-white shadow-2xs'
+                          ? 'bg-[#C23B3B] text-white shadow-2xs'
                           : 'text-[#5F6B7A] hover:text-[#1B2433]'
                       }`}
                     >
@@ -482,7 +464,7 @@ export const FlashcardsView = ({
             {/* Thematic Area Carousel / Pill Selector */}
             <div className="space-y-2.5">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-bold uppercase tracking-wider text-[#2B4468] flex items-center gap-1.5">
+                <label className="text-xs font-bold uppercase tracking-wider text-[#1F3A5F] flex items-center gap-1.5">
                   <Compass className="w-3.5 h-3.5 text-[#1F3A5F]" />
                   <span>Choose Domain / Area of Interest</span>
                 </label>
@@ -498,8 +480,8 @@ export const FlashcardsView = ({
                       onClick={() => handleSelectArea(area.id)}
                       className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border ${
                         isSelected
-                          ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-sm'
-                          : 'bg-white text-[#2B4468] border-[#D9CFBA] hover:border-[#1F3A5F]/40 hover:bg-[#FBF8F1]'
+                          ? 'bg-[#C23B3B] text-white border-[#1F3A5F] shadow-sm'
+                          : 'bg-white text-[#1F3A5F] border-[#D9CFBA] hover:border-[#1F3A5F]/40 hover:bg-[#FBF8F1]'
                       }`}
                     >
                       <span>{area.icon}</span>
@@ -513,8 +495,8 @@ export const FlashcardsView = ({
                   onClick={() => setIsCustomAreaActive(true)}
                   className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border ${
                     isCustomAreaActive
-                      ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-sm'
-                      : 'bg-white text-[#2B4468] border-[#D9CFBA] hover:border-[#1F3A5F]/40 hover:bg-[#FBF8F1]'
+                      ? 'bg-[#C23B3B] text-white border-[#1F3A5F] shadow-sm'
+                      : 'bg-white text-[#1F3A5F] border-[#D9CFBA] hover:border-[#1F3A5F]/40 hover:bg-[#FBF8F1]'
                   }`}
                 >
                   <span>✏️</span>
@@ -539,7 +521,7 @@ export const FlashcardsView = ({
                   <button
                     type="submit"
                     disabled={!customAreaInput.trim() || isLoadingDaily}
-                    className="px-4 py-2 bg-[#1F3A5F] hover:bg-[#223F66] text-white rounded-xl text-xs font-bold transition-all shadow-xs disabled:opacity-50 cursor-pointer"
+                    className="px-4 py-2 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl text-xs font-bold transition-all shadow-xs disabled:opacity-50 cursor-pointer"
                   >
                     Generate
                   </button>
@@ -563,13 +545,13 @@ export const FlashcardsView = ({
             )}
           </div>
 
-          {/* Loading Skeleton during AI Generation */}
+          {/* Loading Skeleton while preparing vocabulary */}
           {isLoadingDaily && (
             <div className="text-center py-16 space-y-4 bg-white border border-[#E6DCC8] rounded-3xl p-8">
               <div className="w-10 h-10 border-3 border-[#1F3A5F] border-t-transparent rounded-full animate-spin mx-auto" />
               <div className="space-y-1">
                 <p className="text-base font-bold text-[#1B2433] font-serif">
-                  Generating Daily Vocabulary with AI...
+                  Preparing Daily Vocabulary...
                 </p>
                 <p className="text-xs text-[#5F6B7A]">
                   Consulting authentic French lexicographical usage in <span className="font-semibold text-[#1F3A5F]">{selectedArea}</span> for level {dailyLevel}
@@ -602,7 +584,7 @@ export const FlashcardsView = ({
 
                   <button
                     onClick={handlePracticeDailyInSrs}
-                    className="flex items-center gap-1.5 px-4 py-2 bg-[#1F3A5F] hover:bg-[#223F66] text-white rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer"
+                    className="flex items-center gap-1.5 px-4 py-2 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer"
                   >
                     <Layers className="w-3.5 h-3.5" />
                     <span>Practice in SRS</span>
@@ -635,7 +617,7 @@ export const FlashcardsView = ({
                                   className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-md ${
                                     item.gender === 'm'
                                       ? 'bg-[#F2EBDC] text-[#1F3A5F] border border-[#1F3A5F]/20'
-                                      : 'bg-[#FCF0EE] text-[#8A2430] border border-[#C23B3B]/30'
+                                      : 'bg-[#FCF0EE] text-[#C23B3B] border border-[#C23B3B]/30'
                                   }`}
                                 >
                                   {item.gender === 'm' ? 'Masculin' : 'Féminin'}
@@ -660,8 +642,8 @@ export const FlashcardsView = ({
                             title="Listen to French pronunciation"
                             className={`p-2.5 rounded-xl border transition-all cursor-pointer shadow-2xs ${
                               isAudioPlaying
-                                ? 'bg-[#1F3A5F] text-white border-[#1F3A5F]'
-                                : 'bg-[#FBF7EE] text-[#1F3A5F] border-[#E6DCC8] hover:bg-[#1F3A5F] hover:text-white'
+                                ? 'bg-[#C23B3B] text-white border-[#1F3A5F]'
+                                : 'bg-[#FBF7EE] text-[#1F3A5F] border-[#E6DCC8] hover:bg-[#C23B3B] hover:text-white'
                             }`}
                           >
                             <Volume2 className="w-4 h-4" />
@@ -698,18 +680,18 @@ export const FlashcardsView = ({
                             <span className="font-bold block text-[10px] uppercase tracking-wider text-[#1F3A5F]">
                               💡 Usage Note
                             </span>
-                            <p className="text-[#2B4468] leading-relaxed">{item.usageNote}</p>
+                            <p className="text-[#1F3A5F] leading-relaxed">{item.usageNote}</p>
                           </div>
                         )}
                       </div>
 
                       {/* Card Action Footer */}
-                      <div className="pt-3 border-t border-[#E6DCC8] flex items-center justify-between gap-2">
+                      {/* <div className="pt-3 border-t border-[#E6DCC8] flex items-center justify-between gap-2">
                         <button
                           onClick={() => handleAddWordToDeck(item)}
                           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                             isAdded
-                              ? 'bg-[#E9F3EE] text-[#245243] border border-[#2F6F57]/30'
+                              ? 'bg-[#E9F3EE] text-[#2F6F57] border border-[#2F6F57]/30'
                               : 'bg-white hover:bg-[#FBF7EE] text-[#1B2433] border border-[#D9CFBA]'
                           }`}
                         >
@@ -737,7 +719,7 @@ export const FlashcardsView = ({
                         >
                           <Star className="w-4 h-4 fill-current" />
                         </button>
-                      </div>
+                      </div> */}
                     </div>
                   );
                 })}
@@ -757,7 +739,7 @@ export const FlashcardsView = ({
             <div className="bg-[#FBF7EE] border border-[#1F3A5F]/20 rounded-2xl p-3.5 flex items-center justify-between text-xs">
               <span className="font-semibold text-[#1F3A5F] flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-[#1F3A5F]" />
-                Practicing Today's AI Vocabulary ({selectedArea})
+                Practicing Today's Vocabulary ({selectedArea})
               </span>
               <button
                 onClick={() => setSrsDeck(null)}
@@ -787,7 +769,7 @@ export const FlashcardsView = ({
                   className={`text-xs font-bold uppercase px-2.5 py-1 rounded-lg ${
                     currentSrsCard.gender === 'm'
                       ? 'bg-[#F2EBDC] text-[#1F3A5F] border border-[#1F3A5F]/20'
-                      : 'bg-[#FCF0EE] text-[#8A2430] border border-[#C23B3B]/30'
+                      : 'bg-[#FCF0EE] text-[#C23B3B] border border-[#C23B3B]/30'
                   }`}
                 >
                   {currentSrsCard.gender === 'm' ? 'Masculine (Le / Un)' : 'Feminine (La / Une)'}
@@ -804,7 +786,7 @@ export const FlashcardsView = ({
                     e.stopPropagation();
                     speakFrench(currentSrsCard.french, audioSpeed);
                   }}
-                  className="p-2.5 rounded-xl bg-[#FBF7EE] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white border border-[#E6DCC8] transition-all shadow-xs cursor-pointer"
+                  className="p-2.5 rounded-xl bg-[#FBF7EE] text-[#1F3A5F] hover:bg-[#C23B3B] hover:text-white border border-[#E6DCC8] transition-all shadow-xs cursor-pointer"
                   title="Listen to French pronunciation"
                 >
                   <Volume2 className="w-4 h-4" />
@@ -877,7 +859,7 @@ export const FlashcardsView = ({
             <div className="grid grid-cols-4 gap-2 pt-2 animate-in fade-in">
               <button
                 onClick={() => handleSrsResponse('again')}
-                className="py-3 px-2 rounded-xl bg-[#FCF0EE] border border-[#B3262F]/30 text-[#B3262F] font-bold text-xs hover:bg-[#FBEAE8] transition-all text-center cursor-pointer shadow-xs"
+                className="py-3 px-2 rounded-xl bg-[#FCF0EE] border border-[#C23B3B]/30 text-[#C23B3B] font-bold text-xs hover:bg-[#FBEAE8] transition-all text-center cursor-pointer shadow-xs"
               >
                 <span>Again</span>
                 <span className="block text-[10px] font-normal opacity-80">&lt; 1 min</span>
@@ -898,7 +880,7 @@ export const FlashcardsView = ({
               </button>
               <button
                 onClick={() => handleSrsResponse('easy')}
-                className="py-3 px-2 rounded-xl bg-[#E9F3EE] border border-[#2F6F57]/30 text-[#245243] font-bold text-xs hover:bg-[#E2ECE2] transition-all text-center cursor-pointer shadow-xs"
+                className="py-3 px-2 rounded-xl bg-[#E9F3EE] border border-[#2F6F57]/30 text-[#2F6F57] font-bold text-xs hover:bg-[#E2ECE2] transition-all text-center cursor-pointer shadow-xs"
               >
                 <span>Easy</span>
                 <span className="block text-[10px] font-normal opacity-80">7 days</span>
@@ -932,7 +914,7 @@ export const FlashcardsView = ({
                 All categories
               </label>
               {VOCABULARY_CATEGORIES.map((category) => (
-                <label key={category} className="inline-flex items-center gap-2 rounded-xl border border-[#D9CFBA] bg-white px-3 py-2 text-xs font-medium text-[#2B4468] hover:border-[#1F3A5F]/50 cursor-pointer">
+                <label key={category} className="inline-flex items-center gap-2 rounded-xl border border-[#D9CFBA] bg-white px-3 py-2 text-xs font-medium text-[#1F3A5F] hover:border-[#1F3A5F]/50 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={selectedCategories.includes(category)}
@@ -996,7 +978,7 @@ export const FlashcardsView = ({
           </section>
 
           {filteredCards.length === 0 && (
-            <p role="status" className="border-l-2 border-[#C23B3B] bg-[#FCF0EE] px-4 py-3 text-xs text-[#5C382A]">
+            <p role="status" className="border-l-2 border-[#C23B3B] bg-[#FCF0EE] px-4 py-3 text-xs text-[#1B2433]">
               No words match your selected categories or search.
             </p>
           )}
@@ -1017,7 +999,7 @@ export const FlashcardsView = ({
                           <h4 className="text-base font-bold text-[#1B2433] font-serif">{card.french}</h4>
                           {card.gender && (
                             <span className={`text-[10px] uppercase font-bold px-1.5 py-0.2 rounded ${
-                              card.gender === 'm' ? 'bg-[#F2EBDC] text-[#1F3A5F]' : 'bg-[#FCF0EE] text-[#8A2430]'
+                              card.gender === 'm' ? 'bg-[#F2EBDC] text-[#1F3A5F]' : 'bg-[#FCF0EE] text-[#C23B3B]'
                             }`}>
                               {card.gender === 'm' ? 'm' : 'f'}
                             </span>
@@ -1042,7 +1024,7 @@ export const FlashcardsView = ({
                       </div>
                     </div>
 
-                    <p className="text-xs text-[#2B4468] italic font-serif pt-1">"{card.exampleFrench}"</p>
+                    <p className="text-xs text-[#1F3A5F] italic font-serif pt-1">"{card.exampleFrench}"</p>
                   </div>
 
                   <div className="flex items-center justify-between text-[11px] text-[#5F6B7A] pt-2 border-t border-[#E6DCC8]">
@@ -1107,7 +1089,7 @@ export const FlashcardsView = ({
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-[#1F3A5F] hover:bg-[#223F66] text-white font-bold text-xs rounded-xl shadow cursor-pointer"
+                  className="px-4 py-2 bg-[#C23B3B] hover:bg-[#C23B3B] text-white font-bold text-xs rounded-xl shadow cursor-pointer"
                 >
                   Save Flashcard
                 </button>
@@ -1120,4 +1102,3 @@ export const FlashcardsView = ({
     </div>
   );
 };
-
