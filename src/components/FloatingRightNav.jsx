@@ -31,7 +31,7 @@ export const FloatingRightNav = ({
               whileTap={{ scale: 0.92 }}
               className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full flex flex-col items-center justify-center transition-all duration-300 cursor-pointer shadow-lg backdrop-blur-xl ${
                 isMenuOpen
-                  ? 'bg-[#C23B3B] text-white ring-2 ring-[#C23B3B]/50 shadow-md shadow-[#C23B3B]/30'
+                  ? 'bg-[#1F3A5F] text-white ring-2 ring-[#1F3A5F]/50 shadow-md shadow-[#1F3A5F]/30'
                   : 'bg-gradient-to-br from-[#FBF8F1]/95 to-[#F6F1E5]/90 text-[#1B2433] border border-[#D9CFBA]/90 hover:border-[#1F3A5F]/50'
               }`}
               title={isMenuOpen ? 'Close Menu' : 'Open Navigation Menu'}
@@ -80,7 +80,7 @@ export const FloatingRightNav = ({
               onClick={scrollToTop}
               whileHover={{ scale: 1.12 }}
               whileTap={{ scale: 0.92 }}
-              className="w-9 h-9 rounded-full bg-white/80 hover:bg-[#C23B3B] text-[#1F3A5F] hover:text-white flex items-center justify-center transition-all duration-200 cursor-pointer border border-[#D9CFBA]/90 shadow-md backdrop-blur-md"
+              className="w-9 h-9 rounded-full bg-white/80 hover:bg-[#1F3A5F] text-[#1F3A5F] hover:text-white flex items-center justify-center transition-all duration-200 cursor-pointer border border-[#D9CFBA]/90 shadow-md backdrop-blur-md"
               title="Scroll to Top"
               aria-label="Scroll to Top"
             >

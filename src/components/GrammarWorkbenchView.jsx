@@ -239,7 +239,7 @@ export const GrammarWorkbenchView = ({
               }}
               className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-all text-left cursor-pointer ${
                 sourceSentence === preset.text
-                  ? 'bg-[#C23B3B] text-white border-[#1F3A5F] shadow-xs'
+                  ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-xs'
                   : 'bg-white text-[#1F3A5F] border-[#E6DCC8] hover:bg-[#FBF7EE]'
               }`}
             >
@@ -295,7 +295,7 @@ export const GrammarWorkbenchView = ({
                 }}
                 className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   selectedCategoryIdx === idx
-                    ? 'bg-[#C23B3B] text-white shadow-xs'
+                    ? 'bg-[#1F3A5F] text-white shadow-xs'
                     : 'text-[#5F6B7A] hover:text-[#1B2433] hover:bg-white/70'
                 }`}
               >
@@ -327,7 +327,7 @@ export const GrammarWorkbenchView = ({
             <button
               onClick={handleTransform}
               disabled={isTransforming || !sourceSentence.trim()}
-              className="px-6 py-3 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-2xl font-bold text-xs shadow-sm flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50"
+              className="px-6 py-3 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-2xl font-bold text-xs shadow-sm flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50"
             >
               <Wand2 className="w-4 h-4" />
               <span>{isTransforming ? 'Transforming Aspect...' : `Apply ${selectedOperation}`}</span>
@@ -347,7 +347,7 @@ export const GrammarWorkbenchView = ({
             </div>
             <button
               onClick={() => handleAudioPlay(transformationResult.transformedSentence)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F2EBDC] text-[#1F3A5F] hover:bg-[#C23B3B] hover:text-white transition-all text-xs font-bold cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F2EBDC] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white transition-all text-xs font-bold cursor-pointer"
             >
               <Volume2 className="w-4 h-4" />
               <span>Listen Narration</span>

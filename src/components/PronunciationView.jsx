@@ -141,7 +141,7 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
               }}
               className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                 isSelected
-                  ? 'bg-[#C23B3B] border-[#1F3A5F] text-white shadow-sm'
+                  ? 'bg-[#1F3A5F] border-[#1F3A5F] text-white shadow-sm'
                   : 'bg-white border-[#E6DCC8] text-[#5F6B7A] hover:text-[#1B2433] hover:border-[#D9CFBA]'
               }`}
             >
@@ -179,7 +179,7 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
                       setTranscript('');
                     }}
                     className={`w-3 h-3 rounded-full transition-all ${
-                      activePhraseIndex === idx ? 'bg-[#C23B3B] scale-125' : 'bg-[#D9CFBA] hover:bg-[#B9AD92]'
+                      activePhraseIndex === idx ? 'bg-[#1F3A5F] scale-125' : 'bg-[#D9CFBA] hover:bg-[#B9AD92]'
                     }`}
                   />
                 ))}
@@ -197,14 +197,14 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
               <div className="pt-2 flex flex-wrap justify-center gap-3">
                 <button
                   onClick={() => speakFrench(activePhrase.french, audioSpeed)}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
                 >
                   <Volume2 className="w-4 h-4" />
                   Standard Pronunciation
                 </button>
                 <button
                   onClick={() => speakFrench(activePhrase.french, 0.7)}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-[#F7F2E7] text-[#1B2433] rounded-xl text-xs font-semibold border border-[#D9CFBA] transition-all cursor-pointer shadow-xs"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-[#EDEEF0] text-[#1B2433] rounded-xl text-xs font-semibold border border-[#D9CFBA] transition-all cursor-pointer shadow-xs"
                 >
                   <Volume2 className="w-4 h-4 text-[#5F6B7A]" />
                   Slow Speed (0.7x)
@@ -229,8 +229,8 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
                   onClick={handleRecordToggle}
                   className={`w-20 h-20 rounded-full flex items-center justify-center transition-all cursor-pointer ${
                     isRecording
-                      ? 'bg-[#C23B3B] text-white animate-pulse ring-8 ring-[#C23B3B]/20 shadow-xl shadow-[#C23B3B]/40'
-                      : 'bg-[#C23B3B] hover:bg-[#C23B3B] text-white hover:scale-105 shadow-md shadow-[#C23B3B]/25'
+                      ? 'bg-[#1F3A5F] text-white animate-pulse ring-8 ring-[#1F3A5F]/20 shadow-xl shadow-[#1F3A5F]/40'
+                      : 'bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white hover:scale-105 shadow-md shadow-[#1F3A5F]/25'
                   }`}
                 >
                   {isRecording ? <MicOff className="w-8 h-8" /> : <Mic className="w-8 h-8" />}
@@ -258,7 +258,7 @@ export const PronunciationView = ({ audioSpeed, onAwardXp }) => {
                     id="evaluate-speech-btn"
                     disabled={isAnalyzing}
                     onClick={handleEvaluate}
-                    className="w-full py-2.5 rounded-xl bg-[#C23B3B] hover:bg-[#C23B3B] disabled:opacity-50 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
+                    className="w-full py-2.5 rounded-xl bg-[#1F3A5F] hover:bg-[#1F3A5F] disabled:opacity-50 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
                   >
                     <Sparkles className="w-4 h-4" />
                     <span>{isAnalyzing ? 'Evaluating pronunciation...' : 'Analyze My Pronunciation'}</span>

@@ -146,7 +146,7 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#F7F2E7] text-[#1B2433] flex flex-col font-sans selection:bg-[#C23B3B] selection:text-white">
+    <div className="relative min-h-screen bg-[#EDEEF0] text-[#1B2433] flex flex-col font-sans selection:bg-[#C23B3B] selection:text-white">
       {/* Animated Moving Background Canvas */}
       <AnimatedBackground isPaused={isModalOpen} />
 
@@ -169,19 +169,9 @@ export default function App() {
                 className={`relative flex-1 min-w-0 flex items-center transition-[background-color,border-color,box-shadow] duration-250 ease-out ${
                   isScrolled
                     ? 'rounded-2xl sm:rounded-3xl bg-transparent border border-transparent shadow-none ring-0'
-                    : 'w-full bg-[#EFE6D2]/95 border-b-2 border-[#1F3A5F] shadow-none rounded-none'
+                    : 'w-full bg-[#EEEEEE]/95 shadow-none rounded-none'
                 }`}
               >
-                {!isScrolled && (
-                  <span
-                    aria-hidden="true"
-                    className="absolute bottom-[-2px] inset-x-0 h-[3px] flex pointer-events-none"
-                  >
-                    <span className="flex-1 bg-[#C23B3B]" />
-                    <span className="flex-1 bg-[#FBF8F1]" />
-                    <span className="flex-1 bg-[#C8102E]" />
-                  </span>
-                )}
                 <div className="w-full">
                   <Header
                     progress={progress}
@@ -209,8 +199,8 @@ export default function App() {
                     whileTap={{ scale: 0.96 }}
                     className={`self-center shrink-0 h-10 w-10 sm:w-auto justify-center sm:justify-start px-0 sm:pl-1.5 sm:pr-4 rounded-full flex items-center gap-2 border shadow-md cursor-pointer select-none text-sm font-bold transition-colors duration-200 ${
                       isNavMenuOpen
-                        ? 'bg-[#C23B3B] text-white border-[#1F3A5F] shadow-[#C23B3B]/25'
-                        : 'bg-[#FBF8F1]/95 text-[#1F3A5F] border-[#D9CFBA]/85 hover:bg-white hover:border-[#1F3A5F]/50'
+                        ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-[#1F3A5F]/25'
+                        : 'bg-white/60 backdrop-blur-sm text-[#1F3A5F] border-[#D9CFBA]/80 shadow-2xs hover:bg-white/80 hover:border-[#1F3A5F]/50'
                     }`}
                     title={isNavMenuOpen ? 'Close menu' : 'Open menu'}
                     aria-label={isNavMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}

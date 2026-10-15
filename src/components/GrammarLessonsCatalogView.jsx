@@ -194,7 +194,7 @@ export const GrammarLessonsCatalogView = ({
               onClick={() => setSelectedCategory(isSelected ? 'All' : cat.id)}
               className={`p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between space-y-2 ${
                 isSelected
-                  ? 'bg-[#C23B3B] text-white border-[#1F3A5F] shadow-xs'
+                  ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-xs'
                   : 'bg-white text-[#1B2433] border-[#E6DCC8] hover:bg-[#FBF7EE]'
               }`}
             >
@@ -249,7 +249,7 @@ export const GrammarLessonsCatalogView = ({
                   }}
                   className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all flex items-center gap-1 ${
                     selectedLevelFilter === lvl
-                      ? 'bg-[#C23B3B] text-white shadow-xs'
+                      ? 'bg-[#1F3A5F] text-white shadow-xs'
                       : isUnlocked
                       ? 'text-[#5F6B7A] hover:text-[#1B2433] cursor-pointer'
                       : 'text-[#B0ABA0] opacity-50 cursor-not-allowed'
@@ -271,7 +271,7 @@ export const GrammarLessonsCatalogView = ({
             }}
             className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
               selectedCategory === 'All' && selectedLevelFilter === (activeLevel || 'A1') && !searchQuery
-                ? 'bg-[#C23B3B] text-white'
+                ? 'bg-[#1F3A5F] text-white'
                 : 'bg-[#F2EBDC] text-[#5F6B7A] hover:text-[#1B2433]'
             }`}
           >
@@ -335,7 +335,7 @@ export const GrammarLessonsCatalogView = ({
                 }}
                 className={`px-2.5 py-1 rounded-lg text-[11px] font-bold shrink-0 border transition-all cursor-pointer ${
                   searchQuery.toLowerCase().includes(`unit ${l.unitNumber}`) || searchQuery === `${l.unitNumber}`
-                    ? 'bg-[#C23B3B] text-white border-[#1F3A5F]'
+                    ? 'bg-[#1F3A5F] text-white border-[#1F3A5F]'
                     : isMastered
                     ? 'bg-[#E9F3EE] text-[#2F6F57] border-[#2F6F57]/30'
                     : isCompleted
@@ -470,7 +470,7 @@ export const GrammarLessonsCatalogView = ({
                 {isUnlocked ? (
                   <button
                     onClick={() => handleOpenLesson(lesson)}
-                    className="px-4 py-2 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs shrink-0"
+                    className="px-4 py-2 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs shrink-0"
                   >
                     <span>{isCompleted ? 'Review & Practice' : 'Study & Practice'}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -586,7 +586,7 @@ export const GrammarLessonsCatalogView = ({
               <button
                 onClick={handleGenerateLesson}
                 disabled={isGenerating || !customPrompt.trim()}
-                className="px-6 py-2.5 rounded-xl bg-[#C23B3B] hover:bg-[#C23B3B] text-white text-xs font-bold flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50 shadow-xs"
+                className="px-6 py-2.5 rounded-xl bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white text-xs font-bold flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50 shadow-xs"
               >
                 <Sparkles className="w-4 h-4 text-[#C23B3B]" />
                 <span>{isGenerating ? 'Synthesizing Lesson...' : 'Generate Lesson'}</span>

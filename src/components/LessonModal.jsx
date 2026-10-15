@@ -477,7 +477,7 @@ export const LessonModal = ({
                         }}
                         className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer flex items-center gap-2 ${
                           activeTopicIndex === idx
-                            ? 'bg-[#C23B3B] text-white shadow-xs'
+                            ? 'bg-[#1F3A5F] text-white shadow-xs'
                             : 'bg-white text-[#1F3A5F] hover:bg-[#F2EBDC] border border-[#E6DCC8]'
                         }`}
                       >
@@ -712,7 +712,7 @@ export const LessonModal = ({
                         setActiveTopicIndex((prev) => prev + 1);
                         scrollToTop();
                       }}
-                      className="px-5 py-2.5 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl font-bold text-xs shadow-xs flex items-center gap-2 transition-all cursor-pointer"
+                      className="px-5 py-2.5 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl font-bold text-xs shadow-xs flex items-center gap-2 transition-all cursor-pointer"
                     >
                       <span>Next Topic: {topicsList[activeTopicIndex + 1]?.title}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -721,7 +721,7 @@ export const LessonModal = ({
                     <button
                       id="start-lesson-ai-quiz-btn"
                       onClick={handleOpenQuizPhase}
-                      className="px-6 py-2.5 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl font-bold text-xs shadow-xs flex items-center gap-2 transition-all cursor-pointer"
+                      className="px-6 py-2.5 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl font-bold text-xs shadow-xs flex items-center gap-2 transition-all cursor-pointer"
                     >
                       <BrainCircuit className="w-4 h-4 text-white" />
                       <span>Start Unit Quiz</span>
@@ -759,7 +759,7 @@ export const LessonModal = ({
                       </div>
                       <button
                         onClick={() => handleAudioPlay(v.french)}
-                        className="p-2.5 rounded-xl bg-[#F2EBDC] text-[#1F3A5F] hover:bg-[#C23B3B] hover:text-white transition-colors border border-[#1F3A5F]/20 cursor-pointer shadow-xs"
+                        className="p-2.5 rounded-xl bg-[#F2EBDC] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white transition-colors border border-[#1F3A5F]/20 cursor-pointer shadow-xs"
                       >
                         <Volume2 className="w-4 h-4" />
                       </button>
@@ -783,7 +783,7 @@ export const LessonModal = ({
                 <button
                   id="vocab-to-quiz-btn"
                   onClick={handleOpenQuizPhase}
-                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#C23B3B] hover:bg-[#C23B3B] text-white font-bold text-xs transition-all shadow-xs cursor-pointer"
+                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white font-bold text-xs transition-all shadow-xs cursor-pointer"
                 >
                   <BrainCircuit className="w-4 h-4 text-white" />
                   <span>Start Unit Quiz</span>
@@ -846,7 +846,7 @@ export const LessonModal = ({
                   </div>
                   <button
                     onClick={() => handleGenerateAiQuiz(true)}
-                    className="px-5 py-2.5 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-xs"
+                    className="px-5 py-2.5 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-xs"
                   >
                     <RotateCcw className="w-4 h-4" />
                     <span>Try Generating Again</span>
@@ -896,7 +896,7 @@ export const LessonModal = ({
                           disabled={isTranslating}
                           className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer border ${
                             isQuestionTranslated
-                              ? 'bg-[#C23B3B] text-white border-[#1F3A5F] shadow-2xs'
+                              ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-2xs'
                               : 'bg-white hover:bg-[#FBF7EE] text-[#1F3A5F] border-[#D9CFBA]'
                           }`}
                           title={isQuestionTranslated ? 'Translate back to French' : 'Translate question into English'}
@@ -944,7 +944,7 @@ export const LessonModal = ({
                                 : hasChecked && isSelected
                                   ? 'bg-[#FCF0EE] text-[#C23B3B] border-[#C23B3B]/60'
                                   : isSelected
-                                    ? 'bg-[#C23B3B] text-white border-[#1F3A5F] shadow-xs'
+                                    ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-xs'
                                     : 'bg-white text-[#1B2433] border-[#E6DCC8] hover:bg-[#FBF7EE]'
                             }`}
                           >
@@ -1022,7 +1022,7 @@ export const LessonModal = ({
                         id="lesson-quiz-check-btn"
                         disabled={!selectedAnswer}
                         onClick={handleCheckAnswer}
-                        className="px-6 py-3 bg-[#C23B3B] text-white rounded-2xl font-bold text-xs shadow-sm hover:bg-[#C23B3B] transition-all cursor-pointer disabled:opacity-50"
+                        className="px-6 py-3 bg-[#1F3A5F] text-white rounded-2xl font-bold text-xs shadow-sm hover:bg-[#1F3A5F] transition-all cursor-pointer disabled:opacity-50"
                       >
                         Check Answer
                       </button>
@@ -1030,7 +1030,7 @@ export const LessonModal = ({
                       <button
                         id="lesson-quiz-next-btn"
                         onClick={handleNextExercise}
-                        className="px-6 py-3 bg-[#C23B3B] text-white rounded-2xl font-bold text-xs shadow-sm hover:bg-[#C23B3B] transition-all cursor-pointer flex items-center gap-2"
+                        className="px-6 py-3 bg-[#1F3A5F] text-white rounded-2xl font-bold text-xs shadow-sm hover:bg-[#1F3A5F] transition-all cursor-pointer flex items-center gap-2"
                       >
                         <span>{currentExIndex < exercises.length - 1 ? 'Next Question' : 'Complete Quiz & View Score'}</span>
                         <ArrowRight className="w-4 h-4" />
@@ -1051,7 +1051,7 @@ export const LessonModal = ({
                   </div>
                   <button
                     onClick={() => handleGenerateAiQuiz(false)}
-                    className="px-6 py-2.5 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-xs"
+                    className="px-6 py-2.5 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-xs"
                   >
                     <Sparkles className="w-4 h-4 text-[#C23B3B]" />
                     <span>Launch Unit Quiz</span>
@@ -1110,7 +1110,7 @@ export const LessonModal = ({
                     <button
                       id="finish-lesson-modal-btn"
                       onClick={onClose}
-                      className="px-6 py-2.5 bg-[#C23B3B] text-white rounded-xl text-xs font-bold hover:bg-[#C23B3B] transition-all cursor-pointer shadow-xs"
+                      className="px-6 py-2.5 bg-[#1F3A5F] text-white rounded-xl text-xs font-bold hover:bg-[#1F3A5F] transition-all cursor-pointer shadow-xs"
                     >
                       <span>Finish & Continue</span>
                     </button>
@@ -1146,7 +1146,7 @@ export const LessonModal = ({
                         setScore(0);
                         setPhase('quiz');
                       }}
-                      className="px-6 py-2.5 bg-[#C23B3B] text-white rounded-xl text-xs font-bold hover:bg-[#C23B3B] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                      className="px-6 py-2.5 bg-[#1F3A5F] text-white rounded-xl text-xs font-bold hover:bg-[#1F3A5F] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
                     >
                       <RotateCcw className="w-4 h-4" />
                       <span>Retake Quiz to Master (0/{exercises.length})</span>
@@ -1200,7 +1200,7 @@ export const LessonModal = ({
                         setScore(0);
                         setPhase('quiz');
                       }}
-                      className="px-6 py-2.5 bg-[#C23B3B] text-white rounded-xl text-xs font-bold hover:bg-[#C23B3B] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                      className="px-6 py-2.5 bg-[#1F3A5F] text-white rounded-xl text-xs font-bold hover:bg-[#1F3A5F] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
                     >
                       <RotateCcw className="w-4 h-4" />
                       <span>Retake to Master ({score}/{exercises.length})</span>

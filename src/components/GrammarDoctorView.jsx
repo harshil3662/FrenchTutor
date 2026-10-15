@@ -106,7 +106,7 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
             id="run-grammar-check-btn"
             disabled={!inputText.trim() || isLoading}
             onClick={() => handleAnalyze()}
-            className="px-6 py-3 bg-[#C23B3B] hover:bg-[#C23B3B] disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-sm flex items-center gap-2 transition-all cursor-pointer"
+            className="px-6 py-3 bg-[#1F3A5F] hover:bg-[#1F3A5F] disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-sm flex items-center gap-2 transition-all cursor-pointer"
           >
             <Sparkles className="w-4 h-4" />
             <span>{isLoading ? 'Analyzing grammar...' : 'Diagnose Sentence'}</span>
@@ -153,7 +153,7 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
                 </p>
                 <button
                   onClick={() => speakFrench(result.correctedText, audioSpeed)}
-                  className="p-2 rounded-xl bg-[#F2EBDC] text-[#1F3A5F] hover:bg-[#C23B3B] hover:text-white transition-colors border border-[#1F3A5F]/20 shadow-xs"
+                  className="p-2 rounded-xl bg-[#F2EBDC] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white transition-colors border border-[#1F3A5F]/20 shadow-xs"
                 >
                   <Volume2 className="w-4 h-4" />
                 </button>

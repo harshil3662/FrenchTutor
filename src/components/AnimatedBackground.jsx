@@ -47,7 +47,7 @@ const AnimatedBackgroundBase = ({ isPaused = false }) => {
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden transform-gpu will-change-transform select-none"
       style={{ isolation: 'isolate', contain: 'strict', transform: 'translateZ(0)' }}
     >
-      {/* 1. Atelier Ambient Light Pools — perfectly harmonized with #F7F2E7 base palette */}
+      {/* 1. Atelier Ambient Light Pools — perfectly harmonized with #EDEEF0 base palette */}
       {/* Warm Ivory & Parchment Light Pool (Top Left) */}
       <div className="absolute -top-[12%] -left-[10%] w-[58vw] h-[58vw] rounded-full bg-radial from-[#FFFDF8]/70 via-[#FAF5EC]/45 to-transparent" />
 

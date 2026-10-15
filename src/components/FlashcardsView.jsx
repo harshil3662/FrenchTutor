@@ -344,7 +344,7 @@ export const FlashcardsView = ({
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               viewMode === 'daily-ai'
-                ? 'bg-[#C23B3B] text-white shadow-xs'
+                ? 'bg-[#1F3A5F] text-white shadow-xs'
                 : 'text-[#6A6A5A] hover:text-[#1B2433] hover:bg-white'
             }`}
           >
@@ -362,7 +362,7 @@ export const FlashcardsView = ({
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               viewMode === 'srs' && !srsDeck
-                ? 'bg-[#C23B3B] text-white shadow-xs'
+                ? 'bg-[#1F3A5F] text-white shadow-xs'
                 : 'text-[#6A6A5A] hover:text-[#1B2433] hover:bg-white'
             }`}
           >
@@ -377,7 +377,7 @@ export const FlashcardsView = ({
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               viewMode === 'grid'
-                ? 'bg-[#C23B3B] text-white shadow-xs'
+                ? 'bg-[#1F3A5F] text-white shadow-xs'
                 : 'text-[#6A6A5A] hover:text-[#1B2433] hover:bg-white'
             }`}
           >
@@ -440,7 +440,7 @@ export const FlashcardsView = ({
                       }}
                       className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer ${
                         dailyLevel === lvl
-                          ? 'bg-[#C23B3B] text-white shadow-2xs'
+                          ? 'bg-[#1F3A5F] text-white shadow-2xs'
                           : 'text-[#5F6B7A] hover:text-[#1B2433]'
                       }`}
                     >
@@ -480,7 +480,7 @@ export const FlashcardsView = ({
                       onClick={() => handleSelectArea(area.id)}
                       className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border ${
                         isSelected
-                          ? 'bg-[#C23B3B] text-white border-[#1F3A5F] shadow-sm'
+                          ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-sm'
                           : 'bg-white text-[#1F3A5F] border-[#D9CFBA] hover:border-[#1F3A5F]/40 hover:bg-[#FBF8F1]'
                       }`}
                     >
@@ -495,7 +495,7 @@ export const FlashcardsView = ({
                   onClick={() => setIsCustomAreaActive(true)}
                   className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border ${
                     isCustomAreaActive
-                      ? 'bg-[#C23B3B] text-white border-[#1F3A5F] shadow-sm'
+                      ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-sm'
                       : 'bg-white text-[#1F3A5F] border-[#D9CFBA] hover:border-[#1F3A5F]/40 hover:bg-[#FBF8F1]'
                   }`}
                 >
@@ -521,7 +521,7 @@ export const FlashcardsView = ({
                   <button
                     type="submit"
                     disabled={!customAreaInput.trim() || isLoadingDaily}
-                    className="px-4 py-2 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl text-xs font-bold transition-all shadow-xs disabled:opacity-50 cursor-pointer"
+                    className="px-4 py-2 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl text-xs font-bold transition-all shadow-xs disabled:opacity-50 cursor-pointer"
                   >
                     Generate
                   </button>
@@ -584,7 +584,7 @@ export const FlashcardsView = ({
 
                   <button
                     onClick={handlePracticeDailyInSrs}
-                    className="flex items-center gap-1.5 px-4 py-2 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer"
+                    className="flex items-center gap-1.5 px-4 py-2 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer"
                   >
                     <Layers className="w-3.5 h-3.5" />
                     <span>Practice in SRS</span>
@@ -642,8 +642,8 @@ export const FlashcardsView = ({
                             title="Listen to French pronunciation"
                             className={`p-2.5 rounded-xl border transition-all cursor-pointer shadow-2xs ${
                               isAudioPlaying
-                                ? 'bg-[#C23B3B] text-white border-[#1F3A5F]'
-                                : 'bg-[#FBF7EE] text-[#1F3A5F] border-[#E6DCC8] hover:bg-[#C23B3B] hover:text-white'
+                                ? 'bg-[#1F3A5F] text-white border-[#1F3A5F]'
+                                : 'bg-[#FBF7EE] text-[#1F3A5F] border-[#E6DCC8] hover:bg-[#1F3A5F] hover:text-white'
                             }`}
                           >
                             <Volume2 className="w-4 h-4" />
@@ -786,7 +786,7 @@ export const FlashcardsView = ({
                     e.stopPropagation();
                     speakFrench(currentSrsCard.french, audioSpeed);
                   }}
-                  className="p-2.5 rounded-xl bg-[#FBF7EE] text-[#1F3A5F] hover:bg-[#C23B3B] hover:text-white border border-[#E6DCC8] transition-all shadow-xs cursor-pointer"
+                  className="p-2.5 rounded-xl bg-[#FBF7EE] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white border border-[#E6DCC8] transition-all shadow-xs cursor-pointer"
                   title="Listen to French pronunciation"
                 >
                   <Volume2 className="w-4 h-4" />
@@ -1089,7 +1089,7 @@ export const FlashcardsView = ({
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-[#C23B3B] hover:bg-[#C23B3B] text-white font-bold text-xs rounded-xl shadow cursor-pointer"
+                  className="px-4 py-2 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white font-bold text-xs rounded-xl shadow cursor-pointer"
                 >
                   Save Flashcard
                 </button>

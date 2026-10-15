@@ -454,7 +454,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                   }}
                   className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex items-start gap-3 ${
                     isSelected
-                      ? 'bg-[#C23B3B] text-white border-[#1F3A5F] shadow-sm'
+                      ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-sm'
                       : 'bg-white hover:bg-[#FBF7EE] text-[#1B2433] border-[#E6DCC8]'
                   }`}
                 >
@@ -503,7 +503,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
             <button
               onClick={() => handleGenerateArticle(customSearchQuery || topicInput, sourceType, activeLevel)}
               disabled={isLoading}
-              className="px-5 py-2.5 bg-[#C23B3B] hover:bg-[#C23B3B] disabled:opacity-50 text-white rounded-2xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs shrink-0"
+              className="px-5 py-2.5 bg-[#1F3A5F] hover:bg-[#1F3A5F] disabled:opacity-50 text-white rounded-2xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs shrink-0"
             >
               <Sparkles className="w-4 h-4" />
               <span>{isLoading ? 'Changing your article...' : 'Change Article'}</span>
@@ -529,7 +529,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                     }}
                     className={`max-w-full text-xs px-3.5 py-1.5 rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs ${
                       topicInput === preset
-                        ? 'bg-[#C23B3B] text-white border-[#1F3A5F]'
+                        ? 'bg-[#1F3A5F] text-white border-[#1F3A5F]'
                         : 'bg-white hover:bg-[#FBF7EE] text-[#1F3A5F] border-[#D9CFBA]'
                     }`}
                   >
@@ -569,7 +569,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                 <button
                   onClick={() => speakFrench(story.frenchText, audioSpeed)}
                   title="Listen to native French audio narration"
-                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#F2EBDC] hover:bg-[#C23B3B] hover:text-white text-[#1F3A5F] border border-[#1F3A5F]/20 text-xs font-bold transition-all shadow-2xs cursor-pointer"
+                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#F2EBDC] hover:bg-[#1F3A5F] hover:text-white text-[#1F3A5F] border border-[#1F3A5F]/20 text-xs font-bold transition-all shadow-2xs cursor-pointer"
                 >
                   <Volume2 className="w-4 h-4" />
                   <span>Listen (Audio)</span>
@@ -643,7 +643,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                   <button
                     id="next-context-btn-header"
                     onClick={() => setCurrentContextIndex((prev) => prev + 1)}
-                    className="px-4 py-2 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl text-xs font-bold flex items-center gap-2 transition-all cursor-pointer shadow-xs shrink-0"
+                    className="px-4 py-2 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl text-xs font-bold flex items-center gap-2 transition-all cursor-pointer shadow-xs shrink-0"
                   >
                     <span>Next Context: {nextStage?.title}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -662,7 +662,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                       onClick={() => setCurrentContextIndex(idx)}
                       className={`px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 transition-all flex items-center gap-1.5 cursor-pointer ${
                         isCurrent
-                          ? 'bg-[#C23B3B] text-white shadow-2xs'
+                          ? 'bg-[#1F3A5F] text-white shadow-2xs'
                           : isPast
                           ? 'bg-[#E9F3EE] text-[#2F6F57] border border-[#2F6F57]/30'
                           : 'bg-[#FBF7EE] text-[#5F6B7A] hover:bg-[#F2EBDC]'
@@ -715,7 +715,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                             onClick={() => setRightWrongAnswers((prev) => ({ ...prev, [idx]: true }))}
                             className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
                               userAnswer === true
-                                ? 'bg-[#C23B3B] text-white border-[#1F3A5F]'
+                                ? 'bg-[#1F3A5F] text-white border-[#1F3A5F]'
                                 : 'bg-[#FBF7EE] text-[#1F3A5F] border-[#E6DCC8] hover:bg-white'
                             }`}
                           >
@@ -727,7 +727,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                             onClick={() => setRightWrongAnswers((prev) => ({ ...prev, [idx]: false }))}
                             className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
                               userAnswer === false
-                                ? 'bg-[#C23B3B] text-white border-[#C23B3B]'
+                                ? 'bg-[#1F3A5F] text-white border-[#1F3A5F]'
                                 : 'bg-[#FBF7EE] text-[#1F3A5F] border-[#E6DCC8] hover:bg-white'
                             }`}
                           >
@@ -768,7 +768,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                   <button
                     onClick={handleCheckRightWrong}
                     disabled={Object.keys(rightWrongAnswers).length < (story.rightOrWrongQuestions || []).length}
-                    className="w-full py-3 bg-[#C23B3B] hover:bg-[#C23B3B] disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
+                    className="w-full py-3 bg-[#1F3A5F] hover:bg-[#1F3A5F] disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
                   >
                     <CheckCircle2 className="w-4 h-4" />
                     <span>Check True / False Answers</span>
@@ -827,7 +827,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                     <button
                       onClick={handleCheckMcq}
                       disabled={Object.keys(mcqAnswers).length < (story.comprehensionQuestions || []).length}
-                      className="w-full py-3 bg-[#C23B3B] hover:bg-[#C23B3B] disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-xs transition-all cursor-pointer"
+                      className="w-full py-3 bg-[#1F3A5F] hover:bg-[#1F3A5F] disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-xs transition-all cursor-pointer"
                     >
                       Submit Comprehension Answers
                     </button>
@@ -895,7 +895,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                   <button
                     onClick={handleSubmitSummary}
                     disabled={selectedSummaryIdx === null}
-                    className="w-full py-3 bg-[#C23B3B] hover:bg-[#C23B3B] disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-xs transition-all cursor-pointer"
+                    className="w-full py-3 bg-[#1F3A5F] hover:bg-[#1F3A5F] disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-xs transition-all cursor-pointer"
                   >
                     Submit Summary Answer
                   </button>
@@ -984,7 +984,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                 <button
                   onClick={handleEvaluateOpinion}
                   disabled={isEvaluatingOpinion || !userOpinionText.trim() || userOpinionText.trim().length < 5}
-                  className="w-full py-3.5 bg-[#C23B3B] hover:bg-[#C23B3B] disabled:opacity-50 text-white font-bold text-xs sm:text-sm rounded-2xl shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
+                  className="w-full py-3.5 bg-[#1F3A5F] hover:bg-[#1F3A5F] disabled:opacity-50 text-white font-bold text-xs sm:text-sm rounded-2xl shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
                 >
                   <Send className="w-4 h-4" />
                   <span>{isEvaluatingOpinion ? 'Analyzing your French response...' : 'Get Feedback & Bonus XP (+25 XP)'}</span>
@@ -1126,7 +1126,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                 <button
                   id="next-context-btn-bottom"
                   onClick={() => setCurrentContextIndex((prev) => Math.min(CONTEXT_STAGES.length - 1, prev + 1))}
-                  className="w-full sm:w-auto px-6 py-2.5 bg-[#C23B3B] hover:bg-[#C23B3B] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
+                  className="w-full sm:w-auto px-6 py-2.5 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
                 >
                   <span>Next Context: {nextStage?.title}</span>
                   <ArrowRight className="w-4 h-4" />
@@ -1162,7 +1162,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                     onClick={() => setCurrentContextIndex(idx)}
                     className={`w-full p-3 rounded-2xl border text-left transition-all cursor-pointer flex items-center justify-between ${
                       isActive
-                        ? 'bg-[#C23B3B] text-white border-[#1F3A5F] shadow-2xs'
+                        ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-2xs'
                         : 'bg-white hover:bg-[#FBF7EE] text-[#1B2433] border-[#E6DCC8]'
                     }`}
                   >

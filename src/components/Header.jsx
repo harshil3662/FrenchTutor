@@ -3,8 +3,14 @@ import { Award, Volume2, Globe, Lock } from 'lucide-react';
 
 const LEVELS = ['A1', 'A2', 'B1', 'B2'];
 
-const LevelSwitcher = ({ activeLevel, unlockedLevels, onLevelChange, idPrefix = '' }) => (
-  <div className="flex items-center h-9 sm:h-8 w-full sm:w-auto min-w-0 bg-[#1F3A5F]/15 backdrop-blur-sm rounded-full p-0.5 pl-2 border border-[#1F3A5F]/40 shadow-2xs">
+// Matches the brand block: transparent at the top, a white capsule once scrolled.
+const controlSurface = (isScrolled) =>
+  isScrolled
+    ? 'bg-white/60 border-[#D9CFBA]/80 backdrop-blur-sm shadow-2xs'
+    : 'bg-transparent border-transparent';
+
+const LevelSwitcher = ({ activeLevel, unlockedLevels, onLevelChange, idPrefix = '', isScrolled = false }) => (
+  <div className={`flex items-center h-9 sm:h-8 w-full sm:w-auto min-w-0 rounded-full p-0.5 pl-2 border ${controlSurface(isScrolled)}`}>
     <Globe className="w-3.5 h-3.5 shrink-0 text-[#5F6B7A] mr-1" />
     <div className="flex flex-1 sm:flex-none min-w-0 h-full items-center space-x-0.5">
       {LEVELS.map((lvl) => {
@@ -27,7 +33,7 @@ const LevelSwitcher = ({ activeLevel, unlockedLevels, onLevelChange, idPrefix = 
             }`}
           >
             <span>{lvl}</span>
-            {!isUnlocked && <Lock className="w-2.5 h-2.5 text-[#1F3A5F]/70" />}
+            {!isUnlocked && <Lock className="w-2.5 h-2.5 text-[#A09C90]" />}
           </button>
         );
       })}
@@ -35,18 +41,18 @@ const LevelSwitcher = ({ activeLevel, unlockedLevels, onLevelChange, idPrefix = 
   </div>
 );
 
-const LevelBadge = ({ progress, idPrefix = '' }) => (
+const LevelBadge = ({ progress, idPrefix = '', isScrolled = false }) => (
   <div
     id={`${idPrefix}user-badge`}
-    className="flex items-center justify-center gap-1.5 h-9 sm:h-8 shrink-0 px-3 bg-[#E9F3EE]/70 backdrop-blur-sm border border-[#2F6F57]/30 text-[#2F6F57] rounded-full text-xs font-bold shadow-2xs whitespace-nowrap"
+    className={`flex items-center justify-center gap-1.5 h-9 sm:h-8 shrink-0 px-3 border ${controlSurface(isScrolled)} text-[#245243] rounded-full text-xs font-bold whitespace-nowrap`}
   >
     <Award className="w-3.5 h-3.5 shrink-0 text-[#2F6F57]" />
     <span>Level {progress.level}</span>
   </div>
 );
 
-const SpeedSelector = ({ audioSpeed, onSpeedChange, idPrefix = '' }) => (
-  <div className="flex items-center gap-1.5 h-9 sm:h-8 w-full sm:w-auto pl-3 pr-1 bg-[#C23B3B]/15 backdrop-blur-sm border border-[#C23B3B]/40 text-[#1B2433] rounded-full text-xs shadow-2xs">
+const SpeedSelector = ({ audioSpeed, onSpeedChange, idPrefix = '', isScrolled = false }) => (
+  <div className={`flex items-center gap-1.5 h-9 sm:h-8 w-full sm:w-auto pl-3 pr-1 border ${controlSurface(isScrolled)} text-[#1B2433] rounded-full text-xs`}>
     <Volume2 className="w-3.5 h-3.5 shrink-0 text-[#5F6B7A]" />
     <select
       id={`${idPrefix}audio-speed-select`}
@@ -55,10 +61,10 @@ const SpeedSelector = ({ audioSpeed, onSpeedChange, idPrefix = '' }) => (
       onChange={(e) => onSpeedChange(parseFloat(e.target.value))}
       className="flex-1 min-w-0 bg-transparent text-[#1B2433] text-xs font-medium focus:outline-none cursor-pointer"
     >
-      <option value="0.75" className="bg-[#F7F2E7] text-[#1B2433]">0.75x (Slow)</option>
-      <option value="0.9" className="bg-[#F7F2E7] text-[#1B2433]">0.9x (Ideal)</option>
-      <option value="1" className="bg-[#F7F2E7] text-[#1B2433]">1x (Normal)</option>
-      <option value="1.15" className="bg-[#F7F2E7] text-[#1B2433]">1.15x (Native)</option>
+      <option value="0.75" className="bg-[#EDEEF0] text-[#1B2433]">0.75x (Slow)</option>
+      <option value="0.9" className="bg-[#EDEEF0] text-[#1B2433]">0.9x (Ideal)</option>
+      <option value="1" className="bg-[#EDEEF0] text-[#1B2433]">1x (Normal)</option>
+      <option value="1.15" className="bg-[#EDEEF0] text-[#1B2433]">1.15x (Native)</option>
     </select>
   </div>
 );
@@ -105,9 +111,7 @@ export const Header = ({
   return (
     <div
       id="app-header"
-      className={`text-[#1B2433] transition-colors duration-200 ${
-        isScrolled ? 'border-b-0' : 'border-b border-[#D9CFBA]/30'
-      }`}
+      className="text-[#1B2433] transition-colors duration-200"
     >
       <div className="max-w-7xl mx-auto flex flex-wrap items-center gap-x-3 gap-y-2.5 sm:gap-x-4 px-3.5 sm:px-6 py-2.5 sm:py-3 xl:flex-nowrap xl:justify-between">
         {/* Brand identity */}
@@ -118,12 +122,12 @@ export const Header = ({
               : 'w-full border border-transparent py-0 pl-0 pr-0'
           }`}
         >
-          <div className="relative flex shrink-0 items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-gradient-to-br from-[#1F3A5F] to-[#1F3A5F] shadow-sm shadow-[#1F3A5F]/20">
+          <div className="relative flex shrink-0 items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-gradient-to-br from-[#1F3A5F] to-[#152A47] shadow-sm shadow-[#1F3A5F]/20">
             <span className="font-bold tracking-wider text-white font-serif text-base sm:text-lg -mt-1">
               FR
             </span>
             <span className="absolute bottom-0 inset-x-0 h-1 flex">
-              <span className="flex-1 bg-[#C23B3B]" />
+              <span className="flex-1 bg-[#1F3A5F]" />
               <span className="flex-1 bg-white" />
               <span className="flex-1 bg-[#C23B3B]" />
             </span>
@@ -147,16 +151,17 @@ export const Header = ({
           className={`order-2 w-full sm:w-auto sm:ml-auto flex-wrap items-center gap-2 ${controlGroupVisibility}`}
         >
           <div className="order-1">
-            <LevelBadge progress={progress} />
+            <LevelBadge progress={progress} isScrolled={isScrolled} />
           </div>
           <div className="order-2 ml-auto sm:ml-0">
-            <SpeedSelector audioSpeed={audioSpeed} onSpeedChange={onSpeedChange} />
+            <SpeedSelector audioSpeed={audioSpeed} onSpeedChange={onSpeedChange} isScrolled={isScrolled} />
           </div>
           <div className="order-3 w-full sm:order-2 sm:w-auto">
             <LevelSwitcher
               activeLevel={activeLevel}
               unlockedLevels={unlockedLevels}
               onLevelChange={onLevelChange}
+              isScrolled={isScrolled}
             />
           </div>
         </div>

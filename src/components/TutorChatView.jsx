@@ -184,7 +184,7 @@ export const TutorChatView = ({
                   className={`w-full text-left p-3 rounded-2xl transition-all cursor-pointer flex items-center space-x-3 border ${
                     isSelected
                       ? 'bg-[#FCF0EE] border-[#C23B3B]/50 text-[#1B2433] shadow-xs'
-                      : 'bg-[#F7F2E7] border-[#E6DCC8] text-[#1F3A5F] hover:bg-[#E9E2D2] hover:text-[#1B2433]'
+                      : 'bg-[#EDEEF0] border-[#E6DCC8] text-[#1F3A5F] hover:bg-[#E9E2D2] hover:text-[#1B2433]'
                   }`}
                 >
                   <span className="text-2xl flex-shrink-0">{sc.icon}</span>
@@ -231,7 +231,7 @@ export const TutorChatView = ({
       {/* Main Chat Interface */}
       <div className="lg:col-span-3 bg-white border border-[#E6DCC8] rounded-3xl flex flex-col h-[78vh] shadow-sm overflow-hidden">
         {/* Chat Header */}
-        <div className="px-6 py-4 bg-[#F7F2E7]/90 border-b border-[#E6DCC8] flex items-center justify-between">
+        <div className="px-6 py-4 bg-[#EDEEF0]/90 border-b border-[#E6DCC8] flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="relative">
               <span className="text-3xl">{selectedScenario.character.avatar}</span>
@@ -288,7 +288,7 @@ export const TutorChatView = ({
                 <div
                   className={`max-w-2xl rounded-2xl p-4 shadow-xs ${
                     isUser
-                      ? 'bg-[#C23B3B] text-white rounded-br-xs'
+                      ? 'bg-[#1F3A5F] text-white rounded-br-xs'
                       : 'bg-white text-[#1B2433] border border-[#E6DCC8] rounded-bl-xs'
                   }`}
                 >
@@ -383,7 +383,7 @@ export const TutorChatView = ({
         </div>
 
         {/* Suggested Quick Response Chips */}
-        <div className="px-4 py-2 bg-[#F7F2E7] border-t border-[#E6DCC8] overflow-x-auto no-scrollbar flex space-x-2">
+        <div className="px-4 py-2 bg-[#EDEEF0] border-t border-[#E6DCC8] overflow-x-auto no-scrollbar flex space-x-2">
           {selectedScenario.suggestedPhrases.map((phrase, idx) => (
             <button
               key={idx}
@@ -403,8 +403,8 @@ export const TutorChatView = ({
             onClick={handleToggleVoiceRecording}
             className={`p-3 rounded-2xl border transition-all cursor-pointer ${
               isRecording
-                ? 'bg-[#C23B3B] text-white border-[#C23B3B] animate-pulse shadow-md shadow-[#C23B3B]/30'
-                : 'bg-[#F7F2E7] text-[#1F3A5F] border-[#D9CFBA] hover:text-[#1B2433] hover:bg-[#E9E2D2]'
+                ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] animate-pulse shadow-md shadow-[#1F3A5F]/30'
+                : 'bg-[#EDEEF0] text-[#1F3A5F] border-[#D9CFBA] hover:text-[#1B2433] hover:bg-[#E9E2D2]'
             }`}
             title={isRecording ? 'Stop recording' : 'Speak French (Microphone)'}
           >
@@ -421,7 +421,7 @@ export const TutorChatView = ({
             placeholder={
               isRecording ? 'Listening to your French speech...' : 'Type your message in French...'
             }
-            className="flex-1 bg-[#F7F2E7] border border-[#D9CFBA] focus:border-[#1F3A5F] rounded-2xl px-4 py-3 text-sm text-[#1B2433] focus:outline-none placeholder-[#5F6B7A]"
+            className="flex-1 bg-[#EDEEF0] border border-[#D9CFBA] focus:border-[#1F3A5F] rounded-2xl px-4 py-3 text-sm text-[#1B2433] focus:outline-none placeholder-[#5F6B7A]"
           />
 
           {/* Send Button */}
@@ -429,7 +429,7 @@ export const TutorChatView = ({
             id="send-message-btn"
             disabled={!inputText.trim() || isLoading}
             onClick={() => handleSendMessage()}
-            className="p-3 bg-[#C23B3B] hover:bg-[#C23B3B] disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-2xl font-bold shadow-sm transition-all cursor-pointer"
+            className="p-3 bg-[#1F3A5F] hover:bg-[#1F3A5F] disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-2xl font-bold shadow-sm transition-all cursor-pointer"
           >
             <Send className="w-5 h-5" />
           </button>
