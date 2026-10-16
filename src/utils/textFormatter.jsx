@@ -12,8 +12,8 @@ export function formatBoldText(text, options = {}) {
   if (!text) return text;
   if (typeof text !== 'string') return text;
 
-  const boldClass = options.boldClassName || 'font-bold text-[#1F1F18]';
-  const codeClass = options.codeClassName || 'px-1 py-0.5 rounded bg-[#FBF7EE] border border-[#E6DCC8] font-mono text-[0.9em] text-[#1F3A5F] font-semibold';
+  const boldClass = options.boldClassName || 'font-bold text-[#1B2433]';
+  const codeClass = options.codeClassName || 'px-1 py-0.5 rounded bg-[#FFFFFF] border border-[#E6EAF0] font-mono text-[0.9em] text-[#1F3A5F] font-semibold';
 
   // Match:
   // 1. **bold text**

@@ -244,7 +244,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
       setIsFinished(true);
       playChime('celebrate');
       try {
-        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+        confetti({ colors: ['#1F3A5F'], particleCount: 80, spread: 60, origin: { y: 0.6 } });
       } catch (e) {}
       onAwardXp(score * 15 + 20);
     }
@@ -252,11 +252,11 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
 
   const modalContent = (
     <div id="ai-quiz-modal-overlay" className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-[#1B2433]/70 backdrop-blur-sm animate-in fade-in overscroll-contain">
-      <div className="bg-white border border-[#E6DCC8] rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl flex flex-col text-[#1B2433]">
+      <div className="bg-white border border-[#E6EAF0] rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl flex flex-col text-[#1B2433]">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E6DCC8] bg-[#FBF7EE] shrink-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E6EAF0] bg-[#FFFFFF] shrink-0">
           <div className="flex items-center space-x-2.5">
-            <BrainCircuit className="w-5 h-5 text-[#C23B3B]" />
+            <BrainCircuit className="w-5 h-5 text-[#1F3A5F]" />
             <h3 className="font-bold text-[#1B2433] text-base font-serif">
               {isLoading ? 'Generating Quiz...' : quizTitle}
             </h3>
@@ -264,7 +264,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
           <button
             onClick={onClose}
             aria-label="Close quiz modal"
-            className="p-1.5 text-[#5F6B7A] hover:text-[#1B2433] hover:bg-[#F2EBDC] rounded-xl cursor-pointer shrink-0"
+            className="p-1.5 text-[#5F6B7A] hover:text-[#1B2433] hover:bg-[#F5F7FA] rounded-xl cursor-pointer shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
@@ -285,11 +285,11 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
               <div className="space-y-1">
                 <h4 className="text-2xl font-bold text-[#1B2433] font-serif">Quiz Completed!</h4>
                 <p className="text-sm text-[#5F6B7A]">
-                  Your score: <strong className="text-[#2F6F57] font-serif">{score} / {questions.length}</strong>
+                  Your score: <strong className="text-[#1F3A5F] font-serif">{score} / {questions.length}</strong>
                 </p>
               </div>
 
-              <div className="p-4 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] max-w-xs mx-auto text-xs text-[#1F3A5F] font-bold">
+              <div className="p-4 bg-[#FFFFFF] rounded-2xl border border-[#E6EAF0] max-w-xs mx-auto text-xs text-[#1F3A5F] font-bold">
                 +{score * 15 + 20} XP added to your profile!
               </div>
 
@@ -302,7 +302,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
             </div>
           ) : !currentQ ? (
             <div className="text-center py-10 space-y-4">
-              <p className="text-sm text-[#7A4A3A]">This quiz question could not be displayed.</p>
+              <p className="text-sm text-[#1F3A5F]">This quiz question could not be displayed.</p>
               <button
                 onClick={() => setReloadToken((value) => value + 1)}
                 className="px-5 py-2.5 bg-[#1F3A5F] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 mx-auto cursor-pointer"
@@ -319,14 +319,14 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                 <span className="text-[#1F3A5F] font-bold">Score: {score}</span>
               </div>
 
-              <div className="p-5 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] space-y-3">
+              <div className="p-5 bg-[#FFFFFF] rounded-2xl border border-[#E6EAF0] space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] uppercase font-bold tracking-wider text-[#1F3A5F] bg-[#F2EBDC] px-2.5 py-0.5 rounded-md border border-[#1F3A5F]/15">
+                    <span className="text-[11px] uppercase font-bold tracking-wider text-[#1F3A5F] bg-[#F5F7FA] px-2.5 py-0.5 rounded-md border border-[#1F3A5F]/15">
                       Question {currentIndex + 1}
                     </span>
                     {isQuestionTranslated && (
-                      <span className="text-[10px] uppercase font-semibold text-[#C23B3B] bg-[#FCF0EE] px-2 py-0.5 rounded border border-[#D9CFBA]">
+                      <span className="text-[10px] uppercase font-semibold text-[#1F3A5F] bg-[#E8EEF6] px-2 py-0.5 rounded border border-[#D0D7E2]">
                         English Translation
                       </span>
                     )}
@@ -340,7 +340,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                       className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer border ${
                         isQuestionTranslated
                           ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-2xs'
-                          : 'bg-white hover:bg-[#FBF7EE] text-[#1F3A5F] border-[#D9CFBA]'
+                          : 'bg-white hover:bg-[#FFFFFF] text-[#1F3A5F] border-[#D0D7E2]'
                       }`}
                       title={isQuestionTranslated ? 'Translate back to French' : 'Translate question into English'}
                       aria-label={isQuestionTranslated ? 'Translate back to French' : 'Translate question into English'}
@@ -372,16 +372,16 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {currentQ.options.map((opt, idx) => {
                     const isSelected = selectedOption === opt;
-                    let style = 'bg-white border-[#D9CFBA] text-[#1B2433] hover:bg-[#FBF7EE]';
+                    let style = 'bg-white border-[#D0D7E2] text-[#1B2433] hover:bg-[#FFFFFF]';
 
                     if (hasChecked) {
                       if (opt === currentQ.correctAnswer) {
-                        style = 'bg-[#E9F3EE] border-[#2F6F57] text-[#2F6F57] font-bold';
+                        style = 'bg-[#E8EEF6] border-[#1F3A5F] text-[#1F3A5F] font-bold';
                       } else if (isSelected && opt !== currentQ.correctAnswer) {
-                        style = 'bg-[#FCF0EE] border-[#C23B3B] text-[#C23B3B] font-bold';
+                        style = 'bg-[#E8EEF6] border-[#1F3A5F] text-[#1F3A5F] font-bold';
                       }
                     } else if (isSelected) {
-                      style = 'bg-[#F2EBDC] border-[#1F3A5F] text-[#1B2433] font-semibold shadow-xs';
+                      style = 'bg-[#F5F7FA] border-[#1F3A5F] text-[#1B2433] font-semibold shadow-xs';
                     }
 
                     return (
@@ -415,14 +415,14 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                         ? 'Écrivez la traduction en français...'
                         : 'Répondez en français...'
                     }
-                    className="w-full rounded-xl border border-[#D9CFBA] bg-white px-3.5 py-3 text-xs text-[#1B2433] shadow-2xs outline-none focus:border-[#1F3A5F] focus:ring-2 focus:ring-[#1F3A5F]/10 resize-none disabled:opacity-60"
+                    className="w-full rounded-xl border border-[#D0D7E2] bg-white px-3.5 py-3 text-xs text-[#1B2433] shadow-2xs outline-none focus:border-[#1F3A5F] focus:ring-2 focus:ring-[#1F3A5F]/10 resize-none disabled:opacity-60"
                   />
                 </div>
               )}
 
               {/* Explanation */}
               {hasChecked && (
-                <div className="p-4 bg-[#FBF7EE] rounded-xl border border-[#E6DCC8] text-xs text-[#1F3A5F] animate-in fade-in">
+                <div className="p-4 bg-[#FFFFFF] rounded-xl border border-[#E6EAF0] text-xs text-[#1F3A5F] animate-in fade-in">
                   <strong className="text-[#1F3A5F] block mb-0.5 font-serif">Explanation:</strong>
                   {currentQ.explanation}
                 </div>

@@ -33,8 +33,8 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
   return (
     <div className="space-y-8 sm:space-y-10 pb-10">
       {/* Hero */}
-      <section className="rounded-3xl border border-[#D9CFBA]/80 bg-white/90 p-6 sm:p-10 shadow-sm">
-        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#C23B3B]">Bienvenue</p>
+      <section className="rounded-3xl border border-[#D0D7E2]/80 bg-white/90 p-6 sm:p-10 shadow-sm">
+        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#1F3A5F]">Bienvenue</p>
         <h1 className="mt-2 font-serif text-3xl sm:text-4xl font-bold text-[#1B2433] leading-tight">
           Welcome to L'Atelier Grammaire
         </h1>
@@ -54,7 +54,7 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
       </section>
 
       {/* Your path */}
-      <section className="rounded-3xl border border-[#D9CFBA]/80 bg-white/90 p-6 sm:p-8 shadow-sm">
+      <section className="rounded-3xl border border-[#D0D7E2]/80 bg-white/90 p-6 sm:p-8 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5F6B7A]">Your path</p>
@@ -64,15 +64,15 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
             {doneInLevel} of {levelUnits.length} units complete
           </p>
         </div>
-        <div className="mt-4 h-2.5 w-full overflow-hidden rounded-full bg-[#E9E1CF]">
+        <div className="mt-4 h-2.5 w-full overflow-hidden rounded-full bg-[#E6EAF0]">
           <div className="h-full rounded-full bg-[#1F3A5F] transition-all duration-500" style={{ width: `${percent}%` }} />
         </div>
 
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[#D9CFBA]/70 bg-[#FBF8F1]/80 p-4">
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[#D0D7E2]/70 bg-[#FFFFFF]/80 p-4">
           {nextUnit ? (
             <>
               <div className="flex items-center gap-3 min-w-0">
-                <div className="w-10 h-10 shrink-0 rounded-full bg-[#C23B3B]/10 text-[#C23B3B] flex items-center justify-center">
+                <div className="w-10 h-10 shrink-0 rounded-full bg-[#1F3A5F]/10 text-[#1F3A5F] flex items-center justify-center">
                   <Target className="w-5 h-5" />
                 </div>
                 <div className="min-w-0">
@@ -103,7 +103,7 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
               <div
                 key={level}
                 className={`rounded-2xl border p-4 ${
-                  unlocked ? 'border-[#D9CFBA]/80 bg-white/80' : 'border-[#D9CFBA]/50 bg-[#F1EBDD]/70 opacity-70'
+                  unlocked ? 'border-[#D0D7E2]/80 bg-white/80' : 'border-[#D0D7E2]/50 bg-[#F5F7FA]/70 opacity-70'
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -128,9 +128,9 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
         <h2 className="font-serif text-2xl font-bold text-[#1B2433]">How it works</h2>
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {STEPS.map((step, idx) => (
-            <div key={step.title} className="rounded-2xl border border-[#D9CFBA]/80 bg-white/70 p-5 shadow-xs">
+            <div key={step.title} className="rounded-2xl border border-[#D0D7E2]/80 bg-white/70 p-5 shadow-xs">
               <div className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-full bg-[#C23B3B] text-white text-sm font-bold flex items-center justify-center">
+                <span className="w-8 h-8 rounded-full bg-[#1F3A5F] text-white text-sm font-bold flex items-center justify-center">
                   {idx + 1}
                 </span>
                 <h3 className="font-bold text-[#1B2433]">{step.title}</h3>
@@ -157,7 +157,7 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
                 key={tab.id}
                 type="button"
                 onClick={() => onNavigate(tab.id)}
-                className="text-left rounded-2xl border border-[#D9CFBA]/80 bg-white/70 p-5 shadow-xs hover:bg-white hover:border-[#1F3A5F]/40 transition-colors cursor-pointer"
+                className="text-left rounded-2xl border border-[#D0D7E2]/80 bg-white/70 p-5 shadow-xs hover:bg-white hover:border-[#1F3A5F]/40 transition-colors cursor-pointer"
               >
                 <div className="flex items-center gap-3">
                   <span className="w-9 h-9 rounded-full bg-[#1F3A5F]/10 text-[#1F3A5F] flex items-center justify-center">

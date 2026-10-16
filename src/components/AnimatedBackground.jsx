@@ -8,11 +8,11 @@ const TYPOGRAPHIC_GLYPHS = [
   { id: 1, text: 'é', xStart: 8, delay: 0, duration: 26, size: 'text-4xl', color: 'text-[#1F3A5F]/16' },
   { id: 2, text: '« »', xStart: 24, delay: 3, duration: 32, size: 'text-3xl', color: 'text-[#1F3A5F]/14' },
   { id: 3, text: 'ê', xStart: 42, delay: 6, duration: 28, size: 'text-5xl', color: 'text-[#1F3A5F]/15' },
-  { id: 4, text: 'ç', xStart: 58, delay: 2, duration: 30, size: 'text-4xl', color: 'text-[#C23B3B]/14' },
+  { id: 4, text: 'ç', xStart: 58, delay: 2, duration: 30, size: 'text-4xl', color: 'text-[#1F3A5F]/14' },
   { id: 5, text: 'œ', xStart: 72, delay: 5, duration: 34, size: 'text-4xl', color: 'text-[#1F3A5F]/18' },
   { id: 6, text: 'à', xStart: 86, delay: 1, duration: 27, size: 'text-3xl', color: 'text-[#1F3A5F]/15' },
   { id: 7, text: 'è', xStart: 16, delay: 9, duration: 31, size: 'text-4xl', color: 'text-[#1F3A5F]/14' },
-  { id: 8, text: 'î', xStart: 34, delay: 11, duration: 29, size: 'text-3xl', color: 'text-[#C23B3B]/12' },
+  { id: 8, text: 'î', xStart: 34, delay: 11, duration: 29, size: 'text-3xl', color: 'text-[#1F3A5F]/12' },
   { id: 9, text: 'ô', xStart: 66, delay: 7, duration: 33, size: 'text-4xl', color: 'text-[#1F3A5F]/16' },
   { id: 10, text: '—', xStart: 80, delay: 4, duration: 35, size: 'text-2xl', color: 'text-[#1F3A5F]/14' },
   { id: 11, text: 'ù', xStart: 50, delay: 8, duration: 28, size: 'text-3xl', color: 'text-[#1F3A5F]/15' },
@@ -49,16 +49,16 @@ const AnimatedBackgroundBase = ({ isPaused = false }) => {
     >
       {/* 1. Atelier Ambient Light Pools — perfectly harmonized with #EDEEF0 base palette */}
       {/* Warm Ivory & Parchment Light Pool (Top Left) */}
-      <div className="absolute -top-[12%] -left-[10%] w-[58vw] h-[58vw] rounded-full bg-radial from-[#FFFDF8]/70 via-[#FAF5EC]/45 to-transparent" />
+      <div className="absolute -top-[12%] -left-[10%] w-[58vw] h-[58vw] rounded-full bg-radial from-[#FFFFFF]/70 via-[#FFFFFF]/45 to-transparent" />
 
       {/* French Olive & Atelier Sage Pool (Top Right) */}
-      <div className="absolute top-[3%] -right-[10%] w-[52vw] h-[52vw] rounded-full bg-radial from-[#E6EDE0]/55 via-[#EEF2E8]/35 to-transparent" />
+      <div className="absolute top-[3%] -right-[10%] w-[52vw] h-[52vw] rounded-full bg-radial from-[#E8EEF6]/55 via-[#E8EEF6]/35 to-transparent" />
 
       {/* Terracotta & Warm Parchment Subtle Glow (Bottom Center-Left) */}
-      <div className="absolute -bottom-[16%] left-[8%] w-[56vw] h-[56vw] rounded-full bg-radial from-[#F8EDE6]/50 via-[#F4E9E2]/30 to-transparent" />
+      <div className="absolute -bottom-[16%] left-[8%] w-[56vw] h-[56vw] rounded-full bg-radial from-[#E8EEF6]/50 via-[#E8EEF6]/30 to-transparent" />
 
       {/* Alabaster & Warm Linen Depth (Bottom Right) */}
-      <div className="absolute -bottom-[12%] -right-[8%] w-[50vw] h-[50vw] rounded-full bg-radial from-[#EDECE4]/55 via-[#F6F5EC]/35 to-transparent" />
+      <div className="absolute -bottom-[12%] -right-[8%] w-[50vw] h-[50vw] rounded-full bg-radial from-[#F5F7FA]/55 via-[#FFFFFF]/35 to-transparent" />
 
       {/* 2. Atelier Drafting Paper Grid Overlay (Papier Vélin / Carnet d'Étude) */}
       <div
@@ -113,7 +113,7 @@ const AnimatedBackgroundBase = ({ isPaused = false }) => {
           STUDY_MOTES.map((mote) => (
             <div
               key={`study-mote-${mote.id}`}
-              className={`absolute rounded-full bg-gradient-to-br from-[#C23B3B]/40 to-[#C23B3B]/30 ${mote.size}`}
+              className={`absolute rounded-full bg-gradient-to-br from-[#1F3A5F]/40 to-[#1F3A5F]/30 ${mote.size}`}
               style={{ left: mote.left, top: mote.top }}
             />
           ))}

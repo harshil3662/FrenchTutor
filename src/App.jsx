@@ -146,7 +146,7 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#EDEEF0] text-[#1B2433] flex flex-col font-sans selection:bg-[#C23B3B] selection:text-white">
+    <div className="relative min-h-screen bg-[#EDEEF0] text-[#1B2433] flex flex-col font-sans selection:bg-[#1F3A5F] selection:text-white">
       {/* Animated Moving Background Canvas */}
       <AnimatedBackground isPaused={isModalOpen} />
 
@@ -158,17 +158,23 @@ export default function App() {
           <div
             className={`max-w-7xl mx-auto flex flex-col gap-2.5 ${
               isScrolled
-                ? 'pt-2.5 sm:pt-3.5 px-3 sm:px-6 lg:px-8 pb-1'
+                ? 'pt-2 sm:pt-3 px-3 sm:px-6 lg:px-8 pb-0.5'
                 : 'pt-0 px-0 pb-0'
             }`}
           >
             {/* Top Bar Row: Header Capsule + Same-Height Companion Menu Button */}
-            <div className="flex items-stretch gap-2.5 sm:gap-3 pointer-events-auto">
+            <div
+              className={`flex items-stretch gap-2.5 sm:gap-3 pointer-events-auto transition-[background-color,border-color] duration-250 ease-out ${
+                isScrolled
+                  ? 'rounded-full bg-[#1F3A5F]/35 backdrop-blur-md shadow-2xs p-[3px] pr-[11px] sm:pr-[13px]'
+                  : ''
+              }`}
+            >
               {/* Main Header Capsule */}
               <div
                 className={`relative flex-1 min-w-0 flex items-center transition-[background-color,border-color,box-shadow] duration-250 ease-out ${
                   isScrolled
-                    ? 'rounded-2xl sm:rounded-3xl bg-transparent border border-transparent shadow-none ring-0'
+                    ? 'rounded-full bg-transparent border border-transparent shadow-none ring-0'
                     : 'w-full bg-[#EEEEEE]/95 shadow-none rounded-none'
                 }`}
               >
@@ -197,23 +203,22 @@ export default function App() {
                     onClick={() => setIsNavMenuOpen((prev) => !prev)}
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.96 }}
-                    className={`self-center shrink-0 h-10 w-10 sm:w-auto justify-center sm:justify-start px-0 sm:pl-1.5 sm:pr-4 rounded-full flex items-center gap-2 border shadow-md cursor-pointer select-none text-sm font-bold transition-colors duration-200 ${
+                    className={`self-center shrink-0 h-9 w-9 sm:h-10 sm:w-10 justify-center px-0 rounded-full flex items-center border shadow-md cursor-pointer select-none text-sm font-bold transition-colors duration-200 ${
                       isNavMenuOpen
-                        ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-[#1F3A5F]/25'
-                        : 'bg-white/60 backdrop-blur-sm text-[#1F3A5F] border-[#D9CFBA]/80 shadow-2xs hover:bg-white/80 hover:border-[#1F3A5F]/50'
+                        ? 'bg-[#14284A] text-white border-transparent'
+                        : 'bg-[#1F3A5F] text-white border-transparent hover:bg-[#14284A]'
                     }`}
                     title={isNavMenuOpen ? 'Close menu' : 'Open menu'}
                     aria-label={isNavMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
                     aria-expanded={isNavMenuOpen}
                   >
                     <span
-                      className={`w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-200 ${
-                        isNavMenuOpen ? 'bg-white/20' : 'bg-[#1F3A5F]/10'
+                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${
+                        isNavMenuOpen ? 'bg-white/20' : 'bg-white/15'
                       }`}
                     >
                       {isNavMenuOpen ? <X className="w-3.5 h-3.5" /> : <LayoutGrid className="w-3.5 h-3.5" />}
                     </span>
-                    <span className="hidden sm:inline pointer-events-none">{isNavMenuOpen ? 'Close' : 'Menu'}</span>
                   </motion.button>
                 )}
               </AnimatePresence>
@@ -236,11 +241,16 @@ export default function App() {
               {isScrolled && isNavMenuOpen && (
                 <motion.div
                   key="scrolled-dropdown-nav"
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                  className="overflow-hidden pointer-events-auto"
+                  initial={{ clipPath: 'inset(0% 0% 100% 0% round 1.5rem)', opacity: 0, y: -10 }}
+                  animate={{ clipPath: 'inset(0% 0% 0% 0% round 1.5rem)', opacity: 1, y: 0 }}
+                  exit={{
+                    clipPath: 'inset(0% 0% 100% 0% round 1.5rem)',
+                    opacity: 0,
+                    y: -10,
+                    transition: { duration: 0.7, ease: [0.45, 0, 0.2, 1] },
+                  }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="overflow-hidden pointer-events-auto rounded-3xl bg-[#1F3A5F]/35 backdrop-blur-md"
                 >
                   <Navigation
                     activeTab={activeTab}
@@ -253,6 +263,7 @@ export default function App() {
                     onCloseMenu={() => setIsNavMenuOpen(false)}
                     controls={
                       <HeaderControls
+                        inMenu
                         progress={progress}
                         activeLevel={activeLevel}
                         unlockedLevels={unlockedLevels}
@@ -389,9 +400,9 @@ export default function App() {
             transition={{ duration: 0.18 }}
             role="status"
             aria-live="polite"
-            className="fixed inset-x-3 bottom-3 z-[110] flex items-center gap-3 rounded-xl border border-[#D9CFBA] bg-[#1B2433] px-4 py-3 text-white shadow-lg sm:inset-x-auto sm:bottom-4 sm:right-4"
+            className="fixed inset-x-3 bottom-3 z-[110] flex items-center gap-3 rounded-xl border border-[#D0D7E2] bg-[#1B2433] px-4 py-3 text-white shadow-lg sm:inset-x-auto sm:bottom-4 sm:right-4"
           >
-            <Pause className="h-4 w-4 text-[#E3C66B]" aria-hidden="true" />
+            <Pause className="h-4 w-4 text-[#1F3A5F]" aria-hidden="true" />
             <span className="text-sm font-medium">Narration paused</span>
             <button
               type="button"

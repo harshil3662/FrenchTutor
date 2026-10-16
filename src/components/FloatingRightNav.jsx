@@ -32,7 +32,7 @@ export const FloatingRightNav = ({
               className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full flex flex-col items-center justify-center transition-all duration-300 cursor-pointer shadow-lg backdrop-blur-xl ${
                 isMenuOpen
                   ? 'bg-[#1F3A5F] text-white ring-2 ring-[#1F3A5F]/50 shadow-md shadow-[#1F3A5F]/30'
-                  : 'bg-gradient-to-br from-[#FBF8F1]/95 to-[#F6F1E5]/90 text-[#1B2433] border border-[#D9CFBA]/90 hover:border-[#1F3A5F]/50'
+                  : 'bg-gradient-to-br from-[#FFFFFF]/95 to-[#F5F7FA]/90 text-[#1B2433] border border-[#D0D7E2]/90 hover:border-[#1F3A5F]/50'
               }`}
               title={isMenuOpen ? 'Close Menu' : 'Open Navigation Menu'}
               aria-label={isMenuOpen ? 'Close Menu' : 'Open Navigation Menu'}
@@ -66,10 +66,10 @@ export const FloatingRightNav = ({
 
             {/* Tooltip on Hover */}
             <div className="pointer-events-none absolute right-[calc(100%+12px)] top-1/2 -translate-y-1/2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 z-50 flex items-center">
-              <div className="bg-[#2A2A22]/95 backdrop-blur-md text-white text-xs font-semibold py-1.5 px-3 rounded-xl shadow-xl whitespace-nowrap border border-[#48483B]">
+              <div className="bg-[#1B2433]/95 backdrop-blur-md text-white text-xs font-semibold py-1.5 px-3 rounded-xl shadow-xl whitespace-nowrap border border-[#1B2433]">
                 {isMenuOpen ? 'Close Menu' : 'Navigation Menu'}
               </div>
-              <div className="w-0 h-0 border-y-4 border-y-transparent border-l-4 border-l-[#2A2A22]/95 ml-[-1px]" />
+              <div className="w-0 h-0 border-y-4 border-y-transparent border-l-4 border-l-[#1B2433]/95 ml-[-1px]" />
             </div>
           </div>
 
@@ -80,17 +80,17 @@ export const FloatingRightNav = ({
               onClick={scrollToTop}
               whileHover={{ scale: 1.12 }}
               whileTap={{ scale: 0.92 }}
-              className="w-9 h-9 rounded-full bg-white/80 hover:bg-[#1F3A5F] text-[#1F3A5F] hover:text-white flex items-center justify-center transition-all duration-200 cursor-pointer border border-[#D9CFBA]/90 shadow-md backdrop-blur-md"
+              className="w-9 h-9 rounded-full bg-white/80 hover:bg-[#1F3A5F] text-[#1F3A5F] hover:text-white flex items-center justify-center transition-all duration-200 cursor-pointer border border-[#D0D7E2]/90 shadow-md backdrop-blur-md"
               title="Scroll to Top"
               aria-label="Scroll to Top"
             >
               <ArrowUp className="w-4 h-4" />
             </motion.button>
             <div className="pointer-events-none absolute right-[calc(100%+12px)] top-1/2 -translate-y-1/2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 z-50 flex items-center">
-              <div className="bg-[#2A2A22]/95 backdrop-blur-md text-white text-[11px] font-medium py-1 px-2.5 rounded-xl shadow-xl whitespace-nowrap border border-[#48483B]">
+              <div className="bg-[#1B2433]/95 backdrop-blur-md text-white text-[11px] font-medium py-1 px-2.5 rounded-xl shadow-xl whitespace-nowrap border border-[#1B2433]">
                 Top of Page
               </div>
-              <div className="w-0 h-0 border-y-4 border-y-transparent border-l-4 border-l-[#2A2A22]/95 ml-[-1px]" />
+              <div className="w-0 h-0 border-y-4 border-y-transparent border-l-4 border-l-[#1B2433]/95 ml-[-1px]" />
             </div>
           </div>
         </motion.aside>

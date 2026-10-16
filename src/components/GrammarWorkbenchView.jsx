@@ -198,7 +198,7 @@ export const GrammarWorkbenchView = ({
       {/* Header Banner */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div className="space-y-2">
-          <div className="inline-flex items-center space-x-2 bg-[#F2EBDC] border border-[#1F3A5F]/20 text-[#1F3A5F] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center space-x-2 bg-[#F5F7FA] border border-[#1F3A5F]/20 text-[#1F3A5F] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
             <Cpu className="w-3.5 h-3.5" />
             <span>Grammatical Aspect Transformation Laboratory</span>
           </div>
@@ -214,7 +214,7 @@ export const GrammarWorkbenchView = ({
           <button
             onClick={handleDissect}
             disabled={isDissecting || !sourceSentence.trim()}
-            className="px-4 py-2.5 rounded-xl bg-white hover:bg-[#FBF7EE] border border-[#D9CFBA] text-[#1B2433] font-bold text-xs flex items-center gap-2 transition-all shadow-xs cursor-pointer disabled:opacity-50"
+            className="px-4 py-2.5 rounded-xl bg-white hover:bg-[#FFFFFF] border border-[#D0D7E2] text-[#1B2433] font-bold text-xs flex items-center gap-2 transition-all shadow-xs cursor-pointer disabled:opacity-50"
           >
             <Binary className="w-4 h-4 text-[#1F3A5F]" />
             <span>{isDissecting ? 'Parsing Syntax...' : 'Dissect Sentence'}</span>
@@ -225,7 +225,7 @@ export const GrammarWorkbenchView = ({
       {/* Preset Suggestions */}
       <div className="space-y-2">
         <span className="text-xs font-bold uppercase tracking-wider text-[#5F6B7A] flex items-center gap-1.5">
-          <Sparkles className="w-3.5 h-3.5 text-[#C23B3B]" />
+          <Sparkles className="w-3.5 h-3.5 text-[#1F3A5F]" />
           Select a sample French sentence or type your own:
         </span>
         <div className="flex flex-wrap gap-2">
@@ -240,7 +240,7 @@ export const GrammarWorkbenchView = ({
               className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-all text-left cursor-pointer ${
                 sourceSentence === preset.text
                   ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-xs'
-                  : 'bg-white text-[#1F3A5F] border-[#E6DCC8] hover:bg-[#FBF7EE]'
+                  : 'bg-white text-[#1F3A5F] border-[#E6EAF0] hover:bg-[#FFFFFF]'
               }`}
             >
               <span className="font-semibold">{preset.label}: </span>
@@ -251,7 +251,7 @@ export const GrammarWorkbenchView = ({
       </div>
 
       {/* Source Input Box */}
-      <div className="bg-white border border-[#E6DCC8] rounded-3xl p-6 sm:p-7 shadow-xs space-y-4">
+      <div className="bg-white border border-[#E6EAF0] rounded-3xl p-6 sm:p-7 shadow-xs space-y-4">
         <div className="flex items-center justify-between">
           <label className="text-xs font-bold uppercase tracking-wider text-[#1F3A5F] font-serif flex items-center gap-1.5">
             <Layers className="w-4 h-4" />
@@ -272,12 +272,12 @@ export const GrammarWorkbenchView = ({
             value={sourceSentence}
             onChange={(e) => setSourceSentence(e.target.value)}
             placeholder="Type any French sentence to transform or dissect..."
-            className="w-full px-4 py-3.5 rounded-2xl bg-[#FBF7EE] border border-[#E6DCC8] text-[#1B2433] text-base font-serif focus:outline-none focus:ring-2 focus:ring-[#C23B3B] transition-all"
+            className="w-full px-4 py-3.5 rounded-2xl bg-[#FFFFFF] border border-[#E6EAF0] text-[#1B2433] text-base font-serif focus:outline-none focus:ring-2 focus:ring-[#1F3A5F] transition-all"
           />
         </div>
 
         {/* Aspect Transformation Controls */}
-        <div className="pt-4 border-t border-[#E6DCC8] space-y-4">
+        <div className="pt-4 border-t border-[#E6EAF0] space-y-4">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-[#5F6B7A]">
               Choose Target Grammatical Aspect:
@@ -285,7 +285,7 @@ export const GrammarWorkbenchView = ({
           </div>
 
           {/* Aspect Category Tabs */}
-          <div className="flex flex-wrap gap-1.5 bg-[#FBF7EE] p-1.5 rounded-2xl border border-[#E6DCC8]">
+          <div className="flex flex-wrap gap-1.5 bg-[#FFFFFF] p-1.5 rounded-2xl border border-[#E6EAF0]">
             {TRANSFORMATION_OPERATIONS.map((cat, idx) => (
               <button
                 key={idx}
@@ -312,8 +312,8 @@ export const GrammarWorkbenchView = ({
                 onClick={() => setSelectedOperation(opt.id)}
                 className={`p-3 rounded-2xl border text-left text-xs font-semibold transition-all cursor-pointer flex items-center justify-between ${
                   selectedOperation === opt.id
-                    ? 'bg-[#F2EBDC] border-[#1F3A5F] text-[#1B2433] shadow-xs ring-1 ring-[#C23B3B]'
-                    : 'bg-white border-[#E6DCC8] text-[#1F3A5F] hover:bg-[#FBF7EE]'
+                    ? 'bg-[#F5F7FA] border-[#1F3A5F] text-[#1B2433] shadow-xs ring-1 ring-[#1F3A5F]'
+                    : 'bg-white border-[#E6EAF0] text-[#1F3A5F] hover:bg-[#FFFFFF]'
                 }`}
               >
                 <span>{opt.label}</span>
@@ -339,15 +339,15 @@ export const GrammarWorkbenchView = ({
       {/* Transformation Result Card */}
       {transformationResult && (
         <div className="bg-white border border-[#1F3A5F]/30 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm animate-in fade-in">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E6DCC8] pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E6EAF0] pb-4">
             <div className="flex items-center space-x-3">
-              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#E9F3EE] text-[#2F6F57] border border-[#2F6F57]/30">
+              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#E8EEF6] text-[#1F3A5F] border border-[#1F3A5F]/30">
                 Transformed Result • {transformationResult.aspectComparison?.targetAspect || selectedOperation}
               </span>
             </div>
             <button
               onClick={() => handleAudioPlay(transformationResult.transformedSentence)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F2EBDC] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white transition-all text-xs font-bold cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F5F7FA] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white transition-all text-xs font-bold cursor-pointer"
             >
               <Volume2 className="w-4 h-4" />
               <span>Listen Narration</span>
@@ -355,7 +355,7 @@ export const GrammarWorkbenchView = ({
           </div>
 
           {/* Transformed Output Display */}
-          <div className="p-6 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] space-y-2">
+          <div className="p-6 bg-[#FFFFFF] rounded-2xl border border-[#E6EAF0] space-y-2">
             <span className="text-xs uppercase font-bold tracking-wider text-[#5F6B7A] font-serif">
               Transformed French Sentence:
             </span>
@@ -371,13 +371,13 @@ export const GrammarWorkbenchView = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-3">
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#1F3A5F] flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#2F6F57]" />
+                <CheckCircle2 className="w-4 h-4 text-[#1F3A5F]" />
                 Grammatical Rules Applied Step-by-Step
               </h4>
               <ul className="space-y-2">
                 {transformationResult.rulesApplied?.map((rule, idx) => (
-                  <li key={idx} className="text-xs text-[#1F3A5F] flex items-start gap-2 bg-[#FBF7EE] p-3 rounded-xl border border-[#E6DCC8]">
-                    <span className="w-5 h-5 rounded-full bg-[#C23B3B] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                  <li key={idx} className="text-xs text-[#1F3A5F] flex items-start gap-2 bg-[#FFFFFF] p-3 rounded-xl border border-[#E6EAF0]">
+                    <span className="w-5 h-5 rounded-full bg-[#1F3A5F] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
                       {idx + 1}
                     </span>
                     <span className="leading-relaxed">{rule}</span>
@@ -387,16 +387,16 @@ export const GrammarWorkbenchView = ({
             </div>
 
             <div className="space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#C23B3B] flex items-center gap-1.5">
-                <Info className="w-4 h-4 text-[#C23B3B]" />
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#1F3A5F] flex items-center gap-1.5">
+                <Info className="w-4 h-4 text-[#1F3A5F]" />
                 Linguistic Nuance & Syntactic Notes
               </h4>
-              <div className="p-4 bg-[#FCF0EE] rounded-2xl border border-[#C23B3B]/30 text-xs text-[#1F3A5F] space-y-2">
+              <div className="p-4 bg-[#E8EEF6] rounded-2xl border border-[#1F3A5F]/30 text-xs text-[#1F3A5F] space-y-2">
                 <p className="leading-relaxed font-medium">
                   {transformationResult.explanation}
                 </p>
                 {transformationResult.aspectComparison?.syntacticNotes && (
-                  <div className="pt-2 border-t border-[#C23B3B]/20 font-serif italic text-[#1B2433]">
+                  <div className="pt-2 border-t border-[#1F3A5F]/20 font-serif italic text-[#1B2433]">
                     💡 {transformationResult.aspectComparison.syntacticNotes}
                   </div>
                 )}
@@ -408,8 +408,8 @@ export const GrammarWorkbenchView = ({
 
       {/* Dissection Result Card */}
       {dissectionResult && (
-        <div className="bg-white border border-[#E6DCC8] rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm animate-in fade-in">
-          <div className="flex items-center justify-between border-b border-[#E6DCC8] pb-4">
+        <div className="bg-white border border-[#E6EAF0] rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm animate-in fade-in">
+          <div className="flex items-center justify-between border-b border-[#E6EAF0] pb-4">
             <div className="flex items-center space-x-2">
               <Binary className="w-5 h-5 text-[#1F3A5F]" />
               <h3 className="text-lg font-bold text-[#1B2433] font-serif">
@@ -423,19 +423,19 @@ export const GrammarWorkbenchView = ({
 
           {/* Aspect Matrix Summary */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="p-3 bg-[#FBF7EE] rounded-xl border border-[#E6DCC8] text-center">
+            <div className="p-3 bg-[#FFFFFF] rounded-xl border border-[#E6EAF0] text-center">
               <span className="text-[10px] uppercase font-bold text-[#5F6B7A] block">Tense</span>
               <span className="text-xs font-bold text-[#1B2433] font-serif mt-0.5 block">{dissectionResult.aspects?.tense || 'Présent'}</span>
             </div>
-            <div className="p-3 bg-[#FBF7EE] rounded-xl border border-[#E6DCC8] text-center">
+            <div className="p-3 bg-[#FFFFFF] rounded-xl border border-[#E6EAF0] text-center">
               <span className="text-[10px] uppercase font-bold text-[#5F6B7A] block">Mood</span>
               <span className="text-xs font-bold text-[#1B2433] font-serif mt-0.5 block">{dissectionResult.aspects?.mood || 'Indicatif'}</span>
             </div>
-            <div className="p-3 bg-[#FBF7EE] rounded-xl border border-[#E6DCC8] text-center">
+            <div className="p-3 bg-[#FFFFFF] rounded-xl border border-[#E6EAF0] text-center">
               <span className="text-[10px] uppercase font-bold text-[#5F6B7A] block">Voice</span>
               <span className="text-xs font-bold text-[#1B2433] font-serif mt-0.5 block">{dissectionResult.aspects?.voice || 'Active'}</span>
             </div>
-            <div className="p-3 bg-[#FBF7EE] rounded-xl border border-[#E6DCC8] text-center">
+            <div className="p-3 bg-[#FFFFFF] rounded-xl border border-[#E6EAF0] text-center">
               <span className="text-[10px] uppercase font-bold text-[#5F6B7A] block">Polarity</span>
               <span className="text-xs font-bold text-[#1B2433] font-serif mt-0.5 block">{dissectionResult.aspects?.polarity || 'Affirmative'}</span>
             </div>
@@ -448,16 +448,16 @@ export const GrammarWorkbenchView = ({
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
               {dissectionResult.syntacticTokens?.map((tok, idx) => (
-                <div key={idx} className="p-3.5 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] space-y-1">
+                <div key={idx} className="p-3.5 bg-[#FFFFFF] rounded-2xl border border-[#E6EAF0] space-y-1">
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-bold text-[#1B2433] font-serif">« {tok.token} »</span>
-                    <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-[#F2EBDC] text-[#1F3A5F]">
+                    <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-[#F5F7FA] text-[#1F3A5F]">
                       {tok.role}
                     </span>
                   </div>
                   <div className="text-xs text-[#5F6B7A]">{tok.type}</div>
                   {tok.details && (
-                    <div className="text-[11px] text-[#1F3A5F] italic pt-1 border-t border-[#E6DCC8]/70">
+                    <div className="text-[11px] text-[#1F3A5F] italic pt-1 border-t border-[#E6EAF0]/70">
                       {tok.details}
                     </div>
                   )}
@@ -469,18 +469,18 @@ export const GrammarWorkbenchView = ({
           {/* Agreement Checks */}
           {dissectionResult.agreementChecks && dissectionResult.agreementChecks.length > 0 && (
             <div className="space-y-3 pt-2">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#2F6F57] flex items-center gap-1.5">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#1F3A5F] flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4" />
                 Agreement Verification Checklist
               </h4>
               <div className="space-y-2">
                 {dissectionResult.agreementChecks.map((chk, idx) => (
-                  <div key={idx} className="p-3 bg-[#E9F3EE] rounded-xl border border-[#2F6F57]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                  <div key={idx} className="p-3 bg-[#E8EEF6] rounded-xl border border-[#1F3A5F]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
                     <div>
-                      <strong className="text-[#2F6F57] font-serif block">{chk.element}:</strong>
+                      <strong className="text-[#1F3A5F] font-serif block">{chk.element}:</strong>
                       <span className="text-[#1F3A5F]">{chk.rule}</span>
                     </div>
-                    <span className="px-2.5 py-0.5 rounded-full bg-white text-[#2F6F57] font-bold text-[10px] uppercase border border-[#2F6F57]/20 self-start sm:self-auto">
+                    <span className="px-2.5 py-0.5 rounded-full bg-white text-[#1F3A5F] font-bold text-[10px] uppercase border border-[#1F3A5F]/20 self-start sm:self-auto">
                       {chk.status}
                     </span>
                   </div>
@@ -490,7 +490,7 @@ export const GrammarWorkbenchView = ({
           )}
 
           {/* Summary */}
-          <div className="p-4 bg-[#F2EBDC] rounded-2xl border border-[#1F3A5F]/20 text-xs text-[#1F3A5F] leading-relaxed">
+          <div className="p-4 bg-[#F5F7FA] rounded-2xl border border-[#1F3A5F]/20 text-xs text-[#1F3A5F] leading-relaxed">
             <strong className="text-[#1F3A5F] block mb-1 font-serif">Syntactic Summary:</strong>
             {dissectionResult.grammaticalSummary}
           </div>

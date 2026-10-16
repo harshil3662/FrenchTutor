@@ -291,7 +291,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
 
     if (correctCount === questions.length) {
       try {
-        confetti({ particleCount: 35, spread: 55, origin: { y: 0.6 } });
+        confetti({ colors: ['#1F3A5F'], particleCount: 35, spread: 55, origin: { y: 0.6 } });
       } catch {}
       playChime('celebrate');
       if (onAwardXp) onAwardXp(25);
@@ -314,7 +314,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
 
     if (correctCount === questions.length) {
       try {
-        confetti({ particleCount: 40, spread: 60, origin: { y: 0.6 } });
+        confetti({ colors: ['#1F3A5F'], particleCount: 40, spread: 60, origin: { y: 0.6 } });
       } catch {}
       playChime('celebrate');
       if (onAwardXp) onAwardXp(30);
@@ -330,7 +330,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
     const bestOption = story.summaryExercise?.options?.[selectedSummaryIdx];
     if (bestOption?.isBest) {
       try {
-        confetti({ particleCount: 30, spread: 50, origin: { y: 0.6 } });
+        confetti({ colors: ['#1F3A5F'], particleCount: 30, spread: 50, origin: { y: 0.6 } });
       } catch {}
       playChime('celebrate');
       if (onAwardXp) onAwardXp(20);
@@ -363,7 +363,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
       setOpinionEvaluation(evaluation);
       playChime('celebrate');
       try {
-        confetti({ particleCount: 45, spread: 65, origin: { y: 0.6 } });
+        confetti({ colors: ['#1F3A5F'], particleCount: 45, spread: 65, origin: { y: 0.6 } });
       } catch {}
       if (onAwardXp && evaluation.xpBonus) {
         onAwardXp(evaluation.xpBonus);
@@ -400,10 +400,10 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
   return (
     <div id="stories-view" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-in fade-in">
       {/* Header & Media Control Panel */}
-      <div className="bg-white border border-[#E6DCC8] rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
+      <div className="bg-white border border-[#E6EAF0] rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-1.5">
-            <div className="inline-flex items-center space-x-2 bg-[#F2EBDC] border border-[#1F3A5F]/20 text-[#1F3A5F] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center space-x-2 bg-[#F5F7FA] border border-[#1F3A5F]/20 text-[#1F3A5F] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
               <Newspaper className="w-3.5 h-3.5 text-[#1F3A5F]" />
               <span>French Reading Room & Press Kiosk</span>
             </div>
@@ -412,7 +412,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
             </h2>
             <p className="text-sm text-[#1F3A5F] max-w-2xl leading-relaxed">
               Explore French newspaper articles, magazine features, and stories tailored to CEFR level{' '}
-              <strong className="text-[#1B2433] font-bold underline decoration-[#C23B3B] decoration-2">
+              <strong className="text-[#1B2433] font-bold underline decoration-[#1F3A5F] decoration-2">
                 {activeLevel}
               </strong>
               . Step through one comprehension context at a time below!
@@ -420,8 +420,8 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
           </div>
 
           {/* Level Badge Info */}
-          <div className="p-3.5 bg-[#FBF7EE] border border-[#E6DCC8] rounded-2xl flex items-center gap-3 shrink-0">
-            <div className="w-10 h-10 rounded-xl bg-[#C23B3B] text-white font-bold flex items-center justify-center font-serif text-sm shadow-xs">
+          <div className="p-3.5 bg-[#FFFFFF] border border-[#E6EAF0] rounded-2xl flex items-center gap-3 shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-[#1F3A5F] text-white font-bold flex items-center justify-center font-serif text-sm shadow-xs">
               {activeLevel}
             </div>
             <div>
@@ -436,7 +436,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
         </div>
 
         {/* Publication Format Selector */}
-        <div className="border-t border-[#E6DCC8]/80 pt-5 space-y-3">
+        <div className="border-t border-[#E6EAF0]/80 pt-5 space-y-3">
           <label className="text-xs font-bold text-[#1F3A5F] uppercase tracking-wider flex items-center gap-1.5">
             <SlidersHorizontal className="w-3.5 h-3.5" />
             <span>Select Publication Format</span>
@@ -455,10 +455,10 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                   className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex items-start gap-3 ${
                     isSelected
                       ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-sm'
-                      : 'bg-white hover:bg-[#FBF7EE] text-[#1B2433] border-[#E6DCC8]'
+                      : 'bg-white hover:bg-[#FFFFFF] text-[#1B2433] border-[#E6EAF0]'
                   }`}
                 >
-                  <div className={`p-2 rounded-xl shrink-0 ${isSelected ? 'bg-white/20' : 'bg-[#F2EBDC] text-[#1F3A5F]'}`}>
+                  <div className={`p-2 rounded-xl shrink-0 ${isSelected ? 'bg-white/20' : 'bg-[#F5F7FA] text-[#1F3A5F]'}`}>
                     <Icon className="w-4 h-4" />
                   </div>
                   <div className="min-w-0">
@@ -497,7 +497,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                   }
                 }}
                 placeholder="Type any topic you like (e.g. French cinema, Paris bakeries, travel to Provence, technology, sports...)"
-                className="w-full pl-10 pr-4 py-2.5 bg-[#FBF7EE] border border-[#E6DCC8] rounded-2xl text-xs sm:text-sm text-[#1B2433] placeholder-[#9C9485] focus:outline-none focus:border-[#1F3A5F] focus:bg-white transition-all"
+                className="w-full pl-10 pr-4 py-2.5 bg-[#FFFFFF] border border-[#E6EAF0] rounded-2xl text-xs sm:text-sm text-[#1B2433] placeholder-[#5F6B7A] focus:outline-none focus:border-[#1F3A5F] focus:bg-white transition-all"
               />
             </div>
             <button
@@ -530,7 +530,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                     className={`max-w-full text-xs px-3.5 py-1.5 rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs ${
                       topicInput === preset
                         ? 'bg-[#1F3A5F] text-white border-[#1F3A5F]'
-                        : 'bg-white hover:bg-[#FBF7EE] text-[#1F3A5F] border-[#D9CFBA]'
+                        : 'bg-white hover:bg-[#FFFFFF] text-[#1F3A5F] border-[#D0D7E2]'
                     }`}
                   >
                     <span>{cat.icon}</span>
@@ -547,15 +547,15 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Article Reading Column (2 Cols) */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white border border-[#E6DCC8] rounded-3xl p-6 sm:p-9 space-y-6 shadow-sm relative overflow-hidden">
+          <div className="bg-white border border-[#E6EAF0] rounded-3xl p-6 sm:p-9 space-y-6 shadow-sm relative overflow-hidden">
             {/* Journal Header Bar */}
             <div className="border-b-2 border-[#1B2433] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded-md bg-[#C23B3B] text-white text-[10px] font-bold uppercase tracking-wider">
+                  <span className="px-2 py-0.5 rounded-md bg-[#1F3A5F] text-white text-[10px] font-bold uppercase tracking-wider">
                     {story.sourceType || 'French Press Article'}
                   </span>
-                  <span className="px-2 py-0.5 rounded-md bg-[#F2EBDC] text-[#1F3A5F] text-[10px] font-bold uppercase">
+                  <span className="px-2 py-0.5 rounded-md bg-[#F5F7FA] text-[#1F3A5F] text-[10px] font-bold uppercase">
                     Level {story.level || activeLevel}
                   </span>
                 </div>
@@ -569,7 +569,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                 <button
                   onClick={() => speakFrench(story.frenchText, audioSpeed)}
                   title="Listen to native French audio narration"
-                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#F2EBDC] hover:bg-[#1F3A5F] hover:text-white text-[#1F3A5F] border border-[#1F3A5F]/20 text-xs font-bold transition-all shadow-2xs cursor-pointer"
+                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#F5F7FA] hover:bg-[#1F3A5F] hover:text-white text-[#1F3A5F] border border-[#1F3A5F]/20 text-xs font-bold transition-all shadow-2xs cursor-pointer"
                 >
                   <Volume2 className="w-4 h-4" />
                   <span>Listen (Audio)</span>
@@ -578,8 +578,8 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                   onClick={() => setShowEnglish(!showEnglish)}
                   className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer shadow-2xs ${
                     showEnglish
-                      ? 'bg-[#E9F3EE] text-[#2F6F57] border-[#2F6F57]/30'
-                      : 'bg-white text-[#1F3A5F] border-[#D9CFBA] hover:bg-[#FBF7EE]'
+                      ? 'bg-[#E8EEF6] text-[#1F3A5F] border-[#1F3A5F]/30'
+                      : 'bg-white text-[#1F3A5F] border-[#D0D7E2] hover:bg-[#FFFFFF]'
                   }`}
                 >
                   <Languages className="w-4 h-4" />
@@ -601,7 +601,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
             </div>
 
             {/* Main French Article Body */}
-            <div className="prose max-w-none text-[#2C2C26] font-serif text-base sm:text-lg leading-relaxed space-y-4">
+            <div className="prose max-w-none text-[#1B2433] font-serif text-base sm:text-lg leading-relaxed space-y-4">
               <p className="whitespace-pre-line first-letter:text-4xl first-letter:font-bold first-letter:float-left first-letter:mr-2.5 first-letter:text-[#1F3A5F]">
                 {story.frenchText}
               </p>
@@ -609,7 +609,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
 
             {/* Optional English Translation Box */}
             {showEnglish && (
-              <div className="p-5 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] text-sm text-[#1F3A5F] leading-relaxed italic animate-in fade-in space-y-1.5">
+              <div className="p-5 bg-[#FFFFFF] rounded-2xl border border-[#E6EAF0] text-sm text-[#1F3A5F] leading-relaxed italic animate-in fade-in space-y-1.5">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#5F6B7A] not-italic font-serif block">
                   Side-by-side English Translation
                 </span>
@@ -619,13 +619,13 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
           </div>
 
           {/* SINGLE-CONTEXT STEPPER WORKBENCH (ONE CONTEXT AT A TIME) */}
-          <div className="bg-white border border-[#E6DCC8] rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
+          <div className="bg-white border border-[#E6EAF0] rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
             {/* Top Stepper Indicator */}
             <div className="space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E6DCC8] pb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E6EAF0] pb-4">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-[#C23B3B] text-white">
+                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-[#1F3A5F] text-white">
                       {currentStage.badgeText}
                     </span>
                     <span className="text-xs font-bold text-[#5F6B7A]">
@@ -664,20 +664,20 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                         isCurrent
                           ? 'bg-[#1F3A5F] text-white shadow-2xs'
                           : isPast
-                          ? 'bg-[#E9F3EE] text-[#2F6F57] border border-[#2F6F57]/30'
-                          : 'bg-[#FBF7EE] text-[#5F6B7A] hover:bg-[#F2EBDC]'
+                          ? 'bg-[#E8EEF6] text-[#1F3A5F] border border-[#1F3A5F]/30'
+                          : 'bg-[#FFFFFF] text-[#5F6B7A] hover:bg-[#F5F7FA]'
                       }`}
                       title={stage.title}
                     >
                       <span>{stage.stepNumber}. {stage.title}</span>
-                      {isPast && <Check className="w-3 h-3 text-[#2F6F57]" />}
+                      {isPast && <Check className="w-3 h-3 text-[#1F3A5F]" />}
                     </button>
                   );
                 })}
               </div>
 
               {/* Context Description in clear English */}
-              <div className="p-3.5 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] flex items-start gap-2.5">
+              <div className="p-3.5 bg-[#FFFFFF] rounded-2xl border border-[#E6EAF0] flex items-start gap-2.5">
                 <Lightbulb className="w-4 h-4 text-[#1F3A5F] shrink-0 mt-0.5" />
                 <p className="text-xs text-[#1F3A5F] leading-relaxed">
                   {currentStage.description}
@@ -700,9 +700,9 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                         className={`p-4 sm:p-5 rounded-2xl border transition-all ${
                           rightWrongSubmitted
                             ? isCorrect
-                              ? 'bg-[#E9F3EE] border-[#2F6F57]/40'
-                              : 'bg-[#FCF0EE] border-[#C23B3B]/40'
-                            : 'bg-white border-[#E6DCC8]'
+                              ? 'bg-[#E8EEF6] border-[#1F3A5F]/40'
+                              : 'bg-[#E8EEF6] border-[#1F3A5F]/40'
+                            : 'bg-white border-[#E6EAF0]'
                         }`}
                       >
                         <p className="text-xs sm:text-sm font-bold text-[#1B2433] mb-3 leading-snug">
@@ -716,7 +716,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                             className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
                               userAnswer === true
                                 ? 'bg-[#1F3A5F] text-white border-[#1F3A5F]'
-                                : 'bg-[#FBF7EE] text-[#1F3A5F] border-[#E6DCC8] hover:bg-white'
+                                : 'bg-[#FFFFFF] text-[#1F3A5F] border-[#E6EAF0] hover:bg-white'
                             }`}
                           >
                             <Check className="w-3.5 h-3.5" />
@@ -728,7 +728,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                             className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
                               userAnswer === false
                                 ? 'bg-[#1F3A5F] text-white border-[#1F3A5F]'
-                                : 'bg-[#FBF7EE] text-[#1F3A5F] border-[#E6DCC8] hover:bg-white'
+                                : 'bg-[#FFFFFF] text-[#1F3A5F] border-[#E6EAF0] hover:bg-white'
                             }`}
                           >
                             <X className="w-3.5 h-3.5" />
@@ -740,11 +740,11 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                           <div className="mt-3 pt-3 border-t border-black/10 text-xs space-y-1.5">
                             <p className="font-bold flex items-center gap-1.5">
                               {isCorrect ? (
-                                <span className="text-[#2F6F57] flex items-center gap-1">
+                                <span className="text-[#1F3A5F] flex items-center gap-1">
                                   <CheckCircle2 className="w-3.5 h-3.5" /> Correct!
                                 </span>
                               ) : (
-                                <span className="text-[#C23B3B] flex items-center gap-1">
+                                <span className="text-[#1F3A5F] flex items-center gap-1">
                                   <XCircle className="w-3.5 h-3.5" /> Incorrect (Expected answer: {item.isRight ? 'True' : 'False'})
                                 </span>
                               )}
@@ -782,7 +782,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
               <div className="space-y-6 animate-in fade-in">
                 <div className="space-y-6">
                   {(story.comprehensionQuestions || []).map((q, qIdx) => (
-                    <div key={qIdx} className="space-y-3 p-4 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8]">
+                    <div key={qIdx} className="space-y-3 p-4 bg-[#FFFFFF] rounded-2xl border border-[#E6EAF0]">
                       <p className="text-xs sm:text-sm font-bold text-[#1B2433]">
                         Question {qIdx + 1}: {q.question}
                       </p>
@@ -790,16 +790,16 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                         {q.options.map((opt, optIdx) => {
                           const isSelected = mcqAnswers[qIdx] === optIdx;
-                          let btnStyle = 'bg-white border-[#E6DCC8] text-[#1F3A5F] hover:border-[#1F3A5F]/40';
+                          let btnStyle = 'bg-white border-[#E6EAF0] text-[#1F3A5F] hover:border-[#1F3A5F]/40';
 
                           if (mcqSubmitted) {
                             if (optIdx === q.correctIndex) {
-                              btnStyle = 'bg-[#E9F3EE] border-[#2F6F57] text-[#2F6F57] font-bold';
+                              btnStyle = 'bg-[#E8EEF6] border-[#1F3A5F] text-[#1F3A5F] font-bold';
                             } else if (isSelected && optIdx !== q.correctIndex) {
-                              btnStyle = 'bg-[#FCF0EE] border-[#C23B3B] text-[#C23B3B] font-bold';
+                              btnStyle = 'bg-[#E8EEF6] border-[#1F3A5F] text-[#1F3A5F] font-bold';
                             }
                           } else if (isSelected) {
-                            btnStyle = 'bg-[#F2EBDC] border-[#1F3A5F] text-[#1B2433] font-semibold';
+                            btnStyle = 'bg-[#F5F7FA] border-[#1F3A5F] text-[#1B2433] font-semibold';
                           }
 
                           return (
@@ -859,13 +859,13 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                         className={`p-4 rounded-2xl border transition-all cursor-pointer ${
                           summarySubmitted
                             ? opt.isBest
-                              ? 'bg-[#E9F3EE] border-[#2F6F57] text-[#2F6F57]'
+                              ? 'bg-[#E8EEF6] border-[#1F3A5F] text-[#1F3A5F]'
                               : isSelected
-                              ? 'bg-[#FCF0EE] border-[#C23B3B] text-[#C23B3B]'
-                              : 'bg-white border-[#E6DCC8] opacity-60'
+                              ? 'bg-[#E8EEF6] border-[#1F3A5F] text-[#1F3A5F]'
+                              : 'bg-white border-[#E6EAF0] opacity-60'
                             : isSelected
-                            ? 'bg-[#F2EBDC] border-[#1F3A5F] text-[#1B2433]'
-                            : 'bg-white border-[#E6DCC8] hover:bg-[#FBF7EE]'
+                            ? 'bg-[#F5F7FA] border-[#1F3A5F] text-[#1B2433]'
+                            : 'bg-white border-[#E6EAF0] hover:bg-[#FFFFFF]'
                         }`}
                       >
                         <div className="flex items-start gap-3">
@@ -901,7 +901,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                   </button>
                 ) : (
                   story.summaryExercise?.sampleSummary && (
-                    <div className="p-4 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] space-y-1">
+                    <div className="p-4 bg-[#FFFFFF] rounded-2xl border border-[#E6EAF0] space-y-1">
                       <span className="text-[10px] font-bold uppercase text-[#5F6B7A]">
                         Model Reference Summary (in French):
                       </span>
@@ -917,7 +917,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
             {/* CONTEXT 4: USER OPINION & POINT OF VIEW */}
             {currentStage.id === 'opinion' && (
               <div className="space-y-6 animate-in fade-in">
-                <div className="p-4 sm:p-5 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] space-y-2">
+                <div className="p-4 sm:p-5 bg-[#FFFFFF] rounded-2xl border border-[#E6EAF0] space-y-2">
                   <div className="flex items-center gap-2 text-[#1F3A5F]">
                     <MessageSquareQuote className="w-4 h-4" />
                     <span className="text-xs font-bold uppercase tracking-wider">
@@ -954,7 +954,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                                 setUserOpinionText((prev) => `${prev} ${cleanPhrase} `);
                               }
                             }}
-                            className="text-xs px-2.5 py-1 rounded-lg bg-white hover:bg-[#FBF7EE] border border-[#D9CFBA] text-[#1F3A5F] transition-colors cursor-pointer shadow-2xs"
+                            className="text-xs px-2.5 py-1 rounded-lg bg-white hover:bg-[#FFFFFF] border border-[#D0D7E2] text-[#1F3A5F] transition-colors cursor-pointer shadow-2xs"
                             title={`Insert: ${cleanPhrase}`}
                           >
                             + {phrase}
@@ -972,7 +972,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                     value={userOpinionText}
                     onChange={(e) => setUserOpinionText(e.target.value)}
                     placeholder="Write your opinion or point of view in French here... (e.g. À mon avis, c'est très important parce que...)"
-                    className="w-full p-4 rounded-2xl border border-[#E6DCC8] bg-white text-xs sm:text-sm text-[#1B2433] placeholder-[#9C9485] focus:outline-none focus:border-[#1F3A5F] transition-all leading-relaxed"
+                    className="w-full p-4 rounded-2xl border border-[#E6EAF0] bg-white text-xs sm:text-sm text-[#1B2433] placeholder-[#5F6B7A] focus:outline-none focus:border-[#1F3A5F] transition-all leading-relaxed"
                   />
                   <div className="flex items-center justify-between text-[11px] text-[#5F6B7A]">
                     <span>{userOpinionText.trim().split(/\s+/).filter(Boolean).length} words written</span>
@@ -992,14 +992,14 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
 
                 {/* Feedback Card */}
                 {opinionEvaluation && (
-                  <div className="p-5 sm:p-6 bg-gradient-to-br from-[#FBF8F1] to-[#F6F1E5] border-2 border-[#2F6F57]/30 rounded-3xl space-y-4 shadow-sm animate-in fade-in slide-in-from-top-2">
-                    <div className="flex items-center justify-between border-b border-[#E6DCC8] pb-3">
+                  <div className="p-5 sm:p-6 bg-gradient-to-br from-[#FFFFFF] to-[#F5F7FA] border-2 border-[#1F3A5F]/30 rounded-3xl space-y-4 shadow-sm animate-in fade-in slide-in-from-top-2">
+                    <div className="flex items-center justify-between border-b border-[#E6EAF0] pb-3">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-9 h-9 rounded-xl bg-[#2F6F57] text-white flex items-center justify-center font-bold text-sm shadow-xs">
+                        <div className="w-9 h-9 rounded-xl bg-[#1F3A5F] text-white flex items-center justify-center font-bold text-sm shadow-xs">
                           {opinionEvaluation.score}/100
                         </div>
                         <div>
-                          <span className="text-xs font-bold text-[#2F6F57] block">
+                          <span className="text-xs font-bold text-[#1F3A5F] block">
                             {opinionEvaluation.cefrAssessment}
                           </span>
                           <span className="text-[10px] text-[#5F6B7A]">
@@ -1007,7 +1007,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                           </span>
                         </div>
                       </div>
-                      <span className="px-3 py-1 bg-[#E9F3EE] text-[#2F6F57] border border-[#2F6F57]/30 rounded-full text-xs font-black">
+                      <span className="px-3 py-1 bg-[#E8EEF6] text-[#1F3A5F] border border-[#1F3A5F]/30 rounded-full text-xs font-black">
                         +{opinionEvaluation.xpBonus || 25} XP
                       </span>
                     </div>
@@ -1024,7 +1024,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                     </div>
 
                     {opinionEvaluation.grammarTips && opinionEvaluation.grammarTips.length > 0 && (
-                      <div className="p-3.5 bg-white rounded-xl border border-[#E6DCC8] space-y-1">
+                      <div className="p-3.5 bg-white rounded-xl border border-[#E6EAF0] space-y-1">
                         <span className="text-[10px] font-bold uppercase text-[#1F3A5F] flex items-center gap-1">
                           <Lightbulb className="w-3.5 h-3.5" /> Language & Grammar Advice:
                         </span>
@@ -1037,11 +1037,11 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                     )}
 
                     {opinionEvaluation.suggestedNativeVersion && (
-                      <div className="p-3.5 bg-[#E9F3EE] rounded-xl border border-[#2F6F57]/20 space-y-1">
-                        <span className="text-[10px] font-bold uppercase text-[#2F6F57]">
+                      <div className="p-3.5 bg-[#E8EEF6] rounded-xl border border-[#1F3A5F]/20 space-y-1">
+                        <span className="text-[10px] font-bold uppercase text-[#1F3A5F]">
                           Native French Journalist Phrasing Suggestion:
                         </span>
-                        <p className="text-xs font-serif italic text-[#2C4A2C]">
+                        <p className="text-xs font-serif italic text-[#1F3A5F]">
                           &ldquo;{opinionEvaluation.suggestedNativeVersion}&rdquo;
                         </p>
                       </div>
@@ -1054,7 +1054,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
             {/* CONTEXT 5: VOCABULARY & PRESS GLOSSARY */}
             {currentStage.id === 'glossary' && (
               <div className="space-y-6 animate-in fade-in">
-                <div className="p-3.5 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] flex items-center justify-between">
+                <div className="p-3.5 bg-[#FFFFFF] rounded-2xl border border-[#E6EAF0] flex items-center justify-between">
                   <span className="text-xs text-[#1F3A5F]">
                     Review the {story.glossary?.length || 0} key expressions and vocabulary items extracted from this passage.
                   </span>
@@ -1071,7 +1071,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                   {story.glossary?.map((item, idx) => (
                     <div
                       key={idx}
-                      className="p-4 bg-white rounded-2xl border border-[#E6DCC8] flex items-start justify-between gap-4 shadow-2xs hover:border-[#1F3A5F]/40 transition-all"
+                      className="p-4 bg-white rounded-2xl border border-[#E6EAF0] flex items-start justify-between gap-4 shadow-2xs hover:border-[#1F3A5F]/40 transition-all"
                     >
                       <div className="space-y-1 min-w-0">
                         <div className="flex items-baseline gap-2">
@@ -1097,7 +1097,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                       <button
                         onClick={() => speakFrench(item.french, audioSpeed)}
                         title={`Listen to "${item.french}"`}
-                        className="p-2.5 text-[#5F6B7A] hover:text-[#1B2433] hover:bg-[#FBF7EE] rounded-xl cursor-pointer transition-colors shrink-0"
+                        className="p-2.5 text-[#5F6B7A] hover:text-[#1B2433] hover:bg-[#FFFFFF] rounded-xl cursor-pointer transition-colors shrink-0"
                       >
                         <Volume2 className="w-4 h-4" />
                       </button>
@@ -1108,11 +1108,11 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
             )}
 
             {/* SEPARATE "NEXT CONTEXT" / "PREVIOUS CONTEXT" NAVIGATION BUTTON BAR */}
-            <div className="pt-6 border-t border-[#E6DCC8] flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="pt-6 border-t border-[#E6EAF0] flex flex-col sm:flex-row items-center justify-between gap-3">
               <button
                 disabled={currentContextIndex === 0}
                 onClick={() => setCurrentContextIndex((prev) => Math.max(0, prev - 1))}
-                className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-[#D9CFBA] text-xs font-bold text-[#1F3A5F] hover:bg-[#FBF7EE] disabled:opacity-30 disabled:pointer-events-none transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-[#D0D7E2] text-xs font-bold text-[#1F3A5F] hover:bg-[#FFFFFF] disabled:opacity-30 disabled:pointer-events-none transition-all flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
                 <span>Previous Context</span>
@@ -1134,7 +1134,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
               ) : (
                 <button
                   onClick={() => setCurrentContextIndex(0)}
-                  className="w-full sm:w-auto px-6 py-2.5 bg-[#2F6F57] hover:bg-[#4A6A4A] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
+                  className="w-full sm:w-auto px-6 py-2.5 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
                 >
                   <RefreshCw className="w-4 h-4" />
                   <span>Review from Context 1</span>
@@ -1147,7 +1147,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
         {/* Sidebar: Reading Guidance & Key Takeaways (1 Col) */}
         <div className="space-y-6">
           {/* Quick Context Jump List */}
-          <div className="bg-white border border-[#E6DCC8] rounded-3xl p-6 space-y-4 shadow-sm">
+          <div className="bg-white border border-[#E6EAF0] rounded-3xl p-6 space-y-4 shadow-sm">
             <h4 className="text-xs font-bold uppercase text-[#1F3A5F] tracking-wider flex items-center gap-1.5">
               <SlidersHorizontal className="w-3.5 h-3.5" />
               <span>Activities In This Lesson</span>
@@ -1163,11 +1163,11 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                     className={`w-full p-3 rounded-2xl border text-left transition-all cursor-pointer flex items-center justify-between ${
                       isActive
                         ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-2xs'
-                        : 'bg-white hover:bg-[#FBF7EE] text-[#1B2433] border-[#E6DCC8]'
+                        : 'bg-white hover:bg-[#FFFFFF] text-[#1B2433] border-[#E6EAF0]'
                     }`}
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <div className={`p-1.5 rounded-lg ${isActive ? 'bg-white/20' : 'bg-[#F2EBDC] text-[#1F3A5F]'}`}>
+                      <div className={`p-1.5 rounded-lg ${isActive ? 'bg-white/20' : 'bg-[#F5F7FA] text-[#1F3A5F]'}`}>
                         <Icon className="w-3.5 h-3.5" />
                       </div>
                       <div className="min-w-0">
@@ -1187,8 +1187,8 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
           </div>
 
           {/* Press Glossary Quick View */}
-          <div className="bg-white border border-[#E6DCC8] rounded-3xl p-6 space-y-4 shadow-sm">
-            <div className="flex items-center justify-between border-b border-[#E6DCC8] pb-3">
+          <div className="bg-white border border-[#E6EAF0] rounded-3xl p-6 space-y-4 shadow-sm">
+            <div className="flex items-center justify-between border-b border-[#E6EAF0] pb-3">
               <div>
                 <h4 className="text-sm font-bold text-[#1B2433] font-serif">
                   Key Vocabulary
@@ -1209,7 +1209,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
               {story.glossary?.slice(0, 4).map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-3 bg-[#FBF7EE] rounded-xl border border-[#E6DCC8] flex items-center justify-between shadow-2xs"
+                  className="p-3 bg-[#FFFFFF] rounded-xl border border-[#E6EAF0] flex items-center justify-between shadow-2xs"
                 >
                   <div className="min-w-0">
                     <span className="text-xs font-bold text-[#1B2433] font-serif block truncate">
@@ -1232,7 +1232,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
           </div>
 
           {/* Reading Level Progression Advice */}
-          <div className="p-6 bg-[#FBF7EE] border border-[#E6DCC8] rounded-3xl space-y-3 shadow-2xs">
+          <div className="p-6 bg-[#FFFFFF] border border-[#E6EAF0] rounded-3xl space-y-3 shadow-2xs">
             <div className="flex items-center gap-2 text-[#1F3A5F]">
               <Award className="w-4 h-4" />
               <h5 className="text-xs font-bold uppercase tracking-wider">

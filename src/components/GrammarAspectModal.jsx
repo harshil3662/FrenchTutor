@@ -361,7 +361,7 @@ export const GrammarAspectModal = ({
       const earnedXp = Math.max(10, score * 10);
       if (isMastered) {
         try {
-          confetti({ particleCount: 75, spread: 70, origin: { y: 0.6 } });
+          confetti({ colors: ['#1F3A5F'], particleCount: 75, spread: 70, origin: { y: 0.6 } });
         } catch {}
         try {
           playChime('celebrate');
@@ -393,19 +393,19 @@ export const GrammarAspectModal = ({
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200 overscroll-contain">
       <div
         id="grammar-aspect-modal"
-        className="bg-white rounded-3xl w-full max-w-4xl max-h-[92vh] flex flex-col shadow-2xl border border-[#D9CFBA] overflow-hidden"
+        className="bg-white rounded-3xl w-full max-w-4xl max-h-[92vh] flex flex-col shadow-2xl border border-[#D0D7E2] overflow-hidden"
       >
         {/* Modal Header */}
-        <div className="p-4 sm:p-6 bg-[#FBF7EE] border-b border-[#E6DCC8] flex items-start justify-between shrink-0">
+        <div className="p-4 sm:p-6 bg-[#FFFFFF] border-b border-[#E6EAF0] flex items-start justify-between shrink-0">
           <div className="space-y-1">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#C23B3B] text-white">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#1F3A5F] text-white">
                 {lesson.level}
               </span>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#F2EBDC] text-[#1F3A5F] border border-[#1F3A5F]/20">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#F5F7FA] text-[#1F3A5F] border border-[#1F3A5F]/20">
                 {lesson.category}
               </span>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#FCF0EE] text-[#C23B3B] border border-[#C23B3B]/20 flex items-center gap-1">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#E8EEF6] text-[#1F3A5F] border border-[#1F3A5F]/20 flex items-center gap-1">
                 <BrainCircuit className="w-3 h-3" />
                 <span>Practice Quiz</span>
               </span>
@@ -421,14 +421,14 @@ export const GrammarAspectModal = ({
           <button
             onClick={onClose}
             aria-label="Close grammar modal"
-            className="p-2 rounded-full hover:bg-[#E9E2D2] text-[#5F6B7A] hover:text-[#1B2433] transition-all cursor-pointer shrink-0"
+            className="p-2 rounded-full hover:bg-[#E6EAF0] text-[#5F6B7A] hover:text-[#1B2433] transition-all cursor-pointer shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex border-b border-[#E6DCC8] bg-[#EDEEF0] px-2 sm:px-6">
+        <div className="flex border-b border-[#E6EAF0] bg-[#EDEEF0] px-2 sm:px-6">
           <button
             id="tab-grammar-guide"
             onClick={() => setActiveTab('guide')}
@@ -466,7 +466,7 @@ export const GrammarAspectModal = ({
             <div className="space-y-6 animate-in fade-in">
               {/* Sub-Topics Segmented Selector (When Unit Has Multiple Topics) */}
               {hasMultipleTopics && (
-                <div className="bg-[#FBF7EE] border border-[#E6DCC8] p-3 rounded-2xl space-y-2.5 shadow-2xs">
+                <div className="bg-[#FFFFFF] border border-[#E6EAF0] p-3 rounded-2xl space-y-2.5 shadow-2xs">
                   <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#5F6B7A] px-1">
                     <span className="flex items-center gap-1.5">
                       <Layers className="w-3.5 h-3.5 text-[#1F3A5F]" />
@@ -487,7 +487,7 @@ export const GrammarAspectModal = ({
                         className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer flex items-center gap-2 ${
                           activeTopicIndex === idx
                             ? 'bg-[#1F3A5F] text-white shadow-xs'
-                            : 'bg-white text-[#1F3A5F] hover:bg-[#F2EBDC] border border-[#E6DCC8]'
+                            : 'bg-white text-[#1F3A5F] hover:bg-[#F5F7FA] border border-[#E6EAF0]'
                         }`}
                       >
                         <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold ${
@@ -503,7 +503,7 @@ export const GrammarAspectModal = ({
               )}
 
               {/* Topic Header & Jump to Quiz CTA */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-[#E6DCC8]">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-[#E6EAF0]">
                 <div>
                   <h3 className="text-lg font-bold text-[#1B2433] font-serif">
                     {activeTopic?.title || lesson.title}
@@ -516,7 +516,7 @@ export const GrammarAspectModal = ({
                 </div>
                 <button
                   onClick={handleOpenAiQuiz}
-                  className="px-3.5 py-1.5 rounded-xl bg-white hover:bg-[#FBF7EE] text-[#1F3A5F] border border-[#1F3A5F]/25 text-xs font-bold transition-all shadow-2xs hover:shadow-xs flex items-center gap-1.5 cursor-pointer shrink-0 self-start sm:self-auto"
+                  className="px-3.5 py-1.5 rounded-xl bg-white hover:bg-[#FFFFFF] text-[#1F3A5F] border border-[#1F3A5F]/25 text-xs font-bold transition-all shadow-2xs hover:shadow-xs flex items-center gap-1.5 cursor-pointer shrink-0 self-start sm:self-auto"
                 >
                   <BrainCircuit className="w-3.5 h-3.5 text-[#1F3A5F]" />
                   <span>Take Quiz →</span>
@@ -525,7 +525,7 @@ export const GrammarAspectModal = ({
 
               {/* 1. Structural Formula Blueprint */}
               {formulaText && (
-                <div className="p-5 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] space-y-2">
+                <div className="p-5 bg-[#FFFFFF] rounded-2xl border border-[#E6EAF0] space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold uppercase tracking-wider text-[#1F3A5F] flex items-center gap-1.5">
                       <Layers className="w-3.5 h-3.5" />
@@ -539,7 +539,7 @@ export const GrammarAspectModal = ({
                       <Volume2 className="w-4 h-4" />
                     </button>
                   </div>
-                  <div className="text-sm sm:text-base font-mono font-semibold text-[#1B2433] bg-white p-3 rounded-xl border border-[#D9CFBA]/80">
+                  <div className="text-sm sm:text-base font-mono font-semibold text-[#1B2433] bg-white p-3 rounded-xl border border-[#D0D7E2]/80">
                     {formulaText}
                   </div>
                 </div>
@@ -547,10 +547,10 @@ export const GrammarAspectModal = ({
 
               {/* 2. Golden Rule */}
               {goldenRuleText && (
-                <div className="p-5 bg-[#E9F3EE] rounded-2xl border border-[#2F6F57]/30 flex items-start gap-3">
-                  <Lightbulb className="w-5 h-5 text-[#2F6F57] shrink-0 mt-0.5" />
+                <div className="p-5 bg-[#E8EEF6] rounded-2xl border border-[#1F3A5F]/30 flex items-start gap-3">
+                  <Lightbulb className="w-5 h-5 text-[#1F3A5F] shrink-0 mt-0.5" />
                   <div className="space-y-1">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#2F6F57]">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#1F3A5F]">
                       Golden Grammar Rule
                     </h4>
                     <p className="text-sm text-[#1B2433] font-medium leading-relaxed">
@@ -562,12 +562,12 @@ export const GrammarAspectModal = ({
 
               {/* 3. Detailed Pedagogical Descriptions */}
               {detailedParagraphs.length > 0 && (
-                <div className="space-y-3 bg-[#FAF9F5] p-5 rounded-2xl border border-[#E6DCC8]">
+                <div className="space-y-3 bg-[#FFFFFF] p-5 rounded-2xl border border-[#E6EAF0]">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-[#5F6B7A] flex items-center gap-1.5">
                     <FileText className="w-3.5 h-3.5 text-[#1F3A5F]" />
                     Pedagogical Explanation
                   </h4>
-                  <div className="space-y-3 text-sm text-[#404038] leading-relaxed">
+                  <div className="space-y-3 text-sm text-[#1B2433] leading-relaxed">
                     {detailedParagraphs.map((para, pIdx) => (
                       <p key={pIdx} className="leading-relaxed">
                         {formatBoldText(para)}
@@ -587,9 +587,9 @@ export const GrammarAspectModal = ({
                     {activeTopic.rules.map((rule, idx) => (
                       <div
                         key={idx}
-                        className="p-4 rounded-xl bg-white border border-[#E6DCC8] flex items-start gap-3 shadow-2xs"
+                        className="p-4 rounded-xl bg-white border border-[#E6EAF0] flex items-start gap-3 shadow-2xs"
                       >
-                        <span className="w-6 h-6 rounded-full bg-[#F2EBDC] text-[#1F3A5F] flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+                        <span className="w-6 h-6 rounded-full bg-[#F5F7FA] text-[#1F3A5F] flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
                           {idx + 1}
                         </span>
                         <p className="text-xs sm:text-sm text-[#1B2433] leading-relaxed">
@@ -612,17 +612,17 @@ export const GrammarAspectModal = ({
                     {tableList.map((tbl, tIdx) => (
                       <div
                         key={tIdx}
-                        className="bg-white rounded-2xl border border-[#E6DCC8] overflow-hidden shadow-2xs"
+                        className="bg-white rounded-2xl border border-[#E6EAF0] overflow-hidden shadow-2xs"
                       >
                         {tbl.title && (
-                          <div className="px-4 py-2.5 bg-[#F2EBDC] border-b border-[#E6DCC8] font-bold text-xs text-[#1F3A5F]">
+                          <div className="px-4 py-2.5 bg-[#F5F7FA] border-b border-[#E6EAF0] font-bold text-xs text-[#1F3A5F]">
                             {tbl.title}
                           </div>
                         )}
                         <div className="overflow-x-auto">
                           <table className="w-full text-left text-xs sm:text-sm">
                             {tbl.headers && (
-                              <thead className="bg-[#FBF7EE] border-b border-[#E6DCC8] text-[#5F6B7A]">
+                              <thead className="bg-[#FFFFFF] border-b border-[#E6EAF0] text-[#5F6B7A]">
                                 <tr>
                                   {tbl.headers.map((h, hIdx) => (
                                     <th key={hIdx} className="px-4 py-2 font-semibold">
@@ -632,9 +632,9 @@ export const GrammarAspectModal = ({
                                 </tr>
                               </thead>
                             )}
-                            <tbody className="divide-y divide-[#E6DCC8]">
+                            <tbody className="divide-y divide-[#E6EAF0]">
                               {tbl.rows?.map((row, rIdx) => (
-                                <tr key={rIdx} className="hover:bg-[#FAF9F5] transition-colors">
+                                <tr key={rIdx} className="hover:bg-[#FFFFFF] transition-colors">
                                   {row.map((cell, cIdx) => (
                                     <td key={cIdx} className="px-4 py-2.5 text-[#1B2433] font-medium">
                                       {cell}
@@ -661,7 +661,7 @@ export const GrammarAspectModal = ({
                     {lessonExamples.map((ex, idx) => (
                       <div
                         key={idx}
-                        className="p-4 rounded-xl bg-white border border-[#E6DCC8] space-y-1.5 shadow-2xs"
+                        className="p-4 rounded-xl bg-white border border-[#E6EAF0] space-y-1.5 shadow-2xs"
                       >
                         <div className="flex items-center justify-between">
                           <span className="text-sm sm:text-base font-bold text-[#1B2433] font-serif">
@@ -679,7 +679,7 @@ export const GrammarAspectModal = ({
                           "{ex.english}"
                         </p>
                         {ex.aspectNote && (
-                          <div className="pt-1.5 border-t border-[#E6DCC8]/60 text-xs text-[#1F3A5F] font-medium">
+                          <div className="pt-1.5 border-t border-[#E6EAF0]/60 text-xs text-[#1F3A5F] font-medium">
                             💡 {ex.aspectNote}
                           </div>
                         )}
@@ -691,8 +691,8 @@ export const GrammarAspectModal = ({
 
               {/* 7. Common Traps & Pitfalls */}
               {activeTopic?.commonTraps && activeTopic.commonTraps.length > 0 && (
-                <div className="p-5 bg-[#FCF0EE] rounded-2xl border border-[#C23B3B]/30 space-y-2">
-                  <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#C23B3B]">
+                <div className="p-5 bg-[#E8EEF6] rounded-2xl border border-[#1F3A5F]/30 space-y-2">
+                  <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#1F3A5F]">
                     <AlertTriangle className="w-4 h-4" />
                     <span>Watch Out: Frequent Learner Traps</span>
                   </div>
@@ -707,7 +707,7 @@ export const GrammarAspectModal = ({
               )}
 
               {/* Bottom Actions: Next Topic or Start Quiz */}
-              <div className="pt-4 border-t border-[#E6DCC8] flex justify-between items-center">
+              <div className="pt-4 border-t border-[#E6EAF0] flex justify-between items-center">
                 {hasMultipleTopics && activeTopicIndex > 0 ? (
                   <button
                     onClick={() => {
@@ -752,9 +752,9 @@ export const GrammarAspectModal = ({
             /* ACTIVE TAB: UNIT QUIZ */
             <div className="space-y-6 animate-in fade-in">
               {/* Header inside Unit Quiz */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#E6DCC8]">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#E6EAF0]">
                 <div className="flex items-center gap-2.5">
-                  <div className="p-2 bg-[#F2EBDC] text-[#1F3A5F] rounded-xl border border-[#1F3A5F]/15">
+                  <div className="p-2 bg-[#F5F7FA] text-[#1F3A5F] rounded-xl border border-[#1F3A5F]/15">
                     <BrainCircuit className="w-5 h-5" />
                   </div>
                   <div>
@@ -771,9 +771,9 @@ export const GrammarAspectModal = ({
                   id="regenerate-ai-quiz-btn"
                   onClick={() => handleGenerateAiExercises(true)}
                   disabled={isGeneratingExercises}
-                  className="px-3.5 py-1.5 bg-white hover:bg-[#FBF7EE] text-[#1F3A5F] border border-[#D9CFBA] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs disabled:opacity-50 self-start sm:self-auto"
+                  className="px-3.5 py-1.5 bg-white hover:bg-[#FFFFFF] text-[#1F3A5F] border border-[#D0D7E2] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs disabled:opacity-50 self-start sm:self-auto"
                 >
-                  <Sparkles className="w-3.5 h-3.5 text-[#C23B3B]" />
+                  <Sparkles className="w-3.5 h-3.5 text-[#1F3A5F]" />
                   <span>Generate New Questions</span>
                 </button>
               </div>
@@ -791,13 +791,13 @@ export const GrammarAspectModal = ({
                   </div>
                 </div>
               ) : exerciseGenerationError ? (
-                <div className="text-center py-12 space-y-4 bg-[#FCF0EE] rounded-3xl p-8 border border-[#C23B3B]/30">
-                  <AlertTriangle className="w-10 h-10 text-[#C23B3B] mx-auto" />
+                <div className="text-center py-12 space-y-4 bg-[#E8EEF6] rounded-3xl p-8 border border-[#1F3A5F]/30">
+                  <AlertTriangle className="w-10 h-10 text-[#1F3A5F] mx-auto" />
                   <div className="space-y-1">
                     <h4 className="text-base font-bold text-[#1B2433] font-serif">
                       Could not generate quiz
                     </h4>
-                    <p className="text-xs text-[#7A4A3A]">{exerciseGenerationError}</p>
+                    <p className="text-xs text-[#1F3A5F]">{exerciseGenerationError}</p>
                   </div>
                   <button
                     onClick={() => handleGenerateAiExercises(true)}
@@ -813,12 +813,12 @@ export const GrammarAspectModal = ({
                   {exercises.length > 0 && score === exercises.length ? (
                     /* 100% Correct: Truly Mastered */
                     <>
-                      <div className="w-20 h-20 bg-[#E9F3EE] text-[#2F6F57] rounded-full flex items-center justify-center mx-auto border-2 border-[#2F6F57] shadow-xs">
+                      <div className="w-20 h-20 bg-[#E8EEF6] text-[#1F3A5F] rounded-full flex items-center justify-center mx-auto border-2 border-[#1F3A5F] shadow-xs">
                         <Trophy className="w-10 h-10" />
                       </div>
                       <div className="space-y-1">
-                        <div className="inline-flex items-center gap-1.5 bg-[#E9F3EE] text-[#2F6F57] border border-[#2F6F57]/30 px-3.5 py-1 rounded-full text-xs font-bold">
-                          <Sparkles className="w-3.5 h-3.5 text-[#2F6F57]" />
+                        <div className="inline-flex items-center gap-1.5 bg-[#E8EEF6] text-[#1F3A5F] border border-[#1F3A5F]/30 px-3.5 py-1 rounded-full text-xs font-bold">
+                          <Sparkles className="w-3.5 h-3.5 text-[#1F3A5F]" />
                           <span>100% Score • Unit Mastered</span>
                         </div>
                         <h3 className="text-2xl sm:text-3xl font-bold text-[#1B2433] font-serif">
@@ -833,14 +833,14 @@ export const GrammarAspectModal = ({
                       <div className="flex flex-wrap justify-center gap-3 pt-3">
                         <button
                           onClick={() => handleGenerateAiExercises(true)}
-                          className="px-5 py-2.5 bg-white border border-[#D9CFBA] hover:bg-[#FBF7EE] text-[#1F3A5F] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+                          className="px-5 py-2.5 bg-white border border-[#D0D7E2] hover:bg-[#FFFFFF] text-[#1F3A5F] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
                         >
-                          <Sparkles className="w-4 h-4 text-[#C23B3B]" />
+                          <Sparkles className="w-4 h-4 text-[#1F3A5F]" />
                           <span>Generate New Quiz</span>
                         </button>
                         <button
                           onClick={handleResetExercises}
-                          className="px-5 py-2.5 bg-white border border-[#D9CFBA] text-[#1B2433] rounded-xl text-xs font-bold flex items-center gap-1.5 hover:bg-[#FBF7EE] transition-all cursor-pointer shadow-xs"
+                          className="px-5 py-2.5 bg-white border border-[#D0D7E2] text-[#1B2433] rounded-xl text-xs font-bold flex items-center gap-1.5 hover:bg-[#FFFFFF] transition-all cursor-pointer shadow-xs"
                         >
                           <RotateCcw className="w-4 h-4" />
                           <span>Retake Current Quiz</span>
@@ -856,12 +856,12 @@ export const GrammarAspectModal = ({
                   ) : score === 0 ? (
                     /* 0 Correct: Needs Practice / Not Mastered */
                     <>
-                      <div className="w-20 h-20 bg-[#FCF0EE] text-[#C23B3B] rounded-full flex items-center justify-center mx-auto border-2 border-[#C23B3B]/40 shadow-xs">
+                      <div className="w-20 h-20 bg-[#E8EEF6] text-[#1F3A5F] rounded-full flex items-center justify-center mx-auto border-2 border-[#1F3A5F]/40 shadow-xs">
                         <AlertTriangle className="w-10 h-10" />
                       </div>
                       <div className="space-y-1">
-                        <div className="inline-flex items-center gap-1.5 bg-[#FCF0EE] text-[#C23B3B] border border-[#C23B3B]/30 px-3.5 py-1 rounded-full text-xs font-bold">
-                          <XCircle className="w-3.5 h-3.5 text-[#C23B3B]" />
+                        <div className="inline-flex items-center gap-1.5 bg-[#E8EEF6] text-[#1F3A5F] border border-[#1F3A5F]/30 px-3.5 py-1 rounded-full text-xs font-bold">
+                          <XCircle className="w-3.5 h-3.5 text-[#1F3A5F]" />
                           <span>Not Mastered (0 / {exercises.length} Correct)</span>
                         </div>
                         <h3 className="text-2xl sm:text-3xl font-bold text-[#1B2433] font-serif">
@@ -885,14 +885,14 @@ export const GrammarAspectModal = ({
                             handleResetExercises();
                             setActiveTab('overview');
                           }}
-                          className="px-5 py-2.5 bg-white border border-[#D9CFBA] hover:bg-[#FBF7EE] text-[#1F3A5F] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+                          className="px-5 py-2.5 bg-white border border-[#D0D7E2] hover:bg-[#FFFFFF] text-[#1F3A5F] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
                         >
                           <BookOpen className="w-4 h-4" />
                           <span>Review Grammar Notes</span>
                         </button>
                         <button
                           onClick={onClose}
-                          className="px-5 py-2.5 bg-white border border-[#D9CFBA] text-[#5F6B7A] hover:text-[#1B2433] hover:bg-[#FBF7EE] rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs"
+                          className="px-5 py-2.5 bg-white border border-[#D0D7E2] text-[#5F6B7A] hover:text-[#1B2433] hover:bg-[#FFFFFF] rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs"
                         >
                           <span>Finish & Close</span>
                         </button>
@@ -901,12 +901,12 @@ export const GrammarAspectModal = ({
                   ) : (
                     /* Partial Score: Completed but Not Mastered */
                     <>
-                      <div className="w-20 h-20 bg-[#FCF0EE] text-[#C23B3B] rounded-full flex items-center justify-center mx-auto border-2 border-[#C23B3B]/40 shadow-xs">
+                      <div className="w-20 h-20 bg-[#E8EEF6] text-[#1F3A5F] rounded-full flex items-center justify-center mx-auto border-2 border-[#1F3A5F]/40 shadow-xs">
                         <CheckCircle2 className="w-10 h-10" />
                       </div>
                       <div className="space-y-1">
-                        <div className="inline-flex items-center gap-1.5 bg-[#FCF0EE] text-[#C23B3B] border border-[#C23B3B]/30 px-3.5 py-1 rounded-full text-xs font-bold">
-                          <Sparkles className="w-3.5 h-3.5 text-[#C23B3B]" />
+                        <div className="inline-flex items-center gap-1.5 bg-[#E8EEF6] text-[#1F3A5F] border border-[#1F3A5F]/30 px-3.5 py-1 rounded-full text-xs font-bold">
+                          <Sparkles className="w-3.5 h-3.5 text-[#1F3A5F]" />
                           <span>Almost There ({score} / {exercises.length} Correct)</span>
                         </div>
                         <h3 className="text-2xl sm:text-3xl font-bold text-[#1B2433] font-serif">
@@ -928,14 +928,14 @@ export const GrammarAspectModal = ({
                         </button>
                         <button
                           onClick={() => handleGenerateAiExercises(true)}
-                          className="px-5 py-2.5 bg-white border border-[#D9CFBA] hover:bg-[#FBF7EE] text-[#1F3A5F] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+                          className="px-5 py-2.5 bg-white border border-[#D0D7E2] hover:bg-[#FFFFFF] text-[#1F3A5F] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
                         >
-                          <Sparkles className="w-4 h-4 text-[#C23B3B]" />
+                          <Sparkles className="w-4 h-4 text-[#1F3A5F]" />
                           <span>Generate New Quiz</span>
                         </button>
                         <button
                           onClick={onClose}
-                          className="px-5 py-2.5 bg-white border border-[#D9CFBA] text-[#5F6B7A] hover:text-[#1B2433] hover:bg-[#FBF7EE] rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs"
+                          className="px-5 py-2.5 bg-white border border-[#D0D7E2] text-[#5F6B7A] hover:text-[#1B2433] hover:bg-[#FFFFFF] rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs"
                         >
                           <span>Finish & Close</span>
                         </button>
@@ -953,29 +953,29 @@ export const GrammarAspectModal = ({
                       Question {currentExIdx + 1} of {exercises.length}
                     </span>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-bold text-[#C23B3B] bg-[#FCF0EE] px-2 py-0.5 rounded-full border border-[#C23B3B]/30 flex items-center gap-1">
-                        <AlertTriangle className="w-3 h-3 text-[#C23B3B]" />
+                      <span className="text-[10px] font-bold text-[#1F3A5F] bg-[#E8EEF6] px-2 py-0.5 rounded-full border border-[#1F3A5F]/30 flex items-center gap-1">
+                        <AlertTriangle className="w-3 h-3 text-[#1F3A5F]" />
                         <span>100% correct required to finish unit</span>
                       </span>
                       <span className="font-bold text-[#1B2433]">Score: {score}</span>
                     </div>
                   </div>
-                  <div className="w-full bg-[#E9E2D2] h-2 rounded-full overflow-hidden">
+                  <div className="w-full bg-[#E6EAF0] h-2 rounded-full overflow-hidden">
                     <div
-                      className="bg-[#C23B3B] h-full transition-all duration-300"
+                      className="bg-[#1F3A5F] h-full transition-all duration-300"
                       style={{ width: `${((currentExIdx + 1) / exercises.length) * 100}%` }}
                     />
                   </div>
 
                   {/* Question Prompt */}
-                  <div className="p-6 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] space-y-3 shadow-2xs">
+                  <div className="p-6 bg-[#FFFFFF] rounded-2xl border border-[#E6EAF0] space-y-3 shadow-2xs">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="text-[11px] uppercase font-bold tracking-wider text-[#1F3A5F] bg-[#F2EBDC] px-2.5 py-0.5 rounded-md border border-[#1F3A5F]/15">
+                        <span className="text-[11px] uppercase font-bold tracking-wider text-[#1F3A5F] bg-[#F5F7FA] px-2.5 py-0.5 rounded-md border border-[#1F3A5F]/15">
                           {isQuestionTranslated ? 'English Translation' : 'French Grammar Challenge'}
                         </span>
                         {isQuestionTranslated && (
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#C23B3B] bg-[#FCF0EE] px-2 py-0.5 rounded-md border border-[#C23B3B]/20">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#1F3A5F] bg-[#E8EEF6] px-2 py-0.5 rounded-md border border-[#1F3A5F]/20">
                             EN
                           </span>
                         )}
@@ -989,7 +989,7 @@ export const GrammarAspectModal = ({
                           className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer border ${
                             isQuestionTranslated
                               ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-2xs'
-                              : 'bg-white hover:bg-[#FBF7EE] text-[#1F3A5F] border-[#D9CFBA]'
+                              : 'bg-white hover:bg-[#FFFFFF] text-[#1F3A5F] border-[#D0D7E2]'
                           }`}
                           title={isQuestionTranslated ? 'Translate back to French' : 'Translate question into English'}
                           aria-label={isQuestionTranslated ? 'Translate back to French' : 'Translate question into English'}
@@ -1028,12 +1028,12 @@ export const GrammarAspectModal = ({
                             className={`p-4 rounded-2xl border text-left text-sm sm:text-base font-semibold transition-all cursor-pointer flex items-center justify-between gap-3 ${
                               isSelected
                                 ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-xs'
-                                : 'bg-white text-[#1B2433] border-[#E6DCC8] hover:bg-[#FBF7EE]'
+                                : 'bg-white text-[#1B2433] border-[#E6EAF0] hover:bg-[#FFFFFF]'
                             }`}
                           >
                             <div className="flex items-center gap-3">
                               <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
-                                isSelected ? 'bg-white/20 text-white' : 'bg-[#F2EBDC] text-[#1F3A5F]'
+                                isSelected ? 'bg-white/20 text-white' : 'bg-[#F5F7FA] text-[#1F3A5F]'
                               }`}>
                                 {letter}
                               </span>
@@ -1063,7 +1063,7 @@ export const GrammarAspectModal = ({
                             ? 'Écrivez la traduction en français...'
                             : 'Répondez en français...'
                         }
-                        className="w-full rounded-2xl border border-[#D9CFBA] bg-white px-4 py-3 text-sm sm:text-base text-[#1B2433] shadow-2xs outline-none focus:border-[#1F3A5F] focus:ring-2 focus:ring-[#C23B3B]/10 resize-none disabled:opacity-60"
+                        className="w-full rounded-2xl border border-[#D0D7E2] bg-white px-4 py-3 text-sm sm:text-base text-[#1B2433] shadow-2xs outline-none focus:border-[#1F3A5F] focus:ring-2 focus:ring-[#1F3A5F]/10 resize-none disabled:opacity-60"
                       />
                     </div>
                   )}
@@ -1073,19 +1073,19 @@ export const GrammarAspectModal = ({
                     <div
                       className={`p-5 rounded-2xl border text-sm sm:text-base space-y-2 animate-in fade-in ${
                         isCorrect
-                          ? 'bg-[#E9F3EE] border-[#2F6F57]/40 text-[#2F6F57]'
-                          : 'bg-[#FCF0EE] border-[#C23B3B]/40 text-[#1F3A5F]'
+                          ? 'bg-[#E8EEF6] border-[#1F3A5F]/40 text-[#1F3A5F]'
+                          : 'bg-[#E8EEF6] border-[#1F3A5F]/40 text-[#1F3A5F]'
                       }`}
                     >
                       <div className="flex items-center gap-2 font-bold text-base">
                         {isCorrect ? (
                           <>
-                            <CheckCircle2 className="w-5 h-5 text-[#2F6F57]" />
+                            <CheckCircle2 className="w-5 h-5 text-[#1F3A5F]" />
                             <span>Correct! Excellent grammatical precision.</span>
                           </>
                         ) : (
                           <>
-                            <AlertTriangle className="w-5 h-5 text-[#C23B3B]" />
+                            <AlertTriangle className="w-5 h-5 text-[#1F3A5F]" />
                             <span>Incorrect. Correct Answer: {currentExercise.correctAnswer}</span>
                           </>
                         )}
@@ -1118,7 +1118,7 @@ export const GrammarAspectModal = ({
                   </div>
                 </div>
               ) : (
-                <div className="text-center py-12 space-y-4 bg-white rounded-3xl border border-[#E6DCC8] p-8">
+                <div className="text-center py-12 space-y-4 bg-white rounded-3xl border border-[#E6EAF0] p-8">
                   <BrainCircuit className="w-10 h-10 text-[#1F3A5F] mx-auto" />
                   <div className="space-y-1">
                     <h4 className="text-base font-bold text-[#1B2433] font-serif">
@@ -1132,7 +1132,7 @@ export const GrammarAspectModal = ({
                     onClick={() => handleGenerateAiExercises(false)}
                     className="px-6 py-2.5 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-xs"
                   >
-                    <Sparkles className="w-4 h-4 text-[#C23B3B]" />
+                    <Sparkles className="w-4 h-4 text-[#1F3A5F]" />
                     <span>Launch Unit Quiz</span>
                   </button>
                 </div>

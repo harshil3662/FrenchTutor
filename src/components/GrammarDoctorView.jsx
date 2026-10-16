@@ -55,9 +55,9 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
   return (
     <div id="grammar-doctor-view" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-in fade-in">
       {/* Header */}
-      <div className="bg-white border border-[#E6DCC8] rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
+      <div className="bg-white border border-[#E6EAF0] rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
         <div className="space-y-2">
-          <div className="inline-flex items-center space-x-2 bg-[#F2EBDC] border border-[#1F3A5F]/20 text-[#1F3A5F] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center space-x-2 bg-[#F5F7FA] border border-[#1F3A5F]/20 text-[#1F3A5F] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
             <Stethoscope className="w-3.5 h-3.5" />
             <span>Grammar & Linguistics Clinic</span>
           </div>
@@ -69,7 +69,7 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
       </div>
 
       {/* Input Analysis Card */}
-      <div className="bg-white border border-[#E6DCC8] rounded-3xl p-6 sm:p-8 space-y-4 shadow-sm">
+      <div className="bg-white border border-[#E6EAF0] rounded-3xl p-6 sm:p-8 space-y-4 shadow-sm">
         <div className="space-y-2">
           <label className="text-xs font-bold uppercase tracking-wider text-[#5F6B7A] block">
             Your French sentence to diagnose
@@ -80,7 +80,7 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             placeholder="Write or paste a French sentence..."
-            className="w-full bg-[#FBF7EE] border border-[#D9CFBA] focus:border-[#1F3A5F] rounded-2xl p-4 text-[#1B2433] text-sm focus:outline-none placeholder-[#5F6B7A] shadow-xs"
+            className="w-full bg-[#FFFFFF] border border-[#D0D7E2] focus:border-[#1F3A5F] rounded-2xl p-4 text-[#1B2433] text-sm focus:outline-none placeholder-[#5F6B7A] shadow-xs"
           />
         </div>
 
@@ -94,7 +94,7 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
                 setInputText(sample.text);
                 handleAnalyze(sample.text);
               }}
-              className="text-xs bg-[#F2EBDC] hover:bg-[#E9E2D2] text-[#1F3A5F] px-3 py-1 rounded-xl border border-[#1F3A5F]/20 transition-colors cursor-pointer font-medium"
+              className="text-xs bg-[#F5F7FA] hover:bg-[#E6EAF0] text-[#1F3A5F] px-3 py-1 rounded-xl border border-[#1F3A5F]/20 transition-colors cursor-pointer font-medium"
             >
               {sample.desc}
             </button>
@@ -120,15 +120,15 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
           {/* Main Verdict Card */}
           <div className={`rounded-3xl p-6 sm:p-8 border shadow-sm ${
             result.isCorrect
-              ? 'bg-[#E9F3EE] border-[#2F6F57]/30 text-[#1B2433]'
-              : 'bg-white border-[#E6DCC8] text-[#1B2433]'
+              ? 'bg-[#E8EEF6] border-[#1F3A5F]/30 text-[#1B2433]'
+              : 'bg-white border-[#E6EAF0] text-[#1B2433]'
           }`}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center space-x-2.5">
                 {result.isCorrect ? (
-                  <CheckCircle2 className="w-6 h-6 text-[#2F6F57]" />
+                  <CheckCircle2 className="w-6 h-6 text-[#1F3A5F]" />
                 ) : (
-                  <AlertCircle className="w-6 h-6 text-[#C23B3B]" />
+                  <AlertCircle className="w-6 h-6 text-[#1F3A5F]" />
                 )}
                 <h3 className="text-lg font-bold text-[#1B2433] font-serif">
                   {result.isCorrect ? 'Sentence is Fully Correct!' : 'Recommended Corrections'}
@@ -136,24 +136,24 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
               </div>
 
               {result.registerAnalysis && (
-                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#F2EBDC] text-[#1F3A5F] border border-[#1F3A5F]/20">
+                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#F5F7FA] text-[#1F3A5F] border border-[#1F3A5F]/20">
                   Register: {result.registerAnalysis}
                 </span>
               )}
             </div>
 
             {/* Corrected Text Box */}
-            <div className="p-4 bg-[#FBF7EE] rounded-2xl border border-[#E6DCC8] space-y-2">
+            <div className="p-4 bg-[#FFFFFF] rounded-2xl border border-[#E6EAF0] space-y-2">
               <span className="text-[11px] font-bold uppercase tracking-wider text-[#5F6B7A] block">
                 Recommended Model Version
               </span>
               <div className="flex items-center justify-between">
-                <p className="text-base sm:text-lg font-bold text-[#2F6F57] font-serif">
+                <p className="text-base sm:text-lg font-bold text-[#1F3A5F] font-serif">
                   {result.correctedText}
                 </p>
                 <button
                   onClick={() => speakFrench(result.correctedText, audioSpeed)}
-                  className="p-2 rounded-xl bg-[#F2EBDC] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white transition-colors border border-[#1F3A5F]/20 shadow-xs"
+                  className="p-2 rounded-xl bg-[#F5F7FA] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white transition-colors border border-[#1F3A5F]/20 shadow-xs"
                 >
                   <Volume2 className="w-4 h-4" />
                 </button>
@@ -170,11 +170,11 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
                   {result.errors.map((err, idx) => (
                     <div
                       key={idx}
-                      className="p-4 bg-[#FBF7EE] rounded-xl border border-[#E6DCC8] space-y-1.5"
+                      className="p-4 bg-[#FFFFFF] rounded-xl border border-[#E6EAF0] space-y-1.5"
                     >
                       <div className="flex items-center justify-between text-xs">
-                        <span className="font-bold text-[#C23B3B] line-through">{err.mistake}</span>
-                        <span className="text-[#2F6F57] font-bold">→ {err.correction}</span>
+                        <span className="font-bold text-[#1F3A5F] line-through">{err.mistake}</span>
+                        <span className="text-[#1F3A5F] font-bold">→ {err.correction}</span>
                       </div>
                       <p className="text-xs text-[#1F3A5F] leading-relaxed">{err.rule}</p>
                     </div>
@@ -186,7 +186,7 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
 
           {/* Conjugation Tables (if verbs identified) */}
           {result.conjugations && result.conjugations.length > 0 && (
-            <div className="bg-white border border-[#E6DCC8] rounded-3xl p-6 sm:p-8 space-y-4 shadow-sm">
+            <div className="bg-white border border-[#E6EAF0] rounded-3xl p-6 sm:p-8 space-y-4 shadow-sm">
               <div className="flex items-center space-x-2 text-[#1B2433] font-bold text-base">
                 <Table className="w-5 h-5 text-[#1F3A5F]" />
                 <h3 className="font-serif">Conjugation Table: Verb "{result.conjugations[0].verb}" ({result.conjugations[0].tense})</h3>
@@ -196,7 +196,7 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
                 {Object.entries(result.conjugations[0].table).map(([pronoun, conj], idx) => (
                   <div
                     key={idx}
-                    className="p-3 bg-[#FBF7EE] rounded-xl border border-[#E6DCC8] text-center space-y-1 shadow-xs"
+                    className="p-3 bg-[#FFFFFF] rounded-xl border border-[#E6EAF0] text-center space-y-1 shadow-xs"
                   >
                     <span className="text-xs text-[#5F6B7A] font-semibold block">{pronoun}</span>
                     <span className="text-sm font-bold text-[#1F3A5F] font-serif">{conj}</span>

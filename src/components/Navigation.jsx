@@ -112,7 +112,7 @@ export const Navigation = ({
             {/* Segmented Glass Dock Track with Horizontal Scroll */}
             <div
               ref={scrollContainerRef}
-              className="relative p-1 bg-white/95 rounded-full border border-[#D9CFBA]/80 shadow-xs flex items-center overflow-x-auto no-scrollbar"
+              className="relative p-1 bg-white/95 rounded-full border border-[#D0D7E2]/80 shadow-xs flex items-center overflow-x-auto no-scrollbar"
             >
               <div className="flex space-x-1 sm:space-x-1.5 min-w-max mx-auto px-1">
                 {NAV_TABS.map((tab) => {
@@ -163,7 +163,7 @@ export const Navigation = ({
                           className={`hidden sm:inline-block text-[10px] font-bold px-2 py-0.5 rounded-full transition-colors duration-300 shrink-0 ${
                             isActive
                               ? 'bg-white/20 text-white/95 shadow-2xs border border-white/20'
-                              : 'bg-[#C23B3B]/10 text-[#C23B3B] border border-[#C23B3B]/20 group-hover:bg-[#C23B3B]/15'
+                              : 'bg-[#1F3A5F]/10 text-[#1F3A5F] border border-[#1F3A5F]/20 group-hover:bg-[#1F3A5F]/15'
                           }`}
                         >
                           {tab.tag}
@@ -182,15 +182,11 @@ export const Navigation = ({
       {isScrolled && isMenuOpen && (
         <motion.nav
           id="scrolled-dropdown-navigation"
-          initial={{ clipPath: 'inset(0% 0% 100% 0% round 1.5rem)', opacity: 0, y: -10 }}
-          animate={{ clipPath: 'inset(0% 0% 0% 0% round 1.5rem)', opacity: 1, y: 0 }}
-          exit={{ clipPath: 'inset(0% 0% 100% 0% round 1.5rem)', opacity: 0, y: -10 }}
-          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="overflow-y-auto overflow-x-hidden max-h-[calc(100dvh-7.5rem)] rounded-3xl bg-[#FBF8F1]/95 border border-[#D9CFBA]/80 shadow-lg shadow-[#1B2433]/5 px-3 sm:px-5 py-3.5"
+          className="overflow-y-auto overflow-x-hidden max-h-[calc(100dvh-7.5rem)] rounded-3xl border border-transparent shadow-lg shadow-[#1B2433]/5 px-3 sm:px-5 py-3.5"
         >
-          {controls && <div className="min-[1370px]:hidden pb-3 mb-3 border-b border-[#D9CFBA]/60">{controls}</div>}
+          {controls && <div className="min-[1370px]:hidden pb-3 mb-3 border-b border-white/20">{controls}</div>}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2">
-            {NAV_TABS.map((tab, idx) => {
+            {NAV_TABS.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
 
@@ -199,22 +195,25 @@ export const Navigation = ({
                   key={tab.id}
                   id={`scrolled-menu-tab-${tab.id}`}
                   onClick={() => handleTabClick(tab.id)}
-                  initial={{ opacity: 0, y: -8, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ delay: idx * 0.035, duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                  whileHover={{ scale: 1.04, y: -2 }}
                   whileTap={{ scale: 0.96 }}
-                  className={`p-2.5 sm:p-3 rounded-2xl border flex flex-row sm:flex-col items-center sm:justify-center text-left sm:text-center gap-2.5 sm:gap-1.5 transition-all cursor-pointer select-none group shadow-xs ${
+                  className={`p-2.5 sm:p-3 rounded-2xl border flex flex-row sm:flex-col items-center sm:justify-center text-left sm:text-center gap-2.5 sm:gap-1.5 transition-all cursor-pointer select-none group shadow-xs relative isolate ${
                     isActive
-                      ? 'bg-gradient-to-br from-[#1F3A5F]/90 via-[#1F3A5F]/90 to-[#1F3A5F]/90 text-white border-[#1F3A5F]/80 shadow-md shadow-[#1F3A5F]/25'
-                      : 'bg-white/45 hover:bg-white/70 text-[#1B2433] border-[#D9CFBA]/70 hover:border-[#1F3A5F]/40'
+                      ? 'text-white border-transparent'
+                      : 'bg-white/45 text-[#1B2433] border-[#D0D7E2]/70 hover:bg-white/70'
                   }`}
                 >
+                  {isActive && (
+                    <motion.div
+                      layoutId="scrolled-nav-pill"
+                      className="absolute inset-0 rounded-2xl border border-[#1F3A5F]/80 bg-[#1F3A5F]/90 shadow-md shadow-[#1F3A5F]/25 -z-10"
+                      transition={{ type: 'spring', stiffness: 150, damping: 20, mass: 1.1 }}
+                    />
+                  )}
                   <div
                     className={`w-8 h-8 shrink-0 rounded-full flex items-center justify-center transition-colors ${
                       isActive
                         ? 'bg-white/20 text-white'
-                        : 'bg-[#1F3A5F]/10 text-[#1F3A5F] group-hover:bg-[#1F3A5F]/15'
+                        : 'bg-[#1F3A5F]/10 text-[#1F3A5F]'
                     }`}
                   >
                     <Icon className="w-4 h-4" />
