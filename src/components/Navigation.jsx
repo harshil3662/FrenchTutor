@@ -199,7 +199,7 @@ export const Navigation = ({
                   className={`p-2.5 sm:p-3 rounded-2xl border flex flex-row sm:flex-col items-center sm:justify-center text-left sm:text-center gap-2.5 sm:gap-1.5 transition-all cursor-pointer select-none group shadow-xs relative isolate ${
                     isActive
                       ? 'text-white border-transparent'
-                      : 'bg-white/45 text-[#1B2433] border-[#D0D7E2]/70 hover:bg-white/70'
+                      : 'bg-white text-[#1B2433] border-[#D0D7E2]/70 hover:bg-white'
                   }`}
                 >
                   {isActive && (
