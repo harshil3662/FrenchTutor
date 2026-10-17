@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { LayoutGrid, Pause, Play, X } from './components/icons';
+import { LayoutGrid, Pause, Play, X, XRegular } from './components/icons';
 import { Header, HeaderControls } from './components/Header.jsx';
 import { Navigation } from './components/Navigation.jsx';
 import { HomeView } from './components/HomeView.jsx';
@@ -217,7 +217,7 @@ export default function App() {
                         isNavMenuOpen ? 'bg-white/20' : 'bg-white/15'
                       }`}
                     >
-                      {isNavMenuOpen ? <X className="w-3.5 h-3.5" /> : <LayoutGrid className="w-3.5 h-3.5" />}
+                      {isNavMenuOpen ? <XRegular weight="regular" className="w-3.5 h-3.5" /> : <LayoutGrid className="w-3.5 h-3.5" />}
                     </span>
                   </motion.button>
                 )}

@@ -36,6 +36,7 @@ export const Trophy = filled(Ph.Trophy);
 export const Unlock = filled(Ph.LockOpen);
 export const Volume2 = filled(Ph.SpeakerHigh);
 export const X = filled(Ph.X);
+export const XRegular = Ph.X;
 export const Zap = filled(Ph.Lightning);
 export const XCircle = filled(Ph.XCircle);
 export const RotateCcw = filled(Ph.ArrowCounterClockwise);
