@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Mic, MicOff, Volume2, Languages, Sparkles, RefreshCw, MessageSquare, MapPin, CheckCircle2, ChevronDown } from 'lucide-react';
+import { Send, Mic, MicOff, Volume2, Languages, Sparkles, RefreshCw, MessageSquare, MapPin, CheckCircle2, ChevronDown } from './icons';
 import { ROLEPLAY_SCENARIOS } from '../data/scenariosData.js';
 import { speakFrench, startFrenchSpeechRecognition, isSpeechRecognitionSupported, playChime } from '../utils/audioUtils.js';
 

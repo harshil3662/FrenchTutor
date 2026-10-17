@@ -20,7 +20,7 @@ import {
   Quote,
   CheckCircle2,
   ExternalLink,
-} from 'lucide-react';
+} from './icons';
 import { VOCABULARY_FLASHCARDS } from '../data/vocabData.js';
 import { speakFrench, playChime } from '../utils/audioUtils.js';
 import { useModalTracker } from '../utils/modalState.js';

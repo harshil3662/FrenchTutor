@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, BookOpen, CheckCircle2, Lock, Target, Unlock } from 'lucide-react';
+import { ArrowRight, BookOpen, CheckCircle2, Lock, Target, Unlock } from './icons';
 import { LEVEL_ORDER, LEVEL_UNIT_ORDER, PASS_THRESHOLD_PERCENT } from '../utils/progressionUtils.js';
 import { NAV_TABS } from './Navigation.jsx';
 

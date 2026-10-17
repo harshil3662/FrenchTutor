@@ -24,7 +24,7 @@ import {
   SlidersHorizontal,
   ChevronRight,
   PenTool
-} from 'lucide-react';
+} from './icons';
 import confetti from 'canvas-confetti';
 import { speakFrench, playChime } from '../utils/audioUtils.js';
 

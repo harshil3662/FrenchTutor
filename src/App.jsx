@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { LayoutGrid, Pause, Play, X } from 'lucide-react';
+import { LayoutGrid, Pause, Play, X } from './components/icons';
 import { Header, HeaderControls } from './components/Header.jsx';
 import { Navigation } from './components/Navigation.jsx';
 import { HomeView } from './components/HomeView.jsx';
@@ -166,7 +166,7 @@ export default function App() {
             <div
               className={`flex items-stretch gap-2.5 sm:gap-3 pointer-events-auto transition-[background-color,border-color] duration-250 ease-out ${
                 isScrolled
-                  ? 'rounded-full bg-[#1F3A5F]/35 backdrop-blur-md shadow-2xs p-[3px] pr-[11px] sm:pr-[13px]'
+                  ? 'rounded-full bg-[#1F3A5F]/35 backdrop-blur-xl shadow-2xs p-[3px] pr-[11px] sm:pr-[13px]'
                   : ''
               }`}
             >
@@ -175,7 +175,7 @@ export default function App() {
                 className={`relative flex-1 min-w-0 flex items-center transition-[background-color,border-color,box-shadow] duration-250 ease-out ${
                   isScrolled
                     ? 'rounded-full bg-transparent border border-transparent shadow-none ring-0'
-                    : 'w-full bg-[#EEEEEE]/95 shadow-none rounded-none'
+                    : 'w-full bg-[#EDEEF0] shadow-none rounded-none'
                 }`}
               >
                 <div className="w-full">
@@ -250,7 +250,7 @@ export default function App() {
                     transition: { duration: 0.7, ease: [0.45, 0, 0.2, 1] },
                   }}
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="overflow-hidden pointer-events-auto rounded-3xl bg-[#1F3A5F]/35 backdrop-blur-md"
+                  className="overflow-hidden pointer-events-auto rounded-3xl bg-[#1F3A5F]/35 backdrop-blur-xl"
                 >
                   <Navigation
                     activeTab={activeTab}

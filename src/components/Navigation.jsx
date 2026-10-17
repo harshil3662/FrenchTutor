@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { House, BookOpen, Cpu, Stethoscope, Layers, BookCheck, MessageSquare, Trophy } from 'lucide-react';
+import { House, BookOpen, Cpu, Stethoscope, Layers, BookCheck, MessageSquare, Trophy } from './icons';
 
 export const NAV_TABS = [
   { id: 'home', label: 'Home', icon: House, tag: 'Start Here' },

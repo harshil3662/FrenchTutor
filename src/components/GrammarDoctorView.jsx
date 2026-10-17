@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Stethoscope, Sparkles, CheckCircle2, AlertCircle, Volume2, BookOpen, ArrowRight, Table } from 'lucide-react';
+import { Stethoscope, Sparkles, CheckCircle2, AlertCircle, Volume2, BookOpen, ArrowRight, Table } from './icons';
 import { speakFrench, playChime } from '../utils/audioUtils.js';
 import { analyzeFrenchGrammarLocally } from '../utils/frenchGrammarEngine.js';
 

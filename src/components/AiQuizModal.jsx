@@ -10,7 +10,7 @@ import {
   BrainCircuit,
   Languages,
   Volume2,
-} from 'lucide-react';
+} from './icons';
 import confetti from 'canvas-confetti';
 import { playChime, speakFrench } from '../utils/audioUtils.js';
 import { useModalTracker } from '../utils/modalState.js';

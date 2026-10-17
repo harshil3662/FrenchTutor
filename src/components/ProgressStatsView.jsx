@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trophy, Flame, Sparkles, Award, CheckCircle2, Star, Target, BookOpen, Layers } from 'lucide-react';
+import { Trophy, Flame, Sparkles, Award, CheckCircle2, Star, Target, BookOpen, Layers } from './icons';
 
 export const ProgressStatsView = ({ progress, activeLevel }) => {
   const allBadges = [

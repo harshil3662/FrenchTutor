@@ -13,7 +13,7 @@ import {
   Info,
   Flame,
   Binary,
-} from 'lucide-react';
+} from './icons';
 import { speakFrench, playChime } from '../utils/audioUtils.js';
 import { transformFrenchAspectLocally, dissectFrenchSentenceLocally } from '../utils/frenchGrammarEngine.js';
 

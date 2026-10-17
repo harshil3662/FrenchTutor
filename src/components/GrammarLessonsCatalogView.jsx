@@ -18,7 +18,7 @@ import {
   HelpCircle,
   Lock,
   X,
-} from 'lucide-react';
+} from './icons';
 import { GRAMMAR_ASPECT_CATEGORIES, GRAMMAR_ASPECT_LESSONS } from '../data/grammarAspectsData.js';
 import { GrammarAspectModal } from './GrammarAspectModal.jsx';
 import { playChime } from '../utils/audioUtils.js';

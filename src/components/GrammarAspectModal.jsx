@@ -17,7 +17,7 @@ import {
   AlertTriangle,
   Languages,
   XCircle,
-} from 'lucide-react';
+} from './icons';
 import confetti from 'canvas-confetti';
 import { useModalTracker } from '../utils/modalState.js';
 import {

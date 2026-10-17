@@ -17,7 +17,7 @@ import {
   AlertTriangle,
   Languages,
   Trophy,
-} from 'lucide-react';
+} from './icons';
 import confetti from 'canvas-confetti';
 import { speakFrench, playChime } from '../utils/audioUtils.js';
 import { useModalTracker } from '../utils/modalState.js';

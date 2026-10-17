@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp } from './icons';
 
 export const FloatingRightNav = ({
   isVisible,
