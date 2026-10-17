@@ -23,7 +23,7 @@ const LevelSwitcher = ({ activeLevel, unlockedLevels, onLevelChange, idPrefix = 
             className={`${activeLevel === lvl && isScrolled ? 'my-1 h-[calc(100%-0.5rem)]' : 'h-full'} min-w-0 flex-1 sm:flex-none ${activeLevel === lvl && isScrolled ? 'px-2 sm:px-2.5' : 'px-1.5 sm:px-2.5'} text-xs font-bold rounded-full transition-all flex items-center justify-center gap-1 ${
               activeLevel === lvl
                 ? isScrolled
-                  ? 'bg-[#5F6B7A]/10 text-[#5F6B7A] border border-[#D0D7E2]/80 shadow-xs'
+                  ? 'bg-[#1F3A5F]/90 text-white border border-[#1F3A5F]/80 shadow-xs'
                   : 'bg-[#1F3A5F]/10 text-[#1F3A5F] border border-[#1F3A5F]/20 shadow-xs'
                 : isUnlocked
                 ? isScrolled
