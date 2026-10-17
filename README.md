@@ -31,3 +31,11 @@ To use different OpenRouter models for individual features, set any of these opt
 - `OPEN_ROUTER_MODEL_GENERATE_STORY`
 - `OPEN_ROUTER_MODEL_PRONUNCIATION_FEEDBACK`
 - `OPEN_ROUTER_MODEL_GENERATE_QUIZ`
+
+## Deploy to Vercel
+
+Import this repository into Vercel with the repository root as the Root Directory. The included `vercel.json` configures the production build and the `dist` output directory. Vercel serves the Vite frontend from `dist` and runs the existing Express API through `api/[...path].js`; `server.js` does not need to be deployed to a separate host.
+
+Add `OPEN_ROUTER_KEY` and `OPEN_ROUTER_MODEL` under the Vercel project's Environment Variables. Add `GEMINI_API_KEY` if you want Gemini as a fallback, and add any feature-specific `OPEN_ROUTER_MODEL_*` variables you use. Apply variables to the Production and Preview environments as needed. The build itself does not require AI keys.
+
+For local development, run `npm run dev`. The local server wrapper is in `local-server.js`; the API app in `server.js` is also imported directly by Vercel's function.

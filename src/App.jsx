@@ -1,25 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { LayoutGrid, Pause, Play, X, XRegular } from './components/icons';
 import { Header, HeaderControls } from './components/Header.jsx';
 import { Navigation } from './components/Navigation.jsx';
-import { HomeView } from './components/HomeView.jsx';
 import { AnimatedBackground } from './components/AnimatedBackground.jsx';
-import { GrammarLessonsCatalogView } from './components/GrammarLessonsCatalogView.jsx';
-import { GrammarWorkbenchView } from './components/GrammarWorkbenchView.jsx';
-import { LessonModal } from './components/LessonModal.jsx';
-import { GrammarAspectModal } from './components/GrammarAspectModal.jsx';
-import { TutorChatView } from './components/TutorChatView.jsx';
-import { FlashcardsView } from './components/FlashcardsView.jsx';
-import { GrammarDoctorView } from './components/GrammarDoctorView.jsx';
-import { StoriesView } from './components/StoriesView.jsx';
-import { ProgressStatsView } from './components/ProgressStatsView.jsx';
-import { AiQuizModal } from './components/AiQuizModal.jsx';
 import { Footer } from './components/Footer.jsx';
 import { loadUserProgress, markLessonCompleted, toggleCardMastery, addXp } from './utils/storageUtils.js';
 import { getStoredUnits } from './utils/curriculumStore.js';
 import { resumeFrench } from './utils/audioUtils.js';
 import { getUnlockedLevels } from './utils/progressionUtils.js';
+
+const HomeView = lazy(() => import('./components/HomeView.jsx').then((module) => ({ default: module.HomeView })));
+const GrammarLessonsCatalogView = lazy(() => import('./components/GrammarLessonsCatalogView.jsx').then((module) => ({ default: module.GrammarLessonsCatalogView })));
+const GrammarWorkbenchView = lazy(() => import('./components/GrammarWorkbenchView.jsx').then((module) => ({ default: module.GrammarWorkbenchView })));
+const LessonModal = lazy(() => import('./components/LessonModal.jsx').then((module) => ({ default: module.LessonModal })));
+const GrammarAspectModal = lazy(() => import('./components/GrammarAspectModal.jsx').then((module) => ({ default: module.GrammarAspectModal })));
+const TutorChatView = lazy(() => import('./components/TutorChatView.jsx').then((module) => ({ default: module.TutorChatView })));
+const FlashcardsView = lazy(() => import('./components/FlashcardsView.jsx').then((module) => ({ default: module.FlashcardsView })));
+const GrammarDoctorView = lazy(() => import('./components/GrammarDoctorView.jsx').then((module) => ({ default: module.GrammarDoctorView })));
+const StoriesView = lazy(() => import('./components/StoriesView.jsx').then((module) => ({ default: module.StoriesView })));
+const ProgressStatsView = lazy(() => import('./components/ProgressStatsView.jsx').then((module) => ({ default: module.ProgressStatsView })));
+const AiQuizModal = lazy(() => import('./components/AiQuizModal.jsx').then((module) => ({ default: module.AiQuizModal })));
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
@@ -282,111 +283,115 @@ export default function App() {
 
       {/* Main Viewport Content */}
       <main className="relative z-10 flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        {activeTab === 'home' && (
-          <HomeView
-            progress={progress}
-            unlockedLevels={unlockedLevels}
-            onNavigate={setActiveTab}
-          />
-        )}
+        <Suspense fallback={<p className="py-8 text-center" role="status">Loading...</p>}>
+          {activeTab === 'home' && (
+            <HomeView
+              progress={progress}
+              unlockedLevels={unlockedLevels}
+              onNavigate={setActiveTab}
+            />
+          )}
 
-        {activeTab === 'grammar-lessons' && (
-          <GrammarLessonsCatalogView
-            activeLevel={activeLevel}
-            unlockedLevels={unlockedLevels}
-            completedLessons={progress.completedLessons}
-            masteredLessons={progress.masteredLessons || []}
-            audioSpeed={audioSpeed}
-            units={units}
-            onAwardXp={handleAwardXp}
-            onLessonComplete={handleLessonCompleted}
-            onSelectLesson={(lesson) => setPreviewUnit(lesson)}
-            onOpenAiQuiz={handleOpenAiQuiz}
-          />
-        )}
+          {activeTab === 'grammar-lessons' && (
+            <GrammarLessonsCatalogView
+              activeLevel={activeLevel}
+              unlockedLevels={unlockedLevels}
+              completedLessons={progress.completedLessons}
+              masteredLessons={progress.masteredLessons || []}
+              audioSpeed={audioSpeed}
+              units={units}
+              onAwardXp={handleAwardXp}
+              onLessonComplete={handleLessonCompleted}
+              onSelectLesson={(lesson) => setPreviewUnit(lesson)}
+              onOpenAiQuiz={handleOpenAiQuiz}
+            />
+          )}
 
-        {activeTab === 'workbench' && (
-          <GrammarWorkbenchView
-            audioSpeed={audioSpeed}
-            activeLevel={activeLevel}
-            onAwardXp={handleAwardXp}
-          />
-        )}
+          {activeTab === 'workbench' && (
+            <GrammarWorkbenchView
+              audioSpeed={audioSpeed}
+              activeLevel={activeLevel}
+              onAwardXp={handleAwardXp}
+            />
+          )}
 
-        {activeTab === 'grammar-doctor' && (
-          <GrammarDoctorView
-            audioSpeed={audioSpeed}
-            onAwardXp={handleAwardXp}
-          />
-        )}
+          {activeTab === 'grammar-doctor' && (
+            <GrammarDoctorView
+              audioSpeed={audioSpeed}
+              onAwardXp={handleAwardXp}
+            />
+          )}
 
-        {activeTab === 'flashcards' && (
-          <FlashcardsView
-            progress={progress}
-            audioSpeed={audioSpeed}
-            activeLevel={activeLevel}
-            onToggleMastery={handleToggleMastery}
-            onAwardXp={handleAwardXp}
-          />
-        )}
+          {activeTab === 'flashcards' && (
+            <FlashcardsView
+              progress={progress}
+              audioSpeed={audioSpeed}
+              activeLevel={activeLevel}
+              onToggleMastery={handleToggleMastery}
+              onAwardXp={handleAwardXp}
+            />
+          )}
 
-        {activeTab === 'stories' && (
-          <StoriesView
-            activeLevel={activeLevel}
-            audioSpeed={audioSpeed}
-            onAwardXp={handleAwardXp}
-          />
-        )}
+          {activeTab === 'stories' && (
+            <StoriesView
+              activeLevel={activeLevel}
+              audioSpeed={audioSpeed}
+              onAwardXp={handleAwardXp}
+            />
+          )}
 
-        {activeTab === 'tutor' && (
-          <TutorChatView
-            activeLevel={activeLevel}
-            audioSpeed={audioSpeed}
-            onAwardXp={handleAwardXp}
-          />
-        )}
+          {activeTab === 'tutor' && (
+            <TutorChatView
+              activeLevel={activeLevel}
+              audioSpeed={audioSpeed}
+              onAwardXp={handleAwardXp}
+            />
+          )}
 
-        {activeTab === 'progress' && (
-          <ProgressStatsView
-            progress={progress}
-            activeLevel={activeLevel}
-          />
-        )}
+          {activeTab === 'progress' && (
+            <ProgressStatsView
+              progress={progress}
+              activeLevel={activeLevel}
+            />
+          )}
+        </Suspense>
       </main>
 
       {/* Interactive Lesson Runner Modal */}
-      {activeLesson && (
-        <LessonModal
-          lesson={activeLesson}
-          audioSpeed={audioSpeed}
-          onClose={() => setActiveLesson(null)}
-          onComplete={handleLessonCompleted}
-        />
-      )}
+      <Suspense fallback={null}>
+        {activeLesson && (
+          <LessonModal
+            lesson={activeLesson}
+            audioSpeed={audioSpeed}
+            onClose={() => setActiveLesson(null)}
+            onComplete={handleLessonCompleted}
+          />
+        )}
 
-      {/* Interactive Unit Aspect Preview Modal */}
-      {previewUnit && (
-        <GrammarAspectModal
-          lesson={previewUnit}
-          isOpen={!!previewUnit}
-          audioSpeed={audioSpeed}
-          onClose={() => setPreviewUnit(null)}
-          onComplete={(lessonId, xp, isMastered, percent) => {
-            handleLessonCompleted(lessonId, xp, isMastered, percent);
-          }}
-        />
-      )}
+        {/* Interactive Unit Aspect Preview Modal */}
+        {previewUnit && (
+          <GrammarAspectModal
+            lesson={previewUnit}
+            isOpen={!!previewUnit}
+            audioSpeed={audioSpeed}
+            onClose={() => setPreviewUnit(null)}
+            onComplete={(lessonId, xp, isMastered, percent) => {
+              handleLessonCompleted(lessonId, xp, isMastered, percent);
+            }}
+          />
+        )}
 
-      {/* Practice Quiz Generator Modal */}
-      {quizModalData && (
-        <AiQuizModal
-          topic={quizModalData.topic}
-          level={quizModalData.level}
-          unit={quizModalData.unit}
-          onClose={() => setQuizModalData(null)}
-          onAwardXp={handleAwardXp}
-        />
-      )}
+        {/* Practice Quiz Generator Modal */}
+        {quizModalData && (
+          <AiQuizModal
+            topic={quizModalData.topic}
+            level={quizModalData.level}
+            unit={quizModalData.unit}
+            onClose={() => setQuizModalData(null)}
+            onAwardXp={handleAwardXp}
+          />
+        )}
+      </Suspense>
 
       {/* Footer */}
       <Footer />

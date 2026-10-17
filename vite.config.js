@@ -11,6 +11,23 @@ export default defineConfig(() => {
         '@': path.resolve(__dirname, '.'),
       },
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('/src/data/grammar/')) {
+              return 'grammar-data';
+            }
+            if (id.includes('/node_modules/@phosphor-icons/react/')) {
+              return 'phosphor-icons';
+            }
+            if (id.includes('/node_modules/motion/')) {
+              return 'motion';
+            }
+          },
+        },
+      },
+    },
     server: {
       allowedHosts: true,
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
