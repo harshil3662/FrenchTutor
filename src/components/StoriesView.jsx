@@ -441,7 +441,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
             <SlidersHorizontal className="w-3.5 h-3.5" />
             <span>Select Publication Format</span>
           </label>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {PUBLICATION_TYPES.map((pub) => {
               const Icon = pub.icon;
               const isSelected = sourceType === pub.id;
@@ -461,11 +461,11 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                   <div className={`p-2 rounded-xl shrink-0 ${isSelected ? 'bg-white/20' : 'bg-[#F5F7FA] text-[#1F3A5F]'}`}>
                     <Icon className="w-4 h-4" />
                   </div>
-                  <div className="min-w-0">
-                    <p className={`text-xs font-bold leading-snug sm:truncate ${isSelected ? 'text-white' : 'text-[#1B2433]'}`}>
+                  <div className="min-w-0 flex-1">
+                    <p className={`text-xs font-bold leading-snug break-words ${isSelected ? 'text-white' : 'text-[#1B2433]'}`}>
                       {pub.label}
                     </p>
-                    <p className={`text-[10px] leading-snug sm:truncate ${isSelected ? 'text-white/80' : 'text-[#5F6B7A]'}`}>
+                    <p className={`text-[10px] leading-snug break-words ${isSelected ? 'text-white/80' : 'text-[#5F6B7A]'}`}>
                       {pub.sub}
                     </p>
                   </div>
