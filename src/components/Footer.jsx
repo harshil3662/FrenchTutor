@@ -127,6 +127,21 @@ export const Footer = () => {
             <ellipse cx="1320" cy="216" rx="14" ry="8" fill="#1F3A5F" opacity="0.9" />
           </g>
         </svg>
+
+        {/* Attribution - Positioned at very bottom right corner */}
+        <div className="absolute bottom-1 right-3 sm:bottom-2 sm:right-4 z-20">
+          <p className="text-xs text-[#202020] font-medium whitespace-nowrap">
+            Designed and developed by{' '}
+            <a
+              href="https://accessharshil.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-[#1F3A5F] font-serif font-semibold transition-colors duration-200 hover:underline"
+            >
+              Harshil
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );
