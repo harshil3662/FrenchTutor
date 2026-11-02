@@ -136,7 +136,7 @@ export const Footer = () => {
               href="https://accessharshil.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-[#1F3A5F] font-serif font-semibold transition-colors duration-200 hover:underline"
+              className="text-sm text-[#2F5F9E] font-serif font-semibold transition-colors duration-200 hover:text-[#E5565F] hover:underline"
             >
               Harshil
             </a>

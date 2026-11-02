@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   BookCheck,
   Sparkles,
@@ -33,45 +33,6 @@ const PUBLICATION_TYPES = [
   { id: 'magazine', label: 'Magazine Feature', sub: 'Culture & lifestyle', icon: BookOpen },
   { id: 'editorial', label: 'Editorial & Debate', sub: 'Perspectives & opinion', icon: MessageSquareQuote },
   { id: 'story', label: 'Narrative Story', sub: 'Literature & fiction', icon: AlignLeft },
-];
-
-const PRESET_TOPICS_BY_CATEGORY = [
-  {
-    category: 'Café & Gastronomy',
-    icon: '🥐',
-    topics: [
-      "Parisian café culture and the daily French art of living",
-      "The craft of artisan bakeries and traditional baguettes",
-      "Regional farmers' markets: from local farm to dinner plate",
-    ],
-  },
-  {
-    category: 'Cities & Environment',
-    icon: '🌿',
-    topics: [
-      "How bicycles conquered major French metropolises",
-      "Green Paris: urban forests and pedestrian avenues",
-      "The revival of scenic night trains across France and Europe",
-    ],
-  },
-  {
-    category: 'Culture & Trends',
-    icon: '🎨',
-    topics: [
-      "Street art and hidden murals across Paris neighborhoods",
-      "Independent French bookshops navigating the digital era",
-      "Neighborhood film festivals celebrating independent cinema",
-    ],
-  },
-  {
-    category: 'Society & Debate',
-    icon: '💡',
-    topics: [
-      "The four-day work week: experiments in French companies",
-      "Digital innovation, culture, and critical thought in France",
-      "The resurgence of traditional craftsmanship among youth",
-    ],
-  },
 ];
 
 const CONTEXT_STAGES = [
@@ -124,7 +85,7 @@ const CONTEXT_STAGES = [
 
 export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp }) => {
   const [sourceType, setSourceType] = useState('newspaper');
-  const [topicInput, setTopicInput] = useState("Parisian café culture and the daily French art of living");
+  const [topicInput, setTopicInput] = useState("");
   const [customSearchQuery, setCustomSearchQuery] = useState('');
   const [showEnglish, setShowEnglish] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -171,20 +132,20 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
     ],
     comprehensionQuestions: [
       {
-        question: "Where does Thomas live in Paris?",
-        options: ["Near the Eiffel Tower", "Near the Luxembourg Garden", "Near Gare de Lyon", "In the northern suburbs"],
+        question: "Où habite Thomas à Paris ?",
+        options: ["Près de la tour Eiffel", "Près du jardin du Luxembourg", "Près de la gare de Lyon", "Dans la banlieue nord"],
         correctIndex: 1,
         explanation: "Thomas lives in a small apartment near the Luxembourg Garden (près du jardin du Luxembourg)."
       },
       {
-        question: "What are people doing while sitting at the café?",
-        options: ["Jogging around the park", "Sleeping at their tables", "Reading the newspaper or discussing the weather", "Watching a live football match"],
+        question: "Que font les gens assis à la terrasse du café ?",
+        options: ["Ils font du jogging dans le parc", "Ils dorment à leur table", "Ils lisent le journal ou parlent de la météo", "Ils regardent un match de football en direct"],
         correctIndex: 2,
         explanation: "The text says: 'Beaucoup de personnes lisent le journal ou parlent de la météo.'"
       },
       {
-        question: "Which part of the day does Thomas prefer most?",
-        options: ["The quiet morning moment before work starts", "The noisy lunch rush", "The evening subway commute", "Late night hours"],
+        question: "Quel moment de la journée Thomas préfère-t-il ?",
+        options: ["Le moment calme du matin, avant le travail", "Le coup de feu bruyant du déjeuner", "Le trajet en métro du soir", "Les heures tardives de la nuit"],
         correctIndex: 0,
         explanation: "Thomas loves this calm morning moment best before beginning work."
       }
@@ -199,7 +160,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
       sampleSummary: "In the morning, Thomas savors a quiet pause at his local bakery and café before his work day begins."
     },
     opinionPrompt: {
-      question: "How do you prefer to start your ideal day? Share your morning routine or point of view in French.",
+      question: "Thomas prend son café au Café des Arts avant de commencer le travail. Et vous, préférez-vous un moment calme le matin, ou commencer la journée plus vite ? Partagez votre point de vue.",
       context: "Write 1 to 3 simple sentences in French (e.g., your breakfast, coffee, walking, or reading habits). Use the starter phrases below to help you write!",
       starterPhrases: [
         "Le matin, je préfère boire... (In the morning, I prefer drinking...)",
@@ -227,11 +188,13 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
   const [isEvaluatingOpinion, setIsEvaluatingOpinion] = useState(false);
   const [opinionEvaluation, setOpinionEvaluation] = useState(null);
 
-  // Sync article when active level changes if user has not heavily interacted
+  // Generate a fresh article each time the tab opens (this component remounts on every visit)
+  // and whenever the level changes. The ref stops StrictMode's double effect run from fetching twice.
+  const lastGeneratedLevelRef = useRef(null);
   useEffect(() => {
-    if (story.level !== activeLevel) {
-      handleGenerateArticle(topicInput, sourceType, activeLevel);
-    }
+    if (lastGeneratedLevelRef.current === activeLevel) return;
+    lastGeneratedLevelRef.current = activeLevel;
+    handleGenerateArticle(topicInput, sourceType, activeLevel);
   }, [activeLevel]);
 
   // Main Generator Call
@@ -497,7 +460,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                   }
                 }}
                 placeholder="Type any topic you like (e.g. French cinema, Paris bakeries, travel to Provence, technology, sports...)"
-                className="w-full pl-10 pr-4 py-2.5 bg-[#FFFFFF] border border-[#E6EAF0] rounded-2xl text-xs sm:text-sm text-[#1B2433] placeholder-[#5F6B7A] focus:outline-none focus:border-[#1F3A5F] focus:bg-white transition-all"
+                className="w-full pl-10 pr-4 py-2.5 bg-[#FFFFFF] border border-[#BBBBBB] rounded-2xl text-xs sm:text-sm text-[#1B2433] placeholder-[#5F6B7A] focus:outline-none focus:border-[#1F3A5F] focus:bg-white transition-all"
               />
             </div>
             <button
@@ -510,41 +473,18 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
             </button>
           </div>
         </div>
-
-        {/* Preset Topic Tags categorized */}
-        <div className="space-y-2">
-          <span className="text-[11px] font-bold text-[#5F6B7A] block">
-            Popular Topics & Reader Interests (Click to Generate):
-          </span>
-          <div className="flex flex-wrap gap-2">
-            {PRESET_TOPICS_BY_CATEGORY.map((cat, cIdx) => (
-              <React.Fragment key={cIdx}>
-                {cat.topics.map((preset, pIdx) => (
-                  <button
-                    key={`${cIdx}-${pIdx}`}
-                    onClick={() => {
-                      setTopicInput(preset);
-                      setCustomSearchQuery(preset);
-                      handleGenerateArticle(preset, sourceType, activeLevel);
-                    }}
-                    className={`max-w-full text-xs px-3.5 py-1.5 rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs ${
-                      topicInput === preset
-                        ? 'bg-[#1F3A5F] text-white border-[#1F3A5F]'
-                        : 'bg-white hover:bg-[#FFFFFF] text-[#1F3A5F] border-[#D0D7E2]'
-                    }`}
-                  >
-                    <span>{cat.icon}</span>
-                    <span className="min-w-0 truncate max-w-[240px]">{preset}</span>
-                  </button>
-                ))}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* Main Journal / Magazine Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {isLoading && (
+        <div className="bg-white border border-[#E6EAF0] rounded-3xl p-10 flex flex-col items-center justify-center gap-3 shadow-sm">
+          <Sparkles className="w-6 h-6 text-[#1F3A5F] animate-pulse" />
+          <p className="text-sm font-bold text-[#1B2433]">Generating your article...</p>
+          <p className="text-xs text-[#5F6B7A]">Level {activeLevel} • {sourceType === 'newspaper' ? 'Newspaper' : sourceType}</p>
+        </div>
+      )}
+
+      <div className={`grid grid-cols-1 lg:grid-cols-3 gap-8 ${isLoading ? 'hidden' : ''}`}>
         {/* Article Reading Column (2 Cols) */}
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-white border border-[#E6EAF0] rounded-3xl p-6 sm:p-9 space-y-6 shadow-sm relative overflow-hidden">
@@ -917,7 +857,7 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
             {/* CONTEXT 4: USER OPINION & POINT OF VIEW */}
             {currentStage.id === 'opinion' && (
               <div className="space-y-6 animate-in fade-in">
-                <div className="p-4 sm:p-5 bg-[#FFFFFF] rounded-2xl border border-[#E6EAF0] space-y-2">
+                <div className="p-4 sm:p-5 bg-[#FFFFFF] rounded-2xl border border-[#BBBBBB] space-y-2">
                   <div className="flex items-center gap-2 text-[#1F3A5F]">
                     <MessageSquareQuote className="w-4 h-4" />
                     <span className="text-xs font-bold uppercase tracking-wider">
@@ -934,45 +874,14 @@ export const StoriesView = ({ activeLevel = 'A1', audioSpeed = 1.0, onAwardXp })
                   )}
                 </div>
 
-                {/* Sentence Starter Chips */}
-                {story.opinionPrompt?.starterPhrases && (
-                  <div className="space-y-1.5">
-                    <span className="text-[11px] font-bold text-[#5F6B7A]">
-                      Helpful French sentence starters (click to insert):
-                    </span>
-                    <div className="flex flex-wrap gap-2">
-                      {story.opinionPrompt.starterPhrases.map((phrase, idx) => {
-                        const cleanPhrase = phrase.split('(')[0].trim();
-                        return (
-                          <button
-                            key={idx}
-                            type="button"
-                            onClick={() => {
-                              if (!userOpinionText) {
-                                setUserOpinionText(`${cleanPhrase} `);
-                              } else {
-                                setUserOpinionText((prev) => `${prev} ${cleanPhrase} `);
-                              }
-                            }}
-                            className="text-xs px-2.5 py-1 rounded-lg bg-white hover:bg-[#FFFFFF] border border-[#D0D7E2] text-[#1F3A5F] transition-colors cursor-pointer shadow-2xs"
-                            title={`Insert: ${cleanPhrase}`}
-                          >
-                            + {phrase}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-
                 {/* Opinion Textarea */}
                 <div className="space-y-2">
                   <textarea
                     rows={4}
                     value={userOpinionText}
                     onChange={(e) => setUserOpinionText(e.target.value)}
-                    placeholder="Write your opinion or point of view in French here... (e.g. À mon avis, c'est très important parce que...)"
-                    className="w-full p-4 rounded-2xl border border-[#E6EAF0] bg-white text-xs sm:text-sm text-[#1B2433] placeholder-[#5F6B7A] focus:outline-none focus:border-[#1F3A5F] transition-all leading-relaxed"
+                    placeholder="Write your opinion or point of view in French here..."
+                    className="w-full p-4 rounded-2xl border border-[#BBBBBB] bg-white text-xs sm:text-sm text-[#1B2433] placeholder-[#5F6B7A] focus:outline-none focus:border-[#1F3A5F] transition-all leading-relaxed"
                   />
                   <div className="flex items-center justify-between text-[11px] text-[#5F6B7A]">
                     <span>{userOpinionText.trim().split(/\s+/).filter(Boolean).length} words written</span>

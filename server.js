@@ -102,7 +102,8 @@ async function generateOpenRouterJson(prompt, { task, temperature = 0.9, timeout
     });
 
     if (!response.ok) {
-      throw new Error(`OpenRouter returned status ${response.status}`);
+      const errorBody = await response.text().catch(() => '');
+      throw new Error(`OpenRouter returned status ${response.status} for model ${getOpenRouterModel(task)}: ${errorBody.slice(0, 500)}`);
     }
 
     const payload = await response.json();
@@ -118,19 +119,25 @@ async function generateAiJson(prompt, fallback, {
   preferOpenRouter = false,
   openRouterTimeoutMs,
   maxTokens,
+  parseRetries = 0,
 } = {}) {
   if (preferOpenRouter) {
-    try {
-      const openRouterResult = await generateOpenRouterJson(prompt, {
-        task,
-        temperature,
-        timeoutMs: openRouterTimeoutMs,
-        maxTokens,
-      });
-      const parsed = cleanAndParseJson(openRouterResult, null);
-      if (parsed) return parsed;
-    } catch (error) {
-      console.warn(`OpenRouter ${task || 'AI'} request failed:`, error);
+    // Long JSON replies occasionally come back malformed; retry before using the fallback
+    for (let attempt = 0; attempt <= parseRetries; attempt += 1) {
+      try {
+        const openRouterResult = await generateOpenRouterJson(prompt, {
+          task,
+          temperature,
+          timeoutMs: openRouterTimeoutMs,
+          maxTokens,
+        });
+        const parsed = cleanAndParseJson(openRouterResult, null);
+        if (parsed) return parsed;
+        console.warn(`OpenRouter ${task || 'AI'} returned no usable JSON (attempt ${attempt + 1}, ${openRouterResult?.length ?? 0} chars):`, openRouterResult?.slice(0, 300) ?? 'no content');
+      } catch (error) {
+        console.warn(`OpenRouter ${task || 'AI'} request failed:`, error);
+        break;
+      }
     }
   }
 
@@ -393,20 +400,20 @@ app.post('/api/ai/generate-story', async (req, res) => {
       ],
       comprehensionQuestions: [
         {
-          question: "Where does Thomas live in Paris?",
-          options: ["Near the Eiffel Tower", "Near the Luxembourg Garden", "Near Gare de Lyon", "In the northern suburbs"],
+          question: "Où habite Thomas à Paris ?",
+          options: ["Près de la tour Eiffel", "Près du jardin du Luxembourg", "Près de la gare de Lyon", "Dans la banlieue nord"],
           correctIndex: 1,
           explanation: "Thomas lives in a small apartment near the Luxembourg Garden (près du jardin du Luxembourg)."
         },
         {
-          question: "What are people doing while sitting at the café?",
-          options: ["Jogging around the park", "Sleeping at their tables", "Reading the newspaper or discussing the weather", "Watching a live football match"],
+          question: "Que font les gens assis à la terrasse du café ?",
+          options: ["Ils font du jogging dans le parc", "Ils dorment à leur table", "Ils lisent le journal ou parlent de la météo", "Ils regardent un match de football en direct"],
           correctIndex: 2,
           explanation: "The text says: 'Beaucoup de personnes lisent le journal ou parlent de la météo.'"
         },
         {
-          question: "Which part of the day does Thomas prefer most?",
-          options: ["The quiet morning moment before work starts", "The noisy lunch rush", "The evening subway commute", "Late night hours"],
+          question: "Quel moment de la journée Thomas préfère-t-il ?",
+          options: ["Le moment calme du matin, avant le travail", "Le coup de feu bruyant du déjeuner", "Le trajet en métro du soir", "Les heures tardives de la nuit"],
           correctIndex: 0,
           explanation: "Thomas loves this calm morning moment best before beginning work."
         }
@@ -421,7 +428,7 @@ app.post('/api/ai/generate-story', async (req, res) => {
         sampleSummary: "In the morning, Thomas savors a quiet pause at his local bakery and café before his work day begins."
       },
       opinionPrompt: {
-        question: "How do you prefer to start your ideal day? Share your morning routine or point of view in French.",
+        question: "Thomas prend son café au Café des Arts avant de commencer le travail. Et vous, préférez-vous un moment calme le matin, ou commencer la journée plus vite ? Partagez votre point de vue en français.",
         context: "Write 1 to 3 simple sentences in French (e.g., your breakfast, coffee, walking, or reading habits). Use the starter phrases below to help you write!",
         starterPhrases: [
           "Le matin, je préfère boire... (In the morning, I prefer drinking...)",
@@ -469,20 +476,20 @@ app.post('/api/ai/generate-story', async (req, res) => {
       ],
       comprehensionQuestions: [
         {
-          question: "How long has Mrs. Dupont worked as a vegetable grower?",
-          options: ["Two years", "Ten years", "Twenty years", "Fifty years"],
+          question: "Depuis combien de temps Madame Dupont est-elle maraîchère ?",
+          options: ["Depuis deux ans", "Depuis dix ans", "Depuis vingt ans", "Depuis cinquante ans"],
           correctIndex: 2,
           explanation: "The text explicitly states: 'Madame Dupont, maraîchère depuis vingt ans' (twenty years)."
         },
         {
-          question: "What main advantage justifies the higher market prices according to the author?",
-          options: ["Automated self-checkout speed", "Incomparable freshness and flavor of the produce", "Free unlimited parking", "Daily clearance discounts"],
+          question: "Quel avantage principal justifie, selon l'auteur, des prix plus élevés ?",
+          options: ["La rapidité des caisses automatiques", "La fraîcheur et le goût incomparables des produits", "Un parking gratuit et illimité", "Des remises quotidiennes sur les invendus"],
           correctIndex: 1,
           explanation: "The text specifies that 'la fraîcheur et le goût sont incomparables' (freshness and taste are incomparable)."
         },
         {
-          question: "What do visitors do at the market in addition to buying food?",
-          options: ["Work silently on laptops", "Chat with growers and exchange recipes", "Protest in the streets", "Attend choir rehearsals"],
+          question: "Que font les visiteurs au marché, en plus d'acheter à manger ?",
+          options: ["Ils travaillent en silence sur leur ordinateur", "Ils discutent avec les producteurs et échangent des recettes", "Ils manifestent dans la rue", "Ils assistent à des répétitions de chorale"],
           correctIndex: 1,
           explanation: "The market is a warm gathering place where people take time to chat and share recipes."
         }
@@ -545,20 +552,20 @@ app.post('/api/ai/generate-story', async (req, res) => {
       ],
       comprehensionQuestions: [
         {
-          question: "What primarily fostered the dramatic boom in urban cycling across French cities?",
-          options: ["The permanent shutdown of metro networks", "Protected bike lanes and low-traffic calm zones", "A total ban on walking", "Drastic price cuts on luxury bicycles"],
+          question: "Qu'est-ce qui a surtout favorisé l'essor spectaculaire du vélo dans les villes françaises ?",
+          options: ["La fermeture définitive des réseaux de métro", "Les pistes cyclables protégées et les zones apaisées à faible trafic", "L'interdiction totale de marcher", "De fortes baisses de prix sur les vélos de luxe"],
           correctIndex: 1,
           explanation: "The author credits protected cycling infrastructure and limited-traffic pedestrian-friendly zones."
         },
         {
-          question: "What ongoing public space challenge is cited in the report?",
-          options: ["Sharing streets safely among pedestrians, e-scooters, and cyclists", "Total lack of street trees", "Severe cold weather in July", "The complete absence of traffic signs"],
+          question: "Quel défi persistant de l'espace public est évoqué dans le rapport ?",
+          options: ["Partager la rue en sécurité entre piétons, trottinettes et cyclistes", "Le manque total d'arbres dans les rues", "Le froid intense au mois de juillet", "L'absence complète de panneaux de signalisation"],
           correctIndex: 0,
           explanation: "Coexistence among pedestrians, scooters, and cyclists requires constant vigilance."
         },
         {
-          question: "How has cycling transformed Sarah's daily experience in Lyon?",
-          options: ["She feels lost and disoriented", "She is completely indifferent", "She feels freer, less stressed, and more connected to her surroundings", "She wants to buy a bigger car"],
+          question: "Comment le vélo a-t-il transformé le quotidien de Sarah à Lyon ?",
+          options: ["Elle se sent perdue et désorientée", "Elle est complètement indifférente", "Elle se sent plus libre, moins stressée et plus connectée à son environnement", "Elle veut acheter une voiture plus grande"],
           correctIndex: 2,
           explanation: "Sarah feels much more connected to her environment and free from traffic stress."
         }
@@ -621,20 +628,20 @@ app.post('/api/ai/generate-story', async (req, res) => {
       ],
       comprehensionQuestions: [
         {
-          question: "What dual posture characterizes the French approach according to the editorial?",
-          options: ["Total denial and resignation", "Entrepreneurial boldness paired with Cartesian critical vigilance", "Blind imitation of foreign models", "Nostalgic isolationism"],
+          question: "Quelle double posture caractérise, selon l'éditorial, l'approche française ?",
+          options: ["Un déni total et la résignation", "L'audace entrepreneuriale alliée à une vigilance critique cartésienne", "L'imitation aveugle des modèles étrangers", "Un isolationnisme nostalgique"],
           correctIndex: 1,
           explanation: "The author describes a posture combining entrepreneurial boldness and Cartesian circumspection."
         },
         {
-          question: "To which philosophical heritage does the author tie the demand for ethical oversight?",
-          options: ["19th-century romanticism", "Enlightenment humanism (les Lumières)", "Industrial positivism", "Ancient stoicism"],
+          question: "À quel héritage philosophique l'auteur rattache-t-il l'exigence d'un contrôle éthique ?",
+          options: ["Le romantisme du XIXe siècle", "L'humanisme des Lumières", "Le positivisme industriel", "Le stoïcisme antique"],
           correctIndex: 1,
           explanation: "The author refers to a critical tradition deeply rooted in Enlightenment humanism."
         },
         {
-          question: "What condition is deemed essential for technical progress to be truly liberating?",
-          options: ["It must safeguard critical discernment and human creativity", "It must maximize quarterly profits", "It must replace all human teachers", "It must ban printed books"],
+          question: "Quelle condition est jugée essentielle pour que le progrès technique soit vraiment libérateur ?",
+          options: ["Il doit préserver le discernement critique et la créativité humaine", "Il doit maximiser les bénéfices trimestriels", "Il doit remplacer tous les enseignants", "Il doit interdire les livres imprimés"],
           correctIndex: 0,
           explanation: "Progress is only liberating if it upholds critical discernment and human creativity."
         }
@@ -664,6 +671,34 @@ app.post('/api/ai/generate-story', async (req, res) => {
   const defaultFallback = levelFallbacks[level] || levelFallbacks.A1;
 
   try {
+    // A random angle makes each generation take a different direction for the same topic
+    const storyAngles = [
+      "a personal story from an ordinary local resident",
+      "a practical guide to a place or everyday custom",
+      "a seasonal or weekend event that draws people together",
+      "a debate about daily life in a big city",
+      "a surprising everyday fact or small discovery",
+      "an interview-style portrait of someone who works in the field",
+      "a short historical anecdote linked to the present day",
+      "a travel tip for a visitor discovering the topic for the first time",
+      "a story about a small misunderstanding or unexpected moment",
+      "a short report on how people are changing their habits",
+    ];
+    const storyAngle = storyAngles[Math.floor(Math.random() * storyAngles.length)];
+
+    // Build the article around a grammar unit from the learner's current CEFR level
+    const levelUnits = GRAMMAR_ASPECT_LESSONS.filter((unit) => unit.level === level);
+    const grammarUnit = levelUnits.length > 0
+      ? levelUnits[Math.floor(Math.random() * levelUnits.length)]
+      : null;
+    const grammarFocus = grammarUnit
+      ? `Grammar focus (CEFR ${level}): ${grammarUnit.title}
+Rule formula: ${grammarUnit.formula || 'see unit'}
+Key rule: ${grammarUnit.goldenRule || 'see unit'}
+Topics in this unit: ${(grammarUnit.topics || []).map((t) => t.title).join('; ')}
+Requirement: the article must naturally use this grammar several times (at least 5 clear examples), and the grammar should be visible in the sentences a learner would read. Use only structures and vocabulary at or below CEFR ${level}; do not use structures from higher levels.`
+      : `Grammar focus: use structures appropriate for CEFR ${level}.`;
+
     const genreDescription = {
       newspaper: "an authentic French newspaper article (article de presse / dépêche d'actualité)",
       magazine: "a cultural magazine feature (chronique de magazine culturel / grand format de société)",
@@ -675,9 +710,11 @@ app.post('/api/ai/generate-story', async (req, res) => {
 Generate an engaging, culturally authentic French reading piece in the style of ${genreDescription} tailored specifically to CEFR level ${level}.
 
 Target Topic / Interest: "${topic}"
+Angle for this piece: ${storyAngle}. Write a fresh, original text: do not reuse common stock characters, bakery/café examples, or stock phrasing. Choose new names, places, and details.
 Theme: "${theme}"
 Target CEFR Level: "${level}"
 Publication Format: "${sourceType}"
+${grammarFocus}
 
 CEFR Level Specifications:
 - If A1: Simple short sentences, present tense, high-frequency everyday vocabulary, clear cognates, approachable tone.
@@ -694,21 +731,21 @@ Required output content:
 6. EnglishTranslation: Accurate side-by-side English translation.
 7. Glossary: 4-6 key journalistic terms/idioms with French, English, grammatical type, and context sentence.
 8. RightOrWrongQuestions: Exactly 3 statements testing who, what, or which claim is right or wrong, with:
-   - claim: statement written in clear English stating what is claimed about the text (e.g. "According to the article: ...")
+   - claim: statement written in French stating what is claimed about the text (e.g. "Selon l'article : ...")
    - isRight: boolean (true if claim is true / accurate according to text, false if wrong)
    - explanation: clear explanation in English citing the passage
    - quote: direct short quote in French from the text
-9. ComprehensionQuestions: Exactly 3 multiple-choice questions written in English testing reading comprehension, with 4 English options each, correctIndex (0-3), and clear English explanation.
+9. ComprehensionQuestions: Exactly 3 multiple-choice reading comprehension questions written in French (CEFR-level French), with 4 French options each, correctIndex (0-3), and a clear English explanation.
 10. SummaryExercise:
-   - prompt: "Which statement best summarizes this article?"
-   - options: 3 summary statements in English (exactly 1 with isBest: true and encouraging English feedback, 2 with isBest: false and pedagogical English feedback explaining why it's incomplete or misleading)
-   - sampleSummary: a model 1-2 sentence French summary with English translation.
+   - prompt: "Quelle phrase résume le mieux cet article ?"
+   - options: 3 summary statements in French (exactly 1 with isBest: true and encouraging English feedback, 2 with isBest: false and pedagogical English feedback explaining why it's incomplete or misleading)
+   - sampleSummary: a model 1-2 sentence French summary with English translation in parentheses.
 11. OpinionPrompt:
-   - question: an engaging question in English asking for the reader's opinion or point of view on the topic
+   - question: an engaging question in French asking for the reader's opinion on a SPECIFIC event, claim, person, or debate from THIS article (name a concrete detail from the FrenchText, e.g. a character, a place, a change, or a proposal the article describes). Do not ask a generic question about the topic.
    - context: brief guidance in English on how to respond in French
    - starterPhrases: 4 helpful French sentence starters with English translations in parentheses (e.g., "À mon avis... (In my opinion...)", "Je pense que... (I think that...)")
 
-IMPORTANT: Keep all comprehension questions, statements/claims, answer options, summary options, explanations, and prompts in ENGLISH so the student understands exactly what is being asked of them.
+IMPORTANT: All learner-facing activity text (statements/claims, comprehension questions, answer options, summary options, the opinion question) must be in FRENCH, because this is a French learning platform. Only explanations, feedback, and guidance notes are in English, so the student understands the answers.
 
 Format strictly as JSON with this exact structure:
 {
@@ -724,20 +761,20 @@ Format strictly as JSON with this exact structure:
     { "french": "mot", "english": "meaning", "type": "noun/verb/adj", "contextSentence": "Exemple..." }
   ],
   "rightOrWrongQuestions": [
-    { "claim": "Statement in English...", "isRight": true, "explanation": "Explanation in English...", "quote": "Citation en français..." }
+    { "claim": "Affirmation en français...", "isRight": true, "explanation": "Explanation in English...", "quote": "Citation en français..." }
   ],
   "comprehensionQuestions": [
-    { "question": "Question in English?", "options": ["Option A", "Option B", "Option C", "Option D"], "correctIndex": 0, "explanation": "Explanation in English..." }
+    { "question": "Question en français ?", "options": ["Option A", "Option B", "Option C", "Option D"], "correctIndex": 0, "explanation": "Explanation in English..." }
   ],
   "summaryExercise": {
-    "prompt": "Which statement best summarizes this article?",
+    "prompt": "Quelle phrase résume le mieux cet article ?",
     "options": [
-      { "text": "Summary option in English...", "isBest": true, "feedback": "Feedback in English..." }
+      { "text": "Résumé proposé en français...", "isBest": true, "feedback": "Feedback in English..." }
     ],
-    "sampleSummary": "Model summary..."
+    "sampleSummary": "Résumé modèle en français (English translation)."
   },
   "opinionPrompt": {
-    "question": "Question in English asking for opinion...",
+    "question": "Question en français demandant l'opinion...",
     "context": "Guidance in English...",
     "starterPhrases": ["À mon avis... (In my opinion...)", "Je pense que... (I think that...)"]
   }
@@ -745,10 +782,11 @@ Format strictly as JSON with this exact structure:
 
     const result = await generateAiJson(prompt, defaultFallback, {
       task: 'generate-story',
-      temperature: 0.6,
+      temperature: 0.95,
       preferOpenRouter: true,
-      openRouterTimeoutMs: 25000,
-      maxTokens: 3500,
+      openRouterTimeoutMs: 90000,
+      maxTokens: 8000,
+      parseRetries: 1,
     });
 
     // Ensure all critical fields exist
@@ -764,6 +802,9 @@ Format strictly as JSON with this exact structure:
         : defaultFallback.comprehensionQuestions,
       summaryExercise: result?.summaryExercise || defaultFallback.summaryExercise,
       opinionPrompt: result?.opinionPrompt || defaultFallback.opinionPrompt,
+      grammarFocus: grammarUnit
+        ? { unitNumber: grammarUnit.unitNumber, title: grammarUnit.title }
+        : null,
     };
 
     res.json(finalData);
@@ -1242,18 +1283,19 @@ Format STRICTLY as valid JSON matching this schema:
 });
 
 // Dynamic AI Practice Quiz Generator
-const QUIZ_SUPPORTED_TYPES = ['multiple-choice', 'fill-in-the-blank', 'complete-the-sentence', 'translate-english-to-french'];
 
 app.post('/api/ai/generate-quiz', async (req, res) => {
   const {
     topic = 'Passé Composé vs Imparfait',
-    level = 'B1',
+    level: requestedLevel = 'B1',
     questionCount = 4,
     lessonId,
     unitContext: requestedUnitContext = {},
   } = req.body;
 
   const lesson = GRAMMAR_ASPECT_LESSONS.find((item) => item.id === lessonId);
+  // The lesson's own level wins, so a quiz never uses another level's difficulty
+  const level = lesson?.level || requestedLevel;
   const unitContext = lesson
     ? {
         ...requestedUnitContext,
@@ -1271,112 +1313,12 @@ app.post('/api/ai/generate-quiz', async (req, res) => {
       }
     : requestedUnitContext;
 
-  const genericFallback = {
-    title: `Quiz de Révision: ${topic}`,
-    level,
-    questions: [
-      {
-        id: 'q1',
-        type: 'multiple-choice',
-        prompt: "Hier soir, nous ___ (manger) dans un formidable restaurant parisien.",
-        promptEnglish: "Last night, we ___ (ate) at a wonderful Parisian restaurant.",
-        options: ["avons mangé", "mangions", "mangeons", "avions mangé"],
-        correctAnswer: "avons mangé",
-        explanation: "Passé Composé is used for a completed punctual action in the past with a specific time indicator ('Hier soir')."
-      },
-      {
-        id: 'q2',
-        type: 'multiple-choice',
-        prompt: "Quand j'étais enfant, je ___ (jouer) toujours dans le jardin l'été.",
-        promptEnglish: "When I was a child, I always ___ (played) in the garden in the summer.",
-        options: ["jouais", "ai joué", "joue", "jouerai"],
-        correctAnswer: "jouais",
-        explanation: "Imparfait expresses habitual past actions or repeated descriptions ('Quand j'étais enfant, toujours')."
-      },
-      {
-        id: 'q3',
-        type: 'multiple-choice',
-        prompt: "Il faut absolument que vous ___ (venir) à l'heure.",
-        promptEnglish: "It is absolutely necessary that you ___ (come) on time.",
-        options: ["veniez", "venez", "viendrez", "êtes venus"],
-        correctAnswer: "veniez",
-        explanation: "'Il faut que' demands the subjunctive mood (vous + venir -> veniez)."
-      },
-      {
-        id: 'q4',
-        type: 'multiple-choice',
-        prompt: "Les fleurs que Marie a ___ (acheter) sont magnifiques.",
-        promptEnglish: "The flowers that Marie ___ (bought) are magnificent.",
-        options: ["achetées", "acheté", "achetés", "achete"],
-        correctAnswer: "achetées",
-        explanation: "Agreement with preceding direct object (COD) 'les fleurs' (feminine plural) placed before auxiliary avoir."
-      }
-    ]
-  };
-
-  const unitFallbackQuestions = Array.isArray(unitContext.practiceExercises) && unitContext.practiceExercises.length
-    ? unitContext.practiceExercises
-        .filter((exercise) => {
-          const type = exercise?.type || 'multiple-choice';
-          if (!QUIZ_SUPPORTED_TYPES.includes(type)) return false;
-          const hasPrompt = typeof exercise?.prompt === 'string' && exercise.prompt.trim();
-          const hasAnswer = typeof (exercise?.correctAnswer || exercise?.answer) === 'string' && (exercise.correctAnswer || exercise.answer).trim();
-          if (type === 'multiple-choice') {
-            return hasPrompt && Array.isArray(exercise.options) && exercise.options.length >= 2 && hasAnswer;
-          }
-          return hasPrompt && hasAnswer;
-        })
-        .slice(0, questionCount)
-        .map((exercise, index) => ({
-          id: exercise.id || `q${index + 1}`,
-          type: exercise.type || 'multiple-choice',
-          prompt: exercise.prompt,
-          promptEnglish: exercise.promptEnglish || exercise.english || exercise.translation || `In the context of ${topic}, answer this French question.`,
-          options: Array.isArray(exercise.options) ? exercise.options : [],
-          correctAnswer: exercise.correctAnswer || exercise.answer || '',
-          acceptableAnswers: Array.isArray(exercise.acceptableAnswers) ? exercise.acceptableAnswers.filter(Boolean) : [],
-          explanation: exercise.explanation || exercise.hint || `Apply the grammatical rule for ${topic}.`,
-        }))
-    : [
-        {
-          id: 'q1',
-          type: 'fill-in-the-blank',
-          prompt: `Complétez la phrase : ${unitContext.frenchTitle || topic} est ___ pour expliquer la règle de base.`,
-          promptEnglish: `Complete the sentence: "${unitContext.frenchTitle || topic}" is ___ to explain the basic rule.`,
-          correctAnswer: 'essentiel',
-          acceptableAnswers: ['essentiel'],
-          explanation: `A concise, specific learning cue is useful when describing the rule: ${unitContext.goldenRule || 'Use the core grammar pattern precisely.'}`
-        },
-        {
-          id: 'q2',
-          type: 'multiple-choice',
-          prompt: `Dans le contexte de « ${unitContext.frenchTitle || topic} », quelle proposition est grammaticalement correcte ?`,
-          promptEnglish: `In the context of "${unitContext.frenchTitle || topic}", which statement is grammatically correct?`,
-          options: [
-            unitContext.goldenRule ? unitContext.goldenRule.slice(0, 60) + '...' : `Application exacte de la règle de ${topic}`,
-            `Forme incorrecte avec accord erroné`,
-            `Structure syntaxique inadaptée`,
-            `Emploi d'un temps ou mode inapproprié`
-          ],
-          correctAnswer: unitContext.goldenRule ? unitContext.goldenRule.slice(0, 60) + '...' : `Application exacte de la règle de ${topic}`,
-          explanation: `According to the unit rule: ${unitContext.goldenRule || 'Review the core formula and apply agreement constraints accurately.'}`
-        },
-        {
-          id: 'q3',
-          type: 'complete-the-sentence',
-          prompt: 'Complétez la phrase : Hier, nous ___ au marché avant le déjeuner.',
-          promptEnglish: 'Complete the sentence: "Yesterday, we ___ at the market before lunch."',
-          correctAnswer: 'sommes allés',
-          acceptableAnswers: ['sommes allés', 'sommes allées'],
-          explanation: 'The passé composé is used for a completed action in the past, and the verb aller takes être as its auxiliary.'
-        },
-        ...genericFallback.questions.slice(3, questionCount)
-      ];
-
+  // Offline quiz content is not curated per unit, so never serve generic questions that may fall outside the lesson
   const defaultFallback = {
-    title: `Quiz IA : ${unitContext.frenchTitle || topic}`,
+    title: `Quiz IA : ${lesson?.frenchTitle || topic}`,
     level,
-    questions: unitFallbackQuestions.length ? unitFallbackQuestions : genericFallback.questions,
+    questions: [],
+    usedFallback: true,
   };
 
   try {
@@ -1403,12 +1345,22 @@ app.post('/api/ai/generate-quiz', async (req, res) => {
     };
     const allowedTypes = typeMix[level] || typeMix.A2;
 
+    // Units are ordered by unitNumber, which is the order the learner works through them
+    const scopeTaught = lesson
+      ? GRAMMAR_ASPECT_LESSONS.filter((unit) => unit.unitNumber <= lesson.unitNumber).map((unit) => unit.title)
+      : [];
+    const scopeNotYetTaught = lesson
+      ? GRAMMAR_ASPECT_LESSONS.filter((unit) => unit.unitNumber > lesson.unitNumber).map((unit) => unit.title)
+      : [];
+
     const prompt = `Generate a fresh ${questionCount}-question French interactive grammar quiz strictly focused on grammatical aspects for topic: "${topic}" and level ${level}.
 
   Use this unit-specific curriculum context as the source of truth. Test its rules and terminology, not a generic grammar topic:
   ${JSON.stringify(unitContext)}
 
   STRICT GROUNDING: The curriculum context above is the lesson's knowledge base. Every question must test a rule, pattern, table, trap, or contrast that appears in that lesson. Do not introduce grammar points, vocabulary patterns, or exceptions that are not covered in the lesson content. The lesson's practiceExercises show the expected style and difficulty only; do not copy them.
+
+  CURRICULUM SCOPE: The learner has been taught these units so far, including this one: ${JSON.stringify(scopeTaught)}. Test only grammar from these units. The learner has NOT been taught these later units yet, so do not test or mention their grammar: ${JSON.stringify(scopeNotYetTaught)}.
 
   Make this quiz substantially different from a standard or previously generated quiz. Use the scenario cue "${variationCue}" as inspiration, vary names, verbs, sentence structures, and contexts, and avoid stock examples. Use existing drills only to understand the unit content; do not copy their questions or answers verbatim. Give every question in this quiz a distinct sentence and test case. Variation token: ${variationToken}.
 

@@ -288,8 +288,8 @@ export const TutorChatView = ({
                 <div
                   className={`max-w-2xl rounded-2xl p-4 shadow-xs ${
                     isUser
-                      ? 'bg-[#1F3A5F] text-white rounded-br-xs'
-                      : 'bg-white text-[#1B2433] border border-[#E6EAF0] rounded-bl-xs'
+                      ? 'bg-gradient-to-br from-[#1F3A5F] to-[#2F5F9E] text-white rounded-br-xs'
+                      : 'bg-white text-[#1B2433] border border-[#8DB1E3]/40 border-l-2 border-l-[#E5565F] rounded-bl-xs'
                   }`}
                 >
                   {/* French content */}
@@ -375,8 +375,8 @@ export const TutorChatView = ({
           {isLoading && (
             <div className="flex items-center space-x-2 text-[#5F6B7A] text-xs p-3 bg-white border border-[#E6EAF0] rounded-2xl w-max shadow-xs">
               <div className="w-2 h-2 rounded-full bg-[#1F3A5F] animate-pulse" />
-              <div className="w-2 h-2 rounded-full bg-[#1F3A5F] animate-pulse delay-150" />
-              <div className="w-2 h-2 rounded-full bg-[#1F3A5F] animate-pulse delay-300" />
+              <div className="w-2 h-2 rounded-full bg-[#4A7AB8] animate-pulse delay-150" />
+              <div className="w-2 h-2 rounded-full bg-[#E5565F] animate-pulse delay-300" />
               <span className="text-[#1B2433] font-medium ml-1">Émile is typing in French...</span>
             </div>
           )}

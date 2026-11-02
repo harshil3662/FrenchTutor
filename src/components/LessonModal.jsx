@@ -870,7 +870,7 @@ export const LessonModal = ({
                   </div>
                   <div className="w-full bg-[#E6EAF0] h-2 rounded-full overflow-hidden">
                     <div
-                      className="bg-[#1F3A5F] h-full transition-all duration-300"
+                      className="fr-progress-fill h-full transition-all duration-300"
                       style={{ width: `${((currentExIndex + 1) / exercises.length) * 100}%` }}
                     />
                   </div>
@@ -942,7 +942,7 @@ export const LessonModal = ({
                               isCorrectOption
                                 ? 'bg-[#E8EEF6] text-[#1F3A5F] border-[#1F3A5F]/60'
                                 : hasChecked && isSelected
-                                  ? 'bg-[#E8EEF6] text-[#1F3A5F] border-[#1F3A5F]/60'
+                                  ? 'bg-[#E5565F]/10 text-[#B93A44] border-[#E5565F]/60'
                                   : isSelected
                                     ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-xs'
                                     : 'bg-white text-[#1B2433] border-[#E6EAF0] hover:bg-[#FFFFFF]'
@@ -956,8 +956,8 @@ export const LessonModal = ({
                               </span>
                               <span>{option}</span>
                             </div>
-                            {isCorrectOption && <CheckCircle2 className="w-5 h-5 shrink-0 text-[#1F3A5F]" />}
-                            {hasChecked && isSelected && !isCorrectOption && <XCircle className="w-5 h-5 shrink-0 text-[#1F3A5F]" />}
+                            {isCorrectOption && <CheckCircle2 className="w-5 h-5 shrink-0 text-[#4A7AB8]" />}
+                            {hasChecked && isSelected && !isCorrectOption && <XCircle className="w-5 h-5 shrink-0 text-[#E5565F]" />}
                           </button>
                         );
                       })}
@@ -1125,7 +1125,7 @@ export const LessonModal = ({
 
                   <div className="space-y-1">
                     <div className="inline-flex items-center gap-1.5 bg-[#E8EEF6] text-[#1F3A5F] border border-[#1F3A5F]/30 px-3.5 py-1 rounded-full text-xs font-bold">
-                      <XCircle className="w-3.5 h-3.5 text-[#1F3A5F]" />
+                      <XCircle className="w-3.5 h-3.5 text-[#E5565F]" />
                       <span>Not Mastered (0 / {exercises.length} Correct)</span>
                     </div>
                     <h3 className="text-2xl sm:text-3xl font-bold text-[#1B2433] font-serif">

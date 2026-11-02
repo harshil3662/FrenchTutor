@@ -1,4 +1,4 @@
-# L'Atelier Grammaire — FrenchTutor
+# French Tutor
 
 A French learning web app that teaches grammar the way a good teacher does: one structured unit at a time, from A1 to B2, with every unit gated by a quiz, and AI used to explain mistakes, transform sentences, and generate authentic reading material.
 

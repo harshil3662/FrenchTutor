@@ -4,7 +4,7 @@ import { speakFrench, playChime } from '../utils/audioUtils.js';
 import { analyzeFrenchGrammarLocally } from '../utils/frenchGrammarEngine.js';
 
 export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
-  const [inputText, setInputText] = useState('Hier, elle a allé au marché et elle a acheté du pain.');
+  const [inputText, setInputText] = useState('');
   const [targetTense, setTargetTense] = useState('General');
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState(null);
@@ -80,7 +80,7 @@ export const GrammarDoctorView = ({ audioSpeed, onAwardXp }) => {
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             placeholder="Write or paste a French sentence..."
-            className="w-full bg-[#FFFFFF] border border-[#D0D7E2] focus:border-[#1F3A5F] rounded-2xl p-4 text-[#1B2433] text-sm focus:outline-none placeholder-[#5F6B7A] shadow-xs"
+            className="w-full bg-[#FFFFFF] border border-[#BBBBBB] rounded-2xl p-4 text-[#1B2433] text-sm focus:outline-none focus:ring focus:ring-[#1F3A5F] placeholder-[#5F6B7A] shadow-xs"
           />
         </div>
 

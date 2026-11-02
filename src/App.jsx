@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { LayoutGrid, Pause, Play, X, XRegular } from './components/icons';
 import { Header, HeaderControls } from './components/Header.jsx';
 import { Navigation } from './components/Navigation.jsx';
-import { AnimatedBackground } from './components/AnimatedBackground.jsx';
 import { Footer } from './components/Footer.jsx';
 import { loadUserProgress, markLessonCompleted, toggleCardMastery, addXp } from './utils/storageUtils.js';
 import { getStoredUnits } from './utils/curriculumStore.js';
@@ -147,10 +146,7 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#EDEEF0] text-[#1B2433] flex flex-col font-sans selection:bg-[#1F3A5F] selection:text-white">
-      {/* Animated Moving Background Canvas */}
-      <AnimatedBackground isPaused={isModalOpen} />
-
+    <div className="relative min-h-screen bg-[#EDEEF0] text-[#1B2433] flex flex-col font-sans selection:bg-[#4A7AB8]/40">
       {/* Sticky Top Header & Navigation Container (hidden when modal is open) */}
       {!isModalOpen && (
         <header
@@ -206,7 +202,7 @@ export default function App() {
                     whileTap={{ scale: 0.96 }}
                     className={`self-center shrink-0 h-9 w-9 sm:h-10 sm:w-10 justify-center px-0 rounded-full flex items-center border shadow-md cursor-pointer select-none text-sm font-bold transition-colors duration-200 ${
                       isNavMenuOpen
-                        ? 'bg-[#14284A] text-white border-transparent'
+                        ? 'bg-[#E5565F] text-white border-transparent'
                         : 'bg-[#1F3A5F] text-white border-transparent hover:bg-[#14284A]'
                     }`}
                     title={isNavMenuOpen ? 'Close menu' : 'Open menu'}

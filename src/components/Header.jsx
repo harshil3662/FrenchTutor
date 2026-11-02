@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { Award, Volume2, Globe, Lock } from './icons';
 
 const LEVELS = ['A1', 'A2', 'B1', 'B2'];
@@ -100,6 +101,83 @@ export const HeaderControls = ({
   </div>
 );
 
+const LOCKUP_TITLE = 'French Tutor';
+const BUBBLE_NAVY = '#1F3A5F';
+
+// Everything that morphs between the wordmark and the F logo shares one transition.
+const MORPH =
+  'transition-[width,height,top,margin,min-width,max-width,opacity,padding,background-color,letter-spacing] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none';
+
+// The brand name is typeset inside a big "F": a stem on the left, a blue arm over the name and a shorter red arm under it.
+// Scrolling down squeezes the letters away and the same three bars shrink into the compact F inside a chat bubble;
+// scrolling back to the top unfolds the F back into the name.
+const BrandLockup = ({ isScrolled, reduceMotion }) => {
+  const logo = isScrolled;
+  const barEntrance = (delay, axis) => ({
+    initial: reduceMotion ? false : { [axis]: 0 },
+    animate: { [axis]: 1 },
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], delay },
+  });
+
+  return (
+    <div
+      className={`relative inline-flex h-9 sm:h-10 min-w-0 items-center whitespace-nowrap rounded-[14px] ${MORPH} ${
+        logo ? 'bg-[#1F3A5F] px-[11px]' : 'bg-[#1F3A5F]/0 px-0'
+      }`}
+    >
+      {/* Bubble tail, only once the F has formed */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 12 7"
+        className={`pointer-events-none absolute -bottom-[5px] left-3 h-[7px] w-3 ${MORPH} ${logo ? 'opacity-100' : 'opacity-0'}`}
+      >
+        <path d="M0 0H12L2 7Z" fill={BUBBLE_NAVY} />
+      </svg>
+
+      {/* Stem of the F */}
+      <motion.span
+        aria-hidden="true"
+        className={`origin-top shrink-0 rounded-full ${MORPH} ${
+          logo ? 'h-[18px] w-[4.2px] mr-0 bg-white' : 'h-full w-1 mr-2.5 bg-[#1F3A5F]'
+        }`}
+        {...barEntrance(0, 'scaleY')}
+      />
+
+      {/* Column holding the name between the two arms */}
+      <span className={`relative flex self-stretch items-center ${MORPH} ${logo ? 'min-w-[10px]' : 'min-w-0'}`}>
+        <motion.span
+          aria-hidden="true"
+          className={`absolute left-0 origin-left rounded-full ${MORPH} ${
+            logo ? 'top-[calc(50%_-_9px)] h-[4.2px] w-[10px] bg-[#8DB1E3]' : 'top-0 h-[3px] w-full bg-[#4A7AB8]'
+          }`}
+          {...barEntrance(0.15, 'scaleX')}
+        />
+        <motion.span
+          aria-hidden="true"
+          className={`absolute left-0 origin-left rounded-full ${MORPH} ${
+            logo
+              ? 'top-[calc(50%_-_1.6px)] h-[4.2px] w-[7px] bg-[#E5565F]'
+              : 'top-[calc(100%_-_7px)] h-[3px] w-[55%] bg-[#E5565F]'
+          }`}
+          {...barEntrance(0.3, 'scaleX')}
+        />
+        <span className={`block overflow-hidden ${MORPH} ${logo ? 'max-w-0 opacity-0' : 'max-w-[10rem] opacity-100'}`}>
+          <motion.h1
+            className={`font-bold font-serif leading-tight whitespace-nowrap text-lg sm:text-xl text-[#1B2433] ${MORPH} ${
+              logo ? 'tracking-[-0.35em]' : 'tracking-tight'
+            }`}
+            initial={reduceMotion ? false : { opacity: 0, x: 8 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.35 }}
+          >
+            {LOCKUP_TITLE}
+          </motion.h1>
+        </span>
+      </span>
+    </div>
+  );
+};
+
 export const Header = ({
   progress,
   activeLevel,
@@ -111,6 +189,7 @@ export const Header = ({
   inMenu = false,
 }) => {
   // The scrolled header keeps only the brand below 1370px; the controls live in the menu there.
+  const reduceMotion = useReducedMotion();
   const useScrolledTone = isScrolled || inMenu;
   const controlGroupVisibility = isScrolled ? 'hidden min-[1370px]:flex' : 'flex';
 
@@ -128,28 +207,7 @@ export const Header = ({
               : 'w-full border border-transparent py-0 pl-0 pr-0'
           }`}
         >
-          <div className={`relative flex shrink-0 items-center justify-center rounded-full overflow-hidden bg-gradient-to-br from-[#1F3A5F] to-[#152A47] shadow-sm shadow-[#1F3A5F]/20 w-9 h-9 sm:w-10 sm:h-10`}>
-            <span className="font-bold tracking-wider text-white font-serif text-base sm:text-lg -mt-1">
-              FR
-            </span>
-            <span className="absolute bottom-0 inset-x-0 h-1 flex">
-              <span className="flex-1 bg-[#1F3A5F]" />
-              <span className="flex-1 bg-white" />
-              <span className="flex-1 bg-[#1F3A5F]" />
-            </span>
-          </div>
-          <div className="min-w-0">
-            <h1
-              className={`font-bold tracking-tight ${isScrolled ? 'text-[#1F3A5F]' : 'text-[#1B2433]'} font-serif leading-tight truncate ${
-                'text-lg sm:text-xl'
-              }`}
-            >
-              L'Atelier Grammaire
-            </h1>
-            <p className={`hidden sm:block text-[10px] font-bold uppercase tracking-[0.18em] leading-tight ${isScrolled ? 'text-[#1F3A5F]/70' : 'text-[#5F6B7A]'}`}>
-              Grammaire française
-            </p>
-          </div>
+          <BrandLockup isScrolled={isScrolled} reduceMotion={reduceMotion} />
         </div>
 
         {/* Level badge, level switcher and audio speed selector: a row of their own on mobile, inline on sm+ */}

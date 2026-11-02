@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, BookOpen, CheckCircle2, Lock, Target, Unlock } from './icons';
 import { LEVEL_ORDER, LEVEL_UNIT_ORDER, PASS_THRESHOLD_PERCENT } from '../utils/progressionUtils.js';
-import { NAV_TABS } from './Navigation.jsx';
+import { NAV_TABS, ACCENT_STYLES } from './Navigation.jsx';
 
 const TAB_GUIDE = {
   'grammar-lessons': 'Work through the 28 units from A1 to B2. Read each guide, then take its quiz. Score 70% or more to unlock the next unit.',
@@ -12,6 +12,11 @@ const TAB_GUIDE = {
   tutor: 'Chat with Émile, a French conversation tutor, in immersion scenarios and get feedback on your French.',
   progress: 'Track your XP, daily streak, mastered lessons, and badges as you move forward.',
 };
+
+const STEP_COLORS = ['bg-[#1F3A5F]', 'bg-[#4A7AB8]', 'bg-[#E5565F]', 'bg-[#1F3A5F]'];
+
+// Top border color for each CEFR level card
+const LEVEL_TOP = { A1: 'border-t-[#8DB1E3]', A2: 'border-t-[#4A7AB8]', B1: 'border-t-[#1F3A5F]', B2: 'border-t-[#E5565F]' };
 
 const STEPS = [
   { title: 'Start at A1', text: 'Every learner begins with A1 units. There is no placement test, so beginners and advanced learners follow the same path.' },
@@ -33,10 +38,13 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
   return (
     <div className="space-y-8 sm:space-y-10 pb-10">
       {/* Hero */}
-      <section className="rounded-3xl border border-[#D0D7E2]/80 bg-white/90 p-6 sm:p-10 shadow-sm">
-        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#1F3A5F]">Bienvenue</p>
+      <section className="relative isolate overflow-hidden rounded-3xl border border-[#D0D7E2]/80 bg-white/85 p-6 sm:p-10 shadow-sm shadow-[#4A7AB8]/10">
+        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#2F5F9E]">
+          <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-[#E5565F] align-middle" aria-hidden="true" />
+          Bienvenue
+        </p>
         <h1 className="mt-2 font-serif text-3xl sm:text-4xl font-bold text-[#1B2433] leading-tight">
-          Welcome to L'Atelier Grammaire
+          Welcome to French Tutor
         </h1>
         <p className="mt-3 max-w-2xl text-[#3A4656] leading-relaxed">
           Learn French grammar step by step. Everyone starts at A1, whether you are a complete beginner or
@@ -46,7 +54,7 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
           <button
             type="button"
             onClick={() => onNavigate('grammar-lessons')}
-            className="inline-flex items-center gap-2 rounded-full bg-[#1F3A5F] px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-[#1F3A5F]/20 hover:bg-[#1F3A5F] transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#1F3A5F] to-[#2F5F9E] px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-[#4A7AB8]/30 hover:from-[#2F5F9E] hover:to-[#4A7AB8] transition-colors cursor-pointer"
           >
             Start learning <ArrowRight className="w-4 h-4" />
           </button>
@@ -54,7 +62,7 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
       </section>
 
       {/* Your path */}
-      <section className="rounded-3xl border border-[#D0D7E2]/80 bg-white/90 p-6 sm:p-8 shadow-sm">
+      <section className="rounded-3xl border border-[#D0D7E2]/80 bg-white/85 p-6 sm:p-8 shadow-sm shadow-[#4A7AB8]/10">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5F6B7A]">Your path</p>
@@ -65,14 +73,14 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
           </p>
         </div>
         <div className="mt-4 h-2.5 w-full overflow-hidden rounded-full bg-[#E6EAF0]">
-          <div className="h-full rounded-full bg-[#1F3A5F] transition-all duration-500" style={{ width: `${percent}%` }} />
+          <div className="fr-progress-fill h-full rounded-full transition-all duration-500" style={{ width: `${percent}%` }} />
         </div>
 
         <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[#D0D7E2]/70 bg-[#FFFFFF]/80 p-4">
           {nextUnit ? (
             <>
               <div className="flex items-center gap-3 min-w-0">
-                <div className="w-10 h-10 shrink-0 rounded-full bg-[#1F3A5F]/10 text-[#1F3A5F] flex items-center justify-center">
+                <div className="w-10 h-10 shrink-0 rounded-full bg-[#E5565F]/12 text-[#B93A44] flex items-center justify-center">
                   <Target className="w-5 h-5" />
                 </div>
                 <div className="min-w-0">
@@ -83,7 +91,7 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
               <button
                 type="button"
                 onClick={() => onNavigate('grammar-lessons')}
-                className="inline-flex items-center gap-2 rounded-full border border-[#1F3A5F] px-4 py-2 text-sm font-bold text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 rounded-full border border-[#4A7AB8] px-4 py-2 text-sm font-bold text-[#2F5F9E] hover:bg-[#4A7AB8] hover:text-white transition-colors cursor-pointer"
               >
                 Continue <ArrowRight className="w-4 h-4" />
               </button>
@@ -102,14 +110,16 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
             return (
               <div
                 key={level}
-                className={`rounded-2xl border p-4 ${
-                  unlocked ? 'border-[#D0D7E2]/80 bg-white/80' : 'border-[#D0D7E2]/50 bg-[#F5F7FA]/70 opacity-70'
+                className={`rounded-2xl border border-t-4 p-4 ${
+                  unlocked
+                    ? `border-[#D0D7E2]/80 ${LEVEL_TOP[level] || ''} bg-white/80`
+                    : 'border-[#D0D7E2]/50 border-t-[#D0D7E2] bg-[#F5F7FA]/70 opacity-70'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="font-serif text-xl font-bold text-[#1B2433]">{level}</span>
                   {unlocked ? (
-                    <Unlock className="w-4 h-4 text-[#1F3A5F]" />
+                    <Unlock className="w-4 h-4 text-[#4A7AB8]" />
                   ) : (
                     <Lock className="w-4 h-4 text-[#5F6B7A]" />
                   )}
@@ -130,7 +140,7 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
           {STEPS.map((step, idx) => (
             <div key={step.title} className="rounded-2xl border border-[#D0D7E2]/80 bg-white/70 p-5 shadow-xs">
               <div className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-full bg-[#1F3A5F] text-white text-sm font-bold flex items-center justify-center">
+                <span className={`w-8 h-8 rounded-full ${STEP_COLORS[idx % STEP_COLORS.length]} text-white text-sm font-bold flex items-center justify-center`}>
                   {idx + 1}
                 </span>
                 <h3 className="font-bold text-[#1B2433]">{step.title}</h3>
@@ -140,7 +150,7 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
           ))}
         </div>
         <p className="mt-4 flex items-start gap-2 text-sm text-[#3A4656]">
-          <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0 text-[#1F3A5F]" />
+          <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0 text-[#4A7AB8]" />
           Your progress is saved in this browser. Units unlock in order, and you can go back to any finished unit to review it.
         </p>
       </section>
@@ -157,10 +167,10 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
                 key={tab.id}
                 type="button"
                 onClick={() => onNavigate(tab.id)}
-                className="text-left rounded-2xl border border-[#D0D7E2]/80 bg-white/70 p-5 shadow-xs hover:bg-white hover:border-[#1F3A5F]/40 transition-colors cursor-pointer"
+                className={`text-left rounded-2xl border border-[#D0D7E2]/80 bg-white/70 p-5 shadow-xs hover:bg-white ${ACCENT_STYLES[tab.accent].hoverBorder} transition-colors cursor-pointer`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-9 h-9 rounded-full bg-[#1F3A5F]/10 text-[#1F3A5F] flex items-center justify-center">
+                  <span className={`w-9 h-9 rounded-full ${ACCENT_STYLES[tab.accent].chip} flex items-center justify-center`}>
                     <Icon className="w-4 h-4" />
                   </span>
                   <div>

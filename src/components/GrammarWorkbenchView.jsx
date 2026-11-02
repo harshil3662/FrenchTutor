@@ -109,7 +109,7 @@ export const GrammarWorkbenchView = ({
   activeLevel,
   onAwardXp,
 }) => {
-  const [sourceSentence, setSourceSentence] = useState('Julien mange une pomme rouge dans la cuisine.');
+  const [sourceSentence, setSourceSentence] = useState('');
   const [selectedCategoryIdx, setSelectedCategoryIdx] = useState(0);
   const [selectedOperation, setSelectedOperation] = useState('Passé Composé');
   const [isTransforming, setIsTransforming] = useState(false);
@@ -222,34 +222,6 @@ export const GrammarWorkbenchView = ({
         </div>
       </div>
 
-      {/* Preset Suggestions */}
-      <div className="space-y-2">
-        <span className="text-xs font-bold uppercase tracking-wider text-[#5F6B7A] flex items-center gap-1.5">
-          <Sparkles className="w-3.5 h-3.5 text-[#1F3A5F]" />
-          Select a sample French sentence or type your own:
-        </span>
-        <div className="flex flex-wrap gap-2">
-          {PRESET_SENTENCES.map((preset, idx) => (
-            <button
-              key={idx}
-              onClick={() => {
-                setSourceSentence(preset.text);
-                setTransformationResult(null);
-                setDissectionResult(null);
-              }}
-              className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-all text-left cursor-pointer ${
-                sourceSentence === preset.text
-                  ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-xs'
-                  : 'bg-white text-[#1F3A5F] border-[#E6EAF0] hover:bg-[#FFFFFF]'
-              }`}
-            >
-              <span className="font-semibold">{preset.label}: </span>
-              <span className="italic">« {preset.text} »</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
       {/* Source Input Box */}
       <div className="bg-white border border-[#E6EAF0] rounded-3xl p-6 sm:p-7 shadow-xs space-y-4">
         <div className="flex items-center justify-between">
@@ -272,7 +244,7 @@ export const GrammarWorkbenchView = ({
             value={sourceSentence}
             onChange={(e) => setSourceSentence(e.target.value)}
             placeholder="Type any French sentence to transform or dissect..."
-            className="w-full px-4 py-3.5 rounded-2xl bg-[#FFFFFF] border border-[#E6EAF0] text-[#1B2433] text-base font-serif focus:outline-none focus:ring-2 focus:ring-[#1F3A5F] transition-all"
+            className="w-full px-4 py-3.5 rounded-2xl bg-[#FFFFFF] border border-[#BBBBBB] text-[#1B2433] text-base font-serif focus:outline-none focus:ring-1 focus:ring-[#1F3A5F] transition-all"
           />
         </div>
 

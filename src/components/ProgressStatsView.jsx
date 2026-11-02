@@ -73,7 +73,7 @@ export const ProgressStatsView = ({ progress, activeLevel }) => {
   return (
     <div id="progress-stats-view" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-in fade-in">
       {/* Hero Stats Banner */}
-      <div className="bg-white border border-[#E6EAF0] rounded-3xl p-6 sm:p-8 shadow-sm text-[#1B2433]">
+      <div className="relative overflow-hidden bg-white border border-[#E6EAF0] rounded-3xl p-6 sm:p-8 shadow-sm shadow-[#4A7AB8]/10 text-[#1B2433]">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="flex items-center space-x-4 min-w-0">
             <div className="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-2xl bg-[#F5F7FA] border border-[#1F3A5F]/20 flex items-center justify-center text-3xl shadow-xs">
@@ -93,12 +93,12 @@ export const ProgressStatsView = ({ progress, activeLevel }) => {
           {/* Quick Metrics */}
           <div className="grid grid-cols-3 gap-3 w-full md:w-auto">
             <div className="bg-[#FFFFFF] border border-[#E6EAF0] p-3 rounded-2xl text-center shadow-xs">
-              <Flame className="w-4 h-4 text-[#1F3A5F] mx-auto fill-[#1F3A5F]" />
+              <Flame className="w-4 h-4 text-[#E5565F] mx-auto fill-[#E5565F]" />
               <span className="text-lg font-bold text-[#1B2433] block mt-0.5 font-serif">{progress.streakDays}</span>
               <span className="text-[10px] text-[#5F6B7A] font-medium">Day Streak</span>
             </div>
             <div className="bg-[#FFFFFF] border border-[#E6EAF0] p-3 rounded-2xl text-center shadow-xs">
-              <Sparkles className="w-4 h-4 text-[#1F3A5F] mx-auto" />
+              <Sparkles className="w-4 h-4 text-[#4A7AB8] mx-auto" />
               <span className="text-lg font-bold text-[#1B2433] block mt-0.5 font-serif">{progress.xp}</span>
               <span className="text-[10px] text-[#5F6B7A] font-medium">Total XP</span>
             </div>
@@ -119,7 +119,7 @@ export const ProgressStatsView = ({ progress, activeLevel }) => {
 
           <div className="w-full bg-[#FFFFFF] h-3 rounded-full overflow-hidden p-0.5 border border-[#E6EAF0]">
             <div
-              className="bg-[#1F3A5F] h-full rounded-full transition-all duration-500"
+              className="fr-progress-fill h-full rounded-full transition-all duration-500"
               style={{ width: `${levelProgressPercent}%` }}
             />
           </div>
