@@ -477,7 +477,7 @@ export const LessonModal = ({
                         }}
                         className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer flex items-center gap-2 ${
                           activeTopicIndex === idx
-                            ? 'bg-[#1F3A5F] text-white shadow-xs'
+                            ? 'bg-[#E5565F] text-white shadow-xs'
                             : 'bg-white text-[#1F3A5F] hover:bg-[#F5F7FA] border border-[#E6EAF0]'
                         }`}
                       >
@@ -507,9 +507,9 @@ export const LessonModal = ({
                 </div>
                 <button
                   onClick={handleOpenQuizPhase}
-                  className="px-3.5 py-1.5 rounded-xl bg-white hover:bg-[#FFFFFF] text-[#1F3A5F] border border-[#1F3A5F]/25 text-xs font-bold transition-all shadow-2xs hover:shadow-xs flex items-center gap-1.5 cursor-pointer shrink-0 self-start sm:self-auto"
+                  className="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shadow-2xs hover:shadow-xs flex items-center gap-1.5 cursor-pointer shrink-0 self-start sm:self-auto bg-[#E5565F] hover:bg-[#D14650] text-white"
                 >
-                  <BrainCircuit className="w-3.5 h-3.5 text-[#1F3A5F]" />
+                  <BrainCircuit className="w-3.5 h-3.5" />
                   <span>Skip to Quiz →</span>
                 </button>
               </div>
@@ -688,7 +688,7 @@ export const LessonModal = ({
                       setActiveTopicIndex((prev) => prev - 1);
                       scrollToTop();
                     }}
-                    className="px-4 py-2 text-xs font-semibold text-[#5F6B7A] hover:text-[#1B2433] cursor-pointer"
+                    className="px-4 py-2 text-xs font-semibold cursor-pointer bg-[#E5565F] hover:bg-[#D14650] text-white"
                   >
                     ← Previous Topic
                   </button>
@@ -700,7 +700,7 @@ export const LessonModal = ({
                   {vocabList.length > 0 ? (
                     <button
                       onClick={() => setPhase('vocab')}
-                      className="px-5 py-2.5 bg-white border border-[#D0D7E2] hover:bg-[#FFFFFF] text-[#1B2433] rounded-xl font-bold text-xs shadow-2xs flex items-center gap-2 cursor-pointer"
+                      className="px-5 py-2.5 rounded-xl font-bold text-xs shadow-2xs flex items-center gap-2 cursor-pointer bg-[#E5565F] hover:bg-[#D14650] text-white"
                     >
                       <span>Key Vocabulary ({vocabList.length}) →</span>
                     </button>
@@ -712,7 +712,7 @@ export const LessonModal = ({
                         setActiveTopicIndex((prev) => prev + 1);
                         scrollToTop();
                       }}
-                      className="px-5 py-2.5 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl font-bold text-xs shadow-xs flex items-center gap-2 transition-all cursor-pointer"
+                      className="px-5 py-2.5 text-white rounded-xl font-bold text-xs shadow-xs flex items-center gap-2 transition-all cursor-pointer bg-[#E5565F] hover:bg-[#D14650]"
                     >
                       <span>Next Topic: {topicsList[activeTopicIndex + 1]?.title}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -721,7 +721,7 @@ export const LessonModal = ({
                     <button
                       id="start-lesson-ai-quiz-btn"
                       onClick={handleOpenQuizPhase}
-                      className="px-6 py-2.5 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl font-bold text-xs shadow-xs flex items-center gap-2 transition-all cursor-pointer"
+                      className="px-6 py-2.5 text-white rounded-xl font-bold text-xs shadow-xs flex items-center gap-2 transition-all cursor-pointer bg-[#E5565F] hover:bg-[#D14650]"
                     >
                       <BrainCircuit className="w-4 h-4 text-white" />
                       <span>Start Unit Quiz</span>
@@ -759,7 +759,7 @@ export const LessonModal = ({
                       </div>
                       <button
                         onClick={() => handleAudioPlay(v.french)}
-                        className="p-2.5 rounded-xl bg-[#F5F7FA] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white transition-colors border border-[#1F3A5F]/20 cursor-pointer shadow-xs"
+                        className="p-2.5 rounded-xl hover:text-white transition-colors cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650] text-white"
                       >
                         <Volume2 className="w-4 h-4" />
                       </button>
@@ -776,14 +776,14 @@ export const LessonModal = ({
               <div className="flex justify-between items-center pt-4">
                 <button
                   onClick={() => setPhase('grammar')}
-                  className="px-4 py-2 text-xs font-semibold text-[#5F6B7A] hover:text-[#1B2433] cursor-pointer"
+                  className="px-4 py-2 text-xs font-semibold cursor-pointer bg-[#E5565F] hover:bg-[#D14650] text-white"
                 >
                   ← Back to Guide
                 </button>
                 <button
                   id="vocab-to-quiz-btn"
                   onClick={handleOpenQuizPhase}
-                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white font-bold text-xs transition-all shadow-xs cursor-pointer"
+                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-white font-bold text-xs transition-all shadow-xs cursor-pointer bg-[#E5565F] hover:bg-[#D14650]"
                 >
                   <BrainCircuit className="w-4 h-4 text-white" />
                   <span>Start Unit Quiz</span>
@@ -816,9 +816,9 @@ export const LessonModal = ({
                   id="lesson-regenerate-ai-quiz-btn"
                   onClick={() => handleGenerateAiQuiz(true)}
                   disabled={isGeneratingQuiz}
-                  className="px-3.5 py-1.5 bg-white hover:bg-[#FFFFFF] text-[#1F3A5F] border border-[#D0D7E2] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs disabled:opacity-50 self-start sm:self-auto"
+                  className="px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs disabled:opacity-50 self-start sm:self-auto bg-[#E5565F] hover:bg-[#D14650] text-white"
                 >
-                  <Sparkles className="w-3.5 h-3.5 text-[#1F3A5F]" />
+                  <Sparkles className="w-3.5 h-3.5" />
                   <span>Generate New Questions</span>
                 </button>
               </div>
@@ -846,7 +846,7 @@ export const LessonModal = ({
                   </div>
                   <button
                     onClick={() => handleGenerateAiQuiz(true)}
-                    className="px-5 py-2.5 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-xs"
+                    className="px-5 py-2.5 text-white rounded-xl text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650]"
                   >
                     <RotateCcw className="w-4 h-4" />
                     <span>Try Generating Again</span>
@@ -896,7 +896,7 @@ export const LessonModal = ({
                           disabled={isTranslating}
                           className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer border ${
                             isQuestionTranslated
-                              ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-2xs'
+                              ? 'bg-[#E5565F] text-white border-[#E5565F] shadow-2xs'
                               : 'bg-white hover:bg-[#FFFFFF] text-[#1F3A5F] border-[#D0D7E2]'
                           }`}
                           title={isQuestionTranslated ? 'Translate back to French' : 'Translate question into English'}
@@ -1022,7 +1022,7 @@ export const LessonModal = ({
                         id="lesson-quiz-check-btn"
                         disabled={!selectedAnswer}
                         onClick={handleCheckAnswer}
-                        className="px-6 py-3 bg-[#1F3A5F] text-white rounded-2xl font-bold text-xs shadow-sm hover:bg-[#1F3A5F] transition-all cursor-pointer disabled:opacity-50"
+                        className="px-6 py-3 text-white rounded-2xl font-bold text-xs shadow-sm transition-all cursor-pointer disabled:opacity-50 bg-[#E5565F] hover:bg-[#D14650]"
                       >
                         Check Answer
                       </button>
@@ -1030,7 +1030,7 @@ export const LessonModal = ({
                       <button
                         id="lesson-quiz-next-btn"
                         onClick={handleNextExercise}
-                        className="px-6 py-3 bg-[#1F3A5F] text-white rounded-2xl font-bold text-xs shadow-sm hover:bg-[#1F3A5F] transition-all cursor-pointer flex items-center gap-2"
+                        className="px-6 py-3 text-white rounded-2xl font-bold text-xs shadow-sm transition-all cursor-pointer flex items-center gap-2 bg-[#E5565F] hover:bg-[#D14650]"
                       >
                         <span>{currentExIndex < exercises.length - 1 ? 'Next Question' : 'Complete Quiz & View Score'}</span>
                         <ArrowRight className="w-4 h-4" />
@@ -1051,9 +1051,9 @@ export const LessonModal = ({
                   </div>
                   <button
                     onClick={() => handleGenerateAiQuiz(false)}
-                    className="px-6 py-2.5 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-xs"
+                    className="px-6 py-2.5 text-white rounded-xl text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650]"
                   >
-                    <Sparkles className="w-4 h-4 text-[#1F3A5F]" />
+                    <Sparkles className="w-4 h-4" />
                     <span>Launch Unit Quiz</span>
                   </button>
                 </div>
@@ -1088,9 +1088,9 @@ export const LessonModal = ({
                   <div className="flex flex-wrap justify-center gap-3 pt-3">
                     <button
                       onClick={() => handleGenerateAiQuiz(true)}
-                      className="px-5 py-2.5 bg-white border border-[#D0D7E2] hover:bg-[#FFFFFF] text-[#1F3A5F] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+                      className="px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650] text-white"
                     >
-                      <Sparkles className="w-4 h-4 text-[#1F3A5F]" />
+                      <Sparkles className="w-4 h-4" />
                       <span>Generate New Quiz</span>
                     </button>
                     <button
@@ -1102,7 +1102,7 @@ export const LessonModal = ({
                         setScore(0);
                         setPhase('quiz');
                       }}
-                      className="px-5 py-2.5 bg-white border border-[#D0D7E2] text-[#1B2433] rounded-xl text-xs font-bold flex items-center gap-1.5 hover:bg-[#FFFFFF] transition-all cursor-pointer shadow-xs"
+                      className="px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650] text-white"
                     >
                       <RotateCcw className="w-4 h-4" />
                       <span>Retake Current Quiz</span>
@@ -1110,7 +1110,7 @@ export const LessonModal = ({
                     <button
                       id="finish-lesson-modal-btn"
                       onClick={onClose}
-                      className="px-6 py-2.5 bg-[#1F3A5F] text-white rounded-xl text-xs font-bold hover:bg-[#1F3A5F] transition-all cursor-pointer shadow-xs"
+                      className="px-6 py-2.5 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650]"
                     >
                       <span>Finish & Continue</span>
                     </button>
@@ -1146,7 +1146,7 @@ export const LessonModal = ({
                         setScore(0);
                         setPhase('quiz');
                       }}
-                      className="px-6 py-2.5 bg-[#1F3A5F] text-white rounded-xl text-xs font-bold hover:bg-[#1F3A5F] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                      className="px-6 py-2.5 text-white rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shadow-sm bg-[#E5565F] hover:bg-[#D14650]"
                     >
                       <RotateCcw className="w-4 h-4" />
                       <span>Retake Quiz to Master (0/{exercises.length})</span>
@@ -1155,7 +1155,7 @@ export const LessonModal = ({
                       onClick={() => {
                         setPhase('learn');
                       }}
-                      className="px-5 py-2.5 bg-white border border-[#D0D7E2] hover:bg-[#FFFFFF] text-[#1F3A5F] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+                      className="px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650] text-white"
                     >
                       <BookOpen className="w-4 h-4" />
                       <span>Review Lesson Notes</span>
@@ -1163,7 +1163,7 @@ export const LessonModal = ({
                     <button
                       id="finish-lesson-modal-btn"
                       onClick={onClose}
-                      className="px-5 py-2.5 bg-white border border-[#D0D7E2] text-[#5F6B7A] hover:text-[#1B2433] hover:bg-[#FFFFFF] rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs"
+                      className="px-5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650] text-white"
                     >
                       <span>Finish & Continue</span>
                     </button>
@@ -1200,22 +1200,22 @@ export const LessonModal = ({
                         setScore(0);
                         setPhase('quiz');
                       }}
-                      className="px-6 py-2.5 bg-[#1F3A5F] text-white rounded-xl text-xs font-bold hover:bg-[#1F3A5F] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                      className="px-6 py-2.5 text-white rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shadow-sm bg-[#E5565F] hover:bg-[#D14650]"
                     >
                       <RotateCcw className="w-4 h-4" />
                       <span>Retake to Master ({score}/{exercises.length})</span>
                     </button>
                     <button
                       onClick={() => handleGenerateAiQuiz(true)}
-                      className="px-5 py-2.5 bg-white border border-[#D0D7E2] hover:bg-[#FFFFFF] text-[#1F3A5F] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+                      className="px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650] text-white"
                     >
-                      <Sparkles className="w-4 h-4 text-[#1F3A5F]" />
+                      <Sparkles className="w-4 h-4" />
                       <span>Generate New Quiz</span>
                     </button>
                     <button
                       id="finish-lesson-modal-btn"
                       onClick={onClose}
-                      className="px-5 py-2.5 bg-white border border-[#D0D7E2] text-[#5F6B7A] hover:text-[#1B2433] hover:bg-[#FFFFFF] rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs"
+                      className="px-5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650] text-white"
                     >
                       <span>Finish & Continue</span>
                     </button>

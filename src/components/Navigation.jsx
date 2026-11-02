@@ -43,8 +43,8 @@ export const Navigation = ({
       {!isScrolled && (
         <nav id="main-navigation" className="select-none">
           <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5">
-            <div className="rounded-3xl xl:rounded-full border border-[#8DB1E3]/45 bg-white/80 backdrop-blur-md shadow-xs shadow-[#4A7AB8]/10 p-1.5">
-              <div className="grid grid-cols-2 min-[540px]:grid-cols-3 md:grid-cols-4 xl:flex gap-1">
+            <div className="rounded-full border border-[#8DB1E3]/45 bg-white/80 backdrop-blur-md shadow-xs shadow-[#4A7AB8]/10 p-1.5">
+              <div className="flex gap-1">
                 {NAV_TABS.map((tab) => {
                   const Icon = tab.icon;
                   const isActive = activeTab === tab.id;
@@ -54,10 +54,12 @@ export const Navigation = ({
                       key={tab.id}
                       id={`nav-tab-${tab.id}`}
                       data-tab-id={tab.id}
+                      aria-label={tab.label}
+                      title={tab.label}
                       onClick={() => handleTabClick(tab.id)}
                       whileHover="hover"
                       whileTap={{ scale: 0.97 }}
-                      className={`relative z-10 group flex min-w-0 xl:flex-auto items-center justify-center gap-2 whitespace-nowrap rounded-full px-3 py-3 text-center cursor-pointer select-none transition-colors duration-300 ${
+                      className={`relative z-10 group flex min-w-0 flex-auto items-center justify-center gap-2 whitespace-nowrap rounded-full px-2 xl:px-3 py-3 text-center cursor-pointer select-none transition-colors duration-300 ${
                         isActive ? 'text-white' : 'text-[#5F6B7A] hover:text-[#1B2433] hover:bg-[#4A7AB8]/10'
                       }`}
                     >
@@ -80,7 +82,7 @@ export const Navigation = ({
                           }`}
                         />
                       </motion.span>
-                      <span className="text-[14px] font-bold leading-tight tracking-tight">
+                      <span className="hidden xl:inline text-[14px] font-bold leading-tight tracking-tight">
                         {tab.label}
                       </span>
                     </motion.button>

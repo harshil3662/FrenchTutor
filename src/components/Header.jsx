@@ -99,16 +99,15 @@ export const HeaderControls = ({
 );
 
 const LOCKUP_TITLE = 'French Tutor';
-const BUBBLE_NAVY = '#1F3A5F';
 
 // Everything that morphs between the wordmark and the F logo shares one transition.
 const MORPH =
   'transition-[width,height,top,margin,min-width,max-width,opacity,padding,background-color,letter-spacing] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none';
 
 // The brand name is typeset inside a big "F": a stem on the left, a blue arm over the name and a shorter red arm under it.
-// Scrolling down squeezes the letters away and the same three bars shrink into the compact F inside a chat bubble;
+// Scrolling down squeezes the letters away and the same three bars shrink into the compact plain F, with no bubble;
 // scrolling back to the top unfolds the F back into the name.
-const BrandLockup = ({ isScrolled, reduceMotion }) => {
+const BrandLockup = ({ isScrolled, reduceMotion, onClick }) => {
   const logo = isScrolled;
   const barEntrance = (delay, axis) => ({
     initial: reduceMotion ? false : { [axis]: 0 },
@@ -118,34 +117,35 @@ const BrandLockup = ({ isScrolled, reduceMotion }) => {
 
   return (
     <div
-      className={`relative inline-flex h-9 sm:h-10 min-w-0 items-center whitespace-nowrap rounded-[14px] ${MORPH} ${
-        logo ? 'bg-[#1F3A5F] px-[11px]' : 'bg-[#1F3A5F]/0 px-0'
+      role="link"
+      tabIndex={0}
+      title="Go to home"
+      onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onClick?.();
+        }
+      }}
+      className={`group relative inline-flex cursor-pointer h-9 sm:h-10 min-w-0 items-center whitespace-nowrap rounded-[14px] ${MORPH} ${
+        logo ? 'ml-2.5' : 'ml-0'
       }`}
     >
-      {/* Bubble tail, only once the F has formed */}
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 12 7"
-        className={`pointer-events-none absolute -bottom-[5px] left-3 h-[7px] w-3 ${MORPH} ${logo ? 'opacity-100' : 'opacity-0'}`}
-      >
-        <path d="M0 0H12L2 7Z" fill={BUBBLE_NAVY} />
-      </svg>
-
       {/* Stem of the F */}
       <motion.span
         aria-hidden="true"
         className={`origin-top shrink-0 rounded-full ${MORPH} ${
-          logo ? 'h-[18px] w-[4.2px] mr-0 bg-white' : 'h-full w-1 mr-2.5 bg-[#1F3A5F]'
+          logo ? 'h-[30px] w-[7px] mr-0 bg-[#1F3A5F]' : 'h-full w-1 mr-2.5 bg-[#1F3A5F]'
         }`}
         {...barEntrance(0, 'scaleY')}
       />
 
       {/* Column holding the name between the two arms */}
-      <span className={`relative flex self-stretch items-center ${MORPH} ${logo ? 'min-w-[10px]' : 'min-w-0'}`}>
+      <span className={`relative flex self-stretch items-center ${MORPH} ${logo ? 'min-w-[20px]' : 'min-w-0'}`}>
         <motion.span
           aria-hidden="true"
           className={`absolute left-0 origin-left rounded-full ${MORPH} ${
-            logo ? 'top-[calc(50%_-_9px)] h-[4.2px] w-[10px] bg-[#8DB1E3]' : 'top-0 h-[3px] w-full bg-[#4A7AB8]'
+            logo ? 'top-[calc(50%_-_15px)] h-[7px] w-[20px] bg-[#4A7AB8]' : 'top-0 h-[3px] w-full bg-[#4A7AB8]'
           }`}
           {...barEntrance(0.15, 'scaleX')}
         />
@@ -153,7 +153,7 @@ const BrandLockup = ({ isScrolled, reduceMotion }) => {
           aria-hidden="true"
           className={`absolute left-0 origin-left rounded-full ${MORPH} ${
             logo
-              ? 'top-[calc(50%_-_1.6px)] h-[4.2px] w-[7px] bg-[#E5565F]'
+              ? 'top-[calc(50%_-_3.5px)] h-[7px] w-[14px] bg-[#E5565F]'
               : 'top-[calc(100%_-_7px)] h-[3px] w-[55%] bg-[#E5565F]'
           }`}
           {...barEntrance(0.3, 'scaleX')}
@@ -171,6 +171,18 @@ const BrandLockup = ({ isScrolled, reduceMotion }) => {
           </motion.h1>
         </span>
       </span>
+
+      {/* Hovering the F slides the name out from behind it. Only exists in the scrolled state; the full lockup already shows the name. */}
+      <span
+        aria-hidden="true"
+        className={`block overflow-hidden transition-[max-width,opacity] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+          logo ? 'max-w-0 opacity-0 group-hover:max-w-[10rem] group-hover:opacity-100' : 'hidden'
+        }`}
+      >
+        <span className="ml-2.5 block -translate-x-full font-serif text-lg sm:text-xl font-bold leading-tight tracking-tight text-[#1B2433] transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0 motion-reduce:transition-none">
+          {LOCKUP_TITLE}
+        </span>
+      </span>
     </div>
   );
 };
@@ -184,6 +196,7 @@ export const Header = ({
   onSpeedChange,
   isScrolled = false,
   inMenu = false,
+  onLogoClick,
 }) => {
   // The scrolled header keeps only the brand below 1370px; the controls live in the menu there.
   const reduceMotion = useReducedMotion();
@@ -204,7 +217,7 @@ export const Header = ({
               : 'w-full border border-transparent py-0 pl-0 pr-0'
           }`}
         >
-          <BrandLockup isScrolled={isScrolled} reduceMotion={reduceMotion} />
+          <BrandLockup isScrolled={isScrolled} reduceMotion={reduceMotion} onClick={onLogoClick} />
         </div>
 
         {/* Level badge, level switcher and audio speed selector: a row of their own on mobile, inline on sm+ */}

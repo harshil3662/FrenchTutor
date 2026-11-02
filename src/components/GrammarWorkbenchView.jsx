@@ -214,9 +214,9 @@ export const GrammarWorkbenchView = ({
           <button
             onClick={handleDissect}
             disabled={isDissecting || !sourceSentence.trim()}
-            className="px-4 py-2.5 rounded-xl bg-white hover:bg-[#FFFFFF] border border-[#D0D7E2] text-[#1B2433] font-bold text-xs flex items-center gap-2 transition-all shadow-xs cursor-pointer disabled:opacity-50"
+            className="px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition-all shadow-xs cursor-pointer disabled:opacity-50 bg-[#E5565F] hover:bg-[#D14650] text-white"
           >
-            <Binary className="w-4 h-4 text-[#1F3A5F]" />
+            <Binary className="w-4 h-4" />
             <span>{isDissecting ? 'Parsing Syntax...' : 'Dissect Sentence'}</span>
           </button>
         </div>
@@ -267,7 +267,7 @@ export const GrammarWorkbenchView = ({
                 }}
                 className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   selectedCategoryIdx === idx
-                    ? 'bg-[#1F3A5F] text-white shadow-xs'
+                    ? 'bg-[#E5565F] text-white shadow-xs'
                     : 'text-[#5F6B7A] hover:text-[#1B2433] hover:bg-white/70'
                 }`}
               >
@@ -299,7 +299,7 @@ export const GrammarWorkbenchView = ({
             <button
               onClick={handleTransform}
               disabled={isTransforming || !sourceSentence.trim()}
-              className="px-6 py-3 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-2xl font-bold text-xs shadow-sm flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50"
+              className="px-6 py-3 text-white rounded-2xl font-bold text-xs shadow-sm flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50 bg-[#E5565F] hover:bg-[#D14650]"
             >
               <Wand2 className="w-4 h-4" />
               <span>{isTransforming ? 'Transforming Aspect...' : `Apply ${selectedOperation}`}</span>
@@ -319,7 +319,7 @@ export const GrammarWorkbenchView = ({
             </div>
             <button
               onClick={() => handleAudioPlay(transformationResult.transformedSentence)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F5F7FA] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white transition-all text-xs font-bold cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl hover:text-white transition-all text-xs font-bold cursor-pointer bg-[#E5565F] hover:bg-[#D14650] text-white"
             >
               <Volume2 className="w-4 h-4" />
               <span>Listen Narration</span>

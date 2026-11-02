@@ -184,6 +184,7 @@ export default function App() {
                     audioSpeed={audioSpeed}
                     onSpeedChange={setAudioSpeed}
                     isScrolled={isScrolled}
+                    onLogoClick={() => setActiveTab('home')}
                   />
                 </div>
               </div>
@@ -200,20 +201,12 @@ export default function App() {
                     onClick={() => setIsNavMenuOpen((prev) => !prev)}
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.96 }}
-                    className={`self-center shrink-0 h-9 w-9 sm:h-10 sm:w-10 justify-center px-0 rounded-full flex items-center border shadow-md cursor-pointer select-none text-sm font-bold transition-colors duration-200 ${
-                      isNavMenuOpen
-                        ? 'bg-[#E5565F] text-white border-transparent'
-                        : 'bg-[#1F3A5F] text-white border-transparent hover:bg-[#14284A]'
-                    }`}
+                    className={`self-center shrink-0 h-9 w-9 sm:h-10 sm:w-10 justify-center px-0 rounded-full flex items-center border shadow-md cursor-pointer select-none text-sm font-bold transition-colors duration-200 bg-[#E5565F] text-white border-transparent hover:bg-[#D14650]`}
                     title={isNavMenuOpen ? 'Close menu' : 'Open menu'}
                     aria-label={isNavMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
                     aria-expanded={isNavMenuOpen}
                   >
-                    <span
-                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${
-                        isNavMenuOpen ? 'bg-white/20' : 'bg-white/15'
-                      }`}
-                    >
+                    <span className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center">
                       {isNavMenuOpen ? <XRegular weight="regular" className="w-3.5 h-3.5" /> : <LayoutGrid className="w-3.5 h-3.5" />}
                     </span>
                   </motion.button>

@@ -54,7 +54,7 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
           <button
             type="button"
             onClick={() => onNavigate('grammar-lessons')}
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#1F3A5F] to-[#2F5F9E] px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-[#4A7AB8]/30 hover:from-[#2F5F9E] hover:to-[#4A7AB8] transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white shadow-md transition-colors cursor-pointer bg-[#E5565F] hover:bg-[#D14650]"
           >
             Start learning <ArrowRight className="w-4 h-4" />
           </button>
@@ -91,7 +91,7 @@ export const HomeView = ({ progress, unlockedLevels = ['A1'], onNavigate }) => {
               <button
                 type="button"
                 onClick={() => onNavigate('grammar-lessons')}
-                className="inline-flex items-center gap-2 rounded-full border border-[#4A7AB8] px-4 py-2 text-sm font-bold text-[#2F5F9E] hover:bg-[#4A7AB8] hover:text-white transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold hover:text-white transition-colors cursor-pointer bg-[#E5565F] hover:bg-[#D14650] text-white"
               >
                 Continue <ArrowRight className="w-4 h-4" />
               </button>

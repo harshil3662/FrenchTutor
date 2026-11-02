@@ -388,7 +388,7 @@ export const TutorChatView = ({
             <button
               key={idx}
               onClick={() => handleSendMessage(phrase.french)}
-              className="text-xs bg-white hover:bg-[#E8EEF6] hover:border-[#1F3A5F]/50 text-[#1F3A5F] hover:text-[#1F3A5F] border border-[#D0D7E2] px-3.5 py-1.5 rounded-full whitespace-nowrap transition-all flex items-center space-x-1.5 cursor-pointer font-medium shadow-xs"
+              className="text-xs px-3.5 py-1.5 rounded-full whitespace-nowrap transition-all flex items-center space-x-1.5 cursor-pointer font-medium shadow-xs bg-[#E5565F] hover:bg-[#D14650] text-white"
             >
               <span>💬 {phrase.french}</span>
             </button>
@@ -403,8 +403,8 @@ export const TutorChatView = ({
             onClick={handleToggleVoiceRecording}
             className={`p-3 rounded-2xl border transition-all cursor-pointer ${
               isRecording
-                ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] animate-pulse shadow-md shadow-[#1F3A5F]/30'
-                : 'bg-[#EDEEF0] text-[#1F3A5F] border-[#D0D7E2] hover:text-[#1B2433] hover:bg-[#E6EAF0]'
+                ? 'bg-[#E5565F] text-white border-[#E5565F] animate-pulse shadow-md shadow-[#E5565F]/30'
+                : 'bg-[#E5565F] text-white border-[#E5565F] hover:bg-[#D14650]'
             }`}
             title={isRecording ? 'Stop recording' : 'Speak French (Microphone)'}
           >
@@ -429,7 +429,7 @@ export const TutorChatView = ({
             id="send-message-btn"
             disabled={!inputText.trim() || isLoading}
             onClick={() => handleSendMessage()}
-            className="p-3 bg-[#1F3A5F] hover:bg-[#1F3A5F] disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-2xl font-bold shadow-sm transition-all cursor-pointer"
+            className="p-3 bg-[#E5565F] hover:bg-[#D14650] disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-2xl font-bold shadow-sm transition-all cursor-pointer"
           >
             <Send className="w-5 h-5" />
           </button>

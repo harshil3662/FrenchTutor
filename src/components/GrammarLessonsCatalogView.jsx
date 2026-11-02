@@ -194,7 +194,7 @@ export const GrammarLessonsCatalogView = ({
               onClick={() => setSelectedCategory(isSelected ? 'All' : cat.id)}
               className={`p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between space-y-2 ${
                 isSelected
-                  ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-xs'
+                  ? 'bg-[#E5565F] text-white border-[#E5565F] shadow-xs'
                   : 'bg-white text-[#1B2433] border-[#E6EAF0] hover:bg-[#FFFFFF]'
               }`}
             >
@@ -249,7 +249,7 @@ export const GrammarLessonsCatalogView = ({
                   }}
                   className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all flex items-center gap-1 ${
                     selectedLevelFilter === lvl
-                      ? 'bg-[#1F3A5F] text-white shadow-xs'
+                      ? 'bg-[#E5565F] text-white shadow-xs'
                       : isUnlocked
                       ? 'text-[#5F6B7A] hover:text-[#1B2433] cursor-pointer'
                       : 'text-[#5F6B7A] opacity-50 cursor-not-allowed'
@@ -257,7 +257,7 @@ export const GrammarLessonsCatalogView = ({
                   title={isUnlocked ? `Filter by ${lvl}` : `Level ${lvl} is locked`}
                 >
                   <span>{lvl === 'All' ? 'All Lessons' : lvl}</span>
-                  {!isUnlocked && <Lock className="w-2.5 h-2.5 text-[#5F6B7A]" />}
+                  {!isUnlocked && <Lock className="w-2.5 h-2.5" />}
                 </button>
               );
             })}
@@ -271,7 +271,7 @@ export const GrammarLessonsCatalogView = ({
             }}
             className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
               selectedCategory === 'All' && selectedLevelFilter === (activeLevel || 'A1') && !searchQuery
-                ? 'bg-[#1F3A5F] text-white'
+                ? 'bg-[#E5565F] text-white'
                 : 'bg-[#F5F7FA] text-[#5F6B7A] hover:text-[#1B2433]'
             }`}
           >
@@ -335,7 +335,7 @@ export const GrammarLessonsCatalogView = ({
                 }}
                 className={`px-2.5 py-1 rounded-lg text-[11px] font-bold shrink-0 border transition-all cursor-pointer ${
                   searchQuery.toLowerCase().includes(`unit ${l.unitNumber}`) || searchQuery === `${l.unitNumber}`
-                    ? 'bg-[#1F3A5F] text-white border-[#1F3A5F]'
+                    ? 'bg-[#E5565F] text-white border-[#E5565F]'
                     : isMastered
                     ? 'bg-[#E8EEF6] text-[#1F3A5F] border-[#1F3A5F]/30'
                     : isCompleted
@@ -470,7 +470,7 @@ export const GrammarLessonsCatalogView = ({
                 {isUnlocked ? (
                   <button
                     onClick={() => handleOpenLesson(lesson)}
-                    className="px-4 py-2 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs shrink-0"
+                    className="px-4 py-2 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs shrink-0 bg-[#E5565F] hover:bg-[#D14650]"
                   >
                     <span>{isCompleted ? 'Review & Practice' : 'Study & Practice'}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -567,7 +567,7 @@ export const GrammarLessonsCatalogView = ({
                     <button
                       key={idx}
                       onClick={() => setCustomPrompt(sugg)}
-                      className="px-2.5 py-1 rounded-lg bg-[#FFFFFF] border border-[#E6EAF0] text-[11px] text-[#1F3A5F] hover:bg-[#E6EAF0] transition-all cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg text-[11px] transition-all cursor-pointer bg-[#E5565F] hover:bg-[#D14650] text-white"
                     >
                       {sugg}
                     </button>
@@ -579,16 +579,16 @@ export const GrammarLessonsCatalogView = ({
             <div className="flex justify-end gap-3 pt-2">
               <button
                 onClick={() => setIsGeneratorOpen(false)}
-                className="px-5 py-2.5 rounded-xl border border-[#D0D7E2] text-xs font-bold text-[#5F6B7A] hover:text-[#1B2433] transition-all cursor-pointer"
+                className="px-5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer bg-[#E5565F] hover:bg-[#D14650] text-white"
               >
                 Cancel
               </button>
               <button
                 onClick={handleGenerateLesson}
                 disabled={isGenerating || !customPrompt.trim()}
-                className="px-6 py-2.5 rounded-xl bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white text-xs font-bold flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50 shadow-xs"
+                className="px-6 py-2.5 rounded-xl text-white text-xs font-bold flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50 shadow-xs bg-[#E5565F] hover:bg-[#D14650]"
               >
-                <Sparkles className="w-4 h-4 text-[#1F3A5F]" />
+                <Sparkles className="w-4 h-4" />
                 <span>{isGenerating ? 'Synthesizing Lesson...' : 'Generate Lesson'}</span>
               </button>
             </div>

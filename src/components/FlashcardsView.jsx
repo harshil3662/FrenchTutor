@@ -344,7 +344,7 @@ export const FlashcardsView = ({
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               viewMode === 'daily-ai'
-                ? 'bg-[#1F3A5F] text-white shadow-xs'
+                ? 'bg-[#E5565F] text-white shadow-xs'
                 : 'text-[#1B2433] hover:text-[#1B2433] hover:bg-white'
             }`}
           >
@@ -362,7 +362,7 @@ export const FlashcardsView = ({
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               viewMode === 'srs' && !srsDeck
-                ? 'bg-[#1F3A5F] text-white shadow-xs'
+                ? 'bg-[#E5565F] text-white shadow-xs'
                 : 'text-[#1B2433] hover:text-[#1B2433] hover:bg-white'
             }`}
           >
@@ -377,7 +377,7 @@ export const FlashcardsView = ({
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               viewMode === 'grid'
-                ? 'bg-[#1F3A5F] text-white shadow-xs'
+                ? 'bg-[#E5565F] text-white shadow-xs'
                 : 'text-[#1B2433] hover:text-[#1B2433] hover:bg-white'
             }`}
           >
@@ -440,7 +440,7 @@ export const FlashcardsView = ({
                       }}
                       className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer ${
                         dailyLevel === lvl
-                          ? 'bg-[#1F3A5F] text-white shadow-2xs'
+                          ? 'bg-[#E5565F] text-white shadow-2xs'
                           : 'text-[#5F6B7A] hover:text-[#1B2433]'
                       }`}
                     >
@@ -452,7 +452,7 @@ export const FlashcardsView = ({
                 <button
                   onClick={() => fetchDailyVocabulary(selectedArea, dailyLevel, true)}
                   disabled={isLoadingDaily}
-                  className="flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-[#F5F7FA] text-[#1B2433] border border-[#D0D7E2] rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer disabled:opacity-60"
+                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer disabled:opacity-60 bg-[#E5565F] hover:bg-[#D14650] text-white"
                   title="Generate a fresh daily vocabulary set for this area"
                 >
                   <RefreshCw className={`w-3.5 h-3.5 text-[#1F3A5F] ${isLoadingDaily ? 'animate-spin' : ''}`} />
@@ -480,7 +480,7 @@ export const FlashcardsView = ({
                       onClick={() => handleSelectArea(area.id)}
                       className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border ${
                         isSelected
-                          ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-sm'
+                          ? 'bg-[#E5565F] text-white border-[#E5565F] shadow-sm'
                           : 'bg-white text-[#1F3A5F] border-[#D0D7E2] hover:border-[#1F3A5F]/40 hover:bg-[#FFFFFF]'
                       }`}
                     >
@@ -495,7 +495,7 @@ export const FlashcardsView = ({
                   onClick={() => setIsCustomAreaActive(true)}
                   className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border ${
                     isCustomAreaActive
-                      ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-sm'
+                      ? 'bg-[#E5565F] text-white border-[#E5565F] shadow-sm'
                       : 'bg-white text-[#1F3A5F] border-[#D0D7E2] hover:border-[#1F3A5F]/40 hover:bg-[#FFFFFF]'
                   }`}
                 >
@@ -521,7 +521,7 @@ export const FlashcardsView = ({
                   <button
                     type="submit"
                     disabled={!customAreaInput.trim() || isLoadingDaily}
-                    className="px-4 py-2 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl text-xs font-bold transition-all shadow-xs disabled:opacity-50 cursor-pointer"
+                    className="px-4 py-2 text-white rounded-xl text-xs font-bold transition-all shadow-xs disabled:opacity-50 cursor-pointer bg-[#E5565F] hover:bg-[#D14650]"
                   >
                     Generate
                   </button>
@@ -576,15 +576,15 @@ export const FlashcardsView = ({
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handleAddAllDailyToDeck}
-                    className="flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-[#FFFFFF] text-[#1B2433] border border-[#D0D7E2] rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer"
+                    className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer bg-[#E5565F] hover:bg-[#D14650] text-white"
                   >
-                    <BookmarkPlus className="w-3.5 h-3.5 text-[#1F3A5F]" />
+                    <BookmarkPlus className="w-3.5 h-3.5" />
                     <span>Add All to Deck</span>
                   </button>
 
                   <button
                     onClick={handlePracticeDailyInSrs}
-                    className="flex items-center gap-1.5 px-4 py-2 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer"
+                    className="flex items-center gap-1.5 px-4 py-2 text-white rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer bg-[#E5565F] hover:bg-[#D14650]"
                   >
                     <Layers className="w-3.5 h-3.5" />
                     <span>Practice in SRS</span>
@@ -642,8 +642,8 @@ export const FlashcardsView = ({
                             title="Listen to French pronunciation"
                             className={`p-2.5 rounded-xl border transition-all cursor-pointer shadow-2xs ${
                               isAudioPlaying
-                                ? 'bg-[#1F3A5F] text-white border-[#1F3A5F]'
-                                : 'bg-[#FFFFFF] text-[#1F3A5F] border-[#E6EAF0] hover:bg-[#1F3A5F] hover:text-white'
+                                ? 'bg-[#E5565F] text-white border-[#E5565F]'
+                                : 'bg-[#FFFFFF] text-[#1F3A5F] border-[#E6EAF0] hover:bg-[#E5565F] hover:text-white'
                             }`}
                           >
                             <Volume2 className="w-4 h-4" />
@@ -691,18 +691,18 @@ export const FlashcardsView = ({
                           onClick={() => handleAddWordToDeck(item)}
                           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                             isAdded
-                              ? 'bg-[#E8EEF6] text-[#1F3A5F] border border-[#1F3A5F]/30'
+                              ? 'bg-[#E5565F] hover:bg-[#D14650] text-white'
                               : 'bg-white hover:bg-[#FFFFFF] text-[#1B2433] border border-[#D0D7E2]'
                           }`}
                         >
                           {isAdded ? (
                             <>
-                              <CheckCircle2 className="w-3.5 h-3.5 text-[#1F3A5F]" />
+                              <CheckCircle2 className="w-3.5 h-3.5" />
                               <span>In Deck</span>
                             </>
                           ) : (
                             <>
-                              <BookmarkPlus className="w-3.5 h-3.5 text-[#1F3A5F]" />
+                              <BookmarkPlus className="w-3.5 h-3.5" />
                               <span>Add to Deck</span>
                             </>
                           )}
@@ -712,7 +712,7 @@ export const FlashcardsView = ({
                           onClick={() => onToggleMastery(item.id)}
                           className={`p-2 rounded-xl border transition-all cursor-pointer ${
                             isMastered
-                              ? 'bg-[#E8EEF6] text-[#1F3A5F] border-[#1F3A5F]/40'
+                              ? 'bg-[#E5565F] hover:bg-[#D14650] text-white'
                               : 'bg-white text-[#D0D7E2] border-[#D0D7E2] hover:text-[#1F3A5F]'
                           }`}
                           title={isMastered ? 'Mastered' : 'Mark as mastered'}
@@ -786,7 +786,7 @@ export const FlashcardsView = ({
                     e.stopPropagation();
                     speakFrench(currentSrsCard.french, audioSpeed);
                   }}
-                  className="p-2.5 rounded-xl bg-[#FFFFFF] text-[#1F3A5F] hover:bg-[#1F3A5F] hover:text-white border border-[#E6EAF0] transition-all shadow-xs cursor-pointer"
+                  className="p-2.5 rounded-xl hover:text-white transition-all shadow-xs cursor-pointer bg-[#E5565F] hover:bg-[#D14650] text-white"
                   title="Listen to French pronunciation"
                 >
                   <Volume2 className="w-4 h-4" />
@@ -798,7 +798,7 @@ export const FlashcardsView = ({
                   }}
                   className={`p-2.5 rounded-xl transition-all border cursor-pointer ${
                     progress.masteredCards.includes(currentSrsCard.id)
-                      ? 'bg-[#E8EEF6] text-[#1F3A5F] border-[#1F3A5F]/40'
+                      ? 'bg-[#E5565F] hover:bg-[#D14650] text-white'
                       : 'bg-[#FFFFFF] text-[#5F6B7A] border-[#E6EAF0] hover:text-[#1F3A5F]'
                   }`}
                 >
@@ -859,28 +859,28 @@ export const FlashcardsView = ({
             <div className="grid grid-cols-4 gap-2 pt-2 animate-in fade-in">
               <button
                 onClick={() => handleSrsResponse('again')}
-                className="py-3 px-2 rounded-xl bg-[#E8EEF6] border border-[#1F3A5F]/30 text-[#1F3A5F] font-bold text-xs hover:bg-[#E8EEF6] transition-all text-center cursor-pointer shadow-xs"
+                className="py-3 px-2 rounded-xl font-bold text-xs transition-all text-center cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650] text-white"
               >
                 <span>Again</span>
                 <span className="block text-[10px] font-normal opacity-80">&lt; 1 min</span>
               </button>
               <button
                 onClick={() => handleSrsResponse('hard')}
-                className="py-3 px-2 rounded-xl bg-[#FFFFFF] border border-[#1F3A5F]/30 text-[#1F3A5F] font-bold text-xs hover:bg-[#FFFFFF] transition-all text-center cursor-pointer shadow-xs"
+                className="py-3 px-2 rounded-xl font-bold text-xs transition-all text-center cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650] text-white"
               >
                 <span>Hard</span>
                 <span className="block text-[10px] font-normal opacity-80">1 day</span>
               </button>
               <button
                 onClick={() => handleSrsResponse('good')}
-                className="py-3 px-2 rounded-xl bg-[#F5F7FA] border border-[#1F3A5F]/30 text-[#1F3A5F] font-bold text-xs hover:bg-[#E6EAF0] transition-all text-center cursor-pointer shadow-xs"
+                className="py-3 px-2 rounded-xl font-bold text-xs transition-all text-center cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650] text-white"
               >
                 <span>Good</span>
                 <span className="block text-[10px] font-normal opacity-80">3 days</span>
               </button>
               <button
                 onClick={() => handleSrsResponse('easy')}
-                className="py-3 px-2 rounded-xl bg-[#E8EEF6] border border-[#1F3A5F]/30 text-[#1F3A5F] font-bold text-xs hover:bg-[#E8EEF6] transition-all text-center cursor-pointer shadow-xs"
+                className="py-3 px-2 rounded-xl font-bold text-xs transition-all text-center cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650] text-white"
               >
                 <span>Easy</span>
                 <span className="block text-[10px] font-normal opacity-80">7 days</span>
@@ -945,7 +945,7 @@ export const FlashcardsView = ({
                 <button
                   type="button"
                   onClick={() => setSuggestionOffset((current) => (current + 8) % availableSuggestions.length)}
-                  className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-[#1F3A5F] hover:bg-white cursor-pointer"
+                  className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold cursor-pointer bg-[#E5565F] hover:bg-[#D14650] text-white"
                 >
                   <Shuffle className="h-3.5 w-3.5" />
                   More words
@@ -965,7 +965,7 @@ export const FlashcardsView = ({
                       type="button"
                       onClick={() => speakFrench(card.french, audioSpeed)}
                       aria-label={`Listen to ${card.french}`}
-                      className="shrink-0 rounded-lg p-2 text-[#5F6B7A] hover:bg-[#F5F7FA] hover:text-[#1B2433] cursor-pointer"
+                      className="shrink-0 rounded-lg p-2 cursor-pointer bg-[#E5565F] hover:bg-[#D14650] text-white"
                     >
                       <Volume2 className="h-4 w-4" />
                     </button>
@@ -1083,13 +1083,13 @@ export const FlashcardsView = ({
                 <button
                   type="button"
                   onClick={() => setIsAddingCard(false)}
-                  className="px-4 py-2 text-xs font-semibold text-[#5F6B7A] hover:text-[#1B2433] cursor-pointer"
+                  className="px-4 py-2 text-xs font-semibold cursor-pointer bg-[#E5565F] hover:bg-[#D14650] text-white"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white font-bold text-xs rounded-xl shadow cursor-pointer"
+                  className="px-4 py-2 text-white font-bold text-xs rounded-xl shadow cursor-pointer bg-[#E5565F] hover:bg-[#D14650]"
                 >
                   Save Flashcard
                 </button>

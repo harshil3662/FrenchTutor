@@ -295,7 +295,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
 
               <button
                 onClick={onClose}
-                className="px-6 py-3 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white font-bold text-xs rounded-xl shadow-sm cursor-pointer"
+                className="px-6 py-3 text-white font-bold text-xs rounded-xl shadow-sm cursor-pointer bg-[#E5565F] hover:bg-[#D14650]"
               >
                 Close & Continue
               </button>
@@ -305,7 +305,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
               <p className="text-sm text-[#1F3A5F]">This quiz question could not be displayed.</p>
               <button
                 onClick={() => setReloadToken((value) => value + 1)}
-                className="px-5 py-2.5 bg-[#1F3A5F] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 mx-auto cursor-pointer"
+                className="px-5 py-2.5 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 mx-auto cursor-pointer bg-[#E5565F] hover:bg-[#D14650]"
               >
                 <RotateCcw className="w-4 h-4" />
                 <span>Reload Quiz</span>
@@ -339,7 +339,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                       disabled={isTranslating}
                       className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer border ${
                         isQuestionTranslated
-                          ? 'bg-[#1F3A5F] text-white border-[#1F3A5F] shadow-2xs'
+                          ? 'bg-[#E5565F] text-white border-[#E5565F] shadow-2xs'
                           : 'bg-white hover:bg-[#FFFFFF] text-[#1F3A5F] border-[#D0D7E2]'
                       }`}
                       title={isQuestionTranslated ? 'Translate back to French' : 'Translate question into English'}
@@ -434,14 +434,14 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
                   <button
                     disabled={!selectedOption}
                     onClick={handleCheck}
-                    className="w-full py-3 bg-[#1F3A5F] hover:bg-[#1F3A5F] disabled:opacity-40 text-white font-bold text-xs rounded-xl shadow-xs transition-all cursor-pointer"
+                    className="w-full py-3 disabled:opacity-40 text-white font-bold text-xs rounded-xl shadow-xs transition-all cursor-pointer bg-[#E5565F] hover:bg-[#D14650]"
                   >
                     Check Answer
                   </button>
                 ) : (
                   <button
                     onClick={handleNext}
-                    className="w-full py-3 bg-[#1F3A5F] hover:bg-[#1F3A5F] text-white font-bold text-xs rounded-xl shadow-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
+                    className="w-full py-3 text-white font-bold text-xs rounded-xl shadow-xs flex items-center justify-center gap-2 transition-all cursor-pointer bg-[#E5565F] hover:bg-[#D14650]"
                   >
                     <span>Continue</span>
                     <ArrowRight className="w-4 h-4" />
