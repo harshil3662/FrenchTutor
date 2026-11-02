@@ -55,9 +55,10 @@ export const Navigation = ({
                       id={`nav-tab-${tab.id}`}
                       data-tab-id={tab.id}
                       onClick={() => handleTabClick(tab.id)}
+                      whileHover="hover"
                       whileTap={{ scale: 0.97 }}
                       className={`relative z-10 group flex min-w-0 xl:flex-auto items-center justify-center gap-2 whitespace-nowrap rounded-full px-3 py-3 text-center cursor-pointer select-none transition-colors duration-300 ${
-                        isActive ? 'text-[#E5565F]' : 'text-[#5F6B7A] hover:text-[#1B2433] hover:bg-[#4A7AB8]/10'
+                        isActive ? 'text-white' : 'text-[#5F6B7A] hover:text-[#1B2433] hover:bg-[#4A7AB8]/10'
                       }`}
                     >
                       {isActive && (
@@ -70,12 +71,12 @@ export const Navigation = ({
 
                       <motion.span
                         className="flex shrink-0"
-                        whileHover={{ rotate: -10, scale: 1.15 }}
+                        variants={{ hover: { rotate: -10, scale: 1.15 } }}
                         transition={{ type: 'spring', stiffness: 320, damping: 16 }}
                       >
                         <Icon
                           className={`w-5 h-5 transition-colors duration-300 ${
-                            isActive ? 'text-white' : ACCENT_STYLES[tab.accent].icon
+                            isActive ? 'text-[#E5565F]' : ACCENT_STYLES[tab.accent].icon
                           }`}
                         />
                       </motion.span>
@@ -108,7 +109,8 @@ export const Navigation = ({
                   key={tab.id}
                   id={`scrolled-menu-tab-${tab.id}`}
                   onClick={() => handleTabClick(tab.id)}
-                  whileHover={{ y: -2 }}
+                  whileHover="hover"
+                  variants={{ hover: { y: -2 } }}
                   whileTap={{ scale: 0.96 }}
                   className={`relative isolate overflow-hidden p-2.5 sm:p-3 rounded-2xl border flex flex-row sm:flex-col items-center sm:items-start gap-2.5 sm:gap-2 text-left transition-colors cursor-pointer select-none group shadow-xs ${
                     isActive
@@ -138,7 +140,7 @@ export const Navigation = ({
                     className={`w-9 h-9 shrink-0 rounded-xl flex items-center justify-center transition-colors ${
                       isActive ? 'bg-white/15 text-white' : ACCENT_STYLES[tab.accent].chip
                     }`}
-                    whileHover={{ rotate: -8, scale: 1.1 }}
+                    variants={{ hover: { rotate: -8, scale: 1.1 } }}
                     transition={{ type: 'spring', stiffness: 320, damping: 16 }}
                   >
                     <Icon className="w-[18px] h-[18px]" />

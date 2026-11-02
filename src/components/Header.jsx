@@ -4,11 +4,18 @@ import { Award, Volume2, Globe, Lock } from './icons';
 
 const LEVELS = ['A1', 'A2', 'B1', 'B2'];
 
-const controlSurface = (isScrolled) => (isScrolled ? 'bg-white border-[#D0D7E2]/70' : 'bg-white/95 border-transparent');
+const controlSurface = (isScrolled) => (isScrolled ? 'bg-[#1F3A5F] border border-transparent' : 'bg-[#1F3A5F] border border-transparent');
+
+// The switcher always sits on a navy surface, so the button states don't depend on the scroll position.
+const LEVEL_BUTTON = {
+  active: 'bg-[#E5565F] text-white shadow-xs',
+  unlocked: 'text-white/70 hover:bg-white/10 hover:text-white cursor-pointer',
+  locked: 'text-white/40 cursor-not-allowed',
+};
 
 const LevelSwitcher = ({ activeLevel, unlockedLevels, onLevelChange, idPrefix = '', isScrolled = false }) => (
   <div className={`flex items-center ${isScrolled ? 'h-9 sm:h-10' : 'h-9 sm:h-8'} w-full sm:w-auto min-w-0 rounded-full p-0.5 pl-2 border ${controlSurface(isScrolled)}`}>
-    <Globe className="w-3.5 h-3.5 shrink-0 mr-1 text-[#5F6B7A]" />
+    <Globe className="w-3.5 h-3.5 shrink-0 mr-1 text-white" />
     <div className="flex flex-1 sm:flex-none min-w-0 h-full items-center space-x-0.5">
       {LEVELS.map((lvl) => {
         const isUnlocked = unlockedLevels.includes(lvl);
@@ -21,22 +28,12 @@ const LevelSwitcher = ({ activeLevel, unlockedLevels, onLevelChange, idPrefix = 
               if (isUnlocked) onLevelChange(lvl);
             }}
             title={isUnlocked ? `Switch to Level ${lvl}` : `Level ${lvl} is locked. Complete earlier units first.`}
-            className={`${activeLevel === lvl && isScrolled ? 'my-1 h-[calc(100%-0.5rem)]' : 'h-full'} min-w-0 flex-1 sm:flex-none ${activeLevel === lvl && isScrolled ? 'px-2 sm:px-2.5' : 'px-1.5 sm:px-2.5'} text-xs font-bold rounded-full transition-all flex items-center justify-center gap-1 ${
-              activeLevel === lvl
-                ? isScrolled
-                  ? 'bg-[#1F3A5F]/90 text-white border border-[#1F3A5F]/80 shadow-xs'
-                  : 'bg-[#1F3A5F]/10 text-[#1F3A5F] border border-[#1F3A5F]/20 shadow-xs'
-                : isUnlocked
-                ? isScrolled
-                  ? 'text-[#5F6B7A] hover:bg-[#5F6B7A]/10 cursor-pointer'
-                  : 'text-[#1F3A5F] hover:text-[#14284A] hover:bg-white/60 cursor-pointer'
-                : isScrolled
-                ? 'text-[#5F6B7A] cursor-not-allowed'
-                : 'text-[#1F3A5F]/70 cursor-not-allowed'
+            className={`h-full min-w-0 flex-1 sm:flex-none px-1.5 sm:px-2.5 text-xs font-bold rounded-full transition-colors flex items-center justify-center gap-1 ${
+              activeLevel === lvl ? LEVEL_BUTTON.active : isUnlocked ? LEVEL_BUTTON.unlocked : LEVEL_BUTTON.locked
             }`}
           >
             <span>{lvl}</span>
-            {!isUnlocked && <Lock className="w-2.5 h-2.5 shrink-0 text-[#5F6B7A]" />}
+            {!isUnlocked && <Lock className="w-2.5 h-2.5 shrink-0 text-[#BBBBBB]" />}
           </button>
         );
       })}
@@ -47,27 +44,27 @@ const LevelSwitcher = ({ activeLevel, unlockedLevels, onLevelChange, idPrefix = 
 const LevelBadge = ({ progress, idPrefix = '', isScrolled = false }) => (
   <div
     id={`${idPrefix}user-badge`}
-    className={`flex items-center justify-center gap-1.5 ${isScrolled ? 'h-9 sm:h-10' : 'h-9 sm:h-8'} shrink-0 px-3 border ${controlSurface(isScrolled)} ${isScrolled ? 'text-[#5F6B7A]' : 'text-[#1F3A5F]'} rounded-full text-xs font-bold whitespace-nowrap`}
+    className={`flex items-center justify-center gap-1.5 ${isScrolled ? 'h-9 sm:h-10' : 'h-9 sm:h-8'} shrink-0 px-3 border ${controlSurface(isScrolled)} text-white rounded-full text-xs font-bold whitespace-nowrap`}
   >
-    <Award className={`w-3.5 h-3.5 shrink-0 ${isScrolled ? 'text-[#5F6B7A]' : 'text-[#1F3A5F]'}`} />
+    <Award className={`w-3.5 h-3.5 shrink-0 text-[#E5565F]`} />
     <span>Level {progress.level}</span>
   </div>
 );
 
 const SpeedSelector = ({ audioSpeed, onSpeedChange, idPrefix = '', isScrolled = false }) => (
   <div className={`flex items-center gap-1.5 ${isScrolled ? 'h-9 sm:h-10' : 'h-9 sm:h-8'} w-full sm:w-auto pl-3 pr-1 border ${controlSurface(isScrolled)} ${isScrolled ? 'text-[#5F6B7A]' : 'text-[#1F3A5F]'} rounded-full text-xs`}>
-    <Volume2 className={`w-3.5 h-3.5 shrink-0 ${isScrolled ? 'text-[#5F6B7A]' : 'text-[#1F3A5F]'}`} />
+    <Volume2 className={`w-3.5 h-3.5 shrink-0 text-[#E5565F]`} />
     <select
       id={`${idPrefix}audio-speed-select`}
       aria-label="Audio pronunciation playback speed"
       value={String(audioSpeed)}
       onChange={(e) => onSpeedChange(parseFloat(e.target.value))}
-      className={`flex-1 min-w-0 bg-transparent ${isScrolled ? 'text-[#5F6B7A]' : 'text-[#1B2433]'} text-xs font-medium focus:outline-none cursor-pointer`}
+      className={`flex-1 min-w-0 bg-transparent text-white text-xs font-medium focus:outline-none cursor-pointer`}
     >
-      <option value="0.75" className={`bg-[#EDEEF0] ${isScrolled ? 'text-[#5F6B7A]' : 'text-[#1F3A5F]'}`}>0.75x (Slow)</option>
-      <option value="0.9" className={`bg-[#EDEEF0] ${isScrolled ? 'text-[#5F6B7A]' : 'text-[#1F3A5F]'}`}>0.9x (Ideal)</option>
-      <option value="1" className={`bg-[#EDEEF0] ${isScrolled ? 'text-[#5F6B7A]' : 'text-[#1F3A5F]'}`}>1x (Normal)</option>
-      <option value="1.15" className={`bg-[#EDEEF0] ${isScrolled ? 'text-[#5F6B7A]' : 'text-[#1F3A5F]'}`}>1.15x (Native)</option>
+      <option value="0.75" className={`bg-[#EDEEF0] text-white`}>0.75x (Slow)</option>
+      <option value="0.9" className={`bg-[#EDEEF0] text-white`}>0.9x (Ideal)</option>
+      <option value="1" className={`bg-[#EDEEF0] text-white`}>1x (Normal)</option>
+      <option value="1.15" className={`bg-[#EDEEF0] text-white`}>1.15x (Native)</option>
     </select>
   </div>
 );
