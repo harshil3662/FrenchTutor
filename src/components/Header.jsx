@@ -100,6 +100,15 @@ export const HeaderControls = ({
 
 const LOCKUP_TITLE = 'French Tutor';
 
+// The F finishes folding after ~500ms; the peek starts then and holds for a couple of seconds.
+const PEEK_DELAY_MS = 600;
+const PEEK_HOLD_MS = 2500;
+
+// The name's typography, shared by the full lockup and the hover reveal so it reads identically in both.
+// The family is set explicitly because the global h1 rule would otherwise switch the heading to the serif face.
+const NAME_TEXT =
+  "font-['Plus_Jakarta_Sans',system-ui,-apple-system,sans-serif] text-lg sm:text-xl font-extrabold leading-tight whitespace-nowrap text-[#1F3A5F]";
+
 // Everything that morphs between the wordmark and the F logo shares one transition.
 const MORPH =
   'transition-[width,height,top,margin,min-width,max-width,opacity,padding,background-color,letter-spacing] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none';
@@ -109,6 +118,20 @@ const MORPH =
 // scrolling back to the top unfolds the F back into the name.
 const BrandLockup = ({ isScrolled, reduceMotion, onClick }) => {
   const logo = isScrolled;
+  // Right after the lockup folds into the F, the name slides out from behind it for a moment, then tucks back in.
+  const [peek, setPeek] = React.useState(false);
+  React.useEffect(() => {
+    if (!isScrolled) {
+      setPeek(false);
+      return undefined;
+    }
+    const show = setTimeout(() => setPeek(true), PEEK_DELAY_MS);
+    const hide = setTimeout(() => setPeek(false), PEEK_DELAY_MS + PEEK_HOLD_MS);
+    return () => {
+      clearTimeout(show);
+      clearTimeout(hide);
+    };
+  }, [isScrolled]);
   const barEntrance = (delay, axis) => ({
     initial: reduceMotion ? false : { [axis]: 0 },
     animate: { [axis]: 1 },
@@ -119,7 +142,7 @@ const BrandLockup = ({ isScrolled, reduceMotion, onClick }) => {
     <div
       role="link"
       tabIndex={0}
-      title="Go to home"
+      // title="Go to home"
       onClick={onClick}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -135,7 +158,7 @@ const BrandLockup = ({ isScrolled, reduceMotion, onClick }) => {
       <motion.span
         aria-hidden="true"
         className={`origin-top shrink-0 rounded-full ${MORPH} ${
-          logo ? 'h-[30px] w-[7px] mr-0 bg-[#1F3A5F]' : 'h-full w-1 mr-2.5 bg-[#1F3A5F]'
+          logo ? 'h-[30px] w-[7px] mr-0 bg-[#1F3A5F]' : 'h-full w-[7px] mr-2.5 bg-[#1F3A5F]'
         }`}
         {...barEntrance(0, 'scaleY')}
       />
@@ -145,7 +168,7 @@ const BrandLockup = ({ isScrolled, reduceMotion, onClick }) => {
         <motion.span
           aria-hidden="true"
           className={`absolute left-0 origin-left rounded-full ${MORPH} ${
-            logo ? 'top-[calc(50%_-_15px)] h-[7px] w-[20px] bg-[#4A7AB8]' : 'top-0 h-[3px] w-full bg-[#4A7AB8]'
+            logo ? 'top-[calc(50%_-_15px)] h-[7px] w-[20px] bg-[#4A7AB8]' : 'top-0 h-[7px] w-full bg-[#4A7AB8]'
           }`}
           {...barEntrance(0.15, 'scaleX')}
         />
@@ -154,13 +177,13 @@ const BrandLockup = ({ isScrolled, reduceMotion, onClick }) => {
           className={`absolute left-0 origin-left rounded-full ${MORPH} ${
             logo
               ? 'top-[calc(50%_-_3.5px)] h-[7px] w-[14px] bg-[#E5565F]'
-              : 'top-[calc(100%_-_7px)] h-[3px] w-[55%] bg-[#E5565F]'
+              : 'top-[calc(100%_-_7px)] h-[7px] w-[55%] bg-[#E5565F]'
           }`}
           {...barEntrance(0.3, 'scaleX')}
         />
         <span className={`block overflow-hidden ${MORPH} ${logo ? 'max-w-0 opacity-0' : 'max-w-[10rem] opacity-100'}`}>
           <motion.h1
-            className={`font-bold font-serif leading-tight whitespace-nowrap text-lg sm:text-xl text-[#1B2433] ${MORPH} ${
+            className={`${NAME_TEXT} ${MORPH} ${
               logo ? 'tracking-[-0.35em]' : 'tracking-tight'
             }`}
             initial={reduceMotion ? false : { opacity: 0, x: 8 }}
@@ -176,10 +199,12 @@ const BrandLockup = ({ isScrolled, reduceMotion, onClick }) => {
       <span
         aria-hidden="true"
         className={`block overflow-hidden transition-[max-width,opacity] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
-          logo ? 'max-w-0 opacity-0 group-hover:max-w-[10rem] group-hover:opacity-100' : 'hidden'
+          logo
+            ? `group-hover:max-w-[10rem] group-hover:opacity-100 ${peek ? 'max-w-[10rem] opacity-100' : 'max-w-0 opacity-0'}`
+            : 'hidden'
         }`}
       >
-        <span className="ml-2.5 block -translate-x-full font-serif text-lg sm:text-xl font-bold leading-tight tracking-tight text-[#1B2433] transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0 motion-reduce:transition-none">
+        <span className={`ml-2.5 block tracking-tight ${peek ? 'translate-x-0' : '-translate-x-full'} ${NAME_TEXT} transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0 motion-reduce:transition-none`}>
           {LOCKUP_TITLE}
         </span>
       </span>
