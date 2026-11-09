@@ -23,6 +23,9 @@ import { speakFrench, playChime } from '../utils/audioUtils.js';
 import { useModalTracker } from '../utils/modalState.js';
 import {
   getStoredAiPracticeExercises,
+  getRecentQuizPrompts,
+  isLessonQuizLocked,
+  setLessonQuizLocked,
   saveStoredAiPracticeExercises,
   clearStoredAiPracticeExercises,
 } from '../utils/curriculumStore.js';
@@ -37,6 +40,7 @@ export const LessonModal = ({
   useModalTracker(Boolean(lesson));
   const scrollContainerRef = useRef(null);
   const [phase, setPhase] = useState('grammar');
+  const [quizLocked, setQuizLocked] = useState(false);
   const [activeTopicIndex, setActiveTopicIndex] = useState(0);
   const [currentExIndex, setCurrentExIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -68,7 +72,9 @@ export const LessonModal = ({
     quizRequestRef.current?.abort();
     const saved = getStoredAiPracticeExercises(lesson?.id);
     setActiveTopicIndex(0);
-    setPhase('grammar');
+    const locked = isLessonQuizLocked(lesson?.id);
+    setQuizLocked(locked);
+    setPhase(locked ? 'quiz' : 'grammar');
     setCurrentExIndex(0);
     setSelectedAnswer(null);
     setHasChecked(false);
@@ -223,6 +229,7 @@ export const LessonModal = ({
           level: lesson.level || 'A1',
           questionCount: 4,
           lessonId: lesson.id,
+          previousQuestions: getRecentQuizPrompts(lesson.id),
           unitContext: {
             unitNumber: lesson.unit,
             category: lesson.category,
@@ -313,6 +320,8 @@ export const LessonModal = ({
   };
 
   const handleOpenQuizPhase = () => {
+    setLessonQuizLocked(lesson.id, true);
+    setQuizLocked(true);
     setPhase('quiz');
     scrollToTop();
     setIsQuestionTranslated(false);
@@ -359,6 +368,8 @@ export const LessonModal = ({
       const totalEarnedXp = Math.max(10, score * 10);
       setPhase('completed');
       if (isMastered) {
+        setLessonQuizLocked(lesson.id, false);
+        setQuizLocked(false);
         try {
           confetti({ colors: ['#1F3A5F'], particleCount: 75, spread: 70, origin: { y: 0.6 } });
         } catch {}
@@ -420,8 +431,12 @@ export const LessonModal = ({
         <div className="flex items-center space-x-6 px-6 border-b border-[#E6EAF0] text-xs font-semibold text-[#5F6B7A] bg-[#FFFFFF] overflow-x-auto scrollbar-none">
           <button
             onClick={() => setPhase('grammar')}
-            className={`flex items-center gap-1.5 py-3 transition-colors cursor-pointer shrink-0 ${
-              phase === 'grammar' ? 'text-[#1F3A5F] font-bold border-b-2 border-[#1F3A5F]' : 'hover:text-[#1B2433]'
+            disabled={quizLocked}
+            title={quizLocked ? 'Locked while the quiz is in progress' : undefined}
+            className={`flex items-center gap-1.5 py-3 transition-colors shrink-0 ${
+              quizLocked ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer'
+            } ${
+              phase === 'grammar' ? 'text-[#1F3A5F] font-bold border-b-2 border-[#1F3A5F]' : quizLocked ? '' : 'hover:text-[#1B2433]'
             }`}
           >
             <BookOpen className="w-3.5 h-3.5" />
@@ -430,8 +445,12 @@ export const LessonModal = ({
           {vocabList.length > 0 && (
             <button
               onClick={() => setPhase('vocab')}
-              className={`flex items-center gap-1.5 py-3 transition-colors cursor-pointer shrink-0 ${
-                phase === 'vocab' ? 'text-[#1F3A5F] font-bold border-b-2 border-[#1F3A5F]' : 'hover:text-[#1B2433]'
+              disabled={quizLocked}
+              title={quizLocked ? 'Locked while the quiz is in progress' : undefined}
+              className={`flex items-center gap-1.5 py-3 transition-colors shrink-0 ${
+                quizLocked ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer'
+              } ${
+                phase === 'vocab' ? 'text-[#1F3A5F] font-bold border-b-2 border-[#1F3A5F]' : quizLocked ? '' : 'hover:text-[#1B2433]'
               }`}
             >
               <Layers className="w-3.5 h-3.5" />
@@ -1132,7 +1151,7 @@ export const LessonModal = ({
                       Practice Makes Perfect!
                     </h3>
                     <p className="text-sm text-[#5F6B7A] max-w-md mx-auto">
-                      You scored <strong>0 / {exercises.length}</strong>. A unit is only considered <strong>Mastered</strong> when all questions are answered correctly. Review the lesson explanations and try again!
+                      You scored <strong>0 / {exercises.length}</strong>. A unit is only considered <strong>Mastered</strong> when all questions are answered correctly. Use the explanations after each question and try again!
                     </p>
                   </div>
 
@@ -1150,15 +1169,6 @@ export const LessonModal = ({
                     >
                       <RotateCcw className="w-4 h-4" />
                       <span>Retake Quiz to Master (0/{exercises.length})</span>
-                    </button>
-                    <button
-                      onClick={() => {
-                        setPhase('learn');
-                      }}
-                      className="px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650] text-white"
-                    >
-                      <BookOpen className="w-4 h-4" />
-                      <span>Review Lesson Notes</span>
                     </button>
                     <button
                       id="finish-lesson-modal-btn"

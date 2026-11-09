@@ -140,27 +140,6 @@ export const A1_GRAMMAR_LESSONS = [
         ]
       }
     ],
-    contrastExamples: [
-      {
-        french: 'Je mange du fromage tous les matins.',
-        english: 'I eat (some) cheese every morning.',
-        aspectNote: 'Partitive article "du" for masculine uncountable food.',
-      },
-      {
-        french: 'Je ne mange pas de fromage.',
-        english: 'I do not eat cheese.',
-        aspectNote: 'Reduction of "du" to "de" after negative negation "ne... pas".',
-      },
-      {
-        french: 'C\'est du vin rouge / Ce n\'est pas du vin rouge.',
-        english: 'This is red wine / This is not red wine.',
-        aspectNote: 'Exception: with the verb "être", partitives do NOT reduce to "de".',
-      },
-    ],
-    commonTraps: [
-      'Saying "beaucoup des amis" instead of "beaucoup d\'amis" (quantifiers require "de").',
-      'Saying "Je n\'ai pas un stylo" instead of "Je n\'ai pas de stylo".',
-    ],
   },
 
   // ==========================================

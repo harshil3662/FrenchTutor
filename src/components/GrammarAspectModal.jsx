@@ -22,6 +22,9 @@ import confetti from 'canvas-confetti';
 import { useModalTracker } from '../utils/modalState.js';
 import {
   getStoredAiPracticeExercises,
+  getRecentQuizPrompts,
+  isLessonQuizLocked,
+  setLessonQuizLocked,
   saveStoredAiPracticeExercises,
   clearStoredAiPracticeExercises,
 } from '../utils/curriculumStore.js';
@@ -38,6 +41,7 @@ export const GrammarAspectModal = ({
   useModalTracker(Boolean(isOpen && lesson));
   const scrollContainerRef = useRef(null);
   const [activeTab, setActiveTab] = useState('guide');
+  const [quizLocked, setQuizLocked] = useState(false);
   const [activeTopicIndex, setActiveTopicIndex] = useState(0);
   const [currentExIdx, setCurrentExIdx] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
@@ -68,7 +72,9 @@ export const GrammarAspectModal = ({
     exerciseRequestRef.current?.abort();
     const savedExercises = getStoredAiPracticeExercises(lesson?.id);
     setActiveTopicIndex(0);
-    setActiveTab('guide');
+    const locked = isLessonQuizLocked(lesson?.id);
+    setQuizLocked(locked);
+    setActiveTab(locked ? 'quiz' : 'guide');
     setCurrentExIdx(0);
     setSelectedAnswer('');
     setIsAnswerChecked(false);
@@ -219,6 +225,7 @@ export const GrammarAspectModal = ({
           level: lesson.level || 'A2',
           questionCount: 4,
           lessonId: lesson.id,
+          previousQuestions: getRecentQuizPrompts(lesson.id),
           unitContext: {
             unitNumber: lesson.unitNumber,
             category: lesson.category,
@@ -310,6 +317,8 @@ export const GrammarAspectModal = ({
   };
 
   const handleOpenAiQuiz = () => {
+    setLessonQuizLocked(lesson.id, true);
+    setQuizLocked(true);
     setActiveTab('quiz');
     scrollToTop();
     setIsQuestionTranslated(false);
@@ -358,6 +367,10 @@ export const GrammarAspectModal = ({
     } else {
       setIsLessonFinished(true);
       const isMastered = exercises.length > 0 && score === exercises.length;
+      if (isMastered) {
+        setLessonQuizLocked(lesson.id, false);
+        setQuizLocked(false);
+      }
       const earnedXp = Math.max(10, score * 10);
       if (isMastered) {
         try {
@@ -432,10 +445,14 @@ export const GrammarAspectModal = ({
           <button
             id="tab-grammar-guide"
             onClick={() => setActiveTab('guide')}
-            className={`flex-1 sm:flex-none min-w-0 py-3 px-2 sm:px-4 font-bold text-xs sm:text-sm text-center border-b-2 transition-all flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer ${
+            disabled={quizLocked}
+            title={quizLocked ? 'Locked while the quiz is in progress' : undefined}
+            className={`flex-1 sm:flex-none min-w-0 py-3 px-2 sm:px-4 font-bold text-xs sm:text-sm text-center border-b-2 transition-all flex items-center justify-center gap-1.5 sm:gap-2 ${
+              quizLocked ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer'
+            } ${
               activeTab === 'guide'
                 ? 'border-[#1F3A5F] text-[#1F3A5F] bg-white'
-                : 'border-transparent text-[#5F6B7A] hover:text-[#1B2433]'
+                : `border-transparent text-[#5F6B7A] ${quizLocked ? '' : 'hover:text-[#1B2433]'}`
             }`}
           >
             <BookOpen className="w-4 h-4 shrink-0" />
@@ -868,7 +885,7 @@ export const GrammarAspectModal = ({
                           Practice Makes Perfect!
                         </h3>
                         <p className="text-sm text-[#5F6B7A] max-w-md mx-auto">
-                          You scored <strong>0 / {exercises.length}</strong>. A unit is only considered <strong>Mastered</strong> when all questions are answered correctly. Review the grammar notes above and retake the quiz to achieve mastery!
+                          You scored <strong>0 / {exercises.length}</strong>. A unit is only considered <strong>Mastered</strong> when all questions are answered correctly. Retake the quiz to achieve mastery!
                         </p>
                       </div>
 
@@ -879,16 +896,6 @@ export const GrammarAspectModal = ({
                         >
                           <RotateCcw className="w-4 h-4" />
                           <span>Retake Quiz to Master (0/{exercises.length})</span>
-                        </button>
-                        <button
-                          onClick={() => {
-                            handleResetExercises();
-                            setActiveTab('overview');
-                          }}
-                          className="px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs bg-[#E5565F] hover:bg-[#D14650] text-white"
-                        >
-                          <BookOpen className="w-4 h-4" />
-                          <span>Review Grammar Notes</span>
                         </button>
                         <button
                           onClick={onClose}

@@ -96,7 +96,7 @@ All content lives in `src/data/` and is plain JavaScript, so it is easy to edit.
 - Browser **Web Speech API** for speech recognition and text-to-speech
 
 **Backend**
-- **Express 4** API in `server.js`, with one route per AI feature under `/api/ai/*`
+- **Express 4** API in `backend/`, with one route file per AI feature under `/api/ai/*`
 - `api/router.js` wraps the same Express app as a Vercel serverless function
 - `local-server.js` runs Express with Vite middleware during development
 
@@ -136,7 +136,11 @@ AI features and their prompts:
 
 ```
 FrenchTutor/
-├── server.js               # Express API: all /api/ai/* routes and provider logic
+├── backend/                # Express API
+│   ├── app.js              # App setup, mounts /api
+│   ├── config/env.js       # dotenv loading
+│   ├── services/           # OpenRouter, Gemini, JSON parsing, provider chain
+│   └── routes/             # One file per endpoint, combined in index.js
 ├── local-server.js         # Dev server (Express + Vite middleware) and production static server
 ├── api/router.js           # Vercel serverless entry point for the Express app
 ├── vercel.json             # Build settings and /api rewrite
@@ -222,7 +226,7 @@ Never commit `.env.local` or any key to the repository.
 2. `vercel.json` sets the build command to `npm run build` and the output directory to `dist`. It routes `/api/...` requests to the shared function in `api/router.js`.
 3. Add `OPEN_ROUTER_KEY` and `OPEN_ROUTER_MODEL` under **Settings → Environment Variables**. Add `GEMINI_API_KEY` and any per-feature model variables you use. Apply them to Production and Preview as needed.
 
-The build does not need AI keys. Vercel serves the frontend from `dist` and runs the Express API as a function, so `server.js` does not need its own host.
+The build does not need AI keys. Vercel serves the frontend from `dist` and runs the Express API as a function, so `backend/` does not need its own host.
 
 ---
 

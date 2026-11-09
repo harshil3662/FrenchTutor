@@ -2,6 +2,55 @@ import { GRAMMAR_ASPECT_LESSONS } from '../data/grammarAspectsData.js';
 
 const UNITS_STORAGE_KEY = 'french_grammar_units_v3';
 const PRACTICE_STORAGE_KEY = 'french_ai_practice_exercises_v1';
+const QUIZ_HISTORY_STORAGE_KEY = 'french_ai_quiz_history_v1';
+const QUIZ_HISTORY_LIMIT = 16;
+const QUIZ_LOCK_STORAGE_KEY = 'french_quiz_locked_lessons_v1';
+
+// A lesson is locked from the moment its quiz is opened until it is mastered, so the notes cannot be used to look up answers
+export function isLessonQuizLocked(lessonId) {
+  if (!lessonId) return false;
+  try {
+    const stored = JSON.parse(localStorage.getItem(QUIZ_LOCK_STORAGE_KEY) || '{}');
+    return stored[lessonId] === true;
+  } catch (e) {
+    return false;
+  }
+}
+
+export function setLessonQuizLocked(lessonId, locked) {
+  if (!lessonId) return;
+  try {
+    const stored = JSON.parse(localStorage.getItem(QUIZ_LOCK_STORAGE_KEY) || '{}');
+    if (locked) stored[lessonId] = true;
+    else delete stored[lessonId];
+    localStorage.setItem(QUIZ_LOCK_STORAGE_KEY, JSON.stringify(stored));
+  } catch (e) {
+    console.error('Failed to update quiz lock:', e);
+  }
+}
+
+// Prompts of recently generated quizzes, sent to the server so a retake avoids repeating them
+export function getRecentQuizPrompts(lessonId) {
+  if (!lessonId) return [];
+  try {
+    const stored = JSON.parse(localStorage.getItem(QUIZ_HISTORY_STORAGE_KEY) || '{}');
+    return Array.isArray(stored[lessonId]) ? stored[lessonId] : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+export function recordQuizPrompts(lessonId, questions) {
+  if (!lessonId || !Array.isArray(questions)) return;
+  try {
+    const stored = JSON.parse(localStorage.getItem(QUIZ_HISTORY_STORAGE_KEY) || '{}');
+    const prompts = questions.map((question) => question?.prompt).filter((prompt) => typeof prompt === 'string' && prompt.trim());
+    const history = [...prompts, ...(Array.isArray(stored[lessonId]) ? stored[lessonId] : [])].slice(0, QUIZ_HISTORY_LIMIT);
+    localStorage.setItem(QUIZ_HISTORY_STORAGE_KEY, JSON.stringify({ ...stored, [lessonId]: history }));
+  } catch (e) {
+    console.error('Failed to record quiz history:', e);
+  }
+}
 
 export function getStoredAiPracticeExercises(lessonId) {
   if (!lessonId) return null;
@@ -18,6 +67,8 @@ export function getStoredAiPracticeExercises(lessonId) {
 
 export function saveStoredAiPracticeExercises(lessonId, exercises) {
   if (!lessonId || !Array.isArray(exercises) || !exercises.length) return;
+
+  recordQuizPrompts(lessonId, exercises);
 
   try {
     const stored = JSON.parse(localStorage.getItem(PRACTICE_STORAGE_KEY) || '{}');

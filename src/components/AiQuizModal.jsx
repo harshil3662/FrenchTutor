@@ -14,6 +14,7 @@ import {
 import confetti from 'canvas-confetti';
 import { playChime, speakFrench } from '../utils/audioUtils.js';
 import { useModalTracker } from '../utils/modalState.js';
+import { getRecentQuizPrompts, recordQuizPrompts } from '../utils/curriculumStore.js';
 
 export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
   useModalTracker(true);
@@ -93,6 +94,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
             level,
             questionCount: 4,
             lessonId: unit?.id,
+            previousQuestions: getRecentQuizPrompts(unit?.id),
             unitContext: {
               unitNumber: unit?.unitNumber || unit?.unit,
               category: unit?.category,
@@ -123,6 +125,7 @@ export const AiQuizModal = ({ topic, level, unit, onClose, onAwardXp }) => {
         if (!validQuestions.length) {
           throw new Error('Quiz response did not contain valid questions.');
         }
+        recordQuizPrompts(unit?.id, validQuestions);
         setQuizTitle(data.title || `Practice Quiz: ${topic}`);
         setQuestions(validQuestions);
       } catch (e) {

@@ -1,4 +1,4 @@
-import app from '../server.js';
+import app from '../backend/app.js';
 
 export default function handler(req, res) {
   const url = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`);
